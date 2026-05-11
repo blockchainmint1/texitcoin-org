@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Clock, ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { posts } from "@/data/blog-posts";
+import { posts, getPostImage } from "@/data/blog-posts";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -58,8 +58,16 @@ function BlogIndex() {
             params={{ slug: featured.slug }}
             className="group mt-14 grid overflow-hidden rounded-2xl border border-border bg-card shadow-card md:grid-cols-2"
           >
-            <div className="relative h-64 md:h-full bg-gradient-to-br from-primary/30 via-surface to-accent/20">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,oklch(0.62_0.22_25/0.35),transparent_60%)]" />
+            <div className="relative h-64 md:h-full overflow-hidden">
+              <img
+                src={getPostImage(featured)}
+                alt=""
+                width={1280}
+                height={832}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-background/10 to-transparent" />
               <div className="absolute left-5 top-5 inline-flex items-center rounded-full bg-background/80 backdrop-blur px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em]">
                 Featured · {featured.tag}
               </div>
@@ -94,12 +102,20 @@ function BlogIndex() {
                   params={{ slug: p.slug }}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-shadow"
                 >
-                  <div className="relative h-40 bg-gradient-to-br from-primary/25 via-surface to-accent/20">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,oklch(0.62_0.22_25/0.28),transparent_60%)]" />
+                  <div className="relative h-40 overflow-hidden">
+                    <img
+                      src={getPostImage(p)}
+                      alt=""
+                      width={1280}
+                      height={832}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent" />
                     <div className="absolute left-4 top-4 inline-flex items-center rounded-full bg-background/80 backdrop-blur px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em]">
                       {p.tag}
                     </div>
-                    <div className="absolute right-4 bottom-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <div className="absolute right-4 bottom-4 inline-flex items-center gap-1.5 text-xs text-background/0 [text-shadow:0_1px_2px_rgba(0,0,0,0.6)] text-white">
                       <Clock className="h-3.5 w-3.5" /> {p.readMinutes} min
                     </div>
                   </div>
