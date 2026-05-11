@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { posts, getPost } from "@/data/blog-posts";
+import { posts, getPost, getPostImage } from "@/data/blog-posts";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -98,8 +98,15 @@ function BlogPost() {
             </p>
           </div>
 
-          <div className="relative my-12 h-56 md:h-80 bg-gradient-to-br from-primary/30 via-surface to-accent/20">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,oklch(0.62_0.22_25/0.35),transparent_60%)]" />
+          <div className="relative my-12 h-64 md:h-[28rem] overflow-hidden">
+            <img
+              src={getPostImage(post)}
+              alt=""
+              width={1280}
+              height={832}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
           </div>
 
           <div className="mx-auto max-w-3xl px-6">
@@ -153,8 +160,16 @@ function BlogPost() {
                   params={{ slug: p.slug }}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-shadow"
                 >
-                  <div className="relative h-36 bg-gradient-to-br from-primary/25 via-surface to-accent/20">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,oklch(0.62_0.22_25/0.28),transparent_60%)]" />
+                  <div className="relative h-36 overflow-hidden">
+                    <img
+                      src={getPostImage(p)}
+                      alt=""
+                      width={1280}
+                      height={832}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent" />
                     <div className="absolute left-4 top-4 inline-flex items-center rounded-full bg-background/80 backdrop-blur px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em]">
                       {p.tag}
                     </div>
