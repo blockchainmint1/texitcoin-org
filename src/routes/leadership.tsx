@@ -230,7 +230,7 @@ function LeadershipPage() {
             </ol>
           </div>
 
-          <p className="mt-16 max-w-3xl text-muted-foreground">
+          <p className="mx-auto mt-16 max-w-3xl text-center text-muted-foreground">
             Bobby lives this mission every day in Texas with his family — building,
             innovating, and fighting for money that's honest, decentralized, and usable.
             He's not a newcomer chasing trends; he's been here since the beginning,
