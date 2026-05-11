@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
+import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -17,6 +18,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const ProofOfWorkRoute = ProofOfWorkRouteImport.update({
   id: '/proof-of-work',
   path: '/proof-of-work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurrencyRoute = CurrencyRouteImport.update({
+  id: '/currency',
+  path: '/currency',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -38,12 +44,14 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/currency': typeof CurrencyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/currency': typeof CurrencyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -51,20 +59,28 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/currency': typeof CurrencyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog' | '/proof-of-work' | '/blog/$slug'
+  fullPaths: '/' | '/blog' | '/currency' | '/proof-of-work' | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog' | '/proof-of-work' | '/blog/$slug'
-  id: '__root__' | '/' | '/blog' | '/proof-of-work' | '/blog/$slug'
+  to: '/' | '/blog' | '/currency' | '/proof-of-work' | '/blog/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/currency'
+    | '/proof-of-work'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
+  CurrencyRoute: typeof CurrencyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
 }
 
@@ -75,6 +91,13 @@ declare module '@tanstack/react-router' {
       path: '/proof-of-work'
       fullPath: '/proof-of-work'
       preLoaderRoute: typeof ProofOfWorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/currency': {
+      id: '/currency'
+      path: '/currency'
+      fullPath: '/currency'
+      preLoaderRoute: typeof CurrencyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -114,6 +137,7 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
+  CurrencyRoute: CurrencyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
 }
 export const routeTree = rootRouteImport
