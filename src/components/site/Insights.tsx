@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Clock, ArrowUpRight } from "lucide-react";
-import { posts } from "@/data/blog-posts";
+import { posts, getPostImage } from "@/data/blog-posts";
 
 export function Insights() {
   const featured = posts.slice(0, 3);
@@ -40,12 +40,20 @@ export function Insights() {
                 params={{ slug: p.slug }}
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-shadow"
               >
-                <div className="relative h-44 overflow-hidden bg-gradient-to-br from-primary/30 via-surface to-accent/20">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,oklch(0.62_0.22_25/0.35),transparent_60%)]" />
+                <div className="relative h-44 overflow-hidden">
+                  <img
+                    src={getPostImage(p)}
+                    alt=""
+                    width={1280}
+                    height={832}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent" />
                   <div className="absolute left-5 top-5 inline-flex items-center rounded-full bg-background/70 backdrop-blur px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em]">
                     {p.tag}
                   </div>
-                  <div className="absolute right-5 bottom-5 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <div className="absolute right-5 bottom-5 inline-flex items-center gap-1.5 text-xs text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.6)]">
                     <Clock className="h-3.5 w-3.5" /> {p.readMinutes} min
                   </div>
                 </div>
