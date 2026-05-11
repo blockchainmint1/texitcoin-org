@@ -128,7 +128,7 @@ const FACTS = [
   "Scrypt Proof-of-Work algorithm",
   "353,396,296 max coin supply",
   "~138 years until the final block",
-  "Timestamp: a Texan classic",
+  "Genesis timestamp: \u201CYou may all go to hell and I will go to Texas.\u201D",
   "6 blocks to transaction confirmation",
 ];
 
