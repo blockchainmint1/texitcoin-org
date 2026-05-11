@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import logo from "@/assets/txc-logo.png";
 
 const COLS = [
   {
@@ -26,9 +26,13 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
           <div>
             <div className="flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-md bg-red-gradient shadow-glow">
-                <Star className="h-5 w-5 fill-primary-foreground text-primary-foreground" />
-              </div>
+              <img
+                src={logo}
+                alt="TEXITcoin logo"
+                width={44}
+                height={44}
+                className="h-11 w-11 object-contain"
+              />
               <div className="font-display text-2xl font-bold">
                 TEXIT<span className="text-primary">coin</span>
               </div>
