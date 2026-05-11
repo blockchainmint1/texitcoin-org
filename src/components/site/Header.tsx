@@ -10,6 +10,7 @@ type NavItem =
 
 const NAV: NavItem[] = [
   { label: "Foundation", href: "/#foundation" },
+  { label: "Proof of Work", href: "/proof-of-work", internal: true },
   { label: "Ecosystem", href: "/#ecosystem" },
   { label: "Specs", href: "/#specs" },
   { label: "Blog", href: "/blog", internal: true },
