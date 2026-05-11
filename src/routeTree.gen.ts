@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
+import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +25,11 @@ const ValueRoute = ValueRouteImport.update({
 const ProofOfWorkRoute = ProofOfWorkRouteImport.update({
   id: '/proof-of-work',
   path: '/proof-of-work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadershipRoute = LeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CurrencyRoute = CurrencyRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/currency': typeof CurrencyRoute
+  '/leadership': typeof LeadershipRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/currency': typeof CurrencyRoute
+  '/leadership': typeof LeadershipRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/currency': typeof CurrencyRoute
+  '/leadership': typeof LeadershipRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -78,16 +87,25 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/currency'
+    | '/leadership'
     | '/proof-of-work'
     | '/value'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog' | '/currency' | '/proof-of-work' | '/value' | '/blog/$slug'
+  to:
+    | '/'
+    | '/blog'
+    | '/currency'
+    | '/leadership'
+    | '/proof-of-work'
+    | '/value'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
     | '/blog'
     | '/currency'
+    | '/leadership'
     | '/proof-of-work'
     | '/value'
     | '/blog/$slug'
@@ -97,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
   CurrencyRoute: typeof CurrencyRoute
+  LeadershipRoute: typeof LeadershipRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   ValueRoute: typeof ValueRoute
 }
@@ -115,6 +134,13 @@ declare module '@tanstack/react-router' {
       path: '/proof-of-work'
       fullPath: '/proof-of-work'
       preLoaderRoute: typeof ProofOfWorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leadership': {
+      id: '/leadership'
+      path: '/leadership'
+      fullPath: '/leadership'
+      preLoaderRoute: typeof LeadershipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/currency': {
@@ -162,9 +188,20 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
   CurrencyRoute: CurrencyRoute,
+  LeadershipRoute: LeadershipRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
   ValueRoute: ValueRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

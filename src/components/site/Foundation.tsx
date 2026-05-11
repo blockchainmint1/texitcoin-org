@@ -32,7 +32,7 @@ const PILLARS = [
     title: "A champion for honest money",
     body: "Built with the perspective of two decades of work on alternative and complementary currencies — and a clear, principled mission.",
     img: leadership,
-    href: "#foundation",
+    href: "/leadership",
   },
 ];
 
