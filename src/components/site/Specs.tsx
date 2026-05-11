@@ -196,17 +196,17 @@ export function Specs() {
               <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 Live network
               </div>
-              <div className="flex items-center gap-2 text-xs text-accent">
-                <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-                Healthy
+              <div className={`flex items-center gap-2 text-xs ${healthy ? "text-accent" : "text-muted-foreground"}`}>
+                <span className={`h-2 w-2 rounded-full ${healthy ? "bg-accent animate-pulse" : "bg-muted-foreground"}`} />
+                {healthy ? "Healthy" : "Connecting"}
               </div>
             </div>
             <div className="mt-6 grid grid-cols-2 gap-6">
               {[
-                { l: "Block height", v: "1,284,621" },
-                { l: "Hash rate", v: "84.2 GH/s" },
-                { l: "Difficulty", v: "1.42 M" },
-                { l: "Avg. fee", v: "0.0001 TXC" },
+                { l: "Block height", v: stats.height },
+                { l: "Hash rate", v: stats.hashrate },
+                { l: "Difficulty", v: stats.difficulty },
+                { l: "Fastest fee", v: stats.fee },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.l}</div>
@@ -215,7 +215,7 @@ export function Specs() {
               ))}
             </div>
             <div className="mt-8 h-24 rounded-lg bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 grid place-items-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Last block · 38s ago
+              Last block · {stats.lastBlockAgo}
             </div>
           </div>
         </div>
