@@ -159,38 +159,71 @@ function LeadershipPage() {
             </p>
           </div>
 
-          <div className="relative mt-16">
+          <div className="relative mt-20">
+            {/* Vertical dashed rail */}
             <div
-              className="absolute left-4 top-0 bottom-0 w-px bg-border md:left-1/2"
+              className="pointer-events-none absolute left-6 top-4 bottom-4 w-px border-l border-dashed border-primary/30 md:left-[7.25rem]"
               aria-hidden
             />
-            <ol className="space-y-12">
+
+            <ol className="space-y-10 md:space-y-14">
               {TIMELINE.map((t, i) => (
                 <motion.li
                   key={`${t.year}-${t.title}`}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className={`relative md:grid md:grid-cols-2 md:gap-12 ${
-                    i % 2 === 0 ? "" : "md:[&>div:first-child]:col-start-2"
-                  }`}
+                  transition={{ duration: 0.6, delay: i * 0.05 }}
+                  className="relative pl-16 md:pl-44"
                 >
-                  <div className="pl-12 md:pl-0 md:pr-12 md:text-right">
-                    {i % 2 === 0 ? (
-                      <TimelineCard t={t} />
-                    ) : (
-                      <div className="hidden md:block" aria-hidden />
-                    )}
-                  </div>
-                  <div className="pl-12 md:pl-12 md:pr-0">
-                    {i % 2 === 1 ? <TimelineCard t={t} /> : <div className="hidden md:block" aria-hidden />}
+                  {/* Node */}
+                  <div className="absolute left-6 top-6 -translate-x-1/2 md:left-[7.25rem]">
+                    <div className="grid h-12 w-12 place-items-center rounded-full bg-red-gradient text-primary-foreground shadow-glow">
+                      <t.icon className="h-5 w-5" />
+                    </div>
                   </div>
 
-                  <div className="absolute left-4 top-2 -translate-x-1/2 md:left-1/2">
-                    <div className="grid h-9 w-9 place-items-center rounded-full border border-primary/60 bg-background shadow-glow">
-                      <t.icon className="h-4 w-4 text-primary" />
+                  {/* Year — oversized display number on the rail */}
+                  <div
+                    className="pointer-events-none hidden md:block absolute left-0 top-0 w-24 text-right select-none"
+                    aria-hidden
+                  >
+                    <div className="font-display text-6xl font-black leading-none tracking-tight text-foreground/10">
+                      {t.year}
                     </div>
+                    <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-primary">
+                      Milestone {String(i + 1).padStart(2, "0")}
+                    </div>
+                  </div>
+
+                  {/* Card */}
+                  <div
+                    className={`group relative overflow-hidden rounded-2xl border border-border bg-card p-7 md:p-9 shadow-card hover:border-primary/60 transition-colors ${
+                      i % 2 === 0 ? "md:translate-x-0" : "md:translate-x-6"
+                    }`}
+                  >
+                    <div
+                      className="pointer-events-none absolute -right-6 -top-10 font-display text-[10rem] font-black leading-none tracking-tighter text-primary/[0.06] md:text-[14rem]"
+                      aria-hidden
+                    >
+                      {t.year}
+                    </div>
+
+                    <div className="flex items-center gap-3 md:hidden">
+                      <span className="font-display text-3xl font-black text-primary">
+                        {t.year}
+                      </span>
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                        Milestone {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-3 md:mt-0 font-display text-2xl font-bold leading-snug md:text-3xl">
+                      {t.title}
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-muted-foreground">{t.body}</p>
+
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition" />
                   </div>
                 </motion.li>
               ))}
