@@ -56,6 +56,8 @@ function BlogIndex() {
           <Link
             to="/blog/$slug"
             params={{ slug: featured.slug }}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group mt-14 grid overflow-hidden rounded-2xl border border-border bg-card shadow-card md:grid-cols-2"
           >
             <div className="relative h-64 md:h-full overflow-hidden">
@@ -100,6 +102,8 @@ function BlogIndex() {
                 <Link
                   to="/blog/$slug"
                   params={{ slug: p.slug }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-shadow"
                 >
                   <div className="relative h-40 overflow-hidden">
