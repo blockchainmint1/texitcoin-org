@@ -1,5 +1,121 @@
 import { motion } from "framer-motion";
 import { Coins, Timer, Layers, TrendingDown, Check } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const MEMPOOL_API = "https://mempool.texitcoin.org/api";
+
+type LiveStats = {
+  height: string;
+  hashrate: string;
+  difficulty: string;
+  fee: string;
+  lastBlockAgo: string;
+};
+
+const PLACEHOLDER: LiveStats = {
+  height: "—",
+  hashrate: "—",
+  difficulty: "—",
+  fee: "—",
+  lastBlockAgo: "Connecting…",
+};
+
+function formatHashrate(hps: number): string {
+  if (!isFinite(hps) || hps <= 0) return "—";
+  const units = [
+    { v: 1e18, s: "EH/s" },
+    { v: 1e15, s: "PH/s" },
+    { v: 1e12, s: "TH/s" },
+    { v: 1e9, s: "GH/s" },
+    { v: 1e6, s: "MH/s" },
+    { v: 1e3, s: "KH/s" },
+  ];
+  for (const u of units) {
+    if (hps >= u.v) return `${(hps / u.v).toFixed(2)} ${u.s}`;
+  }
+  return `${hps.toFixed(0)} H/s`;
+}
+
+function formatNumber(n: number): string {
+  return n.toLocaleString("en-US");
+}
+
+function formatDifficulty(d: number): string {
+  if (d >= 1e9) return `${(d / 1e9).toFixed(2)} B`;
+  if (d >= 1e6) return `${(d / 1e6).toFixed(2)} M`;
+  if (d >= 1e3) return `${(d / 1e3).toFixed(2)} K`;
+  return d.toFixed(0);
+}
+
+function formatAgo(seconds: number): string {
+  if (seconds < 60) return `${Math.max(0, Math.floor(seconds))}s ago`;
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  return `${Math.floor(seconds / 3600)}h ago`;
+}
+
+function useLiveStats() {
+  const [stats, setStats] = useState<LiveStats>(PLACEHOLDER);
+  const [healthy, setHealthy] = useState(false);
+  const [tipTimestamp, setTipTimestamp] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const [blocksRes, hashRes, feesRes] = await Promise.all([
+          fetch(`${MEMPOOL_API}/blocks`),
+          fetch(`${MEMPOOL_API}/v1/mining/hashrate/3d`),
+          fetch(`${MEMPOOL_API}/v1/fees/recommended`),
+        ]);
+        if (!blocksRes.ok || !hashRes.ok) throw new Error("api");
+        const blocks = await blocksRes.json();
+        const hashData = await hashRes.json();
+        const fees = feesRes.ok ? await feesRes.json() : null;
+
+        const tip = blocks[0];
+        const hashrates = hashData.hashrates ?? [];
+        const latestHashrate = hashrates.length
+          ? hashrates[hashrates.length - 1].avgHashrate
+          : 0;
+
+        if (cancelled) return;
+        setTipTimestamp(tip.timestamp);
+        setHealthy(true);
+        setStats({
+          height: formatNumber(tip.height),
+          hashrate: formatHashrate(latestHashrate),
+          difficulty: formatDifficulty(tip.difficulty),
+          fee: fees ? `${fees.fastestFee} sat/vB` : "—",
+          lastBlockAgo: formatAgo(Math.floor(Date.now() / 1000) - tip.timestamp),
+        });
+      } catch {
+        if (!cancelled) setHealthy(false);
+      }
+    }
+
+    load();
+    const refresh = setInterval(load, 30_000);
+    return () => {
+      cancelled = true;
+      clearInterval(refresh);
+    };
+  }, []);
+
+  // tick "last block ago" every second
+  useEffect(() => {
+    if (tipTimestamp == null) return;
+    const id = setInterval(() => {
+      setStats((s) => ({
+        ...s,
+        lastBlockAgo: formatAgo(Math.floor(Date.now() / 1000) - tipTimestamp),
+      }));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [tipTimestamp]);
+
+  return { stats, healthy };
+}
 
 const SPECS = [
   { icon: Coins, title: "0.00 pre-mine", body: "Nobody starts with a head start. Mining is permissioned for Texas." },
@@ -17,6 +133,7 @@ const FACTS = [
 ];
 
 export function Specs() {
+  const { stats, healthy } = useLiveStats();
   return (
     <section id="specs" className="relative py-28 bg-surface/40">
       <div className="mx-auto max-w-7xl px-6">
@@ -79,17 +196,17 @@ export function Specs() {
               <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 Live network
               </div>
-              <div className="flex items-center gap-2 text-xs text-accent">
-                <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-                Healthy
+              <div className={`flex items-center gap-2 text-xs ${healthy ? "text-accent" : "text-muted-foreground"}`}>
+                <span className={`h-2 w-2 rounded-full ${healthy ? "bg-accent animate-pulse" : "bg-muted-foreground"}`} />
+                {healthy ? "Healthy" : "Connecting"}
               </div>
             </div>
             <div className="mt-6 grid grid-cols-2 gap-6">
               {[
-                { l: "Block height", v: "1,284,621" },
-                { l: "Hash rate", v: "84.2 GH/s" },
-                { l: "Difficulty", v: "1.42 M" },
-                { l: "Avg. fee", v: "0.0001 TXC" },
+                { l: "Block height", v: stats.height },
+                { l: "Hash rate", v: stats.hashrate },
+                { l: "Difficulty", v: stats.difficulty },
+                { l: "Fastest fee", v: stats.fee },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.l}</div>
@@ -98,7 +215,7 @@ export function Specs() {
               ))}
             </div>
             <div className="mt-8 h-24 rounded-lg bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 grid place-items-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Last block · 38s ago
+              Last block · {stats.lastBlockAgo}
             </div>
           </div>
         </div>
