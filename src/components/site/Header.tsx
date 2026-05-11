@@ -9,8 +9,16 @@ type NavItem =
   | { label: string; children: NavLink[] };
 
 const NAV: NavItem[] = [
-  { label: "Foundation", href: "/#foundation" },
-  { label: "Proof of Work", href: "/proof-of-work", internal: true },
+  {
+    label: "Foundation",
+    children: [
+      { label: "Overview", href: "/#foundation" },
+      { label: "Proof of Work", href: "/proof-of-work", internal: true },
+      { label: "Digital Currency", href: "/#foundation" },
+      { label: "Community Value", href: "/#foundation" },
+      { label: "Leadership", href: "/#foundation" },
+    ],
+  },
   { label: "Ecosystem", href: "/#ecosystem" },
   { label: "Specs", href: "/#specs" },
   { label: "Blog", href: "/blog", internal: true },
