@@ -18,7 +18,7 @@ const PILLARS = [
     title: "Optimized to actually be spent",
     body: "Most chains are too slow or too expensive to use at the counter. TXC is built to stay fast and inexpensive — usable peer-to-peer, every day.",
     img: currency,
-    href: "#foundation",
+    href: "/currency",
   },
   {
     tag: "Participation",

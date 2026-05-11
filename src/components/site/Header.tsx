@@ -14,7 +14,7 @@ const NAV: NavItem[] = [
     children: [
       { label: "Overview", href: "/#foundation" },
       { label: "Proof of Work", href: "/proof-of-work", internal: true },
-      { label: "Digital Currency", href: "/#foundation" },
+      { label: "Digital Currency", href: "/currency", internal: true },
       { label: "Community Value", href: "/#foundation" },
       { label: "Leadership", href: "/#foundation" },
     ],
