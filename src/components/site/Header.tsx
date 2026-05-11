@@ -19,8 +19,6 @@ const NAV: NavItem[] = [
       { label: "Leadership", href: "/#foundation" },
     ],
   },
-  { label: "Ecosystem", href: "/#ecosystem" },
-  { label: "Specs", href: "/#specs" },
   { label: "Blog", href: "/blog", internal: true },
   {
     label: "Resources",
