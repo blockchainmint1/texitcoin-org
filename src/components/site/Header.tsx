@@ -1,13 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Star } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/txc-logo.png";
 
 const NAV = [
-  { label: "Foundation", href: "#foundation" },
-  { label: "Ecosystem", href: "#ecosystem" },
-  { label: "Specs", href: "#specs" },
-  { label: "Insights", href: "#insights" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Foundation", href: "/#foundation" },
+  { label: "Ecosystem", href: "/#ecosystem" },
+  { label: "Specs", href: "/#specs" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export function Header() {
@@ -30,10 +31,14 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="relative grid h-10 w-10 place-items-center rounded-md bg-red-gradient shadow-glow">
-            <Star className="h-5 w-5 fill-primary-foreground text-primary-foreground" />
-          </div>
+        <Link to="/" className="flex items-center gap-3 group">
+          <img
+            src={logo}
+            alt="TEXITcoin logo"
+            width={44}
+            height={44}
+            className="h-11 w-11 object-contain"
+          />
           <div className="leading-tight">
             <div className="font-display text-xl font-bold tracking-wide">
               TEXIT<span className="text-primary">coin</span>
