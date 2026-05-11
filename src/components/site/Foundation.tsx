@@ -11,24 +11,28 @@ const PILLARS = [
     title: "Mining, returned to the people",
     body: "Before institutions captured crypto, individuals mined coins on their own rigs. TXC restores that original spirit with permissioned, Texas-rooted mining.",
     img: mining,
+    href: "/proof-of-work",
   },
   {
     tag: "Digital currency",
     title: "Optimized to actually be spent",
     body: "Most chains are too slow or too expensive to use at the counter. TXC is built to stay fast and inexpensive — usable peer-to-peer, every day.",
     img: currency,
+    href: "#foundation",
   },
   {
     tag: "Participation",
     title: "Value driven by the community",
     body: "Tired of riding the institutional rollercoaster? In TXC, the people who use, mine, and hold the coin shape its value — not Wall Street desks.",
     img: community,
+    href: "#foundation",
   },
   {
     tag: "Leadership",
     title: "A champion for honest money",
     body: "Built with the perspective of two decades of work on alternative and complementary currencies — and a clear, principled mission.",
     img: leadership,
+    href: "#foundation",
   },
 ];
 
@@ -55,7 +59,7 @@ export function Foundation() {
           {PILLARS.map((p, i) => (
             <motion.a
               key={p.tag}
-              href="#"
+              href={p.href}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
