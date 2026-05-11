@@ -346,3 +346,35 @@ export const posts: BlogPost[] = [
 export function getPost(slug: string) {
   return posts.find((p) => p.slug === slug);
 }
+
+import hills from "@/assets/blog/tx-hills.jpg";
+import flag from "@/assets/blog/tx-flag.jpg";
+import ranch from "@/assets/blog/tx-ranch.jpg";
+import skyline from "@/assets/blog/tx-skyline.jpg";
+import boots from "@/assets/blog/tx-boots.jpg";
+import mesa from "@/assets/blog/tx-mesa.jpg";
+import star from "@/assets/blog/tx-star.jpg";
+import energy from "@/assets/blog/tx-energy.jpg";
+
+const TAG_IMAGE: Record<string, string> = {
+  Community: ranch,
+  Founder: boots,
+  Philosophy: mesa,
+  Mission: flag,
+  Education: skyline,
+  Background: ranch,
+  Strategy: energy,
+  Comparison: star,
+  Roadmap: hills,
+  Diligence: star,
+};
+
+const POOL = [hills, flag, ranch, skyline, boots, mesa, star, energy];
+
+export function getPostImage(post: BlogPost) {
+  if (TAG_IMAGE[post.tag]) return TAG_IMAGE[post.tag];
+  // deterministic fallback by slug
+  let h = 0;
+  for (const ch of post.slug) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return POOL[h % POOL.length];
+}
