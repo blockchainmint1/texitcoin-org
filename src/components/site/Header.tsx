@@ -1,13 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Star } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/txc-logo.png";
 
 const NAV = [
-  { label: "Foundation", href: "#foundation" },
-  { label: "Ecosystem", href: "#ecosystem" },
-  { label: "Specs", href: "#specs" },
-  { label: "Insights", href: "#insights" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Foundation", href: "/#foundation" },
+  { label: "Ecosystem", href: "/#ecosystem" },
+  { label: "Specs", href: "/#specs" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export function Header() {
