@@ -25,7 +25,7 @@ const PILLARS = [
     title: "Value driven by the community",
     body: "Tired of riding the institutional rollercoaster? In TXC, the people who use, mine, and hold the coin shape its value — not Wall Street desks.",
     img: community,
-    href: "#foundation",
+    href: "/value",
   },
   {
     tag: "Leadership",
