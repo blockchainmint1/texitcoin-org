@@ -285,8 +285,13 @@ function CurrencyPage() {
         </div>
       </section>
 
-      {/* No sacred cows */}
-      <section className="py-28">
+      {/* No sacred cows + closing */}
+      <section className="relative py-28">
+        <div
+          className="absolute inset-0 -z-10 opacity-60"
+          style={{ background: "var(--gradient-hero)" }}
+          aria-hidden
+        />
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
             Adaptable by Design
@@ -306,21 +311,7 @@ function CurrencyPage() {
             original promise: money that's truly peer-to-peer, accessible, and in the
             hands of the people who use it.
           </p>
-        </div>
-      </section>
-
-      {/* Why it matters */}
-      <section className="relative py-28">
-        <div
-          className="absolute inset-0 -z-10 opacity-60"
-          style={{ background: "var(--gradient-hero)" }}
-          aria-hidden
-        />
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
-            Why this <span className="text-primary">matters</span>
-          </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg text-muted-foreground">
             In a world of volatile stores-of-value and centralized stablecoins, TXC
             stands for something simpler and more powerful: usable, decentralized
             currency. Join the movement to make crypto spendable again.
