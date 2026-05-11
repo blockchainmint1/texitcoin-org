@@ -15,7 +15,7 @@ const NAV: NavItem[] = [
       { label: "Overview", href: "/#foundation" },
       { label: "Proof of Work", href: "/proof-of-work", internal: true },
       { label: "Digital Currency", href: "/currency", internal: true },
-      { label: "Community Value", href: "/#foundation" },
+      { label: "Community Value", href: "/value", internal: true },
       { label: "Leadership", href: "/#foundation" },
     ],
   },
