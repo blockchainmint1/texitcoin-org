@@ -1,5 +1,121 @@
 import { motion } from "framer-motion";
 import { Coins, Timer, Layers, TrendingDown, Check } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const MEMPOOL_API = "https://mempool.texitcoin.org/api";
+
+type LiveStats = {
+  height: string;
+  hashrate: string;
+  difficulty: string;
+  fee: string;
+  lastBlockAgo: string;
+};
+
+const PLACEHOLDER: LiveStats = {
+  height: "—",
+  hashrate: "—",
+  difficulty: "—",
+  fee: "—",
+  lastBlockAgo: "Connecting…",
+};
+
+function formatHashrate(hps: number): string {
+  if (!isFinite(hps) || hps <= 0) return "—";
+  const units = [
+    { v: 1e18, s: "EH/s" },
+    { v: 1e15, s: "PH/s" },
+    { v: 1e12, s: "TH/s" },
+    { v: 1e9, s: "GH/s" },
+    { v: 1e6, s: "MH/s" },
+    { v: 1e3, s: "KH/s" },
+  ];
+  for (const u of units) {
+    if (hps >= u.v) return `${(hps / u.v).toFixed(2)} ${u.s}`;
+  }
+  return `${hps.toFixed(0)} H/s`;
+}
+
+function formatNumber(n: number): string {
+  return n.toLocaleString("en-US");
+}
+
+function formatDifficulty(d: number): string {
+  if (d >= 1e9) return `${(d / 1e9).toFixed(2)} B`;
+  if (d >= 1e6) return `${(d / 1e6).toFixed(2)} M`;
+  if (d >= 1e3) return `${(d / 1e3).toFixed(2)} K`;
+  return d.toFixed(0);
+}
+
+function formatAgo(seconds: number): string {
+  if (seconds < 60) return `${Math.max(0, Math.floor(seconds))}s ago`;
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  return `${Math.floor(seconds / 3600)}h ago`;
+}
+
+function useLiveStats() {
+  const [stats, setStats] = useState<LiveStats>(PLACEHOLDER);
+  const [healthy, setHealthy] = useState(false);
+  const [tipTimestamp, setTipTimestamp] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const [blocksRes, hashRes, feesRes] = await Promise.all([
+          fetch(`${MEMPOOL_API}/blocks`),
+          fetch(`${MEMPOOL_API}/v1/mining/hashrate/3d`),
+          fetch(`${MEMPOOL_API}/v1/fees/recommended`),
+        ]);
+        if (!blocksRes.ok || !hashRes.ok) throw new Error("api");
+        const blocks = await blocksRes.json();
+        const hashData = await hashRes.json();
+        const fees = feesRes.ok ? await feesRes.json() : null;
+
+        const tip = blocks[0];
+        const hashrates = hashData.hashrates ?? [];
+        const latestHashrate = hashrates.length
+          ? hashrates[hashrates.length - 1].avgHashrate
+          : 0;
+
+        if (cancelled) return;
+        setTipTimestamp(tip.timestamp);
+        setHealthy(true);
+        setStats({
+          height: formatNumber(tip.height),
+          hashrate: formatHashrate(latestHashrate),
+          difficulty: formatDifficulty(tip.difficulty),
+          fee: fees ? `${fees.fastestFee} sat/vB` : "—",
+          lastBlockAgo: formatAgo(Math.floor(Date.now() / 1000) - tip.timestamp),
+        });
+      } catch {
+        if (!cancelled) setHealthy(false);
+      }
+    }
+
+    load();
+    const refresh = setInterval(load, 30_000);
+    return () => {
+      cancelled = true;
+      clearInterval(refresh);
+    };
+  }, []);
+
+  // tick "last block ago" every second
+  useEffect(() => {
+    if (tipTimestamp == null) return;
+    const id = setInterval(() => {
+      setStats((s) => ({
+        ...s,
+        lastBlockAgo: formatAgo(Math.floor(Date.now() / 1000) - tipTimestamp),
+      }));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [tipTimestamp]);
+
+  return { stats, healthy };
+}
 
 const SPECS = [
   { icon: Coins, title: "0.00 pre-mine", body: "Nobody starts with a head start. Mining is permissioned for Texas." },
