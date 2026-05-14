@@ -114,23 +114,9 @@ export function Footer() {
             ecosystem.
           </div>
           <div className="flex items-center gap-6">
-            <Link to="/blog" className="hover:text-foreground">News</Link>
-            <a
-              href="https://explorer.texitcoin.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground"
-            >
-              Explorer
-            </a>
-            <a
-              href="https://x.com/texitcoin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground"
-            >
-              Contact
-            </a>
+            <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
+            <Link to="/terms" className="hover:text-foreground">Terms</Link>
+            <Link to="/disclosures" className="hover:text-foreground">Disclosures</Link>
           </div>
         </div>
       </div>
