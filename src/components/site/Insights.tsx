@@ -38,8 +38,6 @@ export function Insights() {
               <Link
                 to="/blog/$slug"
                 params={{ slug: p.slug }}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-shadow"
               >
                 <div className="relative h-44 overflow-hidden">
