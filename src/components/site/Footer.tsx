@@ -1,21 +1,45 @@
+import { Link } from "@tanstack/react-router";
 import logo from "@/assets/txc-logo.png";
 
-const COLS = [
+type FooterLink = { label: string; href: string; internal?: boolean };
+
+const COLS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Discover",
-    links: ["News & Updates", "Legal News", "TXC in the News"],
+    links: [
+      { label: "News & Updates", href: "/blog", internal: true },
+      { label: "Currency", href: "/currency", internal: true },
+      { label: "Proof of Work", href: "/proof-of-work", internal: true },
+      { label: "Leadership", href: "/leadership", internal: true },
+    ],
   },
   {
     title: "Resources",
-    links: ["Block Explorer", "Mempool", "Wallets", "Web Wallet", "Pool"],
+    links: [
+      { label: "Block Explorer", href: "https://explorer.texitcoin.org/" },
+      { label: "Mempool", href: "https://mempool.texitcoin.org/" },
+      { label: "Wallets", href: "https://texitcoin.org/wallets.html" },
+      { label: "Web Wallet", href: "https://wallet.texitcoin.org/" },
+      { label: "Pool", href: "https://pool.texitcoin.org/" },
+    ],
   },
   {
     title: "Exchanges",
-    links: ["CoinMarketCap", "CoinGecko", "Bitmart", "MEXC", "Dex-Trade"],
+    links: [
+      { label: "CoinMarketCap", href: "https://coinmarketcap.com/currencies/texitcoin/" },
+      { label: "CoinGecko", href: "https://www.coingecko.com/en/coins/texitcoin" },
+      { label: "Bitmart", href: "https://www.bitmart.com/trade/TXC_USDT" },
+      { label: "MEXC", href: "https://www.mexc.com/exchange/TXC_USDT" },
+      { label: "Dex-Trade", href: "https://dex-trade.com/spot/trading/TXCUSDT" },
+    ],
   },
   {
     title: "Connect",
-    links: ["X / Twitter", "TikTok", "Facebook"],
+    links: [
+      { label: "X / Twitter", href: "https://x.com/texitcoin" },
+      { label: "TikTok", href: "https://www.tiktok.com/@texitcoins" },
+      { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61559875176657" },
+    ],
   },
 ];
 
@@ -50,13 +74,24 @@ export function Footer() {
                 </div>
                 <ul className="mt-4 space-y-2.5">
                   {c.links.map((l) => (
-                    <li key={l}>
-                      <a
-                        href="#"
-                        className="text-sm text-muted-foreground hover:text-foreground transition"
-                      >
-                        {l}
-                      </a>
+                    <li key={l.label}>
+                      {l.internal ? (
+                        <Link
+                          to={l.href}
+                          className="text-sm text-muted-foreground hover:text-foreground transition"
+                        >
+                          {l.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-muted-foreground hover:text-foreground transition"
+                        >
+                          {l.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -79,12 +114,27 @@ export function Footer() {
             ecosystem.
           </div>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-foreground">Privacy</a>
-            <a href="#" className="hover:text-foreground">Terms</a>
-            <a href="#" className="hover:text-foreground">Disclosures</a>
+            <Link to="/blog" className="hover:text-foreground">News</Link>
+            <a
+              href="https://explorer.texitcoin.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground"
+            >
+              Explorer
+            </a>
+            <a
+              href="https://x.com/texitcoin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+
