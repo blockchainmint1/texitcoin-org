@@ -9,6 +9,7 @@ import { Insights } from "@/components/site/Insights";
 import { FAQ } from "@/components/site/FAQ";
 import { CTA } from "@/components/site/CTA";
 import { Footer } from "@/components/site/Footer";
+import { LegalStarburst } from "@/components/site/LegalStarburst";
 
 export const Route = createFileRoute("/")({
   head: () => ({
