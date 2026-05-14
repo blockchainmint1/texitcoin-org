@@ -20,6 +20,41 @@ const PLACEHOLDER: LiveStats = {
   lastBlockAgo: "Connecting…",
 };
 
+function Sparkline({ points }: { points: number[] }) {
+  if (points.length < 2) {
+    return (
+      <div className="grid h-full place-items-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        Loading hashrate…
+      </div>
+    );
+  }
+  const w = 100;
+  const h = 100;
+  const min = Math.min(...points);
+  const max = Math.max(...points);
+  const range = max - min || 1;
+  const step = w / (points.length - 1);
+  const coords = points.map((p, i) => {
+    const x = i * step;
+    const y = h - ((p - min) / range) * h * 0.8 - h * 0.1;
+    return [x, y] as const;
+  });
+  const path = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(2)},${y.toFixed(2)}`).join(" ");
+  const area = `${path} L${w},${h} L0,${h} Z`;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" className="h-full w-full">
+      <defs>
+        <linearGradient id="sparkFill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={area} fill="url(#sparkFill)" />
+      <path d={path} fill="none" stroke="hsl(var(--primary))" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+    </svg>
+  );
+}
+
 function formatHashrate(hps: number): string {
   if (!isFinite(hps) || hps <= 0) return "—";
   const units = [
@@ -57,6 +92,7 @@ function useLiveStats() {
   const [stats, setStats] = useState<LiveStats>(PLACEHOLDER);
   const [healthy, setHealthy] = useState(false);
   const [tipTimestamp, setTipTimestamp] = useState<number | null>(null);
+  const [hashSeries, setHashSeries] = useState<number[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -79,9 +115,16 @@ function useLiveStats() {
           ? hashrates[hashrates.length - 1].avgHashrate
           : 0;
 
+        // Last 24h of samples for the sparkline
+        const cutoff = Math.floor(Date.now() / 1000) - 24 * 3600;
+        const series: number[] = hashrates
+          .filter((h: { timestamp: number }) => h.timestamp >= cutoff)
+          .map((h: { avgHashrate: number }) => h.avgHashrate);
+
         if (cancelled) return;
         setTipTimestamp(tip.timestamp);
         setHealthy(true);
+        setHashSeries(series.length >= 2 ? series : hashrates.slice(-24).map((h: { avgHashrate: number }) => h.avgHashrate));
         setStats({
           height: formatNumber(tip.height),
           hashrate: formatHashrate(latestHashrate),
@@ -114,7 +157,7 @@ function useLiveStats() {
     return () => clearInterval(id);
   }, [tipTimestamp]);
 
-  return { stats, healthy };
+  return { stats, healthy, hashSeries };
 }
 
 const SPECS = [
@@ -133,7 +176,7 @@ const FACTS = [
 ];
 
 export function Specs() {
-  const { stats, healthy } = useLiveStats();
+  const { stats, healthy, hashSeries } = useLiveStats();
   return (
     <section id="specs" className="relative py-28 bg-surface/40">
       <div className="mx-auto max-w-7xl px-6">
@@ -214,8 +257,14 @@ export function Specs() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 h-24 rounded-lg bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 grid place-items-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Last block · {stats.lastBlockAgo}
+            <div className="mt-8 overflow-hidden rounded-lg border border-border/60 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
+              <div className="flex items-center justify-between px-3 pt-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                <span>Hashrate · 24h</span>
+                <span>Last block · {stats.lastBlockAgo}</span>
+              </div>
+              <div className="h-16 px-1 pb-1">
+                <Sparkline points={hashSeries} />
+              </div>
             </div>
           </div>
         </div>
