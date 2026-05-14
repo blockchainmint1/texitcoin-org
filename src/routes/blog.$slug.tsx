@@ -2,7 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { posts, getPost, getPostImage } from "@/data/blog-posts";
+import { posts, getPost, getPostImage, getSecondaryImage } from "@/data/blog-posts";
+import { User } from "lucide-react";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
