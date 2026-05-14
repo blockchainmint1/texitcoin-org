@@ -257,8 +257,14 @@ export function Specs() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 h-24 rounded-lg bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 grid place-items-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Last block · {stats.lastBlockAgo}
+            <div className="mt-8 overflow-hidden rounded-lg border border-border/60 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5">
+              <div className="flex items-center justify-between px-3 pt-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                <span>Hashrate · 24h</span>
+                <span>Last block · {stats.lastBlockAgo}</span>
+              </div>
+              <div className="h-16 px-1 pb-1">
+                <Sparkline points={hashSeries} />
+              </div>
             </div>
           </div>
         </div>
