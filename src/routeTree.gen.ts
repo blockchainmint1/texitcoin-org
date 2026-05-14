@@ -10,10 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ValueRouteImport } from './routes/value'
+import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as LegalRouteImport } from './routes/legal'
 import { Route as LeadershipRouteImport } from './routes/leadership'
+import { Route as InTheNewsRouteImport } from './routes/in-the-news'
 import { Route as DisclosuresRouteImport } from './routes/disclosures'
 import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -23,6 +26,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 const ValueRoute = ValueRouteImport.update({
   id: '/value',
   path: '/value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrollsRoute = TrollsRouteImport.update({
+  id: '/trolls',
+  path: '/trolls',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -40,9 +48,19 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeadershipRoute = LeadershipRouteImport.update({
   id: '/leadership',
   path: '/leadership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InTheNewsRoute = InTheNewsRouteImport.update({
+  id: '/in-the-news',
+  path: '/in-the-news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DisclosuresRoute = DisclosuresRouteImport.update({
@@ -76,10 +94,13 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
+  '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
+  '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/terms': typeof TermsRoute
+  '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -88,10 +109,13 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
+  '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
+  '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/terms': typeof TermsRoute
+  '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -101,10 +125,13 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
+  '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
+  '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/terms': typeof TermsRoute
+  '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/blog_/$slug': typeof BlogSlugRoute
 }
@@ -115,10 +142,13 @@ export interface FileRouteTypes {
     | '/blog'
     | '/currency'
     | '/disclosures'
+    | '/in-the-news'
     | '/leadership'
+    | '/legal'
     | '/privacy'
     | '/proof-of-work'
     | '/terms'
+    | '/trolls'
     | '/value'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -127,10 +157,13 @@ export interface FileRouteTypes {
     | '/blog'
     | '/currency'
     | '/disclosures'
+    | '/in-the-news'
     | '/leadership'
+    | '/legal'
     | '/privacy'
     | '/proof-of-work'
     | '/terms'
+    | '/trolls'
     | '/value'
     | '/blog/$slug'
   id:
@@ -139,10 +172,13 @@ export interface FileRouteTypes {
     | '/blog'
     | '/currency'
     | '/disclosures'
+    | '/in-the-news'
     | '/leadership'
+    | '/legal'
     | '/privacy'
     | '/proof-of-work'
     | '/terms'
+    | '/trolls'
     | '/value'
     | '/blog_/$slug'
   fileRoutesById: FileRoutesById
@@ -152,10 +188,13 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   CurrencyRoute: typeof CurrencyRoute
   DisclosuresRoute: typeof DisclosuresRoute
+  InTheNewsRoute: typeof InTheNewsRoute
   LeadershipRoute: typeof LeadershipRoute
+  LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   TermsRoute: typeof TermsRoute
+  TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
   BlogSlugRoute: typeof BlogSlugRoute
 }
@@ -167,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/value'
       fullPath: '/value'
       preLoaderRoute: typeof ValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trolls': {
+      id: '/trolls'
+      path: '/trolls'
+      fullPath: '/trolls'
+      preLoaderRoute: typeof TrollsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -190,11 +236,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leadership': {
       id: '/leadership'
       path: '/leadership'
       fullPath: '/leadership'
       preLoaderRoute: typeof LeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/in-the-news': {
+      id: '/in-the-news'
+      path: '/in-the-news'
+      fullPath: '/in-the-news'
+      preLoaderRoute: typeof InTheNewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/disclosures': {
@@ -240,10 +300,13 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   CurrencyRoute: CurrencyRoute,
   DisclosuresRoute: DisclosuresRoute,
+  InTheNewsRoute: InTheNewsRoute,
   LeadershipRoute: LeadershipRoute,
+  LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
   TermsRoute: TermsRoute,
+  TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
   BlogSlugRoute: BlogSlugRoute,
 }
