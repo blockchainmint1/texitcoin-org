@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/txc-logo.png";
+import { Subscribe } from "@/components/site/Subscribe";
 
 type FooterLink = { label: string; href: string; internal?: boolean };
 
