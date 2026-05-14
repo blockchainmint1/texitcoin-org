@@ -23,7 +23,7 @@ const ITEMS = [
     title: "Trade & spend",
     body: "TXC is live on multiple exchanges, and merchants are signing on every week.",
     cta: "Where to trade",
-    href: "https://coinmarketcap.com/currencies/texitcoin/#markets",
+    href: "https://coinmarketcap.com/currencies/texitcoin/",
   },
 ];
 
