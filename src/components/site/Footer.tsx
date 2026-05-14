@@ -65,29 +65,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-border pt-8">
-          <a
-            href="https://honest.money"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-4 py-2 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition"
-          >
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Part of the{" "}
-            <span className="font-semibold text-foreground group-hover:text-primary transition">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground md:flex-row md:items-center">
+          <div>
+            © {new Date().getFullYear()} TEXITcoin. Digital · Decentralized · Peer-to-peer. · Part of the{" "}
+            <a
+              href="https://honest.money"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-primary transition"
+            >
               honest.money
-            </span>{" "}
-            ecosystem
-            <span aria-hidden className="transition group-hover:translate-x-0.5">→</span>
-          </a>
-
-          <div className="mt-6 flex flex-col items-start justify-between gap-4 text-xs text-muted-foreground md:flex-row md:items-center">
-            <div>© {new Date().getFullYear()} TEXITcoin. Digital · Decentralized · Peer-to-peer.</div>
-            <div className="flex items-center gap-6">
-              <a href="#" className="hover:text-foreground">Privacy</a>
-              <a href="#" className="hover:text-foreground">Terms</a>
-              <a href="#" className="hover:text-foreground">Disclosures</a>
-            </div>
+            </a>{" "}
+            ecosystem.
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="#" className="hover:text-foreground">Privacy</a>
+            <a href="#" className="hover:text-foreground">Terms</a>
+            <a href="#" className="hover:text-foreground">Disclosures</a>
           </div>
         </div>
       </div>
