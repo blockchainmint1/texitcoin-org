@@ -28,7 +28,7 @@ const NAV: NavItem[] = [
     children: [
       { label: "Block Explorer", href: "https://explorer.texitcoin.org/", external: true },
       { label: "Mempool", href: "https://mempool.texitcoin.org/", external: true },
-      { label: "Wallets", href: "https://texitcoin.org/wallets.html", external: true },
+      { label: "Wallets", href: "/wallets", internal: true },
       { label: "Web Wallet", href: "https://wallet.texitcoin.org/", external: true },
       { label: "Pool", href: "https://pool.texitcoin.org/", external: true },
       { label: "Layer 2 & Tokens", href: "https://tokens.texitcoin.org/", external: true },

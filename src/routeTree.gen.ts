@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -23,6 +24,11 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
+const WalletsRoute = WalletsRouteImport.update({
+  id: '/wallets',
+  path: '/wallets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ValueRoute = ValueRouteImport.update({
   id: '/value',
   path: '/value',
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
+  '/wallets': typeof WalletsRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
+  '/wallets': typeof WalletsRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
+  '/wallets': typeof WalletsRoute
   '/blog_/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/trolls'
     | '/value'
+    | '/wallets'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/trolls'
     | '/value'
+    | '/wallets'
     | '/blog/$slug'
   id:
     | '__root__'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/trolls'
     | '/value'
+    | '/wallets'
     | '/blog_/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -196,11 +208,19 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
+  WalletsRoute: typeof WalletsRoute
   BlogSlugRoute: typeof BlogSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wallets': {
+      id: '/wallets'
+      path: '/wallets'
+      fullPath: '/wallets'
+      preLoaderRoute: typeof WalletsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/value': {
       id: '/value'
       path: '/value'
@@ -308,8 +328,19 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
+  WalletsRoute: WalletsRoute,
   BlogSlugRoute: BlogSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -7,7 +7,8 @@ const ITEMS = [
     title: "Get a wallet",
     body: "Cold storage, desktop, or web — pick a wallet that fits how you plan to use TXC.",
     cta: "Browse wallets",
-    href: "https://texitcoin.org/wallets.html",
+    href: "/wallets",
+    internal: true,
   },
   {
     icon: Pickaxe,
