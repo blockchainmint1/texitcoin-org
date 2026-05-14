@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import coldStorageCoin from "@/assets/cold-storage-coin.jpg";
 
 export const Route = createFileRoute("/wallets")({
   head: () => ({
@@ -248,8 +249,10 @@ function WalletsPage() {
               >
                 <div className="relative aspect-square overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-amber-900/30 via-background to-background">
                   <img
-                    src="https://texitcoin.org/assets/img/thumb/3.png"
+                    src={coldStorageCoin}
                     alt="TXC Cold Storage Coin — front face"
+                    width={1024}
+                    height={1024}
                     className="absolute inset-0 h-full w-full object-contain p-8"
                     loading="lazy"
                   />
