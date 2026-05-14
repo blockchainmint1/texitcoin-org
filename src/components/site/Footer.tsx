@@ -8,11 +8,10 @@ const COLS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Discover",
     links: [
-      { label: "News & Updates", href: "/blog", internal: true },
-      { label: "TXC in the News", href: "/in-the-news", internal: true },
-      { label: "TSSB Legal Updates", href: "/legal", internal: true },
-      { label: "Troll Index", href: "/trolls", internal: true },
       { label: "Leadership", href: "/leadership", internal: true },
+      { label: "Proof of Work", href: "/proof-of-work", internal: true },
+      { label: "Currency", href: "/currency", internal: true },
+      { label: "Community Foundation", href: "/#foundation", internal: true },
     ],
   },
   {
