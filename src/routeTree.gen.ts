@@ -14,6 +14,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LeadershipRouteImport } from './routes/leadership'
+import { Route as DisclosuresRouteImport } from './routes/disclosures'
 import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
@@ -44,6 +45,11 @@ const LeadershipRoute = LeadershipRouteImport.update({
   path: '/leadership',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DisclosuresRoute = DisclosuresRouteImport.update({
+  id: '/disclosures',
+  path: '/disclosures',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CurrencyRoute = CurrencyRouteImport.update({
   id: '/currency',
   path: '/currency',
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/currency': typeof CurrencyRoute
+  '/disclosures': typeof DisclosuresRoute
   '/leadership': typeof LeadershipRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/currency': typeof CurrencyRoute
+  '/disclosures': typeof DisclosuresRoute
   '/leadership': typeof LeadershipRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/currency': typeof CurrencyRoute
+  '/disclosures': typeof DisclosuresRoute
   '/leadership': typeof LeadershipRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/currency'
+    | '/disclosures'
     | '/leadership'
     | '/privacy'
     | '/proof-of-work'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/currency'
+    | '/disclosures'
     | '/leadership'
     | '/privacy'
     | '/proof-of-work'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/currency'
+    | '/disclosures'
     | '/leadership'
     | '/privacy'
     | '/proof-of-work'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
   CurrencyRoute: typeof CurrencyRoute
+  DisclosuresRoute: typeof DisclosuresRoute
   LeadershipRoute: typeof LeadershipRoute
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/leadership'
       fullPath: '/leadership'
       preLoaderRoute: typeof LeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disclosures': {
+      id: '/disclosures'
+      path: '/disclosures'
+      fullPath: '/disclosures'
+      preLoaderRoute: typeof DisclosuresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/currency': {
@@ -228,6 +248,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
   CurrencyRoute: CurrencyRoute,
+  DisclosuresRoute: DisclosuresRoute,
   LeadershipRoute: LeadershipRoute,
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
