@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/txc-logo.png";
+import { Subscribe } from "@/components/site/Subscribe";
 
 type FooterLink = { label: string; href: string; internal?: boolean };
 
@@ -45,7 +46,9 @@ const COLS: { title: string; links: FooterLink[] }[] = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border bg-surface/30 pt-20 pb-10">
+    <>
+      <Subscribe />
+      <footer className="relative border-t border-border bg-surface/30 pt-20 pb-10">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
           <div>
@@ -120,7 +123,8 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }
 
