@@ -20,6 +20,41 @@ const PLACEHOLDER: LiveStats = {
   lastBlockAgo: "Connecting…",
 };
 
+function Sparkline({ points }: { points: number[] }) {
+  if (points.length < 2) {
+    return (
+      <div className="grid h-full place-items-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+        Loading hashrate…
+      </div>
+    );
+  }
+  const w = 100;
+  const h = 100;
+  const min = Math.min(...points);
+  const max = Math.max(...points);
+  const range = max - min || 1;
+  const step = w / (points.length - 1);
+  const coords = points.map((p, i) => {
+    const x = i * step;
+    const y = h - ((p - min) / range) * h * 0.8 - h * 0.1;
+    return [x, y] as const;
+  });
+  const path = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(2)},${y.toFixed(2)}`).join(" ");
+  const area = `${path} L${w},${h} L0,${h} Z`;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" className="h-full w-full">
+      <defs>
+        <linearGradient id="sparkFill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={area} fill="url(#sparkFill)" />
+      <path d={path} fill="none" stroke="hsl(var(--primary))" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+    </svg>
+  );
+}
+
 function formatHashrate(hps: number): string {
   if (!isFinite(hps) || hps <= 0) return "—";
   const units = [
