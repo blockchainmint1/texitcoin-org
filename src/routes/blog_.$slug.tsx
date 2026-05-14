@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { posts, getPost, getPostImage, getSecondaryImage } from "@/data/blog-posts";
 import { User } from "lucide-react";
 
-export const Route = createFileRoute("/blog/$slug")({
+export const Route = createFileRoute("/blog_/$slug")({
   loader: ({ params }) => {
     const post = getPost(params.slug);
     if (!post) throw notFound();
