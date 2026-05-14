@@ -18,7 +18,7 @@ import { Route as DisclosuresRouteImport } from './routes/disclosures'
 import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
 const ValueRoute = ValueRouteImport.update({
   id: '/value',
@@ -66,14 +66,14 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog_/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/leadership': typeof LeadershipRoute
@@ -85,7 +85,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/leadership': typeof LeadershipRoute
@@ -98,7 +98,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/leadership': typeof LeadershipRoute
@@ -106,7 +106,7 @@ export interface FileRoutesById {
   '/proof-of-work': typeof ProofOfWorkRoute
   '/terms': typeof TermsRoute
   '/value': typeof ValueRoute
-  '/blog/$slug': typeof BlogSlugRoute
+  '/blog_/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -144,12 +144,12 @@ export interface FileRouteTypes {
     | '/proof-of-work'
     | '/terms'
     | '/value'
-    | '/blog/$slug'
+    | '/blog_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRoute: typeof BlogRouteWithChildren
+  BlogRoute: typeof BlogRoute
   CurrencyRoute: typeof CurrencyRoute
   DisclosuresRoute: typeof DisclosuresRoute
   LeadershipRoute: typeof LeadershipRoute
@@ -157,6 +157,7 @@ export interface RootRouteChildren {
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   TermsRoute: typeof TermsRoute
   ValueRoute: typeof ValueRoute
+  BlogSlugRoute: typeof BlogSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -224,29 +225,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
+    '/blog_/$slug': {
+      id: '/blog_/$slug'
+      path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRoute: BlogRouteWithChildren,
+  BlogRoute: BlogRoute,
   CurrencyRoute: CurrencyRoute,
   DisclosuresRoute: DisclosuresRoute,
   LeadershipRoute: LeadershipRoute,
@@ -254,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProofOfWorkRoute: ProofOfWorkRoute,
   TermsRoute: TermsRoute,
   ValueRoute: ValueRoute,
+  BlogSlugRoute: BlogSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
