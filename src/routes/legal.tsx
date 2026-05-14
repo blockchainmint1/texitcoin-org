@@ -169,7 +169,7 @@ const ENTRIES: Entry[] = [
 
 const TONE_STYLES: Record<NonNullable<Entry["tone"]>, { label: string; bg: string; icon: typeof Gavel }> = {
   win: { label: "Win", bg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30", icon: Sparkles },
-  filing: { label: "SETBACK", bg: "bg-primary/15 text-primary border-primary/30", icon: ScrollText },
+  filing: { label: "PAINFUL", bg: "bg-primary/15 text-primary border-primary/30", icon: ScrollText },
   context: { label: "Context", bg: "bg-accent/15 text-accent border-accent/30", icon: Shield },
   regulator: { label: "Regulator", bg: "bg-amber-500/15 text-amber-300 border-amber-500/30", icon: Gavel },
 };
