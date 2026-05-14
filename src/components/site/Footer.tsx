@@ -11,7 +11,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
       { label: "Leadership", href: "/leadership", internal: true },
       { label: "Proof of Work", href: "/proof-of-work", internal: true },
       { label: "Currency", href: "/currency", internal: true },
-      { label: "Community Foundation", href: "/#foundation", internal: true },
+      { label: "Community", href: "/value", internal: true },
     ],
   },
   {
