@@ -84,6 +84,7 @@ export function Footer() {
             <a href="#" className="hover:text-foreground">Disclosures</a>
           </div>
         </div>
+      </div>
     </footer>
   );
 }
