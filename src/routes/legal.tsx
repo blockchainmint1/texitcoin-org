@@ -48,6 +48,7 @@ type Entry = {
   body: string;
   link?: { label: string; href: string };
   tone?: "win" | "filing" | "context" | "regulator";
+  tag?: string;
 };
 
 const ENTRIES: Entry[] = [
