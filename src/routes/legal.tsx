@@ -317,7 +317,7 @@ function LegalPage() {
                       <span
                         className={`rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] ${tone.bg}`}
                       >
-                        {tone.label}
+                        {e.tag ?? tone.label}
                       </span>
                     </div>
                     <h3 className="mt-3 font-display text-xl font-bold leading-snug md:text-2xl">
