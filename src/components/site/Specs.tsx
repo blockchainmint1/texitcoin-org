@@ -176,7 +176,7 @@ const FACTS = [
 ];
 
 export function Specs() {
-  const { stats, healthy } = useLiveStats();
+  const { stats, healthy, hashSeries } = useLiveStats();
   return (
     <section id="specs" className="relative py-28 bg-surface/40">
       <div className="mx-auto max-w-7xl px-6">
