@@ -47,6 +47,7 @@ function Index() {
         <CTA />
       </main>
       <Footer />
+      <LegalStarburst />
     </div>
   );
 }
