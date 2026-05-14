@@ -92,6 +92,7 @@ function useLiveStats() {
   const [stats, setStats] = useState<LiveStats>(PLACEHOLDER);
   const [healthy, setHealthy] = useState(false);
   const [tipTimestamp, setTipTimestamp] = useState<number | null>(null);
+  const [hashSeries, setHashSeries] = useState<number[]>([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -114,9 +115,16 @@ function useLiveStats() {
           ? hashrates[hashrates.length - 1].avgHashrate
           : 0;
 
+        // Last 24h of samples for the sparkline
+        const cutoff = Math.floor(Date.now() / 1000) - 24 * 3600;
+        const series: number[] = hashrates
+          .filter((h: { timestamp: number }) => h.timestamp >= cutoff)
+          .map((h: { avgHashrate: number }) => h.avgHashrate);
+
         if (cancelled) return;
         setTipTimestamp(tip.timestamp);
         setHealthy(true);
+        setHashSeries(series.length >= 2 ? series : hashrates.slice(-24).map((h: { avgHashrate: number }) => h.avgHashrate));
         setStats({
           height: formatNumber(tip.height),
           hashrate: formatHashrate(latestHashrate),
@@ -149,7 +157,7 @@ function useLiveStats() {
     return () => clearInterval(id);
   }, [tipTimestamp]);
 
-  return { stats, healthy };
+  return { stats, healthy, hashSeries };
 }
 
 const SPECS = [
