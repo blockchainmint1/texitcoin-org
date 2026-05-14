@@ -166,13 +166,18 @@ function NewsPage() {
                 transition={{ duration: 0.45, delay: (i % 6) * 0.05 }}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:border-primary/60 hover:shadow-glow transition"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-surface">
-                  <img
-                    src={a.image}
-                    alt={a.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
+                <div
+                  className="relative aspect-[16/10] overflow-hidden"
+                  style={{
+                    background: `linear-gradient(135deg, hsl(${(i * 47) % 360} 70% 18%), hsl(${(i * 47 + 60) % 360} 80% 32%))`,
+                  }}
+                >
+                  <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:14px_14px]" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <div className="font-display text-2xl font-bold leading-tight text-white drop-shadow-md">
+                      {a.outlet}
+                    </div>
+                  </div>
                   {a.tag && (
                     <div className="absolute left-3 top-3 rounded-full bg-background/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground backdrop-blur">
                       {a.tag}
