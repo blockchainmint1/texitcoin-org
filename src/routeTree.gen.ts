@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ValueRouteImport } from './routes/value'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LeadershipRouteImport } from './routes/leadership'
@@ -21,6 +22,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const ValueRoute = ValueRouteImport.update({
   id: '/value',
   path: '/value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProofOfWorkRoute = ProofOfWorkRouteImport.update({
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/leadership': typeof LeadershipRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
+  '/terms': typeof TermsRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/leadership': typeof LeadershipRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
+  '/terms': typeof TermsRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/leadership': typeof LeadershipRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
+  '/terms': typeof TermsRoute
   '/value': typeof ValueRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/privacy'
     | '/proof-of-work'
+    | '/terms'
     | '/value'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/privacy'
     | '/proof-of-work'
+    | '/terms'
     | '/value'
     | '/blog/$slug'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/privacy'
     | '/proof-of-work'
+    | '/terms'
     | '/value'
     | '/blog/$slug'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   LeadershipRoute: typeof LeadershipRoute
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
+  TermsRoute: typeof TermsRoute
   ValueRoute: typeof ValueRoute
 }
 
@@ -140,6 +153,13 @@ declare module '@tanstack/react-router' {
       path: '/value'
       fullPath: '/value'
       preLoaderRoute: typeof ValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proof-of-work': {
@@ -211,8 +231,19 @@ const rootRouteChildren: RootRouteChildren = {
   LeadershipRoute: LeadershipRoute,
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
+  TermsRoute: TermsRoute,
   ValueRoute: ValueRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
