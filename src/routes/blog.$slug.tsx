@@ -80,7 +80,7 @@ function BlogPost() {
               <ArrowLeft className="h-4 w-4" /> All articles
             </Link>
 
-            <div className="mt-8 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            <div className="mt-8 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
               <span className="text-primary font-semibold">{post.tag}</span>
               <span aria-hidden>·</span>
               <span>{formatDate(post.date)}</span>
@@ -97,6 +97,18 @@ function BlogPost() {
             <p className="mt-6 text-xl leading-relaxed text-muted-foreground text-balance">
               {post.excerpt}
             </p>
+
+            <div className="mt-8 flex items-center gap-3 border-t border-border pt-6">
+              <div className="grid h-10 w-10 place-items-center rounded-full bg-primary/15 text-primary">
+                <User className="h-5 w-5" />
+              </div>
+              <div className="text-sm">
+                <div className="font-semibold text-foreground">{post.author}</div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  Founder, TEXITcoin
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="relative my-12 h-64 md:h-[28rem] overflow-hidden">
@@ -112,9 +124,32 @@ function BlogPost() {
 
           <div className="mx-auto max-w-3xl px-6">
             <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90">
-              {post.body.map((para: string, i: number) => (
-                <p key={i}>{para}</p>
-              ))}
+              {post.body.map((para: string, i: number) => {
+                const insertImageAt = Math.floor(post.body.length / 2);
+                const insertPullquoteAt = Math.min(2, post.body.length - 1);
+                return (
+                  <div key={i} className="space-y-6">
+                    <p>{para}</p>
+                    {i === insertPullquoteAt && post.body.length > 4 && (
+                      <blockquote className="border-l-4 border-primary pl-6 py-2 my-8 font-display text-2xl leading-snug text-foreground/90 italic">
+                        {post.excerpt}
+                      </blockquote>
+                    )}
+                    {i === insertImageAt && post.body.length > 5 && (
+                      <figure className="my-10 -mx-6 md:mx-0">
+                        <div className="relative h-56 md:h-80 overflow-hidden rounded-2xl">
+                          <img
+                            src={getSecondaryImage(post)}
+                            alt=""
+                            loading="lazy"
+                            className="absolute inset-0 h-full w-full object-cover"
+                          />
+                        </div>
+                      </figure>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             <div className="mt-16 rounded-2xl border border-border bg-card p-8 shadow-card">
