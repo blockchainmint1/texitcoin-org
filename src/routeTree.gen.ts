@@ -20,6 +20,7 @@ import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as InTheNewsRouteImport } from './routes/in-the-news'
 import { Route as DisclosuresRouteImport } from './routes/disclosures'
 import { Route as CurrencyRouteImport } from './routes/currency'
+import { Route as BuildRouteImport } from './routes/build'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
@@ -79,6 +80,11 @@ const CurrencyRoute = CurrencyRouteImport.update({
   path: '/currency',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuildRoute = BuildRouteImport.update({
+  id: '/build',
+  path: '/build',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -98,6 +104,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
+  '/build': typeof BuildRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/in-the-news': typeof InTheNewsRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
+  '/build': typeof BuildRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/in-the-news': typeof InTheNewsRoute
@@ -131,6 +139,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
+  '/build': typeof BuildRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/in-the-news': typeof InTheNewsRoute
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/blog'
+    | '/build'
     | '/currency'
     | '/disclosures'
     | '/in-the-news'
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/blog'
+    | '/build'
     | '/currency'
     | '/disclosures'
     | '/in-the-news'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/blog'
+    | '/build'
     | '/currency'
     | '/disclosures'
     | '/in-the-news'
@@ -198,6 +210,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
+  BuildRoute: typeof BuildRoute
   CurrencyRoute: typeof CurrencyRoute
   DisclosuresRoute: typeof DisclosuresRoute
   InTheNewsRoute: typeof InTheNewsRoute
@@ -291,6 +304,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CurrencyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/build': {
+      id: '/build'
+      path: '/build'
+      fullPath: '/build'
+      preLoaderRoute: typeof BuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
@@ -318,6 +338,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
+  BuildRoute: BuildRoute,
   CurrencyRoute: CurrencyRoute,
   DisclosuresRoute: DisclosuresRoute,
   InTheNewsRoute: InTheNewsRoute,
