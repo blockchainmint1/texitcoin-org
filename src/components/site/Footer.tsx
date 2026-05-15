@@ -22,6 +22,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
       { label: "Wallets", href: "/wallets", internal: true },
       { label: "Web Wallet", href: "https://wallet.texitcoin.org/" },
       { label: "Pool", href: "https://pool.texitcoin.org/" },
+      { label: "Build on TXC", href: "/build", internal: true },
     ],
   },
   {

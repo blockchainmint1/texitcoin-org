@@ -218,27 +218,6 @@ const RESOURCES = [
     desc: "Issue tokens, browse the L2, and explore programmable assets on TXC.",
     tag: "L2",
   },
-  {
-    icon: Zap,
-    name: "wTXC on Ethereum",
-    url: "https://wtxc.texitcoin.org/",
-    desc: "Wrapped TXC bridge for use across the Ethereum DeFi ecosystem.",
-    tag: "Bridge",
-  },
-  {
-    icon: Server,
-    name: "CryptoPOP",
-    url: "https://cryptopop.io/",
-    desc: "Plug-and-play mining hardware preconfigured for the TEXITcoin pool.",
-    tag: "Hardware",
-  },
-  {
-    icon: Cpu,
-    name: "StreamTXC",
-    url: "https://streamtxc.com/",
-    desc: "Real-time TXC streaming, payments, and creator tooling on the network.",
-    tag: "Apps",
-  },
 ];
 
 const WHY = [
