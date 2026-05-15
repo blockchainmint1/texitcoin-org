@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 const MEMPOOL_API = "https://mempool.texitcoin.org/api";
 
@@ -317,6 +318,359 @@ curl https://mempool.texitcoin.org/api/address/<txc_address>
 curl -X POST -d '<rawtx_hex>' \\
   https://mempool.texitcoin.org/api/tx`;
 
+// ---------- Ecosystem API docs ----------
+
+type DocSection = {
+  heading: string;
+  body?: React.ReactNode;
+  code?: string;
+  lang?: string;
+};
+
+const OMNI_SECTIONS: DocSection[] = [
+  {
+    heading: "1 · Network parameters",
+    body: (
+      <ul className="space-y-1.5">
+        <li><span className="text-muted-foreground">P2PKH version byte:</span> <code className="font-mono">0x42</code> (addresses start with <code className="font-mono">T</code>)</li>
+        <li><span className="text-muted-foreground">Message-sign prefix:</span> <code className="font-mono">"Texitcoin Signed Message:\n"</code></li>
+        <li><span className="text-muted-foreground">Mempool / Esplora API:</span> <code className="font-mono">https://mempool.texitcoin.org/api</code></li>
+        <li><span className="text-muted-foreground">Dust threshold (effective):</span> <code className="font-mono">10,000 sats</code> — not Bitcoin's 546</li>
+        <li><span className="text-muted-foreground">Suggested fee rate:</span> <code className="font-mono">5 sat/vB</code></li>
+        <li><span className="text-muted-foreground">Omni magic bytes:</span> <code className="font-mono">"omni"</code> (4 ASCII bytes, no extra framing)</li>
+      </ul>
+    ),
+  },
+  {
+    heading: "2 · Quickstart",
+    body: (
+      <p>
+        You need three things: a funded TXC address with the <strong>issuer's private key</strong>;
+        access to a TXC full node with the Omni module enabled (JSON-RPC, HTTP Basic auth);
+        and the <strong>property ID</strong> of your token. Then the loop is{" "}
+        <em>build payload → assemble tx → sign → broadcast</em>. The node only helps with step 1
+        — you assemble, sign, and broadcast yourself. The wallet RPCs assume the issuer key
+        lives in the node's wallet, which is not how most app integrations work.
+      </p>
+    ),
+  },
+  {
+    heading: "3 · RPC reference",
+    body: (
+      <ul className="space-y-1">
+        <li><code className="font-mono">omni_getproperty &lt;id&gt;</code> — token metadata + issuer address</li>
+        <li><code className="font-mono">omni_getbalance &lt;addr&gt; &lt;id&gt;</code> — balance of one address</li>
+        <li><code className="font-mono">omni_createpayload_grant &lt;id&gt; &lt;amount&gt; &lt;grantdata&gt;</code> — payload for a managed-token mint</li>
+        <li><code className="font-mono">omni_createpayload_simplesend &lt;id&gt; &lt;amount&gt;</code> — payload for a transfer</li>
+        <li><code className="font-mono">omni_decodetransaction &lt;rawhex&gt;</code> — sanity-check a tx before broadcast</li>
+        <li><code className="font-mono">omni_gettransaction &lt;txid&gt;</code> — read back a parsed Omni tx after confirmation</li>
+      </ul>
+    ),
+    code: `curl -u user:pass -H 'content-type: text/plain' \\
+  -d '{"jsonrpc":"1.0","id":"x","method":"omni_getproperty","params":[21]}' \\
+  https://your-txc-node.example/`,
+  },
+  {
+    heading: "4 · Minting (Grant)",
+    body: (
+      <p>
+        For <strong>managed</strong> tokens, the issuer mints new units via a Grant. Ask the
+        node for the Omni payload, pull UTXOs from Esplora, and build a tx with{" "}
+        <strong>three outputs in this exact order</strong>:{" "}
+        <code className="font-mono">OP_RETURN(payload)</code>, dust to the receiver, change back
+        to the issuer. Sign every input with the issuer key and POST the raw hex to{" "}
+        <code className="font-mono">/api/tx</code>.
+      </p>
+    ),
+    code: `// 1. Build payload
+const payloadHex = await rpc("omni_createpayload_grant", [
+  21,             // property id
+  "100.00000000", // amount as decimal string (8 dp for divisible)
+  "",             // grantdata — REQUIRED, even when empty
+]);
+
+// 2. Assemble the OP_RETURN — just "omni" + payload, NOTHING else
+import * as bitcoin from "bitcoinjs-lib";
+const opReturnData = Buffer.concat([
+  Buffer.from("omni", "ascii"),
+  Buffer.from(payloadHex, "hex"),
+]);
+const opReturn = bitcoin.payments.embed({ data: [opReturnData] }).output!;
+
+const psbt = new bitcoin.Psbt({ network: TXC });
+// ... addInput() for each issuer UTXO with nonWitnessUtxo ...
+psbt.addOutput({ script: opReturn, value: 0n });
+psbt.addOutput({ address: receiver, value: 10_000n }); // dust = 10k sats on TXC
+psbt.addOutput({ address: issuer,   value: changeSats });
+psbt.signAllInputs(signer);
+psbt.finalizeAllInputs();
+
+// 3. Broadcast
+const rawHex = psbt.extractTransaction().toHex();
+const txid = await fetch("https://mempool.texitcoin.org/api/tx", {
+  method: "POST", headers: { "content-type": "text/plain" }, body: rawHex,
+}).then(r => r.text());`,
+  },
+  {
+    heading: "5 · Sending tokens",
+    body: (
+      <p>
+        Wallet-to-wallet transfer is the same shape as a mint — swap the payload method to{" "}
+        <code className="font-mono">omni_createpayload_simplesend</code>, sign with the{" "}
+        <em>sender's</em> key, and send the dust output to the recipient.
+      </p>
+    ),
+    code: `const payloadHex = await rpc("omni_createpayload_simplesend", [
+  21,
+  "5.00000000",
+]);
+// ...same OP_RETURN + dust + change construction as Grant.`,
+  },
+  {
+    heading: "6 · Reading balances",
+    body: (
+      <p>
+        Balances only update <strong>after the funding tx confirms</strong>. Until then{" "}
+        <code className="font-mono">omni_getbalance</code> returns <code className="font-mono">0</code>.
+        For optimistic UI, mirror the expected balance in your own DB and reconcile periodically.
+      </p>
+    ),
+    code: `type Bal = { balance: string; reserved: string; frozen: string };
+const bal: Bal = await rpc("omni_getbalance", [address, 21]);
+// bal.balance is a decimal string like "100.00000000"`,
+  },
+  {
+    heading: "7 · OP_RETURN format (Class C)",
+    body: (
+      <p>
+        Class C transactions encode the entire operation in <code className="font-mono">OP_RETURN</code>.
+        The payload returned by <code className="font-mono">omni_createpayload_*</code> already
+        contains the version + type bytes — only prepend the 4-byte <code className="font-mono">"omni"</code>{" "}
+        magic. Nothing else.
+      </p>
+    ),
+    code: `+------+----------------------------------------------+
+| omni |  <payload from omni_createpayload_*>          |
++------+----------------------------------------------+
+  4 B          variable (already includes version+type)`,
+  },
+  {
+    heading: "8 · Gotchas (the stuff that cost us a day)",
+    body: (
+      <div className="space-y-4">
+        <div>
+          <div className="font-semibold text-foreground">Don't prepend extra zero bytes to the payload.</div>
+          <p>A common pattern in older Omni examples is <code className="font-mono">"omni" + 0x00 0x00 + payload</code>. On TXC that causes the node to interpret your Grant as a Simple Send for a random property ID — version + type bytes get shifted. <code className="font-mono">omni_decodetransaction</code> shows the wrong type, the receiver balance never moves, and there's no broadcast error. Concatenate just <code className="font-mono">"omni" + payload</code>.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">The <code className="font-mono">grantdata</code> argument is not optional.</div>
+          <p>Upstream Omni docs say it's optional. On TXC the 2-arg form returns the help text instead of a payload. It's a free-form attribution memo embedded inside the Omni payload itself and shows up in <code className="font-mono">omni_gettransaction</code>. Cap it at ~60 bytes — the entire OP_RETURN must fit under the node's 80-byte datacarrier limit.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Chain your own change for back-to-back mints.</div>
+          <p>If you mint twice in quick succession, the second mint's only spendable coin is the unconfirmed change from the first. Symptom: <code className="font-mono">"issuer has no UTXOs"</code> while a block explorer shows the address is funded. Fix: <em>don't</em> filter unconfirmed UTXOs from <code className="font-mono">/address/:addr/utxo</code>; sort confirmed-first and fall through to your own change. Caveat: spending unconfirmed change builds a tx chain that fails together if the parent gets evicted. For high throughput, batch grants or pre-fund several issuer UTXOs.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Dust threshold is 10,000 sats.</div>
+          <p>Bitcoin default is 546. TXC mempool policy rejects anything under 10,000 as dust. Use 10,000 for the recipient's reference output and budget for it in your fee math.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Amount formatting.</div>
+          <p>Divisible tokens: decimal string, up to 8 dp (<code className="font-mono">"100"</code> and <code className="font-mono">"100.00000000"</code> both work). Indivisible: integer string. Don't pass numbers — JSON-RPC will round large values.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Wallet RPCs aren't useful for app integrations.</div>
+          <p><code className="font-mono">omni_send</code> and friends require the signing key to be in the node's wallet. For a hosted app where keys live in your backend or in the user's wallet, use <code className="font-mono">omni_createpayload_*</code> and assemble the tx yourself.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Confirmations.</div>
+          <p>Broadcasted Omni txs hit the mempool immediately, but Omni only parses them after confirmation. <code className="font-mono">omni_gettransaction</code> returns nothing for 0-conf — poll until the block lands or watch the address via Esplora.</p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+const STREAM_SECTIONS: DocSection[] = [
+  {
+    heading: "1 · The CID is the truth",
+    body: (
+      <p>
+        Every video is identified by its IPFS CID — a cryptographic hash of the file's bytes.
+        Same bytes → same CID. The database row, the gateway URL, the chain timestamp, and any
+        third-party IPFS pinner anywhere in the world all reference the same content via the
+        same string. If the gateway goes dark, anyone can re-pin the CID elsewhere and the link
+        still resolves.
+      </p>
+    ),
+    code: `# A CID looks like:
+bafybeigsqgnxogzyi7fdyogldjvia3juqkxnjv...
+
+# Anyone can fetch it from any IPFS gateway:
+curl -L https://ipfs.io/ipfs/{cid}            -o video.mp4
+curl -L https://gateway.pinata.cloud/ipfs/{cid} -o video.mp4
+curl -L https://streamtxc.com/api/stream/{cid}  -o video.mp4`,
+  },
+  {
+    heading: "2 · On-chain proof & OP_RETURN",
+    body: (
+      <p>
+        Every lifecycle event is broadcast as a tiny TXC transaction whose{" "}
+        <code className="font-mono">OP_RETURN</code> output carries an ≤80-byte tag. Each event
+        is sent <em>to</em> a per-video deposit address, so a single mempool address page is the
+        entire public history of that video. Comments work the same way: the comment body is
+        pinned to IPFS, then its CID is stamped against the video's wallet.
+      </p>
+    ),
+    code: `event tags broadcast in OP_RETURN
+
+  C  claim       — first time a video lands on the network
+  P  payment     — hosting payment received
+  R  renewal     — hosting prepaid for another period
+  T  takedown    — uploader took it down
+  D  DMCA        — moderator pulled it
+  M  metadata    — title/description/uploader update
+  X  comment     — IPFS CID of a new comment body`,
+  },
+  {
+    heading: "3 · Login by signing",
+    body: (
+      <p>
+        No usernames or passwords. To prove you control a wallet, sign a one-time challenge
+        message with TXC Core's <em>Sign Message</em> tool (or any wallet that produces a
+        base64 ECDSA signature for a legacy <code className="font-mono">T…</code> address). The
+        server verifies it against the TXC node — no transaction, no spend, no gas. The wallet
+        never moves.
+      </p>
+    ),
+    code: `# 1. Request a challenge
+curl -X POST https://streamtxc.com/_serverFn/requestWalletLogin \\
+  -H "content-type: application/json" \\
+  -d '{"data":{"wallet":"T9..."}}'
+# → { "message": "streamTXC — Sign in...", "challengeToken": "eyJhbGc..." }
+
+# 2. Sign \`message\` in TXC Core (File → Sign Message), then:
+curl -X POST https://streamtxc.com/_serverFn/completeWalletLogin \\
+  -H "content-type: application/json" \\
+  -d '{"data":{
+        "challengeToken": "eyJhbGc...",
+        "signature":      "H4r...=="
+      }}'
+# → session token (5 min challenge TTL)`,
+  },
+  {
+    heading: "4 · Stream a video — GET /api/stream/{cid}",
+    body: (
+      <p>
+        302-redirects to a dedicated Pinata gateway for the given CID. Supports HTTP Range
+        requests, so it works as a drop-in <code className="font-mono">&lt;video src&gt;</code>{" "}
+        for any browser, native app, or video player. Each call also increments the on-site
+        view counter (debounced per IP).
+      </p>
+    ),
+    code: `curl -L https://streamtxc.com/api/stream/{cid} -o video.mp4
+
+<!-- HTML use -->
+<video src="https://streamtxc.com/api/stream/{cid}" controls />`,
+  },
+  {
+    heading: "5 · Embed the player — GET /embed/{cid}",
+    body: (
+      <p>
+        A bare-bones streamTXC player you can drop into any page. Optional query params:{" "}
+        <code className="font-mono">autoplay=1</code>, <code className="font-mono">muted=1</code>,
+        <code className="font-mono">t=30</code> (start seconds).
+      </p>
+    ),
+    code: `<iframe
+  src="https://streamtxc.com/embed/{cid}?autoplay=1&muted=1"
+  width="640" height="360"
+  frameborder="0"
+  allow="autoplay; fullscreen; picture-in-picture"
+  allowfullscreen
+></iframe>`,
+  },
+  {
+    heading: "6 · Verify a TXC signed message — POST /api/public/txc-verify-message",
+    body: (
+      <p>
+        Cryptographically verifies a message signed by any TXC wallet. Useful for
+        wallet-gated content, comments, or proofs of ownership against any TXC address — not
+        just streamTXC ones.
+      </p>
+    ),
+    code: `curl -X POST https://streamtxc.com/api/public/txc-verify-message \\
+  -H "content-type: application/json" \\
+  -d '{
+    "address":   "T9...",
+    "signature": "H4r...==",
+    "message":   "I own this wallet"
+  }'
+# → { "valid": true }`,
+  },
+  {
+    heading: "7 · TXC node health — GET /api/public/txc-health",
+    body: (
+      <p>
+        Live status of the TXC node powering on-chain timestamps: tip block height, chain info,
+        hot-wallet balance, and the public top-up address. Handy for monitoring or status
+        dashboards.
+      </p>
+    ),
+    code: `curl https://streamtxc.com/api/public/txc-health | jq`,
+  },
+  {
+    heading: "8 · Audit on mempool",
+    body: (
+      <p>
+        Every video, comment, and boost has its own TXC wallet. The full lifecycle is published
+        as on-chain transactions to that address. Audit any of it directly:
+      </p>
+    ),
+    code: `https://mempool.texitcoin.org/address/{video_wallet}`,
+  },
+];
+
+function DocBlock({
+  badge,
+  title,
+  intro,
+  sections,
+}: {
+  badge: string;
+  title: string;
+  intro: React.ReactNode;
+  sections: DocSection[];
+}) {
+  return (
+    <div className="rounded-xl border border-border bg-card p-6 md:p-10">
+      <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
+        {badge}
+      </div>
+      <h3 className="mt-2 font-display text-3xl font-bold leading-tight md:text-4xl">{title}</h3>
+      <div className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">{intro}</div>
+
+      <div className="mt-10 space-y-10">
+        {sections.map((s) => (
+          <div key={s.heading}>
+            <h4 className="font-display text-xl font-bold text-foreground">{s.heading}</h4>
+            {s.body && (
+              <div className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground [&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-foreground [&_code]:text-[0.85em]">
+                {s.body}
+              </div>
+            )}
+            {s.code && (
+              <pre className="mt-4 overflow-x-auto whitespace-pre rounded-lg border border-border bg-[#0b0b0b] p-4 text-xs leading-relaxed text-foreground/90">
+{s.code}
+              </pre>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ---------- Page ----------
 
 function BuildPage() {
@@ -535,65 +889,116 @@ function BuildPage() {
         {/* Developer API */}
         <section id="api" className="border-y border-border bg-surface/40 py-24">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-                  Developer API
-                </div>
-                <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
-                  REST endpoints, <span className="text-primary">no API key</span>.
-                </h2>
-                <p className="mt-4 text-muted-foreground">
-                  Public, free, rate-friendly endpoints for blocks, transactions, addresses,
-                  mempool, fees, mining stats, and broadcast. Same API powers this page.
-                </p>
-                <div className="mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 font-mono text-xs">
-                  <Database className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-muted-foreground">Base URL:</span>
-                  <span className="font-semibold">https://mempool.texitcoin.org</span>
-                </div>
-
-                <div className="mt-8 rounded-xl border border-border bg-[#0b0b0b] p-5 shadow-card">
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                    <Terminal className="h-3.5 w-3.5" /> Quick start · curl
-                  </div>
-                  <pre className="mt-3 overflow-x-auto whitespace-pre text-xs leading-relaxed text-foreground/90">
-{QUICK_START}
-                  </pre>
-                </div>
+            <div className="max-w-2xl">
+              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                Developer API
               </div>
-
-              <div className="rounded-xl border border-border bg-card overflow-hidden">
-                <div className="border-b border-border px-5 py-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                  Endpoints
-                </div>
-                <ul>
-                  {API_ENDPOINTS.map((e) => (
-                    <li
-                      key={e.path}
-                      className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 border-b border-border/60 px-5 py-4 last:border-0"
-                    >
-                      <span
-                        className={`mt-0.5 inline-flex h-fit items-center justify-center rounded px-2 py-0.5 font-mono text-[10px] font-bold ${
-                          e.method === "POST"
-                            ? "bg-primary/15 text-primary"
-                            : "bg-accent/15 text-accent"
-                        }`}
-                      >
-                        {e.method}
-                      </span>
-                      <code className="font-mono text-sm font-semibold break-all">{e.path}</code>
-                      <span />
-                      <span className="text-xs text-muted-foreground">{e.desc}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="border-t border-border bg-surface/40 px-5 py-3 text-xs text-muted-foreground">
-                  TXC's mempool API mirrors the open-source mempool.space spec — most existing
-                  Bitcoin/Litecoin tooling works against it with a base-URL swap.
-                </div>
-              </div>
+              <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+                Three layers, <span className="text-primary">one network</span>.
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                The base chain via mempool/Esplora, tokens via Omni Layer (the same stack
+                CryptoPOP runs on), and content addressing via streamTXC. All public, all free,
+                no API key.
+              </p>
             </div>
+
+            <Tabs defaultValue="network" className="mt-10">
+              <TabsList className="bg-card border border-border h-auto p-1 flex-wrap">
+                <TabsTrigger value="network" className="gap-2"><Database className="h-3.5 w-3.5" /> Network REST</TabsTrigger>
+                <TabsTrigger value="omni" className="gap-2"><Layers className="h-3.5 w-3.5" /> Omni Layer (Tokens)</TabsTrigger>
+                <TabsTrigger value="stream" className="gap-2"><Server className="h-3.5 w-3.5" /> streamTXC (IPFS + Proof)</TabsTrigger>
+              </TabsList>
+
+              {/* Network REST */}
+              <TabsContent value="network" className="mt-6">
+                <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+                  <div>
+                    <p className="text-sm text-muted-foreground">
+                      Public REST endpoints for blocks, transactions, addresses, mempool, fees,
+                      mining stats, and broadcast. Mirrors the open-source mempool.space spec —
+                      most existing Bitcoin/Litecoin tooling works against it with a base-URL swap.
+                    </p>
+                    <div className="mt-5 inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 font-mono text-xs">
+                      <Database className="h-3.5 w-3.5 text-primary" />
+                      <span className="text-muted-foreground">Base URL:</span>
+                      <span className="font-semibold">https://mempool.texitcoin.org</span>
+                    </div>
+                    <div className="mt-6 rounded-xl border border-border bg-[#0b0b0b] p-5 shadow-card">
+                      <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                        <Terminal className="h-3.5 w-3.5" /> Quick start · curl
+                      </div>
+                      <pre className="mt-3 overflow-x-auto whitespace-pre text-xs leading-relaxed text-foreground/90">
+{QUICK_START}
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-border bg-card overflow-hidden">
+                    <div className="border-b border-border px-5 py-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                      Endpoints
+                    </div>
+                    <ul>
+                      {API_ENDPOINTS.map((e) => (
+                        <li
+                          key={e.path}
+                          className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 border-b border-border/60 px-5 py-4 last:border-0"
+                        >
+                          <span
+                            className={`mt-0.5 inline-flex h-fit items-center justify-center rounded px-2 py-0.5 font-mono text-[10px] font-bold ${
+                              e.method === "POST"
+                                ? "bg-primary/15 text-primary"
+                                : "bg-accent/15 text-accent"
+                            }`}
+                          >
+                            {e.method}
+                          </span>
+                          <code className="font-mono text-sm font-semibold break-all">{e.path}</code>
+                          <span />
+                          <span className="text-xs text-muted-foreground">{e.desc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </TabsContent>
+
+              {/* Omni Layer */}
+              <TabsContent value="omni" className="mt-6">
+                <DocBlock
+                  badge="Tokens · Omni Layer"
+                  title="Issue, mint, and move tokens on TXC"
+                  intro={
+                    <>
+                      Omni Layer runs on top of TXC the same way it runs on Bitcoin — token
+                      operations are encoded into <code className="font-mono text-foreground">OP_RETURN</code> outputs
+                      of regular TXC transactions. This is the exact stack <a className="text-primary hover:underline" href="https://cryptopop.sg" target="_blank" rel="noreferrer">CryptoPOP</a> ships on. A few defaults from
+                      upstream Omni do <em>not</em> apply here — read the gotchas before going live.
+                    </>
+                  }
+                  sections={OMNI_SECTIONS}
+                />
+              </TabsContent>
+
+              {/* streamTXC */}
+              <TabsContent value="stream" className="mt-6">
+                <DocBlock
+                  badge="Proof + Content · streamTXC"
+                  title="Wallet-signed login, IPFS streaming, and on-chain proof"
+                  intro={
+                    <>
+                      <a className="text-primary hover:underline" href="https://streamtxc.com" target="_blank" rel="noreferrer">streamTXC</a> uses TXC for permanent on-chain
+                      proof and IPFS for content addressing. The CID is the canonical link to a
+                      video — every lifecycle event (claim, payment, renewal, takedown) is
+                      stamped to a per-video TXC wallet via <code className="font-mono text-foreground">OP_RETURN</code>.
+                      The endpoints below are public and reusable for any TXC wallet — not just
+                      streamTXC content.
+                    </>
+                  }
+                  sections={STREAM_SECTIONS}
+                />
+              </TabsContent>
+            </Tabs>
           </div>
         </section>
 
