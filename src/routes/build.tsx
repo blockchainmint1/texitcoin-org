@@ -536,65 +536,116 @@ function BuildPage() {
         {/* Developer API */}
         <section id="api" className="border-y border-border bg-surface/40 py-24">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-                  Developer API
-                </div>
-                <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
-                  REST endpoints, <span className="text-primary">no API key</span>.
-                </h2>
-                <p className="mt-4 text-muted-foreground">
-                  Public, free, rate-friendly endpoints for blocks, transactions, addresses,
-                  mempool, fees, mining stats, and broadcast. Same API powers this page.
-                </p>
-                <div className="mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 font-mono text-xs">
-                  <Database className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-muted-foreground">Base URL:</span>
-                  <span className="font-semibold">https://mempool.texitcoin.org</span>
-                </div>
-
-                <div className="mt-8 rounded-xl border border-border bg-[#0b0b0b] p-5 shadow-card">
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                    <Terminal className="h-3.5 w-3.5" /> Quick start · curl
-                  </div>
-                  <pre className="mt-3 overflow-x-auto whitespace-pre text-xs leading-relaxed text-foreground/90">
-{QUICK_START}
-                  </pre>
-                </div>
+            <div className="max-w-2xl">
+              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                Developer API
               </div>
-
-              <div className="rounded-xl border border-border bg-card overflow-hidden">
-                <div className="border-b border-border px-5 py-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                  Endpoints
-                </div>
-                <ul>
-                  {API_ENDPOINTS.map((e) => (
-                    <li
-                      key={e.path}
-                      className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 border-b border-border/60 px-5 py-4 last:border-0"
-                    >
-                      <span
-                        className={`mt-0.5 inline-flex h-fit items-center justify-center rounded px-2 py-0.5 font-mono text-[10px] font-bold ${
-                          e.method === "POST"
-                            ? "bg-primary/15 text-primary"
-                            : "bg-accent/15 text-accent"
-                        }`}
-                      >
-                        {e.method}
-                      </span>
-                      <code className="font-mono text-sm font-semibold break-all">{e.path}</code>
-                      <span />
-                      <span className="text-xs text-muted-foreground">{e.desc}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="border-t border-border bg-surface/40 px-5 py-3 text-xs text-muted-foreground">
-                  TXC's mempool API mirrors the open-source mempool.space spec — most existing
-                  Bitcoin/Litecoin tooling works against it with a base-URL swap.
-                </div>
-              </div>
+              <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+                Three layers, <span className="text-primary">one network</span>.
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                The base chain via mempool/Esplora, tokens via Omni Layer (the same stack
+                CryptoPOP runs on), and content addressing via streamTXC. All public, all free,
+                no API key.
+              </p>
             </div>
+
+            <Tabs defaultValue="network" className="mt-10">
+              <TabsList className="bg-card border border-border h-auto p-1 flex-wrap">
+                <TabsTrigger value="network" className="gap-2"><Database className="h-3.5 w-3.5" /> Network REST</TabsTrigger>
+                <TabsTrigger value="omni" className="gap-2"><Layers className="h-3.5 w-3.5" /> Omni Layer (Tokens)</TabsTrigger>
+                <TabsTrigger value="stream" className="gap-2"><Server className="h-3.5 w-3.5" /> streamTXC (IPFS + Proof)</TabsTrigger>
+              </TabsList>
+
+              {/* Network REST */}
+              <TabsContent value="network" className="mt-6">
+                <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+                  <div>
+                    <p className="text-sm text-muted-foreground">
+                      Public REST endpoints for blocks, transactions, addresses, mempool, fees,
+                      mining stats, and broadcast. Mirrors the open-source mempool.space spec —
+                      most existing Bitcoin/Litecoin tooling works against it with a base-URL swap.
+                    </p>
+                    <div className="mt-5 inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 font-mono text-xs">
+                      <Database className="h-3.5 w-3.5 text-primary" />
+                      <span className="text-muted-foreground">Base URL:</span>
+                      <span className="font-semibold">https://mempool.texitcoin.org</span>
+                    </div>
+                    <div className="mt-6 rounded-xl border border-border bg-[#0b0b0b] p-5 shadow-card">
+                      <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                        <Terminal className="h-3.5 w-3.5" /> Quick start · curl
+                      </div>
+                      <pre className="mt-3 overflow-x-auto whitespace-pre text-xs leading-relaxed text-foreground/90">
+{QUICK_START}
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-border bg-card overflow-hidden">
+                    <div className="border-b border-border px-5 py-3 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                      Endpoints
+                    </div>
+                    <ul>
+                      {API_ENDPOINTS.map((e) => (
+                        <li
+                          key={e.path}
+                          className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 border-b border-border/60 px-5 py-4 last:border-0"
+                        >
+                          <span
+                            className={`mt-0.5 inline-flex h-fit items-center justify-center rounded px-2 py-0.5 font-mono text-[10px] font-bold ${
+                              e.method === "POST"
+                                ? "bg-primary/15 text-primary"
+                                : "bg-accent/15 text-accent"
+                            }`}
+                          >
+                            {e.method}
+                          </span>
+                          <code className="font-mono text-sm font-semibold break-all">{e.path}</code>
+                          <span />
+                          <span className="text-xs text-muted-foreground">{e.desc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </TabsContent>
+
+              {/* Omni Layer */}
+              <TabsContent value="omni" className="mt-6">
+                <DocBlock
+                  badge="Tokens · Omni Layer"
+                  title="Issue, mint, and move tokens on TXC"
+                  intro={
+                    <>
+                      Omni Layer runs on top of TXC the same way it runs on Bitcoin — token
+                      operations are encoded into <code className="font-mono text-foreground">OP_RETURN</code> outputs
+                      of regular TXC transactions. This is the exact stack <a className="text-primary hover:underline" href="https://cryptopop.sg" target="_blank" rel="noreferrer">CryptoPOP</a> ships on. A few defaults from
+                      upstream Omni do <em>not</em> apply here — read the gotchas before going live.
+                    </>
+                  }
+                  sections={OMNI_SECTIONS}
+                />
+              </TabsContent>
+
+              {/* streamTXC */}
+              <TabsContent value="stream" className="mt-6">
+                <DocBlock
+                  badge="Proof + Content · streamTXC"
+                  title="Wallet-signed login, IPFS streaming, and on-chain proof"
+                  intro={
+                    <>
+                      <a className="text-primary hover:underline" href="https://streamtxc.com" target="_blank" rel="noreferrer">streamTXC</a> uses TXC for permanent on-chain
+                      proof and IPFS for content addressing. The CID is the canonical link to a
+                      video — every lifecycle event (claim, payment, renewal, takedown) is
+                      stamped to a per-video TXC wallet via <code className="font-mono text-foreground">OP_RETURN</code>.
+                      The endpoints below are public and reusable for any TXC wallet — not just
+                      streamTXC content.
+                    </>
+                  }
+                  sections={STREAM_SECTIONS}
+                />
+              </TabsContent>
+            </Tabs>
           </div>
         </section>
 
