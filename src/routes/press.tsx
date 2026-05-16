@@ -108,6 +108,14 @@ const LOGOS: Logo[] = [
 ];
 
 function PressPage() {
+  const fetchIpfsUrl = useServerFn(getIpfsUrl);
+  const { data: brandGuidelines } = useQuery({
+    queryKey: ["ipfs-url", BRAND_GUIDELINES_CID],
+    queryFn: () => fetchIpfsUrl({ data: { cid: BRAND_GUIDELINES_CID } }),
+    staleTime: 1000 * 60 * 60,
+  });
+  const brandGuidelinesUrl = brandGuidelines?.url;
+
   return (
     <>
       <Header />
