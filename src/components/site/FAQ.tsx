@@ -1,3 +1,6 @@
+import { Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import { ArrowRight, HelpCircle } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -30,37 +33,65 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative py-28">
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="text-center">
-          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-            FAQ
-          </div>
-          <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
-            Still have <span className="text-primary">questions?</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Crypto can be complicated. Here&apos;s what most people want to know
-            before they participate — straight answers, no hype.
-          </p>
-        </div>
-
-        <Accordion type="single" collapsible className="mt-12 space-y-3">
-          {FAQS.map((item, i) => (
-            <AccordionItem
-              key={item.q}
-              value={`item-${i}`}
-              className="overflow-hidden rounded-xl border border-border bg-card px-6"
+    <section id="faq" className="relative overflow-hidden py-28">
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(var(--primary)/0.10),transparent_65%)]"
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-5xl px-6">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+          {/* Left: sticky intro */}
+          <div className="lg:sticky lg:top-28">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
+              <HelpCircle className="h-3 w-3" /> FAQ
+            </div>
+            <h2 className="mt-5 font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight md:text-5xl text-balance">
+              Straight <span className="text-primary">answers.</span>
+              <br />No hype.
+            </h2>
+            <p className="mt-5 max-w-sm text-muted-foreground">
+              The questions we hear most — answered plainly. For the deep cut,
+              hit the full knowledge base.
+            </p>
+            <Link
+              to="/faq"
+              className="group mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition hover:opacity-90"
             >
-              <AccordionTrigger className="py-5 text-left font-display text-lg font-semibold hover:no-underline">
-                {item.q}
-              </AccordionTrigger>
-              <AccordionContent className="pb-6 text-muted-foreground">
-                {item.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+              Browse the knowledge base
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </div>
+
+          {/* Right: questions */}
+          <Accordion type="single" collapsible className="space-y-3">
+            {FAQS.map((item, i) => (
+              <motion.div
+                key={item.q}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.35, delay: i * 0.04 }}
+              >
+                <AccordionItem
+                  value={`item-${i}`}
+                  className="group overflow-hidden rounded-xl border border-border bg-card px-6 transition-colors hover:border-primary/40 data-[state=open]:border-primary/60"
+                >
+                  <AccordionTrigger className="py-5 text-left font-display text-lg font-semibold hover:no-underline">
+                    <span className="flex items-baseline gap-4">
+                      <span className="font-mono text-xs text-primary/70">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {item.q}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-6 pl-10 text-muted-foreground">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );
