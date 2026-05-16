@@ -87,36 +87,34 @@ function WhitepaperPage() {
                 </p>
               </div>
 
-              {/* PDF preview card */}
-              <div className="relative">
+              {/* PDF cover thumb */}
+              <a
+                href={PDF_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block"
+                aria-label="Open The TEXITcoin Whitepaper PDF"
+              >
                 <div className="absolute -inset-4 -z-10 rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-accent/10 blur-2xl" />
-                <div className="overflow-hidden rounded-xl border border-border bg-background shadow-card">
+                <div className="overflow-hidden rounded-xl border border-border bg-background shadow-card transition group-hover:border-primary/60">
                   <div className="flex items-center gap-2 border-b border-border bg-card px-4 py-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
                     <span className="inline-flex h-2 w-2 rounded-full bg-primary" />
                     texitcoin-whitepaper.pdf
                   </div>
-                  <object
-                    data={`${PDF_URL}#view=FitH&toolbar=0`}
-                    type="application/pdf"
-                    className="block h-[640px] w-full bg-white"
-                    aria-label="The TEXITcoin Whitepaper preview"
-                  >
-                    <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
-                      <FileText className="h-12 w-12 text-muted-foreground" />
-                      <p className="text-sm text-muted-foreground">
-                        Inline PDF preview isn't supported in this browser.
-                      </p>
-                      <a
-                        href={PDF_URL}
-                        download
-                        className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
-                      >
-                        <Download className="h-4 w-4" /> Download instead
-                      </a>
+                  <div className="relative bg-white">
+                    <img
+                      src="/texitcoin-whitepaper-cover.jpg"
+                      alt="The TEXITcoin Whitepaper — first page preview"
+                      className="block h-auto w-full"
+                      loading="lazy"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+                    <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground opacity-0 transition group-hover:opacity-100">
+                      <ExternalLink className="h-3 w-3" /> Open PDF
                     </div>
-                  </object>
+                  </div>
                 </div>
-              </div>
+              </a>
             </motion.div>
           </div>
         </section>
