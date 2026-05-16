@@ -34,15 +34,20 @@ const TIMELINE = [
   },
   {
     year: "2012",
-    icon: Landmark,
-    title: "Testifying Before Congress",
-    body: "Served as an expert witness before the U.S. House Financial Services Committee's Domestic Monetary Policy Subcommittee on \"Parallel Currencies: The Roadmap to Monetary Freedom.\" Laid out the case for competing currencies, critiqued the failures of centralized money, and showed how everyday people could reclaim financial sovereignty.",
-  },
-  {
-    year: "2012",
     icon: Bitcoin,
     title: "Discovering Bitcoin",
     body: "Brought to life what became the famous physical Bitcoin representation — a tangible bridge between digital crypto and real-world value. It helped normalize Bitcoin early on, giving the fledgling digital currency a physical identity that remains iconic today.",
+  },
+  {
+    year: "2012",
+    icon: Landmark,
+    title: "Testifying Before Congress",
+    body: "Served as an expert witness before the U.S. House Financial Services Committee's Domestic Monetary Policy Subcommittee on \"Parallel Currencies: The Roadmap to Monetary Freedom.\" Laid out the case for competing currencies, critiqued the failures of centralized money, and showed how everyday people could reclaim financial sovereignty.",
+    video: {
+      src: "https://streamtxc.com/e/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq",
+      title: "Bobby Gray — Congressional Testimony on Parallel Currencies (2012)",
+      caption: "Watch the full testimony · streamed via streamTXC",
+    },
   },
   {
     year: "2017",
@@ -223,6 +228,24 @@ function LeadershipPage() {
                     </h3>
                     <p className="mt-4 max-w-2xl text-muted-foreground">{t.body}</p>
 
+                    {"video" in t && t.video ? (
+                      <div className="relative mt-6 overflow-hidden rounded-xl border border-border bg-black">
+                        <div className="relative aspect-video w-full">
+                          <iframe
+                            src={t.video.src}
+                            title={t.video.title}
+                            loading="lazy"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowFullScreen
+                            className="absolute inset-0 h-full w-full"
+                          />
+                        </div>
+                        <div className="border-t border-border bg-card px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                          {t.video.caption}
+                        </div>
+                      </div>
+                    ) : null}
+
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition" />
                   </div>
                 </motion.li>
@@ -270,46 +293,6 @@ function LeadershipPage() {
             asking for blind faith — he's asking you to look at the record, hear the
             speeches, and decide if this is the leadership crypto needs to win.
           </p>
-
-          {/* Congressional Testimony */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="mt-14"
-          >
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-                  On the Record · 2012
-                </div>
-                <h3 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl text-balance">
-                  Bobby's <span className="text-primary">Congressional testimony</span>
-                </h3>
-                <p className="mt-3 max-w-2xl text-muted-foreground">
-                  Expert witness before the U.S. House Financial Services Committee's
-                  Domestic Monetary Policy Subcommittee on "Parallel Currencies: The
-                  Roadmap to Monetary Freedom."
-                </p>
-              </div>
-            </div>
-            <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-black shadow-card">
-              <div className="relative aspect-video w-full">
-                <iframe
-                  src="https://streamtxc.com/e/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq"
-                  title="Bobby Gray — Congressional Testimony on Parallel Currencies (2012)"
-                  loading="lazy"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full"
-                />
-              </div>
-            </div>
-            <p className="mt-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-              Streamed via streamTXC · IPFS · Powered by TEXITcoin
-            </p>
-          </motion.div>
         </div>
       </section>
 
