@@ -176,34 +176,16 @@ function WtxcPage() {
             <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
               {/* Uniswap embed */}
               <div className="overflow-hidden rounded-2xl border border-border bg-card">
-                {hasContract ? (
-                  <iframe
-                    src={UNISWAP_SWAP_URL}
-                    height="660"
-                    width="100%"
-                    title="Uniswap — Swap wTXC"
-                    className="block w-full"
-                    style={{ border: 0 }}
-                    referrerPolicy="no-referrer"
-                    allow="clipboard-read; clipboard-write; web-share"
-                  />
-                ) : (
-                  <div className="flex h-[660px] flex-col items-center justify-center gap-4 p-8 text-center">
-                    <ShieldAlert className="h-10 w-10 text-muted-foreground" />
-                    <p className="font-display text-xl font-bold">Uniswap widget — contract pending</p>
-                    <p className="max-w-sm text-sm text-muted-foreground">
-                      The embedded Uniswap swap will appear here once the wTXC ERC-20 contract address is confirmed and added to this page.
-                    </p>
-                    <a
-                      href="https://app.uniswap.org/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
-                    >
-                      Open Uniswap <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
-                )}
+                <iframe
+                  src={UNISWAP_SWAP_URL}
+                  height="660"
+                  width="100%"
+                  title="Uniswap — Swap wTXC"
+                  className="block w-full"
+                  style={{ border: 0 }}
+                  referrerPolicy="no-referrer"
+                  allow="clipboard-read; clipboard-write; web-share"
+                />
               </div>
 
               {/* Side panel */}
