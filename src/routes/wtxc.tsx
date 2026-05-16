@@ -74,7 +74,7 @@ function WtxcPage() {
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_60%)]" />
-          <div className="container relative mx-auto px-6 pt-28 pb-16">
+          <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 <Sparkles className="h-3 w-3 text-primary" /> Wrapped TEXITcoin
@@ -100,7 +100,7 @@ function WtxcPage() {
 
         {/* Why */}
         <section className="border-b border-border">
-          <div className="container mx-auto px-6 py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <h2 className="font-display text-3xl font-bold md:text-5xl">Why wrap TXC?</h2>
             <p className="mt-4 max-w-2xl text-muted-foreground">
               Native TXC is sound money on its own Layer 1. wTXC is the bridge that lets that same money play in every Ethereum-native protocol.
@@ -126,7 +126,7 @@ function WtxcPage() {
 
         {/* How it works */}
         <section className="border-b border-border bg-card/40">
-          <div className="container mx-auto px-6 py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <h2 className="font-display text-3xl font-bold md:text-5xl">How wrapping works</h2>
             <p className="mt-4 max-w-2xl text-muted-foreground">
               No magic. No fractional reserves. Every wTXC is minted against a native TXC held in custody, and every redemption burns wTXC to release TXC. Flip back and forth between TXC and wTXC at{" "}
@@ -153,7 +153,7 @@ function WtxcPage() {
 
         {/* Advanced users — Uniswap embed */}
         <section id="advanced" className="border-b border-border scroll-mt-24">
-          <div className="container mx-auto px-6 py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-primary">
               <Lock className="h-3 w-3" /> Advanced users only
             </div>
@@ -259,7 +259,7 @@ function WtxcPage() {
 
         {/* Closing CTA */}
         <section>
-          <div className="container mx-auto px-6 py-20 text-center">
+          <div className="mx-auto max-w-7xl px-6 py-20 text-center">
             <h2 className="font-display text-3xl font-bold md:text-5xl">Most folks don't need wTXC.</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
               If you're new here, buy native TXC and self-custody it. Come back to wTXC when you've got a clear reason to bridge.

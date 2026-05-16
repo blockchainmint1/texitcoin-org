@@ -143,7 +143,7 @@ function BuyPage() {
       <main className="bg-background">
         <section className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_60%)]" />
-          <div className="container relative mx-auto px-6 pt-28 pb-16">
+          <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 <Sparkles className="h-3 w-3 text-primary" /> First-time buyer's guide
@@ -177,7 +177,7 @@ function BuyPage() {
         </section>
 
         <section className="border-b border-border">
-          <div className="container mx-auto px-6 py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <div className="grid gap-6 md:grid-cols-2">
               {/* Step 01 */}
               <motion.div
@@ -263,7 +263,7 @@ function BuyPage() {
         </section>
 
         <section className="border-b border-border bg-card/40">
-          <div className="container mx-auto px-6 py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <h2 className="font-display text-3xl font-bold md:text-4xl">Don't get rug'd</h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">A few honest rules that will save you from 99% of the heartache in crypto.</p>
             <ul className="mt-8 grid gap-4 md:grid-cols-2">
@@ -278,7 +278,7 @@ function BuyPage() {
         </section>
 
         <section className="border-b border-border">
-          <div className="container mx-auto px-6 py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-primary">
               <Sparkles className="h-3 w-3" /> For advanced users
             </div>
@@ -295,7 +295,7 @@ function BuyPage() {
         </section>
 
         <section>
-          <div className="container mx-auto px-6 py-20 text-center">
+          <div className="mx-auto max-w-7xl px-6 py-20 text-center">
             <h2 className="font-display text-3xl font-bold md:text-5xl">Ready to ride?</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">Grab some TXC and join the Texans building a sound-money future.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">

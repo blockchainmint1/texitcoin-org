@@ -44,7 +44,7 @@ function WalletsPage() {
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_60%)]" />
-          <div className="container relative mx-auto px-6 pt-28 pb-16">
+          <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ function WalletsPage() {
 
         {/* Web Wallet — featured */}
         <section className="relative py-20">
-          <div className="container mx-auto px-6">
+          <div className="mx-auto max-w-7xl px-6">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -157,7 +157,7 @@ function WalletsPage() {
 
         {/* Mobile Wallet */}
         <section className="border-t border-border py-20">
-          <div className="container mx-auto px-6">
+          <div className="mx-auto max-w-7xl px-6">
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -238,7 +238,7 @@ function WalletsPage() {
 
         {/* Cold Storage */}
         <section className="border-t border-border bg-card/40 py-20">
-          <div className="container mx-auto px-6">
+          <div className="mx-auto max-w-7xl px-6">
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -298,7 +298,7 @@ function WalletsPage() {
 
         {/* Compare strip */}
         <section className="border-t border-border py-20">
-          <div className="container mx-auto px-6">
+          <div className="mx-auto max-w-7xl px-6">
             <div className="text-center">
               <h2 className="font-display text-3xl font-bold md:text-4xl">
                 Which wallet is right for you?
