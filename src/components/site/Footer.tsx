@@ -8,6 +8,8 @@ const COLS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Discover",
     links: [
+      { label: "Whitepaper", href: "/whitepaper", internal: true },
+      { label: "Team", href: "/team", internal: true },
       { label: "Leadership", href: "/leadership", internal: true },
       { label: "Proof of Work", href: "/proof-of-work", internal: true },
       { label: "Currency", href: "/currency", internal: true },
