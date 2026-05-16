@@ -15,10 +15,11 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 
-// TODO: replace with the live wTXC ERC-20 contract address once confirmed.
-// Used to deep-link the Uniswap widget to the right output token.
-const WTXC_CONTRACT = "0x0000000000000000000000000000000000000000";
+// Live wTXC ERC-20 contract on Ethereum mainnet.
+// Etherscan: https://etherscan.io/token/0x9FC65df3997073B8551Ffd617154B5102fACbb88
+const WTXC_CONTRACT = "0x9FC65df3997073B8551Ffd617154B5102fACbb88";
 const UNISWAP_SWAP_URL = `https://app.uniswap.org/#/swap?outputCurrency=${WTXC_CONTRACT}&theme=dark`;
+const ETHERSCAN_URL = `https://etherscan.io/token/${WTXC_CONTRACT}`;
 
 export const Route = createFileRoute("/wtxc")({
   head: () => ({
@@ -65,7 +66,6 @@ const FLOW = [
 ];
 
 function WtxcPage() {
-  const hasContract = WTXC_CONTRACT !== "0x0000000000000000000000000000000000000000";
 
   return (
     <>
@@ -176,34 +176,16 @@ function WtxcPage() {
             <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
               {/* Uniswap embed */}
               <div className="overflow-hidden rounded-2xl border border-border bg-card">
-                {hasContract ? (
-                  <iframe
-                    src={UNISWAP_SWAP_URL}
-                    height="660"
-                    width="100%"
-                    title="Uniswap — Swap wTXC"
-                    className="block w-full"
-                    style={{ border: 0 }}
-                    referrerPolicy="no-referrer"
-                    allow="clipboard-read; clipboard-write; web-share"
-                  />
-                ) : (
-                  <div className="flex h-[660px] flex-col items-center justify-center gap-4 p-8 text-center">
-                    <ShieldAlert className="h-10 w-10 text-muted-foreground" />
-                    <p className="font-display text-xl font-bold">Uniswap widget — contract pending</p>
-                    <p className="max-w-sm text-sm text-muted-foreground">
-                      The embedded Uniswap swap will appear here once the wTXC ERC-20 contract address is confirmed and added to this page.
-                    </p>
-                    <a
-                      href="https://app.uniswap.org/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
-                    >
-                      Open Uniswap <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
-                )}
+                <iframe
+                  src={UNISWAP_SWAP_URL}
+                  height="660"
+                  width="100%"
+                  title="Uniswap — Swap wTXC"
+                  className="block w-full"
+                  style={{ border: 0 }}
+                  referrerPolicy="no-referrer"
+                  allow="clipboard-read; clipboard-write; web-share"
+                />
               </div>
 
               {/* Side panel */}
@@ -214,8 +196,16 @@ function WtxcPage() {
                   <div className="mt-1 text-sm text-muted-foreground">Wrapped TEXITcoin — ERC-20 on Ethereum mainnet</div>
                   <div className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">Contract</div>
                   <code className="mt-1 block break-all rounded-md border border-border bg-background p-2 text-xs">
-                    {hasContract ? WTXC_CONTRACT : "Coming soon"}
+                    {WTXC_CONTRACT}
                   </code>
+                  <a
+                    href={ETHERSCAN_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline"
+                  >
+                    View on Etherscan <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 </div>
 
                 <div className="rounded-2xl border border-border bg-card p-6">
@@ -223,7 +213,7 @@ function WtxcPage() {
                     Prefer to swap in your own wallet? Open Uniswap directly and import the contract above.
                   </p>
                   <a
-                    href={hasContract ? UNISWAP_SWAP_URL : "https://app.uniswap.org/"}
+                    href={UNISWAP_SWAP_URL}
                     target="_blank"
                     rel="noreferrer"
                     className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
