@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Wallet, Coins, ArrowRight, ShieldCheck, ExternalLink, Sparkles, CircleCheck } from "lucide-react";
+import { Wallet, Coins, ArrowRight, ShieldCheck, ExternalLink, Sparkles, CircleCheck, Globe, MapPin } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 
@@ -8,9 +9,9 @@ export const Route = createFileRoute("/buy")({
   head: () => ({
     meta: [
       { title: "How to Buy TEXITcoin (TXC) — Step-by-Step" },
-      { name: "description", content: "Buy TEXITcoin (TXC) in four steps: pick a wallet, fund it, trade on Bitmart, and self-custody your TXC. A plain-English guide for first-time buyers." },
+      { name: "description", content: "Buy TEXITcoin (TXC) in four steps: pick a wallet, fund it, trade on the right exchange for your region, and self-custody your TXC." },
       { property: "og:title", content: "How to Buy TEXITcoin (TXC)" },
-      { property: "og:description", content: "The first-time buyer's guide to TXC. Pick a wallet, fund it, buy on Bitmart, withdraw to self-custody." },
+      { property: "og:description", content: "The first-time buyer's guide to TXC. Pick a wallet, fund it, buy on the right exchange, withdraw to self-custody." },
       { property: "og:url", content: "https://texitcoin.org/buy" },
     ],
     links: [{ rel: "canonical", href: "https://texitcoin.org/buy" }],
@@ -18,42 +19,122 @@ export const Route = createFileRoute("/buy")({
   component: BuyPage,
 });
 
-const STEPS = [
-  {
-    n: "01",
-    title: "Pick a TEXITcoin wallet",
-    body: "Self-custody first. Grab the TEXITcoin Web Wallet for the fastest start — no install, you hold the keys. Mobile (iOS/Android) and the Cold Storage Coin are great for long-term holders.",
-    cta: { to: "/wallets", label: "Browse wallets" },
-    icon: Wallet,
+const CMC_MARKETS_URL = "https://coinmarketcap.com/currencies/texitcoin/#Markets";
+
+const EXCHANGES = {
+  pionex: {
+    name: "Pionex",
+    pair: "TXC/USDC",
+    note: "Recommended for US-based buyers. USDC pair, US-friendly compliance.",
+    url: "https://www.pionex.us/en-US/trade/TXC.USDC",
   },
-  {
-    n: "02",
-    title: "Create a Bitmart account",
-    body: "TXC trades on Bitmart (live since 12/31/24). Sign up, complete KYC, and fund your account with USDT or BTC. Bitmart is where TXC liquidity lives today.",
-    cta: { href: "https://www.bitmart.com/trade/en?symbol=TXC_USDT", label: "Open Bitmart" },
-    icon: Coins,
+  bitmart: {
+    name: "Bitmart",
+    pair: "TXC/USDT",
+    note: "Global liquidity hub. Live since 12/31/24. USDT pair.",
+    url: "https://www.bitmart.com/trade/en?symbol=TXC_USDT",
   },
-  {
-    n: "03",
-    title: "Buy TXC on the TXC/USDT pair",
-    body: "Place a market order for speed or a limit order if you want a specific entry. Start with what you're comfortable losing — never more than you can afford. This isn't a meme; it's a movement.",
-    icon: ArrowRight,
-  },
-  {
-    n: "04",
-    title: "Withdraw to your own wallet",
-    body: "Not your keys, not your coins. Send your TXC off the exchange to your TEXITcoin wallet address. Send a small test transaction first to confirm the address works.",
-    cta: { to: "/wallets", label: "Get a wallet" },
-    icon: ShieldCheck,
-  },
-];
+} as const;
+
+type ExchangeKey = keyof typeof EXCHANGES;
 
 const TIPS = [
-  "Double-check the ticker — it's TXC on Bitmart.",
+  "Double-check the ticker — it's TXC.",
   "Always send a tiny test transaction before a large withdrawal.",
   "Back up your seed phrase offline. Never type it into a website.",
   "Beware of impersonators in Telegram and X DMs — we never DM first.",
 ];
+
+function ExchangeStep() {
+  const [region, setRegion] = useState<"us" | "intl" | null>(null);
+  const [selected, setSelected] = useState<ExchangeKey>("bitmart");
+  const [autoDetected, setAutoDetected] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        if (!res.ok) throw new Error("geo lookup failed");
+        const data = (await res.json()) as { country_code?: string };
+        if (cancelled) return;
+        const isUS = data?.country_code === "US";
+        setRegion(isUS ? "us" : "intl");
+        setSelected(isUS ? "pionex" : "bitmart");
+        setAutoDetected(true);
+      } catch {
+        if (cancelled) return;
+        setRegion("intl");
+        setSelected("bitmart");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const ex = EXCHANGES[selected];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.05 }}
+      className="rounded-2xl border border-border bg-card p-8"
+    >
+      <div className="flex items-start justify-between">
+        <span className="font-display text-4xl font-bold text-primary">02</span>
+        <Coins className="h-6 w-6 text-muted-foreground" />
+      </div>
+      <h2 className="mt-4 font-display text-2xl font-bold">Create an exchange account</h2>
+
+      {/* Region toggle */}
+      <div className="mt-5 inline-flex rounded-full border border-border bg-background p-1 text-xs font-semibold">
+        <button
+          type="button"
+          onClick={() => setSelected("pionex")}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition ${
+            selected === "pionex" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <MapPin className="h-3.5 w-3.5" /> USA — Pionex
+        </button>
+        <button
+          type="button"
+          onClick={() => setSelected("bitmart")}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition ${
+            selected === "bitmart" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Globe className="h-3.5 w-3.5" /> International — Bitmart
+        </button>
+      </div>
+
+      {autoDetected && (
+        <p className="mt-3 text-xs text-muted-foreground">
+          Auto-selected based on your location ({region === "us" ? "United States" : "outside the US"}). Switch anytime.
+        </p>
+      )}
+
+      <p className="mt-4 text-muted-foreground">
+        Sign up at <span className="font-semibold text-foreground">{ex.name}</span>, complete KYC, and fund your account.
+        Buy TXC on the <span className="font-semibold text-foreground">{ex.pair}</span> pair. {ex.note}
+      </p>
+
+      <div className="mt-6">
+        <a
+          href={ex.url}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+        >
+          Open {ex.name} <ExternalLink className="h-4 w-4" />
+        </a>
+      </div>
+    </motion.div>
+  );
+}
 
 function BuyPage() {
   return (
@@ -80,36 +161,85 @@ function BuyPage() {
         <section className="border-b border-border">
           <div className="container mx-auto px-6 py-20">
             <div className="grid gap-6 md:grid-cols-2">
-              {STEPS.map((s, i) => (
-                <motion.div
-                  key={s.n}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="rounded-2xl border border-border bg-card p-8"
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="font-display text-4xl font-bold text-primary">{s.n}</span>
-                    <s.icon className="h-6 w-6 text-muted-foreground" />
-                  </div>
-                  <h2 className="mt-4 font-display text-2xl font-bold">{s.title}</h2>
-                  <p className="mt-3 text-muted-foreground">{s.body}</p>
-                  {s.cta && (
-                    <div className="mt-6">
-                      {"href" in s.cta ? (
-                        <a href={s.cta.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-                          {s.cta.label} <ExternalLink className="h-4 w-4" />
-                        </a>
-                      ) : (
-                        <Link to={s.cta.to} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-                          {s.cta.label} <ArrowRight className="h-4 w-4" />
-                        </Link>
-                      )}
-                    </div>
-                  )}
-                </motion.div>
-              ))}
+              {/* Step 01 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="rounded-2xl border border-border bg-card p-8"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="font-display text-4xl font-bold text-primary">01</span>
+                  <Wallet className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <h2 className="mt-4 font-display text-2xl font-bold">Pick a TEXITcoin wallet</h2>
+                <p className="mt-3 text-muted-foreground">
+                  Self-custody first. Grab the TEXITcoin Web Wallet for the fastest start — no install, you hold the keys.
+                  Mobile (iOS/Android) and the Cold Storage Coin are great for long-term holders.
+                </p>
+                <div className="mt-6">
+                  <Link to="/wallets" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                    Browse wallets <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Step 02 — geo-aware */}
+              <ExchangeStep />
+
+              {/* Step 03 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="rounded-2xl border border-border bg-card p-8"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="font-display text-4xl font-bold text-primary">03</span>
+                  <ArrowRight className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <h2 className="mt-4 font-display text-2xl font-bold">Place your order</h2>
+                <p className="mt-3 text-muted-foreground">
+                  Market order for speed, limit order for a specific entry. Start with what you're comfortable losing —
+                  never more than you can afford. This isn't a meme; it's a movement.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                  <a
+                    href={CMC_MARKETS_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                  >
+                    See other trade pairs <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* Step 04 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="rounded-2xl border border-border bg-card p-8"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="font-display text-4xl font-bold text-primary">04</span>
+                  <ShieldCheck className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <h2 className="mt-4 font-display text-2xl font-bold">Withdraw to your own wallet</h2>
+                <p className="mt-3 text-muted-foreground">
+                  Not your keys, not your coins. Send your TXC off the exchange to your TEXITcoin wallet address.
+                  Send a small test transaction first to confirm the address works.
+                </p>
+                <div className="mt-6">
+                  <Link to="/wallets" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                    Get a wallet <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -132,10 +262,10 @@ function BuyPage() {
         <section>
           <div className="container mx-auto px-6 py-20 text-center">
             <h2 className="font-display text-3xl font-bold md:text-5xl">Ready to ride?</h2>
-            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">Open Bitmart, grab some TXC, and join the Texans building a sound-money future.</p>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">Grab some TXC and join the Texans building a sound-money future.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a href="https://www.bitmart.com/trade/en?symbol=TXC_USDT" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">
-                Buy TXC on Bitmart <ExternalLink className="h-4 w-4" />
+              <a href={CMC_MARKETS_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">
+                See all exchanges <ExternalLink className="h-4 w-4" />
               </a>
               <Link to="/wallets" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-accent">
                 Get a wallet <ArrowRight className="h-4 w-4" />
