@@ -13,6 +13,7 @@ const NAV: NavItem[] = [
     label: "Foundation",
     children: [
       { label: "Overview", href: "/#foundation" },
+      { label: "Discover Texas", href: "/texas", internal: true },
       { label: "Proof of Work", href: "/proof-of-work", internal: true },
       { label: "Digital Currency", href: "/currency", internal: true },
       { label: "Community Value", href: "/value", internal: true },
