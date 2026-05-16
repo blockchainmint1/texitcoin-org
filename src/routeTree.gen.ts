@@ -24,6 +24,7 @@ import { Route as DisclosuresRouteImport } from './routes/disclosures'
 import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as BuildRouteImport } from './routes/build'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as TexasRouteImport } from './routes/texas'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
@@ -100,6 +101,11 @@ const BuildRoute = BuildRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TexasRoute = TexasRouteImport.update({
+  id: '/texas',
+  path: '/texas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
