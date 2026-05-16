@@ -13,6 +13,7 @@ import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LegalRouteImport } from './routes/legal'
@@ -43,6 +44,11 @@ const TrollsRoute = TrollsRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProofOfWorkRoute = ProofOfWorkRouteImport.update({
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
+  '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
+  '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
+  '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/privacy'
     | '/proof-of-work'
+    | '/roadmap'
     | '/terms'
     | '/trolls'
     | '/value'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/privacy'
     | '/proof-of-work'
+    | '/roadmap'
     | '/terms'
     | '/trolls'
     | '/value'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/legal'
     | '/privacy'
     | '/proof-of-work'
+    | '/roadmap'
     | '/terms'
     | '/trolls'
     | '/value'
@@ -218,6 +230,7 @@ export interface RootRouteChildren {
   LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
+  RoadmapRoute: typeof RoadmapRoute
   TermsRoute: typeof TermsRoute
   TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
@@ -253,6 +266,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proof-of-work': {
@@ -346,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
+  RoadmapRoute: RoadmapRoute,
   TermsRoute: TermsRoute,
   TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
@@ -355,13 +376,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
