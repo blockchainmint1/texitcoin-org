@@ -86,6 +86,16 @@ const MILESTONES: Milestone[] = [
       "The first block. Texas power, Texas land, Texas hands — a network built to benefit individuals, not banks.",
   },
   {
+    square: 14,
+    title: "Listed on Bitmart",
+    date: "Dec 31, 2024",
+    price: "$0.10",
+    kind: "win",
+    icon: "Rocket",
+    story:
+      "TXC went live on Bitmart exchange on New Year's Eve 2024 at $0.10 — our first major centralized exchange listing and a huge step toward global liquidity for Texit Coin holders.",
+  },
+  {
     square: 100,
     title: "Top 100",
     kind: "goal",
