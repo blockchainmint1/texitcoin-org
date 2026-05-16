@@ -15,10 +15,11 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 
-// TODO: replace with the live wTXC ERC-20 contract address once confirmed.
-// Used to deep-link the Uniswap widget to the right output token.
-const WTXC_CONTRACT = "0x0000000000000000000000000000000000000000";
+// Live wTXC ERC-20 contract on Ethereum mainnet.
+// Etherscan: https://etherscan.io/token/0x9FC65df3997073B8551Ffd617154B5102fACbb88
+const WTXC_CONTRACT = "0x9FC65df3997073B8551Ffd617154B5102fACbb88";
 const UNISWAP_SWAP_URL = `https://app.uniswap.org/#/swap?outputCurrency=${WTXC_CONTRACT}&theme=dark`;
+const ETHERSCAN_URL = `https://etherscan.io/token/${WTXC_CONTRACT}`;
 
 export const Route = createFileRoute("/wtxc")({
   head: () => ({
