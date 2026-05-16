@@ -25,7 +25,8 @@ export const Route = createFileRoute("/whitepaper")({
   component: WhitepaperPage,
 });
 
-const PDF_URL = "/texitcoin-whitepaper.pdf";
+const PDF_URL =
+  "https://txc.mypinata.cloud/ipfs/bafkreifm3jo26wlq6fapaq57xqe6oxpfj2xgztum3czqtgze6amtlfqdre";
 
 function WhitepaperPage() {
   return (
