@@ -33,6 +33,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
       { label: "Bitmart", href: "https://www.bitmart.com/trade/TXC_USDT" },
       { label: "MEXC", href: "https://www.mexc.com/exchange/TXC_USDT" },
       { label: "Dex-Trade", href: "https://dex-trade.com/spot/trading/TXCUSDT" },
+      { label: "wTXC Wrap/Unwrap", href: "https://wtxc.texitcoin.org/" },
     ],
   },
   {
