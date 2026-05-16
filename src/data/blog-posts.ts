@@ -631,6 +631,7 @@ const TAG_IMAGE: Record<string, string> = {
   Comparison: star,
   Roadmap: hills,
   Diligence: star,
+  Milestone: skyline,
 };
 
 const POOL = [hills, flag, ranch, skyline, boots, mesa, star, energy];
