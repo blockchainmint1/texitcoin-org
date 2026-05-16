@@ -104,7 +104,7 @@ function FaqPage() {
         </section>
 
         <section className="border-b border-border">
-          <div className="container mx-auto max-w-3xl px-6 py-16">
+          <div className="mx-auto max-w-3xl px-6 py-16">
             <Accordion type="single" collapsible className="space-y-3">
               {FAQS.map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="rounded-2xl border border-border bg-card px-6">
