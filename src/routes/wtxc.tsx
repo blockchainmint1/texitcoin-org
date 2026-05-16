@@ -196,8 +196,16 @@ function WtxcPage() {
                   <div className="mt-1 text-sm text-muted-foreground">Wrapped TEXITcoin — ERC-20 on Ethereum mainnet</div>
                   <div className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">Contract</div>
                   <code className="mt-1 block break-all rounded-md border border-border bg-background p-2 text-xs">
-                    {hasContract ? WTXC_CONTRACT : "Coming soon"}
+                    {WTXC_CONTRACT}
                   </code>
+                  <a
+                    href={ETHERSCAN_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline"
+                  >
+                    View on Etherscan <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 </div>
 
                 <div className="rounded-2xl border border-border bg-card p-6">
@@ -205,7 +213,7 @@ function WtxcPage() {
                     Prefer to swap in your own wallet? Open Uniswap directly and import the contract above.
                   </p>
                   <a
-                    href={hasContract ? UNISWAP_SWAP_URL : "https://app.uniswap.org/"}
+                    href={UNISWAP_SWAP_URL}
                     target="_blank"
                     rel="noreferrer"
                     className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
