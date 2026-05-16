@@ -129,7 +129,8 @@ function WtxcPage() {
           <div className="container mx-auto px-6 py-20">
             <h2 className="font-display text-3xl font-bold md:text-5xl">How wrapping works</h2>
             <p className="mt-4 max-w-2xl text-muted-foreground">
-              No magic. No fractional reserves. Every wTXC is minted against a native TXC held in custody, and every redemption burns wTXC to release TXC.
+              No magic. No fractional reserves. Every wTXC is minted against a native TXC held in custody, and every redemption burns wTXC to release TXC. Flip back and forth between TXC and wTXC at{" "}
+              <a href="https://wtxc.texitcoin.org/" target="_blank" rel="noreferrer" className="text-primary hover:underline">wtxc.texitcoin.org</a>.
             </p>
             <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {FLOW.map((f, i) => (
