@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WtxcRouteImport } from './routes/wtxc'
 import { Route as WhitepaperRouteImport } from './routes/whitepaper'
 import { Route as WalletsRouteImport } from './routes/wallets'
+import { Route as VideosRouteImport } from './routes/videos'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TokenomicsRouteImport } from './routes/tokenomics'
@@ -52,6 +53,11 @@ const WhitepaperRoute = WhitepaperRouteImport.update({
 const WalletsRoute = WalletsRouteImport.update({
   id: '/wallets',
   path: '/wallets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ValueRoute = ValueRouteImport.update({
@@ -213,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
+  '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
@@ -244,6 +251,7 @@ export interface FileRoutesByTo {
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
+  '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
@@ -276,6 +284,7 @@ export interface FileRoutesById {
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
+  '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
@@ -309,6 +318,7 @@ export interface FileRouteTypes {
     | '/tokenomics'
     | '/trolls'
     | '/value'
+    | '/videos'
     | '/wallets'
     | '/whitepaper'
     | '/wtxc'
@@ -340,6 +350,7 @@ export interface FileRouteTypes {
     | '/tokenomics'
     | '/trolls'
     | '/value'
+    | '/videos'
     | '/wallets'
     | '/whitepaper'
     | '/wtxc'
@@ -371,6 +382,7 @@ export interface FileRouteTypes {
     | '/tokenomics'
     | '/trolls'
     | '/value'
+    | '/videos'
     | '/wallets'
     | '/whitepaper'
     | '/wtxc'
@@ -403,6 +415,7 @@ export interface RootRouteChildren {
   TokenomicsRoute: typeof TokenomicsRoute
   TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
+  VideosRoute: typeof VideosRoute
   WalletsRoute: typeof WalletsRoute
   WhitepaperRoute: typeof WhitepaperRoute
   WtxcRoute: typeof WtxcRoute
@@ -430,6 +443,13 @@ declare module '@tanstack/react-router' {
       path: '/wallets'
       fullPath: '/wallets'
       preLoaderRoute: typeof WalletsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/value': {
@@ -643,6 +663,7 @@ const rootRouteChildren: RootRouteChildren = {
   TokenomicsRoute: TokenomicsRoute,
   TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
+  VideosRoute: VideosRoute,
   WalletsRoute: WalletsRoute,
   WhitepaperRoute: WhitepaperRoute,
   WtxcRoute: WtxcRoute,
@@ -651,3 +672,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
