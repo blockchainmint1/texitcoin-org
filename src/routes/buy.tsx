@@ -277,6 +277,23 @@ function BuyPage() {
           </div>
         </section>
 
+        <section className="border-b border-border">
+          <div className="container mx-auto px-6 py-20">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-primary">
+              <Sparkles className="h-3 w-3" /> For advanced users
+            </div>
+            <h2 className="mt-4 font-display text-3xl font-bold md:text-5xl">Already in DeFi? Try wTXC.</h2>
+            <p className="mt-4 max-w-2xl text-muted-foreground">
+              wTXC is wrapped TEXITcoin — a 1:1 backed ERC-20 that brings TXC to Ethereum. Trade it on Uniswap, plug it into DeFi, unwrap back to native TXC any time. If you know what a non-custodial wallet is and you've used a DEX before, this one's for you.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/wtxc" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">
+                Learn about wTXC <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section>
           <div className="container mx-auto px-6 py-20 text-center">
             <h2 className="font-display text-3xl font-bold md:text-5xl">Ready to ride?</h2>
