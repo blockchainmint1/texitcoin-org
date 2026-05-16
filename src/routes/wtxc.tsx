@@ -66,7 +66,6 @@ const FLOW = [
 ];
 
 function WtxcPage() {
-  const hasContract = WTXC_CONTRACT !== "0x0000000000000000000000000000000000000000";
 
   return (
     <>
