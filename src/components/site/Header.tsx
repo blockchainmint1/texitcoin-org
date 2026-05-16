@@ -183,15 +183,13 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href="https://swap.texitcoin.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/buy"
             className="hidden sm:inline-flex items-center gap-2 rounded-md bg-red-gradient px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
           >
             Get TXC
             <span aria-hidden>→</span>
-          </a>
+          </Link>
           <button
             className="lg:hidden grid h-10 w-10 place-items-center rounded-md border border-border"
             onClick={() => setOpen((o) => !o)}
