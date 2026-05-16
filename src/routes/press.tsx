@@ -20,10 +20,10 @@ export const Route = createFileRoute("/press")({
 
 const FACTS = [
   { label: "Ticker", value: "TXC" },
-  { label: "Network", value: "Layer 1, SHA-256 PoW" },
-  { label: "Max supply", value: "21,000,000" },
+  { label: "Network", value: "Layer 1, Scrypt PoW" },
+  { label: "Max supply", value: "353,396,296" },
   { label: "Exchange debut", value: "Bitmart, 12/31/24" },
-  { label: "Launch price", value: "$0.10" },
+  { label: "Launch price", value: "$0.028" },
   { label: "Headquarters", value: "Texas, USA" },
 ];
 
