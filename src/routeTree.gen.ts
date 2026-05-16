@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as TrollsRouteImport } from './routes/trolls'
+import { Route as TexasRouteImport } from './routes/texas'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
@@ -39,6 +40,11 @@ const ValueRoute = ValueRouteImport.update({
 const TrollsRoute = TrollsRouteImport.update({
   id: '/trolls',
   path: '/trolls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TexasRoute = TexasRouteImport.update({
+  id: '/texas',
+  path: '/texas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
+  '/texas': typeof TexasRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
+  '/texas': typeof TexasRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
+  '/texas': typeof TexasRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/proof-of-work'
     | '/roadmap'
     | '/terms'
+    | '/texas'
     | '/trolls'
     | '/value'
     | '/wallets'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/proof-of-work'
     | '/roadmap'
     | '/terms'
+    | '/texas'
     | '/trolls'
     | '/value'
     | '/wallets'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/proof-of-work'
     | '/roadmap'
     | '/terms'
+    | '/texas'
     | '/trolls'
     | '/value'
     | '/wallets'
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   RoadmapRoute: typeof RoadmapRoute
   TermsRoute: typeof TermsRoute
+  TexasRoute: typeof TexasRoute
   TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
   WalletsRoute: typeof WalletsRoute
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       path: '/trolls'
       fullPath: '/trolls'
       preLoaderRoute: typeof TrollsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/texas': {
+      id: '/texas'
+      path: '/texas'
+      fullPath: '/texas'
+      preLoaderRoute: typeof TexasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -368,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProofOfWorkRoute: ProofOfWorkRoute,
   RoadmapRoute: RoadmapRoute,
   TermsRoute: TermsRoute,
+  TexasRoute: TexasRoute,
   TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
   WalletsRoute: WalletsRoute,
