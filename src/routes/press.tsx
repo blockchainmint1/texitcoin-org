@@ -20,10 +20,10 @@ export const Route = createFileRoute("/press")({
 
 const FACTS = [
   { label: "Ticker", value: "TXC" },
-  { label: "Network", value: "Layer 1, SHA-256 PoW" },
-  { label: "Max supply", value: "21,000,000" },
+  { label: "Network", value: "Layer 1, Scrypt PoW" },
+  { label: "Max supply", value: "353,396,296" },
   { label: "Exchange debut", value: "Bitmart, 12/31/24" },
-  { label: "Launch price", value: "$0.10" },
+  { label: "Launch price", value: "$0.028" },
   { label: "Headquarters", value: "Texas, USA" },
 ];
 
@@ -61,7 +61,7 @@ function PressPage() {
             <h2 className="font-display text-3xl font-bold">Boilerplate</h2>
             <div className="mt-6 max-w-3xl rounded-2xl border border-border bg-card p-8 text-muted-foreground">
               <p>
-                TEXITcoin (TXC) is a Layer 1 Proof-of-Work cryptocurrency mined in Texas. With a hard-capped supply of 21 million coins, no premine, and no team allocation, TXC is built as sound, sovereign money for the digital age. The project draws its identity from the Texan tradition of independence and self-reliance — pairing rigorous monetary principles with a community-first, no-VC ethos. TXC has traded on Bitmart since December 31, 2024.
+                TEXITcoin (TXC) is a Layer 1 Scrypt Proof-of-Work cryptocurrency mined in Texas. With a hard-capped supply of 353,396,296 coins, no premine, and no team allocation, TXC is built as sound, sovereign money for the digital age. The project draws its identity from the Texan tradition of independence and self-reliance — pairing rigorous monetary principles with a community-first, no-VC ethos. TXC has traded on Bitmart since December 31, 2024.
               </p>
             </div>
           </div>
