@@ -34,15 +34,20 @@ const TIMELINE = [
   },
   {
     year: "2012",
-    icon: Landmark,
-    title: "Testifying Before Congress",
-    body: "Served as an expert witness before the U.S. House Financial Services Committee's Domestic Monetary Policy Subcommittee on \"Parallel Currencies: The Roadmap to Monetary Freedom.\" Laid out the case for competing currencies, critiqued the failures of centralized money, and showed how everyday people could reclaim financial sovereignty.",
-  },
-  {
-    year: "2012",
     icon: Bitcoin,
     title: "Discovering Bitcoin",
     body: "Brought to life what became the famous physical Bitcoin representation — a tangible bridge between digital crypto and real-world value. It helped normalize Bitcoin early on, giving the fledgling digital currency a physical identity that remains iconic today.",
+  },
+  {
+    year: "2012",
+    icon: Landmark,
+    title: "Testifying Before Congress",
+    body: "Served as an expert witness before the U.S. House Financial Services Committee's Domestic Monetary Policy Subcommittee on \"Parallel Currencies: The Roadmap to Monetary Freedom.\" Laid out the case for competing currencies, critiqued the failures of centralized money, and showed how everyday people could reclaim financial sovereignty.",
+    video: {
+      src: "https://streamtxc.com/e/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq",
+      title: "Bobby Gray — Congressional Testimony on Parallel Currencies (2012)",
+      caption: "Watch the full testimony · streamed via streamTXC",
+    },
   },
   {
     year: "2017",
