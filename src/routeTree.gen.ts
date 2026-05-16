@@ -33,6 +33,7 @@ import { Route as BuyRouteImport } from './routes/buy'
 import { Route as BuildRouteImport } from './routes/build'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as TheCaseForTEXITcoinDothtmlRouteImport } from './routes/The-Case-for-TEXITcoin[.]html'
+import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.]html'
 import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
@@ -158,6 +159,11 @@ const TheCaseForTEXITcoinDothtmlRoute =
     path: '/The-Case-for-TEXITcoin.html',
     getParentRoute: () => rootRouteImport,
   } as any)
+const MeetTheTeamDothtmlRoute = MeetTheTeamDothtmlRouteImport.update({
+  id: '/Meet-the-Team.html',
+  path: '/Meet-the-Team.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiscoverTEXITcoinDothtmlRoute =
   DiscoverTEXITcoinDothtmlRouteImport.update({
     id: '/Discover-TEXITcoin.html',
@@ -178,6 +184,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
+  '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
@@ -207,6 +214,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
+  '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
@@ -237,6 +245,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
+  '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
@@ -268,6 +277,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/Discover-TEXITcoin.html'
+    | '/Meet-the-Team.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
@@ -297,6 +307,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/Discover-TEXITcoin.html'
+    | '/Meet-the-Team.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
@@ -326,6 +337,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/Discover-TEXITcoin.html'
+    | '/Meet-the-Team.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
@@ -356,6 +368,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiscoverTEXITcoinDothtmlRoute: typeof DiscoverTEXITcoinDothtmlRoute
+  MeetTheTeamDothtmlRoute: typeof MeetTheTeamDothtmlRoute
   TheCaseForTEXITcoinDothtmlRoute: typeof TheCaseForTEXITcoinDothtmlRoute
   BlogRoute: typeof BlogRoute
   BuildRoute: typeof BuildRoute
@@ -553,6 +566,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheCaseForTEXITcoinDothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/Meet-the-Team.html': {
+      id: '/Meet-the-Team.html'
+      path: '/Meet-the-Team.html'
+      fullPath: '/Meet-the-Team.html'
+      preLoaderRoute: typeof MeetTheTeamDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/Discover-TEXITcoin.html': {
       id: '/Discover-TEXITcoin.html'
       path: '/Discover-TEXITcoin.html'
@@ -580,6 +600,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiscoverTEXITcoinDothtmlRoute: DiscoverTEXITcoinDothtmlRoute,
+  MeetTheTeamDothtmlRoute: MeetTheTeamDothtmlRoute,
   TheCaseForTEXITcoinDothtmlRoute: TheCaseForTEXITcoinDothtmlRoute,
   BlogRoute: BlogRoute,
   BuildRoute: BuildRoute,
