@@ -270,6 +270,46 @@ function LeadershipPage() {
             asking for blind faith — he's asking you to look at the record, hear the
             speeches, and decide if this is the leadership crypto needs to win.
           </p>
+
+          {/* Congressional Testimony */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="mt-14"
+          >
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                  On the Record · 2012
+                </div>
+                <h3 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl text-balance">
+                  Bobby's <span className="text-primary">Congressional testimony</span>
+                </h3>
+                <p className="mt-3 max-w-2xl text-muted-foreground">
+                  Expert witness before the U.S. House Financial Services Committee's
+                  Domestic Monetary Policy Subcommittee on "Parallel Currencies: The
+                  Roadmap to Monetary Freedom."
+                </p>
+              </div>
+            </div>
+            <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-black shadow-card">
+              <div className="relative aspect-video w-full">
+                <iframe
+                  src="https://streamtxc.com/e/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq"
+                  title="Bobby Gray — Congressional Testimony on Parallel Currencies (2012)"
+                  loading="lazy"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
+            </div>
+            <p className="mt-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+              Streamed via streamTXC · IPFS · Powered by TEXITcoin
+            </p>
+          </motion.div>
         </div>
       </section>
 
