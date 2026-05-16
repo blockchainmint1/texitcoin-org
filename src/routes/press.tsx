@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Download, Mail, Sparkles, ArrowRight, FileText } from "lucide-react";
+import { Download, Mail, Sparkles, ArrowRight, FileText, Type } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import coinMark from "@/assets/mineTXC_icon.png";
 
 export const Route = createFileRoute("/press")({
   head: () => ({
@@ -28,10 +29,9 @@ const FACTS = [
 ];
 
 const COLORS = [
-  { name: "Texas Red", hex: "#bf0a30" },
-  { name: "Lone Star Navy", hex: "#0a2a66" },
-  { name: "Capitol Gold", hex: "#f5b700" },
-  { name: "Bone White", hex: "#f5f3ee" },
+  { name: "TEXIT Red", hex: "#be1f24", cmyk: "15, 100, 100, 10" },
+  { name: "TEXIT Blue", hex: "#262262", cmyk: "100, 100, 25, 25" },
+  { name: "TEXIT Black", hex: "#130c0e", cmyk: "20, 20, 20, 100" },
 ];
 
 function PressPage() {
@@ -84,13 +84,15 @@ function PressPage() {
         <section className="border-b border-border">
           <div className="mx-auto max-w-7xl px-6 py-16">
             <h2 className="font-display text-3xl font-bold">Brand colors</h2>
-            <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <p className="mt-2 text-muted-foreground">Primary palette from the official TEXIT Coin brand guidelines.</p>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
               {COLORS.map((c) => (
                 <div key={c.hex} className="overflow-hidden rounded-xl border border-border bg-card">
-                  <div className="h-24" style={{ backgroundColor: c.hex }} />
+                  <div className="h-28" style={{ backgroundColor: c.hex }} />
                   <div className="p-4">
                     <div className="font-semibold">{c.name}</div>
-                    <div className="text-sm text-muted-foreground">{c.hex}</div>
+                    <div className="mt-1 text-sm text-muted-foreground">HEX {c.hex.toUpperCase()}</div>
+                    <div className="text-xs text-muted-foreground">CMYK {c.cmyk}</div>
                   </div>
                 </div>
               ))}
@@ -100,18 +102,61 @@ function PressPage() {
 
         <section className="border-b border-border bg-card/40">
           <div className="mx-auto max-w-7xl px-6 py-16">
+            <h2 className="font-display text-3xl font-bold">Typeface</h2>
+            <div className="mt-6 flex flex-col gap-6 rounded-2xl border border-border bg-background p-8 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-4">
+                <Type className="h-8 w-8 text-primary" />
+                <div>
+                  <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Official typeface</div>
+                  <div className="font-display text-3xl font-bold">Open Sans</div>
+                  <div className="text-sm text-muted-foreground">Regular · Semibold · Bold · ExtraBold (+ italics)</div>
+                </div>
+              </div>
+              <a
+                href="https://fonts.google.com/specimen/Open+Sans"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold hover:bg-accent"
+              >
+                Get Open Sans <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-border">
+          <div className="mx-auto max-w-7xl px-6 py-16">
             <h2 className="font-display text-3xl font-bold">Assets</h2>
             <p className="mt-2 text-muted-foreground">Logos, lockups, and high-res imagery for editorial use.</p>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {["Wordmark (SVG)", "Coin mark (PNG)", "Full brand pack (ZIP)"].map((label) => (
-                <div key={label} className="flex items-center justify-between rounded-xl border border-border bg-background p-5">
-                  <div className="flex items-center gap-3">
-                    <FileText className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-semibold">{label}</span>
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
+                <div className="flex h-32 w-full items-center justify-center rounded-lg bg-card">
+                  <img src={coinMark} alt="TEXITcoin coin mark" className="h-20 w-20" />
+                </div>
+                <div className="flex w-full items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-semibold">Coin mark (PNG)</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    <Download className="h-3.5 w-3.5" /> Coming soon
-                  </span>
+                  <a href={coinMark} download className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-primary hover:opacity-80">
+                    <Download className="h-3.5 w-3.5" /> Download
+                  </a>
+                </div>
+              </div>
+              {["Wordmark (SVG)", "Full brand pack (ZIP)"].map((label) => (
+                <div key={label} className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
+                  <div className="flex h-32 w-full items-center justify-center rounded-lg bg-card text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    Preview pending
+                  </div>
+                  <div className="flex w-full items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <FileText className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-semibold">{label}</span>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      <Download className="h-3.5 w-3.5" /> Soon
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -124,7 +169,7 @@ function PressPage() {
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">For interviews, quotes, or asset requests, reach the team directly.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <a href="mailto:press@texitcoin.org" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">
-                <Mail className="h-4 w-4" /> press@texitcoin.org
+                <Mail className="h-4 w-4" /> <span>press@texitcoin.org</span>
               </a>
               <Link to="/leadership" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-accent">
                 Meet leadership <ArrowRight className="h-4 w-4" />
