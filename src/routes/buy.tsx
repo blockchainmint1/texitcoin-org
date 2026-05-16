@@ -154,6 +154,24 @@ function BuyPage() {
               <p className="mt-6 text-lg text-muted-foreground md:text-xl">
                 Four steps from zero to self-custody. No jargon, no upsell — just the plain path to owning TXC.
               </p>
+
+              <a
+                href="https://swap.texitcoin.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 flex items-start gap-3 rounded-2xl border border-primary/40 bg-primary/5 p-4 transition hover:bg-primary/10 sm:items-center"
+              >
+                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary sm:mt-0">
+                  <Sparkles className="h-4 w-4" />
+                </span>
+                <span className="flex-1 text-sm text-foreground">
+                  <span className="font-semibold">Already got USDC? Know what you're doing?</span>{" "}
+                  <span className="text-muted-foreground">Skip the exchange — use our swap site for a quick trade.</span>
+                </span>
+                <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  Swap <ExternalLink className="h-3.5 w-3.5" />
+                </span>
+              </a>
             </motion.div>
           </div>
         </section>
