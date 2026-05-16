@@ -23,6 +23,7 @@ const NAV: NavItem[] = [
     label: "Discover",
     children: [
       { label: "Team", href: "/team", internal: true },
+      { label: "Tokenomics", href: "/tokenomics", internal: true },
       { label: "TXC in the News", href: "/in-the-news", internal: true },
       { label: "TSSB Legal Updates", href: "/legal", internal: true },
       { label: "Troll Index", href: "/trolls", internal: true },
