@@ -105,9 +105,10 @@ function WhitepaperPage() {
                     <img
                       src="/texitcoin-whitepaper-cover.jpg"
                       alt="The TEXITcoin Whitepaper — first page preview"
-                      className="block h-auto w-full"
+                      className="block h-[380px] w-full object-cover object-top md:h-[440px]"
                       loading="lazy"
                     />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
                     <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground opacity-0 transition group-hover:opacity-100">
                       <ExternalLink className="h-3 w-3" /> Open PDF
