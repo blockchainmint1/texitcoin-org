@@ -44,7 +44,7 @@ const TIMELINE = [
     title: "Testifying Before Congress",
     body: "Served as an expert witness before the U.S. House Financial Services Committee's Domestic Monetary Policy Subcommittee on \"Parallel Currencies: The Roadmap to Monetary Freedom.\" Laid out the case for competing currencies, critiqued the failures of centralized money, and showed how everyday people could reclaim financial sovereignty.",
     video: {
-      src: "https://streamtxc.com/e/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq",
+      src: "https://streamtxc.com/embed/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq?",
       title: "Bobby Gray — Congressional Testimony on Parallel Currencies (2012)",
       caption: "Watch the full testimony · streamed via streamTXC",
     },

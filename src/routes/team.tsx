@@ -143,7 +143,7 @@ function TeamPage() {
             <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-black shadow-card">
               <div className="relative aspect-video w-full">
                 <iframe
-                  src="https://streamtxc.com/e/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq"
+                  src="https://streamtxc.com/embed/bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq?"
                   title="Bobby Gray — Congressional Testimony on Parallel Currencies (2012)"
                   loading="lazy"
                   allow="autoplay; fullscreen; picture-in-picture"
