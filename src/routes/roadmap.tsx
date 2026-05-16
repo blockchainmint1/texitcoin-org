@@ -342,16 +342,24 @@ function BoardSurface({
   }
 
   return (
-    <div className="relative aspect-square w-full overflow-hidden rounded-2xl border-2 border-foreground/20 bg-[linear-gradient(135deg,oklch(0.96_0.02_90),oklch(0.92_0.03_60))] shadow-card">
-      {/* subtle leather grain */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 30%, #000 1px, transparent 1px), radial-gradient(circle at 70% 80%, #000 1px, transparent 1px)",
-          backgroundSize: "18px 18px, 22px 22px",
-        }}
-      />
+    <div
+      className="relative aspect-square w-full overflow-hidden rounded-[28px] border-[6px] border-[#0a2a66] shadow-[0_30px_60px_-20px_rgba(10,42,102,0.5),inset_0_0_0_4px_#fff,inset_0_0_0_10px_#bf0a30]"
+      style={{
+        background:
+          "repeating-linear-gradient(45deg, #fff7e0 0 18px, #fef0c4 18px 36px)",
+      }}
+    >
+      {/* Lone star watermark */}
+      <svg
+        viewBox="0 0 100 100"
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <polygon
+          points="50,8 61,40 95,40 67,60 78,92 50,72 22,92 33,60 5,40 39,40"
+          fill="#0a2a66"
+        />
+      </svg>
 
       {/* Grid of squares */}
       <div className="absolute inset-0 grid grid-cols-10 grid-rows-10">
@@ -359,27 +367,53 @@ function BoardSurface({
           const m = milestonesBySquare.get(n);
           const isMilestone = !!m;
           const isActive = activeSquare === n;
-          // checker tint
           const { col, rowFromBottom } = squareToGrid(n);
-          const dark = (col + rowFromBottom) % 2 === 0;
+          // 4-color Texas checker: red, white/cream, navy, gold
+          const cycle = (col + rowFromBottom * 3) % 4;
+          const palette = [
+            { bg: "#bf0a30", text: "#fff", num: "rgba(255,255,255,0.7)" }, // red
+            { bg: "#fff7e0", text: "#0a2a66", num: "rgba(10,42,102,0.55)" }, // cream
+            { bg: "#0a2a66", text: "#fff", num: "rgba(255,255,255,0.7)" }, // navy
+            { bg: "#f5b700", text: "#0a2a66", num: "rgba(10,42,102,0.65)" }, // gold
+          ][cycle];
           return (
             <button
               key={n}
               onClick={() => onSquareClick(n)}
               disabled={!isMilestone}
-              className={`relative border border-foreground/10 transition ${
-                dark ? "bg-foreground/[0.03]" : "bg-transparent"
-              } ${
+              className={`group relative border border-[#0a2a66]/30 transition-transform ${
                 isMilestone
-                  ? "cursor-pointer hover:bg-primary/10"
+                  ? "cursor-pointer hover:z-10 hover:scale-110"
                   : "cursor-default"
-              } ${isActive ? "ring-2 ring-primary ring-inset z-10" : ""}`}
-              title={m ? `${m.title}${m.price ? ` — ${m.price}` : ""}` : `Square ${n}`}
+              } ${isActive ? "z-10 scale-110" : ""}`}
+              style={{ backgroundColor: palette.bg, color: palette.text }}
+              title={
+                m ? `${m.title}${m.price ? ` — ${m.price}` : ""}` : `Square ${n}`
+              }
             >
-              <span className="absolute left-1 top-1 text-[9px] font-mono text-foreground/40">
+              <span
+                className="absolute left-1 top-1 text-[10px] font-mono font-bold"
+                style={{ color: palette.num }}
+              >
                 {n}
               </span>
-              {isMilestone && <SquareContent m={m} />}
+              {n === 100 && !isMilestone && (
+                <svg
+                  viewBox="0 0 100 100"
+                  className="absolute inset-1 opacity-90"
+                >
+                  <polygon
+                    points="50,8 61,40 95,40 67,60 78,92 50,72 22,92 33,60 5,40 39,40"
+                    fill="#f5b700"
+                    stroke="#0a2a66"
+                    strokeWidth="4"
+                  />
+                </svg>
+              )}
+              {isMilestone && <SquareContent m={m} textColor={palette.text} />}
+              {isActive && (
+                <span className="pointer-events-none absolute inset-0 rounded-[2px] ring-[3px] ring-[#f5b700] ring-inset" />
+              )}
             </button>
           );
         })}
@@ -405,7 +439,7 @@ function BoardSurface({
       <motion.div
         animate={bullControls}
         initial={{ left: `${squareToPct(1).x}%`, top: `${squareToPct(1).y}%` }}
-        className="absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        className="absolute z-30 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
       >
         <BullToken />
       </motion.div>
@@ -413,18 +447,27 @@ function BoardSurface({
   );
 }
 
-function SquareContent({ m }: { m: Milestone }) {
+function SquareContent({
+  m,
+  textColor,
+}: {
+  m: Milestone;
+  textColor: string;
+}) {
   const Icon = m.icon ? ICONS[m.icon] : kindIcon(m.kind);
-  const tone = kindTone(m.kind);
   return (
-    <div className="absolute inset-1 flex flex-col items-center justify-center gap-0.5 rounded-md p-1">
+    <div className="absolute inset-1 flex flex-col items-center justify-center gap-0.5 p-1">
       <div
-        className={`flex h-6 w-6 items-center justify-center rounded-full ${tone.bg} ${tone.text} shadow-sm`}
+        className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-2"
+        style={{ color: "#0a2a66", borderColor: "#f5b700" }}
       >
-        <Icon className="h-3.5 w-3.5" />
+        <Icon className="h-4 w-4" />
       </div>
       {m.price && (
-        <div className="text-[8px] font-mono font-bold text-foreground/80 leading-none">
+        <div
+          className="rounded-sm bg-white/95 px-1 text-[8px] font-mono font-extrabold leading-tight"
+          style={{ color: "#bf0a30" }}
+        >
           {m.price}
         </div>
       )}
