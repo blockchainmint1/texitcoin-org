@@ -174,18 +174,29 @@ function WtxcPage() {
             </div>
 
             <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
-              {/* Uniswap embed */}
-              <div className="overflow-hidden rounded-2xl border border-border bg-card">
-                <iframe
-                  src={UNISWAP_SWAP_URL}
-                  height="660"
-                  width="100%"
-                  title="Uniswap — Swap wTXC"
-                  className="block w-full"
-                  style={{ border: 0 }}
-                  referrerPolicy="no-referrer"
-                  allow="clipboard-read; clipboard-write; web-share"
-                />
+              {/* Uniswap CTA (Uniswap blocks iframe embeds) */}
+              <div className="flex flex-col justify-between gap-6 rounded-2xl border border-border bg-card p-8">
+                <div>
+                  <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Swap on</div>
+                  <h3 className="mt-2 font-display text-3xl font-bold">Uniswap</h3>
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    Uniswap doesn't allow its app to be embedded on other sites. Click below to open the wTXC swap pair in a new tab — the output token is pre-loaded from the verified contract on the right.
+                  </p>
+                  <ol className="mt-5 space-y-2 text-sm text-muted-foreground">
+                    <li><span className="font-semibold text-foreground">1.</span> Connect a non-custodial wallet (MetaMask, Rabby, Coinbase Wallet).</li>
+                    <li><span className="font-semibold text-foreground">2.</span> Pick your input token (ETH, USDC, USDT…).</li>
+                    <li><span className="font-semibold text-foreground">3.</span> Confirm wTXC matches the contract address shown here.</li>
+                    <li><span className="font-semibold text-foreground">4.</span> Review slippage, then swap.</li>
+                  </ol>
+                </div>
+                <a
+                  href={UNISWAP_SWAP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-gradient px-6 py-4 font-display text-base font-bold text-white shadow-lg transition hover:opacity-90"
+                >
+                  Open wTXC swap on Uniswap <ExternalLink className="h-4 w-4" />
+                </a>
               </div>
 
               {/* Side panel */}
