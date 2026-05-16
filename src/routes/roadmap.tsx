@@ -342,16 +342,24 @@ function BoardSurface({
   }
 
   return (
-    <div className="relative aspect-square w-full overflow-hidden rounded-2xl border-2 border-foreground/20 bg-[linear-gradient(135deg,oklch(0.96_0.02_90),oklch(0.92_0.03_60))] shadow-card">
-      {/* subtle leather grain */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 30%, #000 1px, transparent 1px), radial-gradient(circle at 70% 80%, #000 1px, transparent 1px)",
-          backgroundSize: "18px 18px, 22px 22px",
-        }}
-      />
+    <div
+      className="relative aspect-square w-full overflow-hidden rounded-[28px] border-[6px] border-[#0a2a66] shadow-[0_30px_60px_-20px_rgba(10,42,102,0.5),inset_0_0_0_4px_#fff,inset_0_0_0_10px_#bf0a30]"
+      style={{
+        background:
+          "repeating-linear-gradient(45deg, #fff7e0 0 18px, #fef0c4 18px 36px)",
+      }}
+    >
+      {/* Lone star watermark */}
+      <svg
+        viewBox="0 0 100 100"
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <polygon
+          points="50,8 61,40 95,40 67,60 78,92 50,72 22,92 33,60 5,40 39,40"
+          fill="#0a2a66"
+        />
+      </svg>
 
       {/* Grid of squares */}
       <div className="absolute inset-0 grid grid-cols-10 grid-rows-10">
@@ -359,27 +367,53 @@ function BoardSurface({
           const m = milestonesBySquare.get(n);
           const isMilestone = !!m;
           const isActive = activeSquare === n;
-          // checker tint
           const { col, rowFromBottom } = squareToGrid(n);
-          const dark = (col + rowFromBottom) % 2 === 0;
+          // 4-color Texas checker: red, white/cream, navy, gold
+          const cycle = (col + rowFromBottom * 3) % 4;
+          const palette = [
+            { bg: "#bf0a30", text: "#fff", num: "rgba(255,255,255,0.7)" }, // red
+            { bg: "#fff7e0", text: "#0a2a66", num: "rgba(10,42,102,0.55)" }, // cream
+            { bg: "#0a2a66", text: "#fff", num: "rgba(255,255,255,0.7)" }, // navy
+            { bg: "#f5b700", text: "#0a2a66", num: "rgba(10,42,102,0.65)" }, // gold
+          ][cycle];
           return (
             <button
               key={n}
               onClick={() => onSquareClick(n)}
               disabled={!isMilestone}
-              className={`relative border border-foreground/10 transition ${
-                dark ? "bg-foreground/[0.03]" : "bg-transparent"
-              } ${
+              className={`group relative border border-[#0a2a66]/30 transition-transform ${
                 isMilestone
-                  ? "cursor-pointer hover:bg-primary/10"
+                  ? "cursor-pointer hover:z-10 hover:scale-110"
                   : "cursor-default"
-              } ${isActive ? "ring-2 ring-primary ring-inset z-10" : ""}`}
-              title={m ? `${m.title}${m.price ? ` — ${m.price}` : ""}` : `Square ${n}`}
+              } ${isActive ? "z-10 scale-110" : ""}`}
+              style={{ backgroundColor: palette.bg, color: palette.text }}
+              title={
+                m ? `${m.title}${m.price ? ` — ${m.price}` : ""}` : `Square ${n}`
+              }
             >
-              <span className="absolute left-1 top-1 text-[9px] font-mono text-foreground/40">
+              <span
+                className="absolute left-1 top-1 text-[10px] font-mono font-bold"
+                style={{ color: palette.num }}
+              >
                 {n}
               </span>
-              {isMilestone && <SquareContent m={m} />}
+              {n === 100 && !isMilestone && (
+                <svg
+                  viewBox="0 0 100 100"
+                  className="absolute inset-1 opacity-90"
+                >
+                  <polygon
+                    points="50,8 61,40 95,40 67,60 78,92 50,72 22,92 33,60 5,40 39,40"
+                    fill="#f5b700"
+                    stroke="#0a2a66"
+                    strokeWidth="4"
+                  />
+                </svg>
+              )}
+              {isMilestone && <SquareContent m={m} textColor={palette.text} />}
+              {isActive && (
+                <span className="pointer-events-none absolute inset-0 rounded-[2px] ring-[3px] ring-[#f5b700] ring-inset" />
+              )}
             </button>
           );
         })}
@@ -405,7 +439,7 @@ function BoardSurface({
       <motion.div
         animate={bullControls}
         initial={{ left: `${squareToPct(1).x}%`, top: `${squareToPct(1).y}%` }}
-        className="absolute z-20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        className="absolute z-30 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
       >
         <BullToken />
       </motion.div>
@@ -413,18 +447,27 @@ function BoardSurface({
   );
 }
 
-function SquareContent({ m }: { m: Milestone }) {
+function SquareContent({
+  m,
+  textColor,
+}: {
+  m: Milestone;
+  textColor: string;
+}) {
   const Icon = m.icon ? ICONS[m.icon] : kindIcon(m.kind);
-  const tone = kindTone(m.kind);
   return (
-    <div className="absolute inset-1 flex flex-col items-center justify-center gap-0.5 rounded-md p-1">
+    <div className="absolute inset-1 flex flex-col items-center justify-center gap-0.5 p-1">
       <div
-        className={`flex h-6 w-6 items-center justify-center rounded-full ${tone.bg} ${tone.text} shadow-sm`}
+        className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-[0_2px_6px_rgba(0,0,0,0.25)] ring-2"
+        style={{ color: "#0a2a66", borderColor: "#f5b700" }}
       >
-        <Icon className="h-3.5 w-3.5" />
+        <Icon className="h-4 w-4" />
       </div>
       {m.price && (
-        <div className="text-[8px] font-mono font-bold text-foreground/80 leading-none">
+        <div
+          className="rounded-sm bg-white/95 px-1 text-[8px] font-mono font-extrabold leading-tight"
+          style={{ color: "#bf0a30" }}
+        >
           {m.price}
         </div>
       )}
@@ -462,9 +505,40 @@ function Ladder({
     by2 = by - ny * off;
   const rungs = Math.max(3, Math.floor(len / 4));
   return (
-    <g stroke="oklch(0.45 0.12 50)" strokeWidth={0.6} strokeLinecap="round">
-      <line x1={ax1} y1={ay1} x2={bx1} y2={by1} />
-      <line x1={ax2} y1={ay2} x2={bx2} y2={by2} />
+    <g strokeLinecap="round">
+      {/* Wood rails — outer dark + inner highlight */}
+      <line
+        x1={ax1}
+        y1={ay1}
+        x2={bx1}
+        y2={by1}
+        stroke="#4a2912"
+        strokeWidth={1.4}
+      />
+      <line
+        x1={ax2}
+        y1={ay2}
+        x2={bx2}
+        y2={by2}
+        stroke="#4a2912"
+        strokeWidth={1.4}
+      />
+      <line
+        x1={ax1}
+        y1={ay1}
+        x2={bx1}
+        y2={by1}
+        stroke="#c8862d"
+        strokeWidth={0.5}
+      />
+      <line
+        x1={ax2}
+        y1={ay2}
+        x2={bx2}
+        y2={by2}
+        stroke="#c8862d"
+        strokeWidth={0.5}
+      />
       {Array.from({ length: rungs }).map((_, i) => {
         const t = (i + 0.5) / rungs;
         const rx1 = ax1 + (bx1 - ax1) * t;
@@ -478,7 +552,8 @@ function Ladder({
             y1={ry1}
             x2={rx2}
             y2={ry2}
-            strokeWidth={0.4}
+            stroke="#8b5a2b"
+            strokeWidth={0.9}
           />
         );
       })}
@@ -505,7 +580,7 @@ function Snake({
   const len = Math.hypot(dx, dy);
   const nx = -dy / len;
   const ny = dx / len;
-  const wobble = Math.min(12, len * 0.25);
+  const wobble = Math.min(14, len * 0.3);
   const c1x = mx + nx * wobble;
   const c1y = my + ny * wobble;
   const c2x = mx - nx * wobble;
@@ -513,25 +588,62 @@ function Snake({
   const d = `M ${ax} ${ay} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${bx} ${by}`;
   return (
     <g>
+      {/* body outline */}
       <path
         d={d}
         fill="none"
-        stroke="oklch(0.55 0.18 25)"
-        strokeWidth={1.8}
+        stroke="#3a1a0a"
+        strokeWidth={3.2}
         strokeLinecap="round"
       />
+      {/* body fill */}
       <path
         d={d}
         fill="none"
-        stroke="oklch(0.85 0.12 90)"
-        strokeWidth={0.6}
-        strokeDasharray="0.6 1.2"
+        stroke="#d97706"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+      />
+      {/* diamond pattern */}
+      <path
+        d={d}
+        fill="none"
+        stroke="#7c2d12"
+        strokeWidth={2.4}
+        strokeDasharray="0.8 1.6"
+        strokeLinecap="butt"
+      />
+      {/* yellow belly highlight */}
+      <path
+        d={d}
+        fill="none"
+        stroke="#fde047"
+        strokeWidth={0.5}
+        strokeDasharray="0.4 2"
         strokeLinecap="round"
       />
       {/* head */}
-      <circle cx={bx} cy={by} r={1.4} fill="oklch(0.55 0.18 25)" />
-      {/* tail rattle */}
-      <circle cx={ax} cy={ay} r={0.6} fill="oklch(0.35 0.05 60)" />
+      <circle cx={bx} cy={by} r={2} fill="#3a1a0a" />
+      <circle cx={bx} cy={by} r={1.5} fill="#d97706" />
+      {/* eyes */}
+      <circle cx={bx - 0.5} cy={by - 0.3} r={0.3} fill="#fde047" />
+      <circle cx={bx + 0.5} cy={by - 0.3} r={0.3} fill="#fde047" />
+      {/* fangs */}
+      <path
+        d={`M ${bx - 0.3} ${by + 0.4} L ${bx - 0.1} ${by + 1.2}`}
+        stroke="#fff"
+        strokeWidth={0.25}
+        strokeLinecap="round"
+      />
+      <path
+        d={`M ${bx + 0.3} ${by + 0.4} L ${bx + 0.1} ${by + 1.2}`}
+        stroke="#fff"
+        strokeWidth={0.25}
+        strokeLinecap="round"
+      />
+      {/* rattle tail */}
+      <circle cx={ax} cy={ay} r={0.7} fill="#7c2d12" />
+      <circle cx={ax} cy={ay} r={0.4} fill="#fde047" />
     </g>
   );
 }
@@ -540,11 +652,13 @@ function Snake({
 
 function BullToken() {
   return (
-    <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-foreground text-background shadow-[0_4px_12px_rgba(0,0,0,0.35)] ring-2 ring-primary">
-      {/* simple bull glyph */}
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-        <path d="M4 6c0-1 1-2 2-2 1.5 0 2.5 1 3 2l1 2h4l1-2c.5-1 1.5-2 3-2 1 0 2 1 2 2 0 2-1 3-2 4 0 4-3 7-6 7s-6-3-6-7c-1-1-2-2-2-4zm6 8a1 1 0 100 2 1 1 0 000-2zm4 0a1 1 0 100 2 1 1 0 000-2z" />
+    <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#0a2a66] text-[#f5b700] shadow-[0_6px_16px_rgba(0,0,0,0.45)] ring-[3px] ring-[#f5b700]">
+      {/* horned bull glyph */}
+      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
+        <path d="M2 7c.5-1.5 2-2.5 3.5-2 1 .3 1.7 1 2 2L8 9c1.2-.6 2.5-1 4-1s2.8.4 4 1l.5-2c.3-1 1-1.7 2-2 1.5-.5 3 .5 3.5 2 .3 1-.2 2-1 2.5L19 11c.6 1 1 2.2 1 3.5 0 3.6-3.6 6.5-8 6.5s-8-2.9-8-6.5c0-1.3.4-2.5 1-3.5L3 9.5C2.2 9 1.7 8 2 7zm7 7a1 1 0 100 2 1 1 0 000-2zm6 0a1 1 0 100 2 1 1 0 000-2z" />
       </svg>
+      {/* dust puff */}
+      <span className="pointer-events-none absolute -bottom-1 left-1/2 h-2 w-6 -translate-x-1/2 rounded-full bg-[#f5b700]/30 blur-sm" />
     </div>
   );
 }
@@ -553,18 +667,35 @@ function BullToken() {
 
 function Legend() {
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+    <div className="mt-5 flex flex-wrap items-center gap-5 text-xs font-semibold text-foreground/80">
       <span className="inline-flex items-center gap-2">
-        <span className="inline-block h-2 w-6 rounded-full bg-[oklch(0.45_0.12_50)]" />
-        Rope ladder — a leap forward
+        <span
+          className="inline-block h-2.5 w-7 rounded-full"
+          style={{ background: "#8b5a2b", boxShadow: "inset 0 0 0 1px #4a2912" }}
+        />
+        Ladder — climb forward
       </span>
       <span className="inline-flex items-center gap-2">
-        <span className="inline-block h-2 w-6 rounded-full bg-[oklch(0.55_0.18_25)]" />
-        Rattlesnake — knocked us back
+        <span
+          className="inline-block h-2.5 w-7 rounded-full"
+          style={{ background: "#d97706", boxShadow: "inset 0 0 0 1px #3a1a0a" }}
+        />
+        Rattler — slide back
       </span>
       <span className="inline-flex items-center gap-2">
-        <span className="inline-block h-3 w-3 rounded-full bg-foreground ring-2 ring-primary" />
-        The bull (that's us)
+        <span className="inline-block h-3.5 w-3.5 rounded-full bg-[#0a2a66] ring-2 ring-[#f5b700]" />
+        The bull (us)
+      </span>
+      <span className="inline-flex items-center gap-2">
+        <svg viewBox="0 0 100 100" className="h-3.5 w-3.5">
+          <polygon
+            points="50,8 61,40 95,40 67,60 78,92 50,72 22,92 33,60 5,40 39,40"
+            fill="#f5b700"
+            stroke="#0a2a66"
+            strokeWidth="6"
+          />
+        </svg>
+        Square 100 — Top 100
       </span>
     </div>
   );
