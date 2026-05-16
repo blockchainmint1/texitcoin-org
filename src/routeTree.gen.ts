@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WtxcRouteImport } from './routes/wtxc'
 import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as TrollsRouteImport } from './routes/trolls'
@@ -32,6 +33,11 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
+const WtxcRoute = WtxcRouteImport.update({
+  id: '/wtxc',
+  path: '/wtxc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WalletsRoute = WalletsRouteImport.update({
   id: '/wallets',
   path: '/wallets',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
+  '/wtxc': typeof WtxcRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
+  '/wtxc': typeof WtxcRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
+  '/wtxc': typeof WtxcRoute
   '/blog_/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/trolls'
     | '/value'
     | '/wallets'
+    | '/wtxc'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/trolls'
     | '/value'
     | '/wallets'
+    | '/wtxc'
     | '/blog/$slug'
   id:
     | '__root__'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/trolls'
     | '/value'
     | '/wallets'
+    | '/wtxc'
     | '/blog_/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -313,11 +325,19 @@ export interface RootRouteChildren {
   TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
   WalletsRoute: typeof WalletsRoute
+  WtxcRoute: typeof WtxcRoute
   BlogSlugRoute: typeof BlogSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wtxc': {
+      id: '/wtxc'
+      path: '/wtxc'
+      fullPath: '/wtxc'
+      preLoaderRoute: typeof WtxcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wallets': {
       id: '/wallets'
       path: '/wallets'
@@ -497,6 +517,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
   WalletsRoute: WalletsRoute,
+  WtxcRoute: WtxcRoute,
   BlogSlugRoute: BlogSlugRoute,
 }
 export const routeTree = rootRouteImport
