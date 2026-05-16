@@ -292,6 +292,7 @@ function LeadershipPage() {
             You want to know how serious we are? Evaluate the man behind it. Bobby isn't
             asking for blind faith — he's asking you to look at the record, hear the
             speeches, and decide if this is the leadership crypto needs to win.
+          </p>
         </div>
       </section>
 
