@@ -12,20 +12,24 @@ const NAV: NavItem[] = [
   {
     label: "Foundation",
     children: [
-      { label: "Overview", href: "/#foundation" },
       { label: "Whitepaper", href: "/whitepaper", internal: true },
-      { label: "Discover Texas", href: "/texas", internal: true },
-      { label: "Proof of Work", href: "/proof-of-work", internal: true },
+      { label: "Mining (Proof of Work)", href: "/proof-of-work", internal: true },
       { label: "Digital Currency", href: "/currency", internal: true },
       { label: "Community Value", href: "/value", internal: true },
       { label: "Leadership", href: "/leadership", internal: true },
+    ],
+  },
+  {
+    label: "Discover",
+    children: [
       { label: "Team", href: "/team", internal: true },
       { label: "TXC in the News", href: "/in-the-news", internal: true },
       { label: "TSSB Legal Updates", href: "/legal", internal: true },
       { label: "Troll Index", href: "/trolls", internal: true },
+      { label: "Blog", href: "/blog", internal: true },
+      { label: "FAQ", href: "/faq", internal: true },
     ],
   },
-  { label: "Blog", href: "/blog", internal: true },
   {
     label: "Resources",
     children: [
@@ -58,7 +62,6 @@ const NAV: NavItem[] = [
       { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61559875176657", external: true },
     ],
   },
-  { label: "FAQ", href: "/#faq" },
 ];
 
 function NavLinkItem({ item, onClick }: { item: NavLink | { label: string; href: string; internal?: boolean }; onClick?: () => void }) {
