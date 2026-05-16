@@ -7,19 +7,24 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 import appCss from "../styles.css?url";
 
+const QUIPS = [
+  "This trail's gone colder than a well-digger's belt buckle.",
+  "Whatever you were huntin' done lit out for the territories.",
+  "Ain't nothin' out here but tumbleweeds and bad decisions.",
+  "Y'all took a wrong turn at Albuquerque, partner.",
+  "This page got deported back to the Union.",
+  "Reckon this URL seceded without tellin' nobody.",
+];
+
 function NotFoundComponent() {
-  const quips = [
-    "This trail's gone colder than a well-digger's belt buckle.",
-    "Whatever you were huntin' done lit out for the territories.",
-    "Ain't nothin' out here but tumbleweeds and bad decisions.",
-    "Y'all took a wrong turn at Albuquerque, partner.",
-    "This page got deported back to the Union.",
-    "Reckon this URL seceded without tellin' nobody.",
-  ];
-  const quip = quips[Math.floor(Math.random() * quips.length)];
+  const [quip, setQuip] = useState(QUIPS[0]);
+  useEffect(() => {
+    setQuip(QUIPS[Math.floor(Math.random() * QUIPS.length)]);
+  }, []);
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-16">
