@@ -93,7 +93,7 @@ const LOGOS: Logo[] = [
   {
     name: "Wide lockup",
     note: "Horizontal variant for headers, banners, and email signatures.",
-    preview: "/brand/texit_logo_wide_preview.svg",
+    preview: "/brand/texit_logo_wide_preview.png",
     alt: "TEXIT Coin wide horizontal logo",
     bg: "bg-white",
     files: [
