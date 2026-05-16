@@ -27,11 +27,11 @@ type Video = { cid: string; title: string };
 
 const VIDEOS: Video[] = [
   { cid: "bafybeiah3xi6ulcsi7bvn4w64cmhq7qqrdn67kcvxwu3mnkljlwq6pelnq", title: "Bobby Gray — Congressional Testimony on Parallel Currencies (2012)" },
-  { cid: "bafybeie2pykofxtopbc4pzz7nqohxrvld5spcgt3ltsar63zd6ves5b3dy", title: "TEXITcoin Video" },
-  { cid: "bafybeihm7mskcn5nqueme7hygp5evo6srag2myaqybtdyw3k6nmn2uu3ri", title: "TEXITcoin Video" },
-  { cid: "bafybeibb64evx4gtecpneitfslgkx4rxd6bb7kkenr75727hs5gnu5xsku", title: "TEXITcoin Video" },
-  { cid: "QmZj4NwHbmFrbvW9UfC3FmhtEWzaxA2TjGPbqKZVxi6c3N", title: "TEXITcoin Video" },
-  { cid: "bafybeiclv5ul635rkwiuicrz6s4maaoyogfyzcf4jlmgh76q6gypkz3sim", title: "TEXITcoin Video" },
+  { cid: "bafybeie2pykofxtopbc4pzz7nqohxrvld5spcgt3ltsar63zd6ves5b3dy", title: "Discover TEXITcoin in 6 Minutes" },
+  { cid: "bafybeihm7mskcn5nqueme7hygp5evo6srag2myaqybtdyw3k6nmn2uu3ri", title: "TEXITcoin Quick Summary" },
+  { cid: "bafybeibb64evx4gtecpneitfslgkx4rxd6bb7kkenr75727hs5gnu5xsku", title: "Discover TEXITcoin in 2 Minutes" },
+  { cid: "QmZj4NwHbmFrbvW9UfC3FmhtEWzaxA2TjGPbqKZVxi6c3N", title: "Bobby's Disclaimer — Post-TSSB Action" },
+  { cid: "bafybeiclv5ul635rkwiuicrz6s4maaoyogfyzcf4jlmgh76q6gypkz3sim", title: "Bobby Gray Keynote — Ron Paul's 90th Birthday BBQ" },
 ];
 
 function VideosPage() {
