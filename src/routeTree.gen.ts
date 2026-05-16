@@ -32,6 +32,8 @@ import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as BuyRouteImport } from './routes/buy'
 import { Route as BuildRouteImport } from './routes/build'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as TheCaseForTEXITcoinDothtmlRouteImport } from './routes/The-Case-for-TEXITcoin[.]html'
+import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
@@ -150,6 +152,18 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TheCaseForTEXITcoinDothtmlRoute =
+  TheCaseForTEXITcoinDothtmlRouteImport.update({
+    id: '/The-Case-for-TEXITcoin.html',
+    path: '/The-Case-for-TEXITcoin.html',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DiscoverTEXITcoinDothtmlRoute =
+  DiscoverTEXITcoinDothtmlRouteImport.update({
+    id: '/Discover-TEXITcoin.html',
+    path: '/Discover-TEXITcoin.html',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -163,6 +177,8 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
+  '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
@@ -190,6 +206,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
+  '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
@@ -218,6 +236,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
+  '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
@@ -247,6 +267,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/Discover-TEXITcoin.html'
+    | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
     | '/buy'
@@ -274,6 +296,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/Discover-TEXITcoin.html'
+    | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
     | '/buy'
@@ -301,6 +325,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/Discover-TEXITcoin.html'
+    | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
     | '/buy'
@@ -329,6 +355,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DiscoverTEXITcoinDothtmlRoute: typeof DiscoverTEXITcoinDothtmlRoute
+  TheCaseForTEXITcoinDothtmlRoute: typeof TheCaseForTEXITcoinDothtmlRoute
   BlogRoute: typeof BlogRoute
   BuildRoute: typeof BuildRoute
   BuyRoute: typeof BuyRoute
@@ -518,6 +546,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/The-Case-for-TEXITcoin.html': {
+      id: '/The-Case-for-TEXITcoin.html'
+      path: '/The-Case-for-TEXITcoin.html'
+      fullPath: '/The-Case-for-TEXITcoin.html'
+      preLoaderRoute: typeof TheCaseForTEXITcoinDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Discover-TEXITcoin.html': {
+      id: '/Discover-TEXITcoin.html'
+      path: '/Discover-TEXITcoin.html'
+      fullPath: '/Discover-TEXITcoin.html'
+      preLoaderRoute: typeof DiscoverTEXITcoinDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -537,6 +579,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DiscoverTEXITcoinDothtmlRoute: DiscoverTEXITcoinDothtmlRoute,
+  TheCaseForTEXITcoinDothtmlRoute: TheCaseForTEXITcoinDothtmlRoute,
   BlogRoute: BlogRoute,
   BuildRoute: BuildRoute,
   BuyRoute: BuyRoute,
@@ -565,3 +609,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
