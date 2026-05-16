@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, Star } from "lucide-react";
 
 export function CTA() {
@@ -21,15 +22,13 @@ export function CTA() {
               </p>
             </div>
             <div className="flex flex-col gap-3">
-              <a
-                href="https://swap.texitcoin.org/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/buy"
                 className="group inline-flex items-center justify-between rounded-md bg-red-gradient px-6 py-4 text-sm font-semibold uppercase tracking-wider text-primary-foreground shadow-glow hover:brightness-110 transition"
               >
                 Get TXC now
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-              </a>
+              </Link>
               <a
                 href="#ecosystem"
                 className="group inline-flex items-center justify-between rounded-md border border-accent/60 px-6 py-4 text-sm font-semibold uppercase tracking-wider hover:bg-accent/10 transition"

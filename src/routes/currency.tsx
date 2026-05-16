@@ -94,14 +94,12 @@ function CurrencyPage() {
               people, by people.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="https://swap.texitcoin.org/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/buy"
                 className="inline-flex items-center gap-2 rounded-md bg-red-gradient px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
               >
                 Get TXC <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
               <a
                 href="https://wallet.texitcoin.org/"
                 target="_blank"
@@ -317,14 +315,12 @@ function CurrencyPage() {
             currency. Join the movement to make crypto spendable again.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://swap.texitcoin.org/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/buy"
               className="inline-flex items-center gap-2 rounded-md bg-red-gradient px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
             >
               Get TXC <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
             <Link
               to="/proof-of-work"
               className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:border-primary/60 transition"
