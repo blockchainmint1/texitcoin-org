@@ -13,7 +13,7 @@ import {
   Trophy,
   Building2,
   Users,
-  Instagram,
+  AtSign,
   Globe,
   ArrowRight,
 } from "lucide-react";
@@ -419,9 +419,8 @@ function TexasPage() {
                 <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{v.blurb}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {v.links.map((l) => {
-                    const isIG = l.label.includes("@") && l.label.toLowerCase().includes("ig");
-                    const isInsta = l.href.includes("instagram.com");
-                    const Icon = isInsta || isIG ? Instagram : Globe;
+                    const isHandle = l.label.startsWith("@");
+                    const Icon = isHandle ? AtSign : Globe;
                     return (
                       <a
                         key={l.href}
