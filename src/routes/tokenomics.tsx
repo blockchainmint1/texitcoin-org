@@ -19,18 +19,19 @@ export const Route = createFileRoute("/tokenomics")({
 });
 
 const STATS = [
-  { label: "Max supply", value: "21,000,000", suffix: "TXC", note: "Hard-capped. Forever." },
-  { label: "Consensus", value: "PoW", suffix: "SHA-256", note: "Merge-mined with Bitcoin" },
-  { label: "Block time", value: "~10", suffix: "minutes", note: "Same heartbeat as BTC" },
+  { label: "Max supply", value: "353,396,296", suffix: "TXC", note: "Hard-capped. Forever." },
+  { label: "Consensus", value: "PoW", suffix: "Scrypt", note: "Merge-mined with Litecoin & Dogecoin" },
+  { label: "Block time", value: "~3", suffix: "minutes", note: "Built for everyday payments" },
   { label: "Premine", value: "0", suffix: "TXC", note: "No insider allocation" },
 ];
 
 const PRINCIPLES = [
-  { icon: Lock, title: "Fixed supply", body: "21 million TXC. No governance vote can inflate it. No foundation treasury can dilute you." },
-  { icon: Pickaxe, title: "Earn it or buy it", body: "Every TXC enters circulation through Proof-of-Work mining. No airdrops to VCs, no team unlock cliffs." },
-  { icon: TrendingDown, title: "Halving schedule", body: "Block reward halves on a predictable schedule, asymptotically approaching the 21M cap — disinflation by design." },
+  { icon: Lock, title: "Fixed supply", body: "353,396,296 TXC. No governance vote can inflate it. No foundation treasury can dilute you." },
+  { icon: Pickaxe, title: "Earn it or buy it", body: "Every TXC enters circulation through Scrypt Proof-of-Work mining. No airdrops to VCs, no team unlock cliffs." },
+  { icon: TrendingDown, title: "Halving schedule", body: "Block reward starts at 254 TXC and halves every 695,662 blocks — a century-long emission curve, ~138 years to the final block." },
   { icon: Coins, title: "Sound-money math", body: "Scarcity + decentralized issuance + immutable rules. The properties that made gold money, in digital form." },
 ];
+
 
 function TokenomicsPage() {
   return (
