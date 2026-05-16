@@ -80,7 +80,7 @@ function WtxcPage() {
                 <Sparkles className="h-3 w-3 text-primary" /> Wrapped TEXITcoin
               </div>
               <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-7xl">
-                TXC on <span className="text-primary">Ethereum</span>
+                TXC on <span className="text-primary">Ethereum</span> <span className="text-muted-foreground">(wTXC)</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground md:text-xl">
                 wTXC is wrapped TEXITcoin — a 1:1 backed ERC-20 representation of native TXC. Same coin, new rails.
