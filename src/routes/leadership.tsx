@@ -273,6 +273,72 @@ function LeadershipPage() {
         </div>
       </section>
 
+      {/* Champions of Honest Money — Manifesto */}
+      <section className="relative border-t border-border py-28">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+            Our Ethos — Since 2008
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-6xl text-balance">
+            Champions of <span className="text-primary">honest money</span>
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
+            For nearly two decades, our team has fought for the return to honest money.
+            We started in 2008 with gold, silver, and copper — money that worked as a
+            unit of account, a store of value, and a medium of exchange for thousands
+            of years. The metal was just the weapon. The mission was always the same:
+            put the people back in charge of their own money.
+          </p>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-border bg-card p-6">
+              <Coins className="h-6 w-6 text-primary" />
+              <h3 className="mt-4 font-display text-xl font-bold">Against the Cantillionaires</h3>
+              <p className="mt-3 text-sm text-muted-foreground">
+                The people who print the money — and the friends who get it first — have
+                rigged the game for a century. Honest money breaks that game. Trade and
+                the equal exchange of value is how free people deal with one another.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-card p-6">
+              <Bitcoin className="h-6 w-6 text-primary" />
+              <h3 className="mt-4 font-display text-xl font-bold">Crypto lost its way</h3>
+              <p className="mt-3 text-sm text-muted-foreground">
+                Bitcoin proved decentralized, people-driven money is possible. Then crypto
+                turned into a digital casino for the wealthy to day-trade and manipulate.
+                The industry needs leadership to bring it back to its original purpose.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-card p-6">
+              <Flag className="h-6 w-6 text-primary" />
+              <h3 className="mt-4 font-display text-xl font-bold">Built by Texans, for everyone</h3>
+              <p className="mt-3 text-sm text-muted-foreground">
+                TEXITcoin is a digital currency rocket ship — built in Texas, on principles
+                of transparency, security, and community. For Texans, and for anyone around
+                the world who wants to trade with us on honest terms.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 rounded-2xl border-l-4 border-primary bg-card/60 p-8">
+            <p className="font-display text-2xl leading-snug text-foreground md:text-3xl">
+              "Real money should be for the people, by the people. An honest currency
+              is the cornerstone of a civil society."
+            </p>
+            <p className="mt-4 text-sm uppercase tracking-[0.22em] text-muted-foreground">
+              — The TEXITcoin Mission
+            </p>
+          </div>
+
+          <p className="mt-10 max-w-3xl text-muted-foreground">
+            Gold and silver will always be a store of value. But a quality cryptocurrency
+            is honest money that operates at the velocity required by the digital economy.
+            That's the bet we made in 2008, and that's the bet we're still making today —
+            only now the tools have finally caught up to the conviction.
+          </p>
+        </div>
+      </section>
+
       {/* Welcome Letter from Bobby */}
       <section className="relative py-28 border-t border-border bg-card/40">
         <div className="mx-auto max-w-4xl px-6">
