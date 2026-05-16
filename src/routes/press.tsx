@@ -143,22 +143,39 @@ function PressPage() {
                   </a>
                 </div>
               </div>
-              {["Wordmark (SVG)", "Full brand pack (ZIP)"].map((label) => (
-                <div key={label} className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
-                  <div className="flex h-32 w-full items-center justify-center rounded-lg bg-card text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    Preview pending
-                  </div>
-                  <div className="flex w-full items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <FileText className="h-4 w-4 text-primary" />
-                      <span className="text-sm font-semibold">{label}</span>
-                    </div>
-                    <span className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                      <Download className="h-3.5 w-3.5" /> Soon
-                    </span>
-                  </div>
+              <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
+                <div className="flex h-32 w-full items-center justify-center rounded-lg bg-card text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  Preview pending
                 </div>
-              ))}
+                <div className="flex w-full items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-semibold">Wordmark (SVG)</span>
+                  </div>
+                  <span className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    <Download className="h-3.5 w-3.5" /> Soon
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
+                <div className="flex h-32 w-full flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-card text-center">
+                  <FileText className="h-10 w-10 text-primary" />
+                  <div className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">Brand Identity Guidelines</div>
+                </div>
+                <div className="flex w-full items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-semibold">Brand guidelines (PDF)</span>
+                  </div>
+                  <a
+                    href="/TEXIT_Brand_Identity_Guidelines.pdf"
+                    download
+                    className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-primary hover:opacity-80"
+                  >
+                    <Download className="h-3.5 w-3.5" /> Download
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
