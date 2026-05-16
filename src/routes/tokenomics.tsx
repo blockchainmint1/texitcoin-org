@@ -49,7 +49,7 @@ function TokenomicsPage() {
                 TXC <span className="text-primary">tokenomics</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-                No premine. No VC allocation. No foundation tax. Just 21 million coins, earned one block at a time.
+                No premine. No VC allocation. No foundation tax. Just 353,396,296 coins, earned one block at a time.
               </p>
             </motion.div>
           </div>
