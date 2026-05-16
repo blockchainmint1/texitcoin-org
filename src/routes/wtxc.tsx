@@ -209,6 +209,25 @@ function WtxcPage() {
                 </div>
 
                 <div className="rounded-2xl border border-border bg-card p-6">
+                  <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">TXC Custody</div>
+                  <div className="mt-2 font-display text-lg font-bold">1:1 Backing Wallet</div>
+                  <div className="mt-1 text-sm text-muted-foreground">
+                    Native TXC held in reserve on the TEXITcoin Layer 1 — every wTXC on Ethereum is backed by TXC in this wallet.
+                  </div>
+                  <code className="mt-3 block break-all rounded-md border border-border bg-background p-2 text-xs">
+                    TrpW3sC2HB4snoyfhyKaLVPv8DZctTXwsQ
+                  </code>
+                  <a
+                    href="https://explorer.texitcoin.org/address/TrpW3sC2HB4snoyfhyKaLVPv8DZctTXwsQ"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-primary hover:underline"
+                  >
+                    View on TEXITcoin Explorer <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+
+                <div className="rounded-2xl border border-border bg-card p-6">
                   <p className="text-sm text-muted-foreground">
                     Prefer to swap in your own wallet? Open Uniswap directly and import the contract above.
                   </p>
