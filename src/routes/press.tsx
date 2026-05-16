@@ -22,7 +22,7 @@ const FACTS = [
   { label: "Ticker", value: "TXC" },
   { label: "Network", value: "Layer 1, Scrypt PoW" },
   { label: "Max supply", value: "353,396,296" },
-  { label: "Exchange debut", value: "Bitmart, 12/31/24" },
+  { label: "Exchange debut", value: "Dex-Trade, 6/11/24" },
   { label: "Launch price", value: "$0.028" },
   { label: "Headquarters", value: "Texas, USA" },
 ];
