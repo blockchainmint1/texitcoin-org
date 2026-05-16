@@ -84,14 +84,12 @@ function ValuePage() {
               participation matters more than anything.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="https://swap.texitcoin.org/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/buy"
                 className="inline-flex items-center gap-2 rounded-md bg-red-gradient px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
               >
                 Join the Circle <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
               <Link
                 to="/currency"
                 className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:border-primary/60 transition"
@@ -296,14 +294,12 @@ function ValuePage() {
             TXC, from communities choosing honest money over broken systems.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://swap.texitcoin.org/"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/buy"
               className="inline-flex items-center gap-2 rounded-md bg-red-gradient px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
             >
               Get TXC <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
             <Link
               to="/proof-of-work"
               className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:border-primary/60 transition"

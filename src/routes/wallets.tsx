@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   Globe,
@@ -108,14 +108,12 @@ function WalletsPage() {
                     >
                       Open Web Wallet <ArrowUpRight className="h-4 w-4" />
                     </a>
-                    <a
-                      href="https://swap.texitcoin.org/"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to="/buy"
                       className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:border-primary transition"
                     >
                       Get TXC first <ArrowUpRight className="h-4 w-4" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
