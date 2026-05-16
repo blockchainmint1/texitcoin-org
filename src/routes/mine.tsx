@@ -151,6 +151,73 @@ function MinePage() {
           </div>
         </section>
 
+        {/* THE VISION — 35/35 */}
+        <section className="relative overflow-hidden border-y border-border">
+          <div
+            className="absolute inset-0 -z-10 opacity-40"
+            style={{ background: "var(--gradient-hero)" }}
+            aria-hidden
+          />
+          <div className="mx-auto max-w-7xl px-6 py-20">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                <Zap className="h-3 w-3 text-primary" />
+                The Vision
+              </div>
+              <h2 className="mt-4 font-display text-4xl font-bold md:text-6xl text-balance">
+                35 sites. <span className="text-primary">35 megawatts.</span>
+              </h2>
+              <p className="mt-5 text-lg text-muted-foreground">
+                We're building a mine so big the world can't ignore it — and so
+                distributed it can't be captured. Thirty-five Texas sites,
+                roughly a megawatt each, spread across the state. That's the
+                target.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <div className="rounded-2xl border border-border bg-card p-6">
+                <div className="font-display text-5xl font-bold text-primary">35</div>
+                <div className="mt-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  Sites across Texas
+                </div>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Geographic decentralization. No single grid event, no single
+                  bad actor, no single jurisdiction can take the network down.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border bg-card p-6">
+                <div className="font-display text-5xl font-bold text-primary">35 MW</div>
+                <div className="mt-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  Of honest hashpower
+                </div>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Enough scale to be taken seriously on the global Scrypt
+                  leaderboard — and enough margin to keep merge-mining LTC and
+                  DOGE profitable through any market.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border bg-card p-6">
+                <div className="font-display text-5xl font-bold text-primary">51%</div>
+                <div className="mt-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  The number we make impossible
+                </div>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  A bigger, more distributed mine is a more trustworthy mine.
+                  51% attacks die at the cost-of-attack equation. We're pricing
+                  them out.
+                </p>
+              </div>
+            </div>
+
+            <p className="mt-10 max-w-3xl text-muted-foreground">
+              Bigger mine = more robust network. More robust network = harder
+              money. Harder money = a currency Texans — and the world — can
+              actually rely on. That's the whole game.
+            </p>
+          </div>
+        </section>
+
         {/* MERGE MINING */}
         <section className="border-y border-border bg-card/40">
           <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
