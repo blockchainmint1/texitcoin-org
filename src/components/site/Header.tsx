@@ -46,11 +46,6 @@ const NAV: NavItem[] = [
       { label: "Dex-Trade", href: "https://dex-trade.com/spot/trading/TXCUSDT", external: true },
       { label: "Pionex.US", href: "https://www.pionex.us/en-US/trade/TXC_USDT", external: true },
       { label: "wTXC on ETH", href: "/wtxc", internal: true },
-      {
-        label: "wTXC on Uniswap",
-        href: "https://app.uniswap.org/explore/tokens/ethereum/0x9FC65df3997073B8551Ffd617154B5102fACbb88",
-        external: true,
-      },
     ],
   },
   {
