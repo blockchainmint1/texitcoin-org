@@ -12,16 +12,21 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as TrollsRouteImport } from './routes/trolls'
+import { Route as TokenomicsRouteImport } from './routes/tokenomics'
 import { Route as TexasRouteImport } from './routes/texas'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PressRouteImport } from './routes/press'
+import { Route as MerchRouteImport } from './routes/merch'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as InTheNewsRouteImport } from './routes/in-the-news'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DisclosuresRouteImport } from './routes/disclosures'
 import { Route as CurrencyRouteImport } from './routes/currency'
+import { Route as BuyRouteImport } from './routes/buy'
 import { Route as BuildRouteImport } from './routes/build'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
@@ -40,6 +45,11 @@ const ValueRoute = ValueRouteImport.update({
 const TrollsRoute = TrollsRouteImport.update({
   id: '/trolls',
   path: '/trolls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TokenomicsRoute = TokenomicsRouteImport.update({
+  id: '/tokenomics',
+  path: '/tokenomics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TexasRoute = TexasRouteImport.update({
@@ -67,6 +77,16 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MerchRoute = MerchRouteImport.update({
+  id: '/merch',
+  path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LegalRoute = LegalRouteImport.update({
   id: '/legal',
   path: '/legal',
@@ -82,6 +102,11 @@ const InTheNewsRoute = InTheNewsRouteImport.update({
   path: '/in-the-news',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DisclosuresRoute = DisclosuresRouteImport.update({
   id: '/disclosures',
   path: '/disclosures',
@@ -90,6 +115,11 @@ const DisclosuresRoute = DisclosuresRouteImport.update({
 const CurrencyRoute = CurrencyRouteImport.update({
   id: '/currency',
   path: '/currency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuyRoute = BuyRouteImport.update({
+  id: '/buy',
+  path: '/buy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuildRoute = BuildRouteImport.update({
@@ -117,16 +147,21 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
+  '/buy': typeof BuyRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
+  '/faq': typeof FaqRoute
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/merch': typeof MerchRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
+  '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
@@ -136,16 +171,21 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
+  '/buy': typeof BuyRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
+  '/faq': typeof FaqRoute
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/merch': typeof MerchRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
+  '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
@@ -156,16 +196,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
+  '/buy': typeof BuyRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
+  '/faq': typeof FaqRoute
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/merch': typeof MerchRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
+  '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
@@ -177,16 +222,21 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/build'
+    | '/buy'
     | '/currency'
     | '/disclosures'
+    | '/faq'
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/merch'
+    | '/press'
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
     | '/terms'
     | '/texas'
+    | '/tokenomics'
     | '/trolls'
     | '/value'
     | '/wallets'
@@ -196,16 +246,21 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/build'
+    | '/buy'
     | '/currency'
     | '/disclosures'
+    | '/faq'
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/merch'
+    | '/press'
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
     | '/terms'
     | '/texas'
+    | '/tokenomics'
     | '/trolls'
     | '/value'
     | '/wallets'
@@ -215,16 +270,21 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/build'
+    | '/buy'
     | '/currency'
     | '/disclosures'
+    | '/faq'
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/merch'
+    | '/press'
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
     | '/terms'
     | '/texas'
+    | '/tokenomics'
     | '/trolls'
     | '/value'
     | '/wallets'
@@ -235,16 +295,21 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
   BuildRoute: typeof BuildRoute
+  BuyRoute: typeof BuyRoute
   CurrencyRoute: typeof CurrencyRoute
   DisclosuresRoute: typeof DisclosuresRoute
+  FaqRoute: typeof FaqRoute
   InTheNewsRoute: typeof InTheNewsRoute
   LeadershipRoute: typeof LeadershipRoute
   LegalRoute: typeof LegalRoute
+  MerchRoute: typeof MerchRoute
+  PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   RoadmapRoute: typeof RoadmapRoute
   TermsRoute: typeof TermsRoute
   TexasRoute: typeof TexasRoute
+  TokenomicsRoute: typeof TokenomicsRoute
   TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
   WalletsRoute: typeof WalletsRoute
@@ -272,6 +337,13 @@ declare module '@tanstack/react-router' {
       path: '/trolls'
       fullPath: '/trolls'
       preLoaderRoute: typeof TrollsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tokenomics': {
+      id: '/tokenomics'
+      path: '/tokenomics'
+      fullPath: '/tokenomics'
+      preLoaderRoute: typeof TokenomicsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/texas': {
@@ -309,6 +381,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/merch': {
+      id: '/merch'
+      path: '/merch'
+      fullPath: '/merch'
+      preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/legal': {
       id: '/legal'
       path: '/legal'
@@ -330,6 +416,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InTheNewsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/disclosures': {
       id: '/disclosures'
       path: '/disclosures'
@@ -342,6 +435,13 @@ declare module '@tanstack/react-router' {
       path: '/currency'
       fullPath: '/currency'
       preLoaderRoute: typeof CurrencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buy': {
+      id: '/buy'
+      path: '/buy'
+      fullPath: '/buy'
+      preLoaderRoute: typeof BuyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/build': {
@@ -379,16 +479,21 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
   BuildRoute: BuildRoute,
+  BuyRoute: BuyRoute,
   CurrencyRoute: CurrencyRoute,
   DisclosuresRoute: DisclosuresRoute,
+  FaqRoute: FaqRoute,
   InTheNewsRoute: InTheNewsRoute,
   LeadershipRoute: LeadershipRoute,
   LegalRoute: LegalRoute,
+  MerchRoute: MerchRoute,
+  PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
   RoadmapRoute: RoadmapRoute,
   TermsRoute: TermsRoute,
   TexasRoute: TexasRoute,
+  TokenomicsRoute: TokenomicsRoute,
   TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
   WalletsRoute: WalletsRoute,
