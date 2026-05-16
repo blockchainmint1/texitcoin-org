@@ -33,6 +33,7 @@ import { Route as BuyRouteImport } from './routes/buy'
 import { Route as BuildRouteImport } from './routes/build'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as TheCaseForTEXITcoinDothtmlRouteImport } from './routes/The-Case-for-TEXITcoin[.]html'
+import { Route as NewsAndUpdatesDothtmlRouteImport } from './routes/News-and-Updates[.]html'
 import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.]html'
 import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
 import { Route as IndexRouteImport } from './routes/index'
@@ -159,6 +160,11 @@ const TheCaseForTEXITcoinDothtmlRoute =
     path: '/The-Case-for-TEXITcoin.html',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NewsAndUpdatesDothtmlRoute = NewsAndUpdatesDothtmlRouteImport.update({
+  id: '/News-and-Updates.html',
+  path: '/News-and-Updates.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MeetTheTeamDothtmlRoute = MeetTheTeamDothtmlRouteImport.update({
   id: '/Meet-the-Team.html',
   path: '/Meet-the-Team.html',
@@ -185,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
   '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
+  '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
@@ -215,6 +222,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
   '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
+  '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
@@ -246,6 +254,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
   '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
+  '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
@@ -278,6 +287,7 @@ export interface FileRouteTypes {
     | '/'
     | '/Discover-TEXITcoin.html'
     | '/Meet-the-Team.html'
+    | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
@@ -308,6 +318,7 @@ export interface FileRouteTypes {
     | '/'
     | '/Discover-TEXITcoin.html'
     | '/Meet-the-Team.html'
+    | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
@@ -338,6 +349,7 @@ export interface FileRouteTypes {
     | '/'
     | '/Discover-TEXITcoin.html'
     | '/Meet-the-Team.html'
+    | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
     | '/build'
@@ -369,6 +381,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiscoverTEXITcoinDothtmlRoute: typeof DiscoverTEXITcoinDothtmlRoute
   MeetTheTeamDothtmlRoute: typeof MeetTheTeamDothtmlRoute
+  NewsAndUpdatesDothtmlRoute: typeof NewsAndUpdatesDothtmlRoute
   TheCaseForTEXITcoinDothtmlRoute: typeof TheCaseForTEXITcoinDothtmlRoute
   BlogRoute: typeof BlogRoute
   BuildRoute: typeof BuildRoute
@@ -566,6 +579,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheCaseForTEXITcoinDothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/News-and-Updates.html': {
+      id: '/News-and-Updates.html'
+      path: '/News-and-Updates.html'
+      fullPath: '/News-and-Updates.html'
+      preLoaderRoute: typeof NewsAndUpdatesDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/Meet-the-Team.html': {
       id: '/Meet-the-Team.html'
       path: '/Meet-the-Team.html'
@@ -601,6 +621,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiscoverTEXITcoinDothtmlRoute: DiscoverTEXITcoinDothtmlRoute,
   MeetTheTeamDothtmlRoute: MeetTheTeamDothtmlRoute,
+  NewsAndUpdatesDothtmlRoute: NewsAndUpdatesDothtmlRoute,
   TheCaseForTEXITcoinDothtmlRoute: TheCaseForTEXITcoinDothtmlRoute,
   BlogRoute: BlogRoute,
   BuildRoute: BuildRoute,
