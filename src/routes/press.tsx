@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Download, Mail, Sparkles, ArrowRight, FileText } from "lucide-react";
+import { Download, Mail, Sparkles, ArrowRight, FileText, Type } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import coinMark from "@/assets/mineTXC_icon.png";
 
 export const Route = createFileRoute("/press")({
   head: () => ({
@@ -28,10 +29,9 @@ const FACTS = [
 ];
 
 const COLORS = [
-  { name: "Texas Red", hex: "#bf0a30" },
-  { name: "Lone Star Navy", hex: "#0a2a66" },
-  { name: "Capitol Gold", hex: "#f5b700" },
-  { name: "Bone White", hex: "#f5f3ee" },
+  { name: "TEXIT Red", hex: "#be1f24", cmyk: "15, 100, 100, 10" },
+  { name: "TEXIT Blue", hex: "#262262", cmyk: "100, 100, 25, 25" },
+  { name: "TEXIT Black", hex: "#130c0e", cmyk: "20, 20, 20, 100" },
 ];
 
 function PressPage() {
