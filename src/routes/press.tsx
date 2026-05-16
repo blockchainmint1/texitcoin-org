@@ -1,8 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Download, Mail, Sparkles, ArrowRight, FileText, Type } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { getIpfsUrl } from "@/lib/ipfs.functions";
+
+const BRAND_GUIDELINES_CID = "bafybeicdu53kgb7r32vzn3xnkz5i5kyfgy4k5ny5peifnbmua4mug6gwsu";
 
 export const Route = createFileRoute("/press")({
   head: () => ({
@@ -103,6 +108,14 @@ const LOGOS: Logo[] = [
 ];
 
 function PressPage() {
+  const fetchIpfsUrl = useServerFn(getIpfsUrl);
+  const { data: brandGuidelines } = useQuery({
+    queryKey: ["ipfs-url", BRAND_GUIDELINES_CID],
+    queryFn: () => fetchIpfsUrl({ data: { cid: BRAND_GUIDELINES_CID } }),
+    staleTime: 1000 * 60 * 60,
+  });
+  const brandGuidelinesUrl = brandGuidelines?.url;
+
   return (
     <>
       <Header />
@@ -237,11 +250,14 @@ function PressPage() {
                 </div>
               </div>
               <a
-                href="/TEXIT_Brand_Identity_Guidelines.pdf"
-                download
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
+                href={brandGuidelinesUrl ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!brandGuidelinesUrl}
+                onClick={(e) => { if (!brandGuidelinesUrl) e.preventDefault(); }}
+                className={`inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 ${!brandGuidelinesUrl ? "pointer-events-none opacity-60" : ""}`}
               >
-                <Download className="h-4 w-4" /> Download guidelines
+                <Download className="h-4 w-4" /> {brandGuidelinesUrl ? "Download guidelines" : "Loading…"}
               </a>
             </div>
           </div>
