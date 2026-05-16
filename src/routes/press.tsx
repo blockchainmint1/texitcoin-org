@@ -169,7 +169,7 @@ function PressPage() {
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">For interviews, quotes, or asset requests, reach the team directly.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <a href="mailto:press@texitcoin.org" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">
-                <Mail className="h-4 w-4" /> press@texitcoin.org
+                <Mail className="h-4 w-4" /> <span>press@texitcoin.org</span>
               </a>
               <Link to="/leadership" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-accent">
                 Meet leadership <ArrowRight className="h-4 w-4" />
