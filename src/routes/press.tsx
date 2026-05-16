@@ -126,56 +126,55 @@ function PressPage() {
 
         <section className="border-b border-border">
           <div className="mx-auto max-w-7xl px-6 py-16">
-            <h2 className="font-display text-3xl font-bold">Assets</h2>
-            <p className="mt-2 text-muted-foreground">Logos, lockups, and high-res imagery for editorial use.</p>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
-                <div className="flex h-32 w-full items-center justify-center rounded-lg bg-card">
-                  <img src={coinMark} alt="TEXITcoin coin mark" className="h-20 w-20" />
-                </div>
-                <div className="flex w-full items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-semibold">Coin mark (PNG)</span>
-                  </div>
-                  <a href={coinMark} download className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-primary hover:opacity-80">
-                    <Download className="h-3.5 w-3.5" /> Download
-                  </a>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
-                <div className="flex h-32 w-full items-center justify-center rounded-lg bg-card text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Preview pending
-                </div>
-                <div className="flex w-full items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-semibold">Wordmark (SVG)</span>
-                  </div>
-                  <span className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    <Download className="h-3.5 w-3.5" /> Soon
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-col items-center justify-between gap-4 rounded-xl border border-border bg-background p-6">
-                <div className="flex h-32 w-full flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-card text-center">
-                  <FileText className="h-10 w-10 text-primary" />
-                  <div className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">Brand Identity Guidelines</div>
-                </div>
-                <div className="flex w-full items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-semibold">Brand guidelines (PDF)</span>
-                  </div>
-                  <a
-                    href="/TEXIT_Brand_Identity_Guidelines.pdf"
-                    download
-                    className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-primary hover:opacity-80"
+            <h2 className="font-display text-3xl font-bold">Logos &amp; assets</h2>
+            <p className="mt-2 text-muted-foreground">Official TEXIT Coin marks for editorial, partner, and broadcast use. Click to preview or download.</p>
+
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {LOGOS.map((logo) => (
+                <div key={logo.name} className="flex flex-col overflow-hidden rounded-xl border border-border bg-background">
+                  <div
+                    className={`flex h-44 w-full items-center justify-center p-6 ${logo.bg}`}
+                    style={logo.bgStyle}
                   >
-                    <Download className="h-3.5 w-3.5" /> Download
-                  </a>
+                    <img src={logo.preview} alt={logo.alt} className={`max-h-full max-w-full object-contain ${logo.imgClass ?? ""}`} />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-3 border-t border-border p-5">
+                    <div>
+                      <div className="font-semibold">{logo.name}</div>
+                      <div className="text-xs text-muted-foreground">{logo.note}</div>
+                    </div>
+                    <div className="mt-auto flex flex-wrap gap-2">
+                      {logo.files.map((f) => (
+                        <a
+                          key={f.href}
+                          href={f.href}
+                          download
+                          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-foreground hover:bg-accent"
+                        >
+                          <Download className="h-3.5 w-3.5" /> {f.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-border bg-card/40 p-6 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-4">
+                <FileText className="h-8 w-8 text-primary" />
+                <div>
+                  <div className="font-semibold">Brand Identity Guidelines</div>
+                  <div className="text-sm text-muted-foreground">Logo usage rules, clearspace, palette, and typography (PDF).</div>
                 </div>
               </div>
+              <a
+                href="/TEXIT_Brand_Identity_Guidelines.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
+              >
+                <Download className="h-4 w-4" /> Download guidelines
+              </a>
             </div>
           </div>
         </section>
