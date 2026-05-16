@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Download, Mail, Sparkles, ArrowRight, FileText, Type } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import coinMark from "@/assets/mineTXC_icon.png";
 
 export const Route = createFileRoute("/press")({
   head: () => ({
@@ -32,6 +31,75 @@ const COLORS = [
   { name: "TEXIT Red", hex: "#be1f24", cmyk: "15, 100, 100, 10" },
   { name: "TEXIT Blue", hex: "#262262", cmyk: "100, 100, 25, 25" },
   { name: "TEXIT Black", hex: "#130c0e", cmyk: "20, 20, 20, 100" },
+];
+
+type LogoFile = { label: string; href: string };
+type Logo = {
+  name: string;
+  note: string;
+  preview: string;
+  alt: string;
+  bg: string;
+  bgStyle?: React.CSSProperties;
+  imgClass?: string;
+  files: LogoFile[];
+};
+
+const LOGOS: Logo[] = [
+  {
+    name: "Primary lockup (color)",
+    note: "Star + TEXIT COIN wordmark — preferred on light backgrounds.",
+    preview: "/brand/texit_logo_color.png",
+    alt: "TEXIT Coin primary color logo",
+    bg: "bg-white",
+    files: [
+      { label: "PNG", href: "/brand/texit_logo_color.png" },
+      { label: "PDF", href: "/brand/texit_logo_color.pdf" },
+    ],
+  },
+  {
+    name: "Primary lockup (large frame)",
+    note: "Higher-resolution variant with extended clearspace.",
+    preview: "/brand/texit_logo_color_large.png",
+    alt: "TEXIT Coin large color logo",
+    bg: "bg-white",
+    files: [
+      { label: "PNG", href: "/brand/texit_logo_color_large.png" },
+      { label: "PDF", href: "/brand/texit_logo_color_large.pdf" },
+    ],
+  },
+  {
+    name: "Black lockup",
+    note: "Single-color black — use on light, high-contrast backgrounds.",
+    preview: "/brand/texit_logo_black.png",
+    alt: "TEXIT Coin black logo",
+    bg: "bg-white",
+    files: [
+      { label: "PNG", href: "/brand/texit_logo_black.png" },
+      { label: "PDF", href: "/brand/texit_logo_black.pdf" },
+    ],
+  },
+  {
+    name: "White lockup",
+    note: "Reverse mark — use on dark, even-toned backgrounds.",
+    preview: "/brand/texit_logo_white.png",
+    alt: "TEXIT Coin white reverse logo",
+    bg: "",
+    bgStyle: { backgroundColor: "#130c0e" },
+    files: [
+      { label: "PNG", href: "/brand/texit_logo_white.png" },
+    ],
+  },
+  {
+    name: "Wide lockup",
+    note: "Horizontal variant for headers, banners, and email signatures.",
+    preview: "/brand/texit_logo_wide_preview.svg",
+    alt: "TEXIT Coin wide horizontal logo",
+    bg: "bg-white",
+    files: [
+      { label: "PDF", href: "/brand/texit_logo_wide.pdf" },
+    ],
+  },
 ];
 
 function PressPage() {
