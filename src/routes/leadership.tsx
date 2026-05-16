@@ -228,6 +228,24 @@ function LeadershipPage() {
                     </h3>
                     <p className="mt-4 max-w-2xl text-muted-foreground">{t.body}</p>
 
+                    {"video" in t && t.video ? (
+                      <div className="relative mt-6 overflow-hidden rounded-xl border border-border bg-black">
+                        <div className="relative aspect-video w-full">
+                          <iframe
+                            src={t.video.src}
+                            title={t.video.title}
+                            loading="lazy"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowFullScreen
+                            className="absolute inset-0 h-full w-full"
+                          />
+                        </div>
+                        <div className="border-t border-border bg-card px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                          {t.video.caption}
+                        </div>
+                      </div>
+                    ) : null}
+
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition" />
                   </div>
                 </motion.li>
