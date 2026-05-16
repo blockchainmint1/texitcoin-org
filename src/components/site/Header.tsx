@@ -13,11 +13,13 @@ const NAV: NavItem[] = [
     label: "Foundation",
     children: [
       { label: "Overview", href: "/#foundation" },
+      { label: "Whitepaper", href: "/whitepaper", internal: true },
       { label: "Discover Texas", href: "/texas", internal: true },
       { label: "Proof of Work", href: "/proof-of-work", internal: true },
       { label: "Digital Currency", href: "/currency", internal: true },
       { label: "Community Value", href: "/value", internal: true },
       { label: "Leadership", href: "/leadership", internal: true },
+      { label: "Team", href: "/team", internal: true },
       { label: "TXC in the News", href: "/in-the-news", internal: true },
       { label: "TSSB Legal Updates", href: "/legal", internal: true },
       { label: "Troll Index", href: "/trolls", internal: true },
