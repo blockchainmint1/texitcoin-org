@@ -23,6 +23,7 @@ import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PressRouteImport } from './routes/press'
+import { Route as MineRouteImport } from './routes/mine'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as LeadershipRouteImport } from './routes/leadership'
@@ -108,6 +109,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PressRoute = PressRouteImport.update({
   id: '/press',
   path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MineRoute = MineRouteImport.update({
+  id: '/mine',
+  path: '/mine',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MerchRoute = MerchRouteImport.update({
@@ -209,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
   '/merch': typeof MerchRoute
+  '/mine': typeof MineRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -241,6 +248,7 @@ export interface FileRoutesByTo {
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
   '/merch': typeof MerchRoute
+  '/mine': typeof MineRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -274,6 +282,7 @@ export interface FileRoutesById {
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
   '/merch': typeof MerchRoute
+  '/mine': typeof MineRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -308,6 +317,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/legal'
     | '/merch'
+    | '/mine'
     | '/press'
     | '/privacy'
     | '/proof-of-work'
@@ -340,6 +350,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/legal'
     | '/merch'
+    | '/mine'
     | '/press'
     | '/privacy'
     | '/proof-of-work'
@@ -372,6 +383,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/legal'
     | '/merch'
+    | '/mine'
     | '/press'
     | '/privacy'
     | '/proof-of-work'
@@ -405,6 +417,7 @@ export interface RootRouteChildren {
   LeadershipRoute: typeof LeadershipRoute
   LegalRoute: typeof LegalRoute
   MerchRoute: typeof MerchRoute
+  MineRoute: typeof MineRoute
   PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
@@ -520,6 +533,13 @@ declare module '@tanstack/react-router' {
       path: '/press'
       fullPath: '/press'
       preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mine': {
+      id: '/mine'
+      path: '/mine'
+      fullPath: '/mine'
+      preLoaderRoute: typeof MineRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/merch': {
@@ -653,6 +673,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeadershipRoute: LeadershipRoute,
   LegalRoute: LegalRoute,
   MerchRoute: MerchRoute,
+  MineRoute: MineRoute,
   PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
