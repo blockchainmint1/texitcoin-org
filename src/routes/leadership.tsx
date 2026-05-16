@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Coins, Landmark, Bitcoin, Lock, Flag } from "lucide-react";
+import { ArrowRight, Coins, Landmark, Bitcoin, Lock, Flag, Quote } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import heroImg from "@/assets/leadership-hero.jpg";
@@ -270,6 +270,151 @@ function LeadershipPage() {
             asking for blind faith — he's asking you to look at the record, hear the
             speeches, and decide if this is the leadership crypto needs to win.
           </p>
+        </div>
+      </section>
+
+      {/* Welcome Letter from Bobby */}
+      <section className="relative py-28 border-t border-border bg-card/40">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            A Letter from the Founder
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+            An intro from <span className="text-primary">Bobby Gray</span>
+          </h2>
+
+          <article className="relative mt-10 overflow-hidden rounded-2xl border border-border bg-background p-8 md:p-12 shadow-card">
+            <Quote className="absolute right-6 top-6 h-16 w-16 text-primary/10" aria-hidden />
+
+            <div className="space-y-5 text-[1.02rem] leading-relaxed text-foreground/90">
+              <p>
+                <span className="font-display text-lg font-semibold">Hi there! I'm Bobby Gray</span> —
+                and I've been manufacturing gold, silver and copper coins for the past sixteen
+                years. In 2012, I had the honor of creating the original Bitcoin coin, which has
+                since become one of the most renowned coins worldwide.
+              </p>
+              <p>
+                In 2017, I created Cold Storage Coins, providing a simple method to own and
+                physically hold Bitcoin and other cryptocurrencies. These coins are available
+                for purchase on Amazon and various online platforms.
+              </p>
+              <p>
+                Even with my vast experience in precious metals and having been acquainted with
+                Bitcoin for over a decade, I've finally come to a firm conviction that
+                cryptocurrency is the future of money. Not just because it's the cheapest,
+                fastest and most honest form of money, but because it has also garnered
+                widespread recognition on the Internet as the currency of tomorrow. Young
+                people today do not care about gold and silver. They care about
+                cryptocurrencies, NFTs, and digital collectibles. If our children are the
+                future, the future is crypto.
+              </p>
+
+              <h3 className="!mt-10 font-display text-2xl font-bold">
+                Am I saying that Bitcoin is the future of money?
+              </h3>
+              <p>
+                Certainly not. Bitcoin, with its sluggish transaction speeds, high fees, and
+                limited supply, is impractical as a mainstream currency.
+              </p>
+              <p>
+                Today, I'm here to introduce you to the future of crypto in America. It's
+                called <span className="font-semibold text-primary">TEXITcoin</span> — faster,
+                cheaper, and superior in every way. There are more than 300 million units left
+                to be mined, ensuring its longevity for generations to come.
+              </p>
+              <p>
+                If you know anything about new cryptocurrencies, they start out cheap. People
+                treat them like lottery tickets. Most of them fail and go back to being
+                worthless. But if we could turn back time to when Bitcoin was merely a dollar
+                per coin — to the year 2012 when I created the original Bitcoin coin — how many
+                would you get? With the vast growth of the crypto industry today, the answer
+                would undoubtedly be as many as possible.
+              </p>
+
+              <h3 className="!mt-10 font-display text-2xl font-bold">
+                But why TEXIT — and what does it mean?
+              </h3>
+              <p>
+                If you haven't heard, the world is in flux: from the Dutch Empire in the
+                1700's, to the British Empire in the 1800's, and onto the American Empire which
+                has been leading the world for the past 100 years. All empires eventually
+                shift, and experts agree we're living through one of those moments now.
+              </p>
+              <p>
+                At face value, that sounds scary. But the end of an empire is not necessarily a
+                bad thing. Think of it like nature's forest fire: while drastic, it paves the
+                way for new growth and opportunity. The way you win during a changing world
+                order is by knowing what to expect, preparing ahead of the herd, and possessing
+                the resources to capitalize on what comes next.
+              </p>
+
+              <blockquote className="!my-8 rounded-xl border-l-4 border-primary bg-primary/5 px-6 py-5">
+                <p className="font-display text-2xl md:text-3xl font-bold leading-snug">
+                  My advice is simple: <span className="text-primary">Get rich now.</span>
+                </p>
+                <p className="mt-2 text-muted-foreground">
+                  The more you have, the more freedom you have to control your future. The best
+                  thing you can do for you and your family is to be flush with cash.
+                </p>
+              </blockquote>
+
+              <p>
+                Texas is fast becoming Ground Zero in the conversation about states' rights.
+                With a red-hot economy, a huge workforce, energy independence, and significant
+                exports, Texas stands ready to seize one of the greatest opportunities of our
+                lifetime. We're in the right place at the right time. I believe that as the era
+                of the American Empire winds down, Texas will not go down with the ship —
+                instead, it will lead, and create a new framework that better reflects our
+                unique values.
+              </p>
+
+              <h3 className="!mt-10 font-display text-2xl font-bold">
+                TEXITcoin is here to help usher in that bright future.
+              </h3>
+              <p>
+                While you're winning, millions of Texans win too. We'll place advertisements,
+                buy billboards, sponsor events, promote candidates, and lead the charge for
+                Texas independence — sooner rather than later. Built for the future and
+                generations of growth, TXC is equipped to do the job the dollar and Bitcoin
+                can't.
+              </p>
+              <p>
+                We're building a network of merchants and businesses across the state who
+                accept TXC for goods and services. We don't know whether TXC will become the
+                future of money in Texas — only the market can decide that. But if we build a
+                good tool that works correctly and is well implemented, I think we have a real
+                chance. Our team is very familiar with building alternative currencies — in
+                fact, I testified about that before the United States Congress back in 2012.
+              </p>
+              <p>
+                Whether you believe it can happen or not, I want you to know today that I will
+                be working towards this future. I believe that less government is better. I
+                believe that local government is better. I believe in life, liberty, and
+                property as fundamental rights that cannot be voted away.
+              </p>
+              <p className="font-display text-xl font-semibold">
+                Join me on the journey of TEXITcoin as we help pave the way for the currency of
+                the new independent republic.
+              </p>
+
+              <div className="!mt-10 flex items-center gap-4 border-t border-border pt-6">
+                <div>
+                  <div className="font-display text-xl font-bold">Bobby Gray</div>
+                  <div className="text-sm text-muted-foreground">Founder, TEXITcoin</div>
+                </div>
+              </div>
+
+              <blockquote className="!mt-10 rounded-xl border border-dashed border-border bg-muted/30 px-6 py-5 text-center">
+                <p className="font-display text-lg md:text-xl italic text-foreground/80">
+                  "A government big enough to give you everything you want, is a government big
+                  enough to take away everything that you have."
+                </p>
+                <div className="mt-2 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                  — Thomas Jefferson
+                </div>
+              </blockquote>
+            </div>
+          </article>
         </div>
       </section>
 
