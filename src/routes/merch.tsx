@@ -33,7 +33,7 @@ function MerchPage() {
       <main className="bg-background">
         <section className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_60%)]" />
-          <div className="container relative mx-auto px-6 pt-28 pb-16">
+          <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 <Sparkles className="h-3 w-3 text-primary" /> Drop list open
@@ -52,7 +52,7 @@ function MerchPage() {
         </section>
 
         <section className="border-b border-border">
-          <div className="container mx-auto px-6 py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <h2 className="font-display text-3xl font-bold md:text-4xl">What's coming</h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">A first taste of the lineup. Final SKUs, fabrics, and prices land with the drop announcement.</p>
             <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -78,7 +78,7 @@ function MerchPage() {
         </section>
 
         <section>
-          <div className="container mx-auto px-6 py-20 text-center">
+          <div className="mx-auto max-w-7xl px-6 py-20 text-center">
             <Star className="mx-auto h-10 w-10 text-primary" />
             <h2 className="mt-4 font-display text-3xl font-bold md:text-5xl">Made in Texas. Worn worldwide.</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">No drop-ship junk. Real fabric, real prints, real Texans behind every stitch.</p>

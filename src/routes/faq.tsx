@@ -88,7 +88,7 @@ function FaqPage() {
       <main className="bg-background">
         <section className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_60%)]" />
-          <div className="container relative mx-auto px-6 pt-28 pb-16">
+          <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 <Sparkles className="h-3 w-3 text-primary" /> Frequently asked
@@ -104,7 +104,7 @@ function FaqPage() {
         </section>
 
         <section className="border-b border-border">
-          <div className="container mx-auto max-w-3xl px-6 py-16">
+          <div className="mx-auto max-w-3xl px-6 py-16">
             <Accordion type="single" collapsible className="space-y-3">
               {FAQS.map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="rounded-2xl border border-border bg-card px-6">
@@ -119,7 +119,7 @@ function FaqPage() {
         </section>
 
         <section>
-          <div className="container mx-auto px-6 py-20 text-center">
+          <div className="mx-auto max-w-7xl px-6 py-20 text-center">
             <h2 className="font-display text-3xl font-bold md:text-5xl">Didn't see your question?</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">Drop into the community or read the deeper docs.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
