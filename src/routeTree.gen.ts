@@ -10,12 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WtxcRouteImport } from './routes/wtxc'
+import { Route as WhitepaperRouteImport } from './routes/whitepaper'
 import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as ValueRouteImport } from './routes/value'
 import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TokenomicsRouteImport } from './routes/tokenomics'
 import { Route as TexasRouteImport } from './routes/texas'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -36,6 +38,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 const WtxcRoute = WtxcRouteImport.update({
   id: '/wtxc',
   path: '/wtxc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhitepaperRoute = WhitepaperRouteImport.update({
+  id: '/whitepaper',
+  path: '/whitepaper',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WalletsRoute = WalletsRouteImport.update({
@@ -66,6 +73,11 @@ const TexasRoute = TexasRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -165,12 +177,14 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
+  '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -190,12 +204,14 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
+  '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
   '/blog/$slug': typeof BlogSlugRoute
 }
@@ -216,12 +232,14 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/value': typeof ValueRoute
   '/wallets': typeof WalletsRoute
+  '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
   '/blog_/$slug': typeof BlogSlugRoute
 }
@@ -243,12 +261,14 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/team'
     | '/terms'
     | '/texas'
     | '/tokenomics'
     | '/trolls'
     | '/value'
     | '/wallets'
+    | '/whitepaper'
     | '/wtxc'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -268,12 +288,14 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/team'
     | '/terms'
     | '/texas'
     | '/tokenomics'
     | '/trolls'
     | '/value'
     | '/wallets'
+    | '/whitepaper'
     | '/wtxc'
     | '/blog/$slug'
   id:
@@ -293,12 +315,14 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/team'
     | '/terms'
     | '/texas'
     | '/tokenomics'
     | '/trolls'
     | '/value'
     | '/wallets'
+    | '/whitepaper'
     | '/wtxc'
     | '/blog_/$slug'
   fileRoutesById: FileRoutesById
@@ -319,12 +343,14 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   RoadmapRoute: typeof RoadmapRoute
+  TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
   TexasRoute: typeof TexasRoute
   TokenomicsRoute: typeof TokenomicsRoute
   TrollsRoute: typeof TrollsRoute
   ValueRoute: typeof ValueRoute
   WalletsRoute: typeof WalletsRoute
+  WhitepaperRoute: typeof WhitepaperRoute
   WtxcRoute: typeof WtxcRoute
   BlogSlugRoute: typeof BlogSlugRoute
 }
@@ -336,6 +362,13 @@ declare module '@tanstack/react-router' {
       path: '/wtxc'
       fullPath: '/wtxc'
       preLoaderRoute: typeof WtxcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/whitepaper': {
+      id: '/whitepaper'
+      path: '/whitepaper'
+      fullPath: '/whitepaper'
+      preLoaderRoute: typeof WhitepaperRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wallets': {
@@ -378,6 +411,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/roadmap': {
@@ -511,15 +551,27 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
   RoadmapRoute: RoadmapRoute,
+  TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
   TexasRoute: TexasRoute,
   TokenomicsRoute: TokenomicsRoute,
   TrollsRoute: TrollsRoute,
   ValueRoute: ValueRoute,
   WalletsRoute: WalletsRoute,
+  WhitepaperRoute: WhitepaperRoute,
   WtxcRoute: WtxcRoute,
   BlogSlugRoute: BlogSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
