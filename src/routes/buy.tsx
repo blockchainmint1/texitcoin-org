@@ -264,7 +264,7 @@ function BuyPage() {
 
         <section className="border-b border-border bg-card/40">
           <div className="container mx-auto px-6 py-20">
-            <h2 className="font-display text-3xl font-bold md:text-4xl">Don't get rugged</h2>
+            <h2 className="font-display text-3xl font-bold md:text-4xl">Don't get rug'd</h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">A few honest rules that will save you from 99% of the heartache in crypto.</p>
             <ul className="mt-8 grid gap-4 md:grid-cols-2">
               {TIPS.map((t) => (
