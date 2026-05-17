@@ -73,17 +73,44 @@ const ICONS = {
   Crown,
 };
 
-// PLACEHOLDER content — replace with real history as it comes in.
+// Real history — add/edit as more milestones are confirmed.
 const MILESTONES: Milestone[] = [
   {
     square: 1,
     title: "Genesis",
-    date: "Day one",
+    date: "Jan 26, 2024",
     price: "$0.00",
     kind: "start",
     icon: "Flag",
     story:
       "The first block. Texas power, Texas land, Texas hands — a network built to benefit individuals, not banks.",
+  },
+  {
+    square: 3,
+    title: "First money in",
+    date: "Apr 4, 2024",
+    kind: "milestone",
+    icon: "Coins",
+    story:
+      "First participants showed up with cash in hand. Bobby's daughter Samantha was first money in: \"A lot of crazy ideas, Dad — this one is by far the craziest.\" The bet was placed.",
+  },
+  {
+    square: 6,
+    title: "Dex-Trade live · network outage",
+    date: "May 15, 2024",
+    kind: "setback",
+    icon: "Zap",
+    story:
+      "TXC went live on Dex-Trade — and within days a security incident hit: miners figured out how to mine outside our pool. The network went offline for three weeks while the team rebuilt the pool defenses.",
+  },
+  {
+    square: 10,
+    title: "Listed on CoinMarketCap",
+    date: "Aug 20, 2024",
+    kind: "win",
+    icon: "Rocket",
+    story:
+      "TEXITcoin debuts on CoinMarketCap — global visibility, price tracking, and a real spot on the world's crypto map.",
   },
   {
     square: 14,
@@ -96,6 +123,42 @@ const MILESTONES: Milestone[] = [
       "TXC went live on Bitmart exchange on New Year's Eve 2024 at $0.10 — our first major centralized exchange listing and a huge step toward global liquidity for Texit Coin holders.",
   },
   {
+    square: 22,
+    title: "App breach — $210,000 lost",
+    date: "Jan 2025",
+    kind: "setback",
+    icon: "Skull",
+    story:
+      "A hacker accessed the app and drained roughly $210,000. The cause: a back-door planted by a developer that listened for private-key scans. The coin worked perfectly — the app and a bad actor failed us. A hard, expensive lesson in trust and operational security.",
+  },
+  {
+    square: 36,
+    title: "Bitmain keynote · Las Vegas",
+    date: "May 2025",
+    kind: "win",
+    icon: "Crown",
+    story:
+      "Bobby Gray took the stage at the Bitmain World Digital Mining Summit in Las Vegas — TEXITcoin shared the room with the world's largest mining operators.",
+  },
+  {
+    square: 52,
+    title: "TSSB Emergency Cease & Desist",
+    date: "Feb 11, 2026",
+    kind: "setback",
+    icon: "Scale",
+    story:
+      "Texas State Securities Board issues Emergency Cease & Desist Order No. ENF-26-CDO-1893 against Robert J. Gray, TEXITcoin, MineTXC, and Blockchain Mint. All sales halted. The fight for federal clarity begins.",
+  },
+  {
+    square: 58,
+    title: "Welcome to TEXITcoin: Season 3",
+    date: "Mar 26, 2026",
+    kind: "milestone",
+    icon: "Hammer",
+    story:
+      "Community reboot. New education platform, renewed focus, and a clear plan to come out of the setback stronger than we went in.",
+  },
+  {
     square: 100,
     title: "Top 100",
     kind: "goal",
@@ -106,9 +169,10 @@ const MILESTONES: Milestone[] = [
 ];
 
 const CONNECTORS: Connector[] = [
-  // examples — fill in as setbacks/wins land
-  // { from: 14, to: 36, type: "ladder", label: "First listing" },
-  // { from: 72, to: 24, type: "chute",  label: "SEC FUD knocked us back" },
+  { from: 10, to: 23, type: "ladder", label: "CoinMarketCap visibility" },
+  { from: 22, to: 8, type: "chute", label: "App breach knocked us back" },
+  { from: 52, to: 31, type: "chute", label: "TSSB C&D halted sales" },
+  { from: 58, to: 71, type: "ladder", label: "Season 3 reboot" },
 ];
 
 /* ---------------- Board geometry ---------------- */
