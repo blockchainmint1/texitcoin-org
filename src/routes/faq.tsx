@@ -41,7 +41,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "Can I mine TXC?",
-        a: "Yes. TXC is merge-mined with Bitcoin, meaning Bitcoin miners can earn TXC at zero additional energy cost. See the Proof of Work page for details.",
+        a: "Mining is permissioned and rooted in Texas, but the bar to participate is intentionally low — a consumer-grade Scrypt rig is enough. Our Texas operations merge-mine TXC alongside Litecoin (LTC) and Dogecoin (DOGE), so the same Scrypt work earns rewards on all three chains. See the Proof of Work page for details.",
       },
       {
         q: "Do I have to live in Texas to use it?",
