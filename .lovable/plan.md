@@ -1,52 +1,35 @@
-# Port useful content from help.minetxc.com
+# Site-wide consistency sweep
 
-Most of help.minetxc.com is operator-facing (Rapid Rewards comp plan, payout dashboard, ASIC setup, Coinbase off-ramps for miners, promos). That all stays on the mining side. Below is the curated set worth bringing over to texitcoin.org, where it goes, and what to leave alone.
+Scanned every route, component, blog post, and the llms.txt against the canonical facts (whitepaper, tokenomics, press kit). Three real contradictions to fix, plus one quick reword.
 
-## What to port, and where
+## Findings & fixes
 
-### 1. Expand /faq with two new categories
-The FAQ today has three thin categories. Add evergreen, holder-friendly content sourced from help.minetxc.com's "Crypto Basics" and "TXC Basics" sections.
+### 1. `src/routes/merch.tsx` — "21M or bust" slogan is Bitcoin's cap, not TXC's
+Line 24 describes the Sound Money Tee as "'21M or bust' on the back." TXC's hard cap is 353,396,296 — 21M is Bitcoin's. Either the slogan is genuinely wrong, or it's a deliberate nod to Bitcoin maximalists. Since this is on a TXC merch page, it reads as a factual contradiction.
 
-**New category: "Crypto Basics"** (4 Q&As, rewritten in our voice)
-- What's the difference between a Layer 1 and a Layer 2 blockchain?
-- What is a blockchain node?
-- What's a crypto wallet, really?
-- What is an exchange and how does it work?
+**Fix:** Change to "'353M or bust'" (matches our cap) — or, if you'd rather keep the BTC nod, change the framing to make the homage explicit ("'21M or bust' on the back — a nod to the OG"). I'll do the first by default; tell me if you want the second.
 
-**New category: "Wallets & Tools"** (3 Q&As)
-- What is the TXC Wallet app?
-- What is the TXC Blockchain Explorer and how do I use it?
-- What is the Cold Storage Coin?
+### 2. `src/routes/faq.tsx` line 26 — implies TXC mines like Bitcoin (SHA-256)
+The "Is TXC a security?" answer ends with: *"It's earned through Proof-of-Work mining, the same way Bitcoin is."* TXC is Scrypt, merge-mined with Litecoin and Dogecoin — not SHA-256 like Bitcoin. The sentence reads as if TXC uses Bitcoin's algorithm.
 
-These are the kind of questions a curious newcomer to TXC asks before they care about mining. They belong on the public site, not behind a miner login.
+**Fix:** Rewrite to: *"It's earned through Scrypt Proof-of-Work mining, the same family of mining used by Litecoin."*
 
-### 2. Strengthen /value with the network-value framing
-Pull the conceptual backbone from "The Path to $16/$80" essays — Gresham's Law, the Liberty Dollar move-up schedule, Metcalfe's Law, the upward-spiral argument, sound-money DNA — without the price targets, market-cap projections, or dated tables. Reframed as "Why TXC accrues value over time" rather than "$80 by February."
+### 3. `src/data/blog-posts.ts` — three posts say "137 years," everywhere else says 138
+The whitepaper, tokenomics page, Specs component, llms-adjacent metadata, and six other blog posts all use **~138 years** for the full emission curve. Three blog excerpts disagree:
+- Line 542: "distributed over 137 years"
+- Line 573: "designed to run for 137 years"
+- Line 590: "released over 137 years"
 
-This avoids the securities-flavored language the FAQ already disclaims, but keeps the strongest intellectual case for the currency.
+**Fix:** Change all three to **138 years** to match the canonical number.
 
-### 3. Add a short "Buying wTXC on Uniswap" walkthrough to /wtxc
-The existing /wtxc page introduces wrapped TXC. The mineTXC help center has a step-by-step Uniswap guide and a TXC↔wTXC conversion guide. Distill into a 4-step section on the existing /wtxc page (no new route).
+## Things I checked and that are NOT contradictions
 
-### 4. Add a Brand Kit link to /press
-help.minetxc.com has a Brand Kit article (logos, color usage). Add a "Brand assets" block on /press linking to it (or mirror the assets locally if you'd rather host them on this domain — flag for follow-up).
+- Bitmart "New Year's Eve 2024" (roadmap) vs "December 31, 2024" (FAQ/press) — same day, different phrasing.
+- Bitmart launch price $0.10 (roadmap) vs Dex-Trade launch price $0.028 (press) — different events on different exchanges, both correct.
+- "Layer 1" vs "Layer-1" hyphenation — cosmetic, not a contradiction.
+- Home-page FAQ component vs `/faq` page — both now consistent (Scrypt, permissioned, 3-min blocks).
+- All Scrypt / Litecoin-fork / merge-mining references across mine, proof-of-work, currency, whitepaper, press, tokenomics — all aligned.
 
-## What to skip
-- Rapid Rewards comp plan (MLM/commission structure — mining-side only)
-- Payout Dashboard, hash power, daily reward calculations
-- ASIC setup guides (ElphaPex, Mini DOGE, pool config)
-- Coinbase/Kraken off-ramp tutorials aimed at miners cashing out
-- Promos (BOGO, Builder Plan, Launchpad Challenge)
-- Video tutorials (all miner-flow)
-- Explicit price targets and dated market-cap projections
-
-## Technical notes
-- All work is in `src/routes/faq.tsx`, `src/routes/value.tsx`, `src/routes/wtxc.tsx`, and `src/routes/press.tsx`. No new routes.
-- FAQ additions extend the existing `CATEGORIES` array and automatically flow into the FAQPage JSON-LD schema and the side-rail nav.
-- All copy rewritten in the existing site voice (plain, declarative, no emojis, no MLM language). No verbatim paste from the help center.
-- No backend, no schema, no new dependencies.
-
-## Out of scope (ask separately if wanted)
-- Mirroring the help center's images/PDFs locally
-- A dedicated /learn or /education hub (the FAQ expansion covers this for now)
-- Pulling the price-target essays as a standalone /thesis page
+## Out of scope
+- Tone or copy improvements unrelated to factual accuracy.
+- Restructuring `blog-posts.ts` (some posts use older numbers in dated commentary; only the three "137 years" lines are flagged).
