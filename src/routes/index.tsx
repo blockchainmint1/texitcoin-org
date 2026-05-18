@@ -10,9 +10,13 @@ import { FAQ } from "@/components/site/FAQ";
 import { CTA } from "@/components/site/CTA";
 import { Footer } from "@/components/site/Footer";
 import { LegalStarburst } from "@/components/site/LegalStarburst";
+import heroImg from "@/assets/hero-texas.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [
+      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" },
+    ],
     meta: [
       { title: "TEXITcoin — Layer 1 digital currency, mined in Texas" },
       {
