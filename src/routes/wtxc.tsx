@@ -183,11 +183,29 @@ function WtxcPage() {
                   <p className="mt-3 text-sm text-muted-foreground">
                     Uniswap doesn't allow its app to be embedded on other sites. Click below to open the wTXC swap pair in a new tab — the output token is pre-loaded from the verified contract on the right.
                   </p>
-                  <ol className="mt-5 space-y-2 text-sm text-muted-foreground">
-                    <li><span className="font-semibold text-foreground">1.</span> Connect a non-custodial wallet (MetaMask, Rabby, Coinbase Wallet).</li>
-                    <li><span className="font-semibold text-foreground">2.</span> Pick your input token (ETH, USDC, USDT…).</li>
-                    <li><span className="font-semibold text-foreground">3.</span> Confirm wTXC matches the contract address shown here.</li>
-                    <li><span className="font-semibold text-foreground">4.</span> Review slippage, then swap.</li>
+                  <ol className="mt-5 space-y-3 text-sm text-muted-foreground">
+                    <li>
+                      <span className="font-semibold text-foreground">1. Connect a non-custodial wallet.</span>{" "}
+                      Open Uniswap and connect MetaMask, Rabby, Coinbase Wallet, or any wallet that holds Ethereum-mainnet assets. Make sure the network selector reads "Ethereum."
+                    </li>
+                    <li>
+                      <span className="font-semibold text-foreground">2. Confirm the wTXC contract.</span>{" "}
+                      Uniswap may flag wTXC as unknown — that's normal. Cross-check the contract address against the one in the side panel before you accept the token. Watch out for copycats using the same ticker.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-foreground">3. Pick your input token.</span>{" "}
+                      ETH, USDC, or USDT all work. Enter the amount you want to swap and Uniswap will quote the wTXC you'll receive plus the price impact.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-foreground">4. Review slippage and swap.</span>{" "}
+                      For thin liquidity, keep slippage tight (0.5–1%) and trade in smaller chunks. Confirm in your wallet and wait for the transaction to settle on Ethereum.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-foreground">5. Want native TXC back?</span>{" "}
+                      Send your wTXC to{" "}
+                      <a href="https://wtxc.texitcoin.org/" target="_blank" rel="noreferrer" className="text-primary hover:underline">wtxc.texitcoin.org</a>
+                      {" "}to unwrap it 1:1 into native TXC on the TEXITcoin Layer 1.
+                    </li>
                   </ol>
                 </div>
                 <a
