@@ -32,6 +32,28 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "TEXITcoin",
+              url: "https://texitcoin.org",
+              logo: "https://texitcoin.org/favicon.ico",
+              sameAs: ["https://twitter.com/texitcoin"],
+            },
+            {
+              "@type": "WebSite",
+              name: "TEXITcoin",
+              url: "https://texitcoin.org",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: Index,
 });

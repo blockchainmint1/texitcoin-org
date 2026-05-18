@@ -11,9 +11,10 @@ export const Route = createFileRoute("/blog_/$slug")({
     if (!post) throw notFound();
     return { post };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     const post = loaderData?.post;
     if (!post) return { meta: [{ title: "Post not found — TEXITcoin" }] };
+    const url = `https://texitcoin.org/blog/${params.slug}`;
     return {
       meta: [
         { title: `${post.title} — TEXITcoin` },
@@ -21,7 +22,23 @@ export const Route = createFileRoute("/blog_/$slug")({
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.excerpt },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
         { property: "article:published_time", content: post.date },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.date,
+            author: { "@type": "Person", name: post.author },
+            url,
+          }),
+        },
       ],
     };
   },
