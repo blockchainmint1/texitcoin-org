@@ -15,11 +15,11 @@ const CATEGORIES: Category[] = [
     items: [
       {
         q: "What is TEXITcoin?",
-        a: "TEXITcoin (ticker: TXC) is a Layer 1 cryptocurrency mined in Texas. It's a fixed-supply, Proof-of-Work coin built on the same SHA-256 algorithm as Bitcoin — designed to be sound, sovereign money for a sovereign Texas (and anyone else who wants honest money).",
+        a: "TEXITcoin (ticker: TXC) is a Layer 1 cryptocurrency mined in Texas. It's a fixed-supply, Scrypt Proof-of-Work coin forked from Litecoin and tuned for everyday use with 3-minute blocks — designed to be sound, sovereign money for a sovereign Texas (and anyone else who wants honest money).",
       },
       {
         q: "What's the max supply?",
-        a: "21,000,000 TXC. Hard-capped, no premine, no team allocation. Every coin enters circulation through mining.",
+        a: "353,396,296 TXC. Hard-capped, no premine, no team allocation, no VC round. Every coin enters circulation through Scrypt Proof-of-Work mining.",
       },
       {
         q: "Is TXC a security?",
@@ -41,7 +41,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "Can I mine TXC?",
-        a: "Yes. TXC is merge-mined with Bitcoin, meaning Bitcoin miners can earn TXC at zero additional energy cost. See the Proof of Work page for details.",
+        a: "Mining is permissioned and rooted in Texas, but the bar to participate is intentionally low — a consumer-grade Scrypt rig is enough. Our Texas operations merge-mine TXC alongside Litecoin (LTC) and Dogecoin (DOGE), so the same Scrypt work earns rewards on all three chains. See the Proof of Work page for details.",
       },
       {
         q: "Do I have to live in Texas to use it?",
