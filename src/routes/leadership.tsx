@@ -12,7 +12,7 @@ export const Route = createFileRoute("/leadership")({
       {
         name: "description",
         content:
-          "TEXITcoin is led by Bobby Gray — nearly two decades of building honest, decentralized money. From the American Open Currency Standard to Congressional testimony to TXC.",
+          "TEXITcoin is led by Bobby Gray — nearly two decades building honest, decentralized money: from the American Open Currency Standard to TXC.",
       },
       { property: "og:title", content: "Leadership — TEXITcoin" },
       {
