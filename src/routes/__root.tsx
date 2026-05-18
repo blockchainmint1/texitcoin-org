@@ -172,6 +172,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "KmLg2IaIjrk1Ay00WgoVhLHWoOm82BhOlVzCebRO6EU" },
       { title: "TEXITcoin: Layer 1 Currency Mined in Texas" },
       { name: "description", content: "TEXITcoin (TXC) is a Layer 1 cryptocurrency mined in Texas — sound money for a sovereign Lone Star State. Live on Bitmart since 2024." },
       { name: "author", content: "TEXITcoin" },
