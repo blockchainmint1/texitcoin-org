@@ -1,0 +1,37 @@
+# TEXITcoin
+
+> TEXITcoin (TXC) is a Layer 1, proof-of-work digital currency mined in Texas — sound money for a sovereign Lone Star State. Live on Bitmart since 2024.
+
+TEXITcoin is a community-driven cryptocurrency built for everyday peer-to-peer use: fast 3-minute blocks, no pre-mine, 353M max supply, and a foundation rooted in honest money and Texas independence.
+
+## Pages
+
+- [Home](/): Overview of TEXITcoin, the network, and how to get involved.
+- [Buy TXC](/buy): How and where to buy TEXITcoin.
+- [Mine](/mine): How to mine TXC and join the network.
+- [Wallets](/wallets): Wallet options for holding TXC.
+- [Tokenomics](/tokenomics): Supply, emission, and economic model.
+- [Currency](/currency): What makes TXC sound money.
+- [Value](/value): The case for TEXITcoin's value.
+- [Proof of Work](/proof-of-work): Consensus and mining mechanics.
+- [Whitepaper](/whitepaper): Technical and economic whitepaper.
+- [Roadmap](/roadmap): Project history and forward plan.
+- [Leadership](/leadership): Bobby Gray and the founding story.
+- [Team](/team): The people building TEXITcoin.
+- [Texas](/texas): Why Texas, and the connection to the Lone Star State.
+- [Build](/build): Building on TEXITcoin.
+- [FAQ](/faq): Common questions answered.
+- [Blog](/blog): News, updates, and long-form essays.
+- [Videos](/videos): Video library — interviews, keynotes, explainers.
+- [Press](/press): Press kit and media resources.
+- [In the news](/in-the-news): Recent coverage.
+- [Merch](/merch): Official merchandise.
+- [Disclosures](/disclosures): Legal disclosures.
+- [Legal](/legal): Legal information.
+- [Privacy](/privacy): Privacy policy.
+- [Terms](/terms): Terms of use.
+
+## Optional
+
+- [Trolls](/trolls): Responses to critics.
+- [wTXC](/wtxc): Wrapped TXC information.
