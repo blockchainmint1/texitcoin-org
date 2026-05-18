@@ -23,7 +23,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "Is TXC a security?",
-        a: "No. TXC is a decentralized commodity cryptocurrency with no issuer, no pre-sale, no equity claim, and no profit promises. It's earned through Proof-of-Work mining, the same way Bitcoin is.",
+        a: "No. TXC is a decentralized commodity cryptocurrency with no issuer, no pre-sale, no equity claim, and no profit promises. It's earned through Scrypt Proof-of-Work mining, the same family of mining used by Litecoin.",
       },
       {
         q: "Is TEXITcoin a political project?",

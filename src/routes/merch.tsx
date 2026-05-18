@@ -21,7 +21,7 @@ export const Route = createFileRoute("/merch")({
 
 const DROPS = [
   { name: "Lone Star Trucker", desc: "Classic 5-panel with the TXC star embroidered up front. Made in Texas.", tag: "First drop" },
-  { name: "Sound Money Tee", desc: "Heavyweight cotton. '21M or bust' on the back, TXC mark on the chest.", tag: "First drop" },
+  { name: "Sound Money Tee", desc: "Heavyweight cotton. '353M or bust' on the back, TXC mark on the chest.", tag: "First drop" },
   { name: "Founders Patch", desc: "Iron-on patch numbered to the first 1,000 holders on the list.", tag: "Limited" },
   { name: "Cold Storage Hoodie", desc: "Mid-weight fleece. Quiet brand, loud convictions.", tag: "Winter drop" },
 ];
