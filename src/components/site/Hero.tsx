@@ -76,6 +76,8 @@ export function Hero() {
               width={1536}
               height={1536}
               className="h-full w-full object-cover"
+              fetchPriority="high"
+              loading="eager"
             />
           </div>
           <div className="absolute inset-0 clip-parallel border-2 border-accent/30 -translate-x-6 translate-y-4" />
