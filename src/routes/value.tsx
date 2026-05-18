@@ -228,6 +228,73 @@ function ValuePage() {
         </div>
       </section>
 
+      {/* Sound money lineage */}
+      <section className="relative border-t border-border py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="max-w-2xl">
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+              Lineage
+            </div>
+            <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+              Sound-money DNA, <span className="text-primary">tested by history</span>
+            </h2>
+            <p className="mt-6 text-muted-foreground">
+              TXC isn't the first attempt at a complementary currency built outside
+              the state. The Liberty Dollar and the American Open Currency Standard
+              ran the same experiment with silver: issue an honest medium of
+              exchange, set its face value to reflect real worth, and let voluntary
+              trade do the rest. Their playbook gave us two enduring lessons.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-card p-8">
+              <div className="text-xs uppercase tracking-[0.22em] text-primary">
+                Lesson 1 · Gresham's Law
+              </div>
+              <h3 className="mt-3 font-display text-2xl font-bold">
+                Bad money drives out good
+              </h3>
+              <p className="mt-4 text-muted-foreground">
+                When two currencies circulate side-by-side, people spend the weaker
+                one and hoard the stronger one. Silver coins disappeared from
+                pockets the moment they were worth more as metal than as money.
+                The same dynamic protects sound crypto today: holders quietly
+                stack TXC while paying for everyday things in inflating fiat.
+                That's not a bug — it's the market sorting honest money from
+                dishonest money.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-card p-8">
+              <div className="text-xs uppercase tracking-[0.22em] text-primary">
+                Lesson 2 · The move-up schedule
+              </div>
+              <h3 className="mt-3 font-display text-2xl font-bold">
+                Value rises in disciplined steps
+              </h3>
+              <p className="mt-4 text-muted-foreground">
+                The Liberty Dollar didn't pretend silver was worth more than it
+                was — it raised its face value as silver appreciated, in
+                deliberate steps the market could absorb. TXC inherits that
+                discipline. Value isn't pumped; it ratchets up as the network
+                grows, the mine matures, and liquidity deepens. Each step is
+                only taken when the community can hold it.
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-12 max-w-3xl text-muted-foreground">
+            Stack Gresham's Law on top of Metcalfe's Law and the upward spiral
+            takes care of itself. Early holders who exit at a profit hand the
+            torch to new participants who see further still — and each cycle
+            broadens the base of people who use, accept, and trust the currency.
+            That's how honest money compounds: not on hype, but on history
+            repeating itself with better tools.
+          </p>
+        </div>
+      </section>
+
       {/* Initiatives */}
       <section className="relative py-28">
         <div

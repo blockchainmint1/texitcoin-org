@@ -54,6 +54,46 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "wallets-tools",
+    label: "Wallets & Tools",
+    items: [
+      {
+        q: "What is the TXC Wallet app?",
+        a: "The TXC Wallet is the official mobile wallet for TEXITcoin (iOS and Android). It holds your keys on your device, lets you send and receive TXC, scan QR codes for in-person payments, and connect to the TEXITcoin network without trusting a third party. Pair it with the Cold Storage Coin for long-term holdings.",
+      },
+      {
+        q: "What is the Cold Storage Coin?",
+        a: "The Cold Storage Coin is a physical TXC wallet. Your private key is generated and sealed inside the coin, so it never touches an internet-connected device. You hold the coin like a bearer instrument — anyone with the coin and the seal intact controls the TXC on it. Ideal for long-term savings; not meant for daily spending.",
+      },
+      {
+        q: "What is the TXC Blockchain Explorer?",
+        a: "The explorer is a public website that lets anyone look up TXC blocks, transactions, and addresses in real time. Paste a transaction ID to confirm a payment cleared, paste an address to see its balance and history, or browse recent blocks to watch the network in action. It's read-only and free to use — no account required.",
+      },
+    ],
+  },
+  {
+    id: "crypto-basics",
+    label: "Crypto Basics",
+    items: [
+      {
+        q: "What's the difference between a Layer 1 and a Layer 2 blockchain?",
+        a: "A Layer 1 is a standalone blockchain that settles its own transactions and has its own miners or validators — Bitcoin, Litecoin, Ethereum, and TEXITcoin are all Layer 1s. A Layer 2 is a network built on top of a Layer 1 (like Lightning on Bitcoin or Arbitrum on Ethereum) that batches activity off-chain for speed and lower fees, then periodically settles back to the Layer 1 for security. TXC is a Layer 1 — every TXC transaction is final on the TEXITcoin chain itself.",
+      },
+      {
+        q: "What is a blockchain node?",
+        a: "A node is a computer running the blockchain's software. Full nodes keep a complete copy of the chain, validate every block and transaction against the network rules, and relay them to other nodes. Nodes are how a blockchain stays decentralized — no single party controls the ledger because thousands of independent nodes are constantly cross-checking it. Anyone can run a TXC node; you don't have to mine to do it.",
+      },
+      {
+        q: "What's a crypto wallet, really?",
+        a: "A wallet doesn't actually hold your coins — the coins live on the blockchain. The wallet holds your private keys, which prove you control the coins at a given address. 'Self-custody' wallets (like the TXC Wallet app or the Cold Storage Coin) put those keys in your hands. 'Custodial' wallets (like an exchange account) hold the keys for you — convenient, but you're trusting the custodian not to lose, freeze, or misuse your funds.",
+      },
+      {
+        q: "What is a crypto exchange and how does it work?",
+        a: "An exchange is a marketplace that matches buyers and sellers of crypto. You deposit one asset (dollars, USDT, BTC), place an order at the price you want, and the exchange pairs it with a counterparty. Centralized exchanges like Bitmart hold your funds while they're on the platform; decentralized exchanges like Uniswap let you trade directly from your own wallet. Either way, the goal is the same: convert between assets at a market-driven price.",
+      },
+    ],
+  },
+  {
     id: "security",
     label: "Security & Support",
     items: [
