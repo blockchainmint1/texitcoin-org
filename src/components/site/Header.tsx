@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/txc-logo.png";
+import { LivePrice } from "./LivePrice";
 
 type NavLink = { label: string; href: string; external?: boolean; internal?: boolean };
 type NavItem =
