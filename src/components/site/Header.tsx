@@ -190,6 +190,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <LivePrice variant="desktop" />
           <Link
             to="/buy"
             className="hidden sm:inline-flex items-center gap-2 rounded-md bg-red-gradient px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
