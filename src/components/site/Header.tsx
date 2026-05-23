@@ -211,7 +211,7 @@ export function Header() {
       {open && (
         <div className="lg:hidden border-t border-border bg-background/95 backdrop-blur-xl">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
-            {NAV.map((n) => {
+            <div className="pb-3"><LivePrice variant="mobile" /></div>
               if ("children" in n) {
                 const isOpen = openSub === n.label;
                 return (
