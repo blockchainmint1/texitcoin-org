@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/txc-logo.png";
+import { LivePrice } from "./LivePrice";
 
 type NavLink = { label: string; href: string; external?: boolean; internal?: boolean };
 type NavItem =
@@ -189,6 +190,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <LivePrice variant="desktop" />
           <Link
             to="/buy"
             className="hidden sm:inline-flex items-center gap-2 rounded-md bg-red-gradient px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
@@ -209,6 +211,7 @@ export function Header() {
       {open && (
         <div className="lg:hidden border-t border-border bg-background/95 backdrop-blur-xl">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
+            <div className="pb-3"><LivePrice variant="mobile" /></div>
             {NAV.map((n) => {
               if ("children" in n) {
                 const isOpen = openSub === n.label;
