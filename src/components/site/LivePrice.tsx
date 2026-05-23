@@ -210,10 +210,6 @@ export function LivePrice({ variant = "desktop" }: { variant?: "desktop" | "mobi
         </div>
       </div>
 
-      {/* Hover CTA hint */}
-      <span className="ml-1 hidden xl:inline-flex items-center gap-1 rounded-md bg-red-gradient px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary-foreground opacity-90 group-hover:opacity-100">
-        Buy →
-      </span>
     </Link>
   );
 }
