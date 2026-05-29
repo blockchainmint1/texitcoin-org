@@ -186,10 +186,10 @@ const RESOURCES = [
   },
   {
     icon: Layers,
-    name: "Mempool",
-    url: "https://mempool.texitcoin.org/",
-    desc: "Live mempool view, fee estimates, and mining stats. Powers our public REST API.",
-    tag: "Network",
+    name: "TXC Mempool Explorer",
+    url: "https://mempool-heart-explorer.lovable.app/",
+    desc: "TXC-branded mempool.space-style explorer: live mempool viz, fee gauge, blocks, tx/address lookup, mining stats, and full Omni Layer 2 OP_RETURN decoding.",
+    tag: "Explorer",
   },
   {
     icon: Pickaxe,
