@@ -1161,7 +1161,27 @@ function BuildPage() {
               </TabsContent>
 
               {/* Omni Layer */}
+              {/* Chain Params */}
+              <TabsContent value="chain" className="mt-6">
+                <DocBlock
+                  badge="Chain · Parameters & wallet reference"
+                  title="Everything a wallet or signer needs to interop with TXC"
+                  intro={
+                    <>
+                      Address prefixes, BIP standards, ports, magic bytes, and the worked
+                      example of building & broadcasting a transaction. Items marked{" "}
+                      <Verify /> still need to be confirmed against{" "}
+                      <code className="font-mono text-foreground">src/chainparams.cpp</code> in
+                      TEXITcoin Core — one screenshot of the <code className="font-mono text-foreground">CMainParams</code> constructor
+                      fills in nearly all of them.
+                    </>
+                  }
+                  sections={CHAIN_SECTIONS}
+                />
+              </TabsContent>
+
               <TabsContent value="omni" className="mt-6">
+
                 <DocBlock
                   badge="Tokens · Omni Layer"
                   title="Issue, mint, and move tokens on TXC"
