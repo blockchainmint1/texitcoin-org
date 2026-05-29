@@ -329,7 +329,198 @@ type DocSection = {
   lang?: string;
 };
 
-const OMNI_SECTIONS: DocSection[] = [
+function Verify({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="ml-1 inline-flex items-center rounded border border-amber-500/40 bg-amber-500/10 px-1.5 py-0.5 align-middle font-mono text-[10px] font-bold uppercase tracking-wider text-amber-400">
+      verify{children ? <span className="ml-1 font-normal normal-case tracking-normal text-amber-200/80">· {children}</span> : null}
+    </span>
+  );
+}
+
+const CHAIN_SECTIONS: DocSection[] = [
+  {
+    heading: "1 · Consensus basics",
+    body: (
+      <ul className="space-y-1.5">
+        <li><span className="text-muted-foreground">Algorithm:</span> <code className="font-mono">Scrypt</code> Proof-of-Work — same family as Litecoin; ASIC / GPU compatible.</li>
+        <li><span className="text-muted-foreground">Block target:</span> <code className="font-mono">180 s</code> (3 minutes).</li>
+        <li><span className="text-muted-foreground">Coin unit:</span> <code className="font-mono">1 TXC = 100,000,000 sats</code> (8 decimals).</li>
+        <li><span className="text-muted-foreground">Max supply:</span> <code className="font-mono">353,396,296 TXC</code>.</li>
+        <li><span className="text-muted-foreground">Halving interval:</span> <Verify>from <code className="font-mono">chainparams.cpp</code></Verify></li>
+        <li><span className="text-muted-foreground">Difficulty retarget:</span> <Verify>most LTC forks use DGW v3</Verify></li>
+      </ul>
+    ),
+  },
+  {
+    heading: "2 · Address & key format",
+    body: (
+      <>
+        <p>
+          Source of truth: <code className="font-mono">src/chainparams.cpp</code> in TEXITcoin Core,
+          <code className="font-mono"> base58Prefixes[]</code>. The version bytes below are what every
+          wallet, signer, and address parser needs to get right.
+        </p>
+        <div className="mt-4 overflow-x-auto rounded-lg border border-border">
+          <table className="w-full text-xs">
+            <thead className="bg-surface/60 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <tr>
+                <th className="px-3 py-2 text-left font-semibold">Prefix</th>
+                <th className="px-3 py-2 text-left font-semibold">Value</th>
+                <th className="px-3 py-2 text-left font-semibold">Leads with</th>
+                <th className="px-3 py-2 text-left font-semibold">Used for</th>
+              </tr>
+            </thead>
+            <tbody className="font-mono [&_td]:px-3 [&_td]:py-2 [&_td]:border-t [&_td]:border-border/60">
+              <tr>
+                <td>PUBKEY_ADDRESS</td><td>0x42</td><td>T…</td><td className="font-sans text-muted-foreground">P2PKH addresses</td>
+              </tr>
+              <tr>
+                <td>SCRIPT_ADDRESS</td><td>0x32 <Verify /></td><td>M…</td><td className="font-sans text-muted-foreground">P2SH addresses</td>
+              </tr>
+              <tr>
+                <td>SECRET_KEY (WIF)</td><td>0xC1</td><td>V…</td><td className="font-sans text-muted-foreground">Private keys (WIF)</td>
+              </tr>
+              <tr>
+                <td>EXT_PUBLIC_KEY</td><td>0x0488B21E <Verify>BTC default</Verify></td><td>xpub…</td><td className="font-sans text-muted-foreground">BIP32 extended public key</td>
+              </tr>
+              <tr>
+                <td>EXT_SECRET_KEY</td><td>0x0488ADE4 <Verify>BTC default</Verify></td><td>xprv…</td><td className="font-sans text-muted-foreground">BIP32 extended private key</td>
+              </tr>
+              <tr>
+                <td>Bech32 HRP</td><td><code>txc</code>? <Verify>or none</Verify></td><td>txc1…</td><td className="font-sans text-muted-foreground">SegWit addresses, if enabled</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4">
+          <strong className="text-foreground">Common foot-gun:</strong> the WIF byte is{" "}
+          <em>not</em> <code className="font-mono">pubKeyHash + 0x80</code>. For Bitcoin that
+          coincidence holds (<code className="font-mono">0x00 + 0x80 = 0x80</code>); for TXC it
+          does not (<code className="font-mono">0x42 + 0x80 = 0xC2</code>, which is wrong). Always
+          use <code className="font-mono">0xC1</code>.
+        </p>
+      </>
+    ),
+  },
+  {
+    heading: "3 · Verification vector",
+    body: (
+      <p>
+        A correct wallet implementation should pass both of these:
+      </p>
+    ),
+    code: `# Any legacy WIF backup key
+WIF "V…"  →  version byte 0xC1
+            32-byte private key
+            optional 0x01 compression flag
+
+# Known-good funded address (legacy, P2PKH, prefix 0x42)
+Tb55Ha4F6rAdxGPgTftraq2VuLDRFQhnFi
+  → on-chain balance visible at:
+    https://mempool.texitcoin.org/address/Tb55Ha4F6rAdxGPgTftraq2VuLDRFQhnFi`,
+  },
+  {
+    heading: "4 · BIP standards",
+    body: (
+      <ul className="space-y-1.5">
+        <li><span className="text-muted-foreground">BIP32 (HD wallets):</span> Yes <Verify>confirm version bytes</Verify></li>
+        <li><span className="text-muted-foreground">BIP39 (mnemonics):</span> Wallet-level convention — supported by any BIP39 wallet.</li>
+        <li><span className="text-muted-foreground">BIP44 coin type:</span> <Verify>registered SLIP-0044 number — critical for HD path <code className="font-mono">m/44'/X'/0'/0/0</code></Verify></li>
+        <li><span className="text-muted-foreground">BIP141 SegWit:</span> <Verify /></li>
+        <li><span className="text-muted-foreground">BIP173 Bech32:</span> <Verify /></li>
+      </ul>
+    ),
+  },
+  {
+    heading: "5 · Network ports & magic",
+    body: (
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <table className="w-full text-xs">
+          <thead className="bg-surface/60 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <tr>
+              <th className="px-3 py-2 text-left font-semibold">Field</th>
+              <th className="px-3 py-2 text-left font-semibold">Mainnet</th>
+              <th className="px-3 py-2 text-left font-semibold">Testnet</th>
+            </tr>
+          </thead>
+          <tbody className="[&_td]:px-3 [&_td]:py-2 [&_td]:border-t [&_td]:border-border/60">
+            <tr><td className="font-sans text-muted-foreground">P2P port</td><td><Verify /></td><td><Verify /></td></tr>
+            <tr><td className="font-sans text-muted-foreground">RPC port</td><td><Verify /></td><td><Verify /></td></tr>
+            <tr><td className="font-sans text-muted-foreground">Network magic (first 4 bytes of every P2P message)</td><td><Verify /></td><td><Verify /></td></tr>
+            <tr><td className="font-sans text-muted-foreground">Genesis block hash</td><td><Verify /></td><td><Verify /></td></tr>
+            <tr><td className="font-sans text-muted-foreground">Default seed nodes</td><td><Verify>from <code className="font-mono">chainparams.cpp</code></Verify></td><td><Verify /></td></tr>
+          </tbody>
+        </table>
+      </div>
+    ),
+  },
+  {
+    heading: "6 · Public REST API",
+    body: (
+      <>
+        <p>
+          Base URL: <code className="font-mono">https://mempool.texitcoin.org</code> — a
+          mempool.space-compatible Esplora API. No auth, no API key. The full endpoint list
+          lives in the <strong>Network REST</strong> tab. The endpoints most useful for wallet
+          builders are:
+        </p>
+        <ul className="mt-3 space-y-1">
+          <li><code className="font-mono">GET /api/address/:address/utxo</code> — unspent outputs (needed to build tx inputs)</li>
+          <li><code className="font-mono">GET /api/v1/fees/recommended</code> — sat/vB by target blocks</li>
+          <li><code className="font-mono">GET /api/blocks/tip/height</code> · <code className="font-mono">/api/blocks/tip/hash</code> — chain tip without parsing a list</li>
+          <li><code className="font-mono">POST /api/tx</code> — broadcast a signed raw transaction</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    heading: "7 · Building a transaction (worked example)",
+    body: (
+      <ol className="ml-4 list-decimal space-y-2">
+        <li>Decode WIF with <code className="font-mono">bs58check</code>, assert <code className="font-mono">version === 0xC1</code>, slice the 32-byte key (drop the trailing <code className="font-mono">0x01</code> if present → compressed pubkey).</li>
+        <li>Derive the pubkey with <code className="font-mono">secp256k1</code>, <code className="font-mono">hash160</code> it, prepend <code className="font-mono">0x42</code>, Base58Check → <code className="font-mono">T…</code> address.</li>
+        <li>Fetch UTXOs: <code className="font-mono">GET /api/address/:addr/utxo</code>.</li>
+        <li>Fetch fee: <code className="font-mono">GET /api/v1/fees/recommended</code> → use <code className="font-mono">halfHourFee</code> for normal sends.</li>
+        <li>Build & sign with <code className="font-mono">bitcoinjs-lib</code> using a custom network object (see below).</li>
+        <li>Broadcast: <code className="font-mono">POST /api/tx</code> with the raw hex body.</li>
+      </ol>
+    ),
+    code: `// Custom network object for bitcoinjs-lib
+const TXC = {
+  messagePrefix: '\\x19TEXITcoin Signed Message:\\n', // verify exact string
+  bech32: undefined,                                   // verify
+  bip32: { public: 0x0488B21E, private: 0x0488ADE4 }, // verify
+  pubKeyHash: 0x42,
+  scriptHash:  0x32,  // verify
+  wif:         0xC1,
+};`,
+  },
+  {
+    heading: "8 · Common integration mistakes",
+    body: (
+      <div className="space-y-4">
+        <div>
+          <div className="font-semibold text-foreground">Assuming <code className="font-mono">wif = pubKeyHash + 0x80</code>.</div>
+          <p>Wrong for TXC. Use <code className="font-mono">0xC1</code>.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Using Litecoin's <code className="font-mono">bitcoinjs-lib</code> network preset.</div>
+          <p>Address prefixes differ. Build your own network object (see above) — don't import an LTC one and assume it works.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Forgetting the compression flag when re-encoding WIF.</div>
+          <p>Same private key, with vs. without the trailing <code className="font-mono">0x01</code>, produces two different addresses. Pick one and stick with it across the whole flow.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Treating <code className="font-mono">mempool.space</code> and <code className="font-mono">blockstream.info</code> Esplora as identical.</div>
+          <p>Minor field differences exist. The TXC endpoint follows the <strong>mempool.space</strong> variant.</p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+
   {
     heading: "1 · Network parameters",
     body: (
