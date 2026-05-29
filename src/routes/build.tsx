@@ -15,10 +15,12 @@ import {
   Repeat,
   Rocket,
   Server,
+  Settings2,
   Terminal,
   Wallet,
   Zap,
 } from "lucide-react";
+
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
