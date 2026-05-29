@@ -329,13 +329,8 @@ type DocSection = {
   lang?: string;
 };
 
-function Verify({ children }: { children?: React.ReactNode }) {
-  return (
-    <span className="ml-1 inline-flex items-center rounded border border-amber-500/40 bg-amber-500/10 px-1.5 py-0.5 align-middle font-mono text-[10px] font-bold uppercase tracking-wider text-amber-400">
-      verify{children ? <span className="ml-1 font-normal normal-case tracking-normal text-amber-200/80">· {children}</span> : null}
-    </span>
-  );
-}
+
+
 
 
 const CHAIN_SECTIONS: DocSection[] = [
