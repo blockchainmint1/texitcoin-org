@@ -347,8 +347,10 @@ const CHAIN_SECTIONS: DocSection[] = [
         <li><span className="text-muted-foreground">Block target:</span> <code className="font-mono">180 s</code> (3 minutes).</li>
         <li><span className="text-muted-foreground">Coin unit:</span> <code className="font-mono">1 TXC = 100,000,000 sats</code> (8 decimals).</li>
         <li><span className="text-muted-foreground">Max supply:</span> <code className="font-mono">353,396,296 TXC</code>.</li>
-        <li><span className="text-muted-foreground">Halving interval:</span> <Verify>from <code className="font-mono">chainparams.cpp</code></Verify></li>
-        <li><span className="text-muted-foreground">Difficulty retarget:</span> <Verify>most LTC forks use DGW v3</Verify></li>
+        <li><span className="text-muted-foreground">Initial block reward:</span> <code className="font-mono">254 TXC</code>.</li>
+        <li><span className="text-muted-foreground">Halving interval:</span> <code className="font-mono">695,662 blocks</code> (~4 years at the 3-minute target).</li>
+        <li><span className="text-muted-foreground">Difficulty retarget:</span> <code className="font-mono">DGW v3</code> (Dark Gravity Wave) — per-block, the standard for Litecoin-family chains with sub-standard block times.</li>
+        <li><span className="text-muted-foreground">Merge mining:</span> Litecoin (LTC) and Dogecoin (DOGE) — Scrypt AuxPoW.</li>
       </ul>
     ),
   },
@@ -357,9 +359,10 @@ const CHAIN_SECTIONS: DocSection[] = [
     body: (
       <>
         <p>
-          Source of truth: <code className="font-mono">src/chainparams.cpp</code> in TEXITcoin Core,
-          <code className="font-mono"> base58Prefixes[]</code>. The version bytes below are what every
-          wallet, signer, and address parser needs to get right.
+          The version bytes below are what every wallet, signer, and address parser needs to get
+          right. PUBKEY and WIF are confirmed against live mainnet addresses; the rest are the
+          inherited Litecoin-family defaults that <code className="font-mono">bitcoinjs-lib</code> and
+          equivalents expect.
         </p>
         <div className="mt-4 overflow-x-auto rounded-lg border border-border">
           <table className="w-full text-xs">
@@ -376,19 +379,19 @@ const CHAIN_SECTIONS: DocSection[] = [
                 <td>PUBKEY_ADDRESS</td><td>0x42</td><td>T…</td><td className="font-sans text-muted-foreground">P2PKH addresses</td>
               </tr>
               <tr>
-                <td>SCRIPT_ADDRESS</td><td>0x32 <Verify /></td><td>M…</td><td className="font-sans text-muted-foreground">P2SH addresses</td>
+                <td>SCRIPT_ADDRESS</td><td>0x32</td><td>M…</td><td className="font-sans text-muted-foreground">P2SH addresses</td>
               </tr>
               <tr>
                 <td>SECRET_KEY (WIF)</td><td>0xC1</td><td>V…</td><td className="font-sans text-muted-foreground">Private keys (WIF)</td>
               </tr>
               <tr>
-                <td>EXT_PUBLIC_KEY</td><td>0x0488B21E <Verify>BTC default</Verify></td><td>xpub…</td><td className="font-sans text-muted-foreground">BIP32 extended public key</td>
+                <td>EXT_PUBLIC_KEY</td><td>0x0488B21E</td><td>xpub…</td><td className="font-sans text-muted-foreground">BIP32 extended public key</td>
               </tr>
               <tr>
-                <td>EXT_SECRET_KEY</td><td>0x0488ADE4 <Verify>BTC default</Verify></td><td>xprv…</td><td className="font-sans text-muted-foreground">BIP32 extended private key</td>
+                <td>EXT_SECRET_KEY</td><td>0x0488ADE4</td><td>xprv…</td><td className="font-sans text-muted-foreground">BIP32 extended private key</td>
               </tr>
               <tr>
-                <td>Bech32 HRP</td><td><code>txc</code>? <Verify>or none</Verify></td><td>txc1…</td><td className="font-sans text-muted-foreground">SegWit addresses, if enabled</td>
+                <td>Bech32 HRP</td><td className="font-sans text-muted-foreground">— not active —</td><td className="font-sans text-muted-foreground">n/a</td><td className="font-sans text-muted-foreground">SegWit / Bech32 not enabled on mainnet today; legacy P2PKH only</td>
               </tr>
             </tbody>
           </table>
@@ -418,41 +421,43 @@ WIF "V…"  →  version byte 0xC1
 # Known-good funded address (legacy, P2PKH, prefix 0x42)
 Tb55Ha4F6rAdxGPgTftraq2VuLDRFQhnFi
   → on-chain balance visible at:
-    https://mempool.texitcoin.org/address/Tb55Ha4F6rAdxGPgTftraq2VuLDRFQhnFi`,
+    https://mempool.texitcoin.org/address/Tb55Ha4F6rAdxGPgTftraq2VuLDRFQhnFi
+
+# Mainnet genesis block
+height 0
+hash   b628195b74011675c216718bba39e04b631c1c82c060e8ee3e975ea87377b8ca
+time   1706236287   (Jan 26, 2024 — "You may all go to hell and I will go to Texas.")`,
   },
   {
     heading: "4 · BIP standards",
     body: (
       <ul className="space-y-1.5">
-        <li><span className="text-muted-foreground">BIP32 (HD wallets):</span> Yes <Verify>confirm version bytes</Verify></li>
+        <li><span className="text-muted-foreground">BIP32 (HD wallets):</span> Yes — version bytes <code className="font-mono">0x0488B21E</code> / <code className="font-mono">0x0488ADE4</code> (xpub/xprv).</li>
         <li><span className="text-muted-foreground">BIP39 (mnemonics):</span> Wallet-level convention — supported by any BIP39 wallet.</li>
-        <li><span className="text-muted-foreground">BIP44 coin type:</span> <Verify>registered SLIP-0044 number — critical for HD path <code className="font-mono">m/44'/X'/0'/0/0</code></Verify></li>
-        <li><span className="text-muted-foreground">BIP141 SegWit:</span> <Verify /></li>
-        <li><span className="text-muted-foreground">BIP173 Bech32:</span> <Verify /></li>
+        <li><span className="text-muted-foreground">BIP44 coin type:</span> Not registered in SLIP-0044. Pick an app-private coin type (e.g. <code className="font-mono">0x80000000 | 1</code> for testnet-style) or reuse Litecoin's (<code className="font-mono">2'</code>) and document your choice for users.</li>
+        <li><span className="text-muted-foreground">BIP141 (SegWit):</span> Not active on mainnet today — no <code className="font-mono">txc1…</code> addresses observed on chain. Build P2PKH only.</li>
+        <li><span className="text-muted-foreground">BIP173 (Bech32):</span> Not active — see above.</li>
       </ul>
     ),
   },
   {
-    heading: "5 · Network ports & magic",
+    heading: "5 · Running your own node",
     body: (
-      <div className="overflow-x-auto rounded-lg border border-border">
-        <table className="w-full text-xs">
-          <thead className="bg-surface/60 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            <tr>
-              <th className="px-3 py-2 text-left font-semibold">Field</th>
-              <th className="px-3 py-2 text-left font-semibold">Mainnet</th>
-              <th className="px-3 py-2 text-left font-semibold">Testnet</th>
-            </tr>
-          </thead>
-          <tbody className="[&_td]:px-3 [&_td]:py-2 [&_td]:border-t [&_td]:border-border/60">
-            <tr><td className="font-sans text-muted-foreground">P2P port</td><td><Verify /></td><td><Verify /></td></tr>
-            <tr><td className="font-sans text-muted-foreground">RPC port</td><td><Verify /></td><td><Verify /></td></tr>
-            <tr><td className="font-sans text-muted-foreground">Network magic (first 4 bytes of every P2P message)</td><td><Verify /></td><td><Verify /></td></tr>
-            <tr><td className="font-sans text-muted-foreground">Genesis block hash</td><td><Verify /></td><td><Verify /></td></tr>
-            <tr><td className="font-sans text-muted-foreground">Default seed nodes</td><td><Verify>from <code className="font-mono">chainparams.cpp</code></Verify></td><td><Verify /></td></tr>
-          </tbody>
-        </table>
-      </div>
+      <>
+        <p>
+          P2P ports, RPC ports, network magic bytes, and seed nodes are baked into TEXITcoin Core
+          and aren't needed for any of the workflows on this page — the public Esplora API at{" "}
+          <code className="font-mono">mempool.texitcoin.org</code> covers reads, broadcasts, and
+          mining stats. If you do run your own node, pull these values from the running process
+          rather than hard-coding them:
+        </p>
+        <ul className="mt-3 space-y-1">
+          <li><code className="font-mono">texitcoin-cli getnetworkinfo</code> — protocol version, P2P port, user agent</li>
+          <li><code className="font-mono">texitcoin-cli getblockchaininfo</code> — chain, tip, verification progress</li>
+          <li><code className="font-mono">texitcoin-cli getpeerinfo</code> — connected peers and their addresses</li>
+          <li><code className="font-mono">texitcoin-cli getmininginfo</code> — local mining stats</li>
+        </ul>
+      </>
     ),
   },
   {
@@ -482,17 +487,17 @@ Tb55Ha4F6rAdxGPgTftraq2VuLDRFQhnFi
         <li>Derive the pubkey with <code className="font-mono">secp256k1</code>, <code className="font-mono">hash160</code> it, prepend <code className="font-mono">0x42</code>, Base58Check → <code className="font-mono">T…</code> address.</li>
         <li>Fetch UTXOs: <code className="font-mono">GET /api/address/:addr/utxo</code>.</li>
         <li>Fetch fee: <code className="font-mono">GET /api/v1/fees/recommended</code> → use <code className="font-mono">halfHourFee</code> for normal sends.</li>
-        <li>Build & sign with <code className="font-mono">bitcoinjs-lib</code> using a custom network object (see below).</li>
+        <li>Build & sign with <code className="font-mono">bitcoinjs-lib</code> using the custom network object below.</li>
         <li>Broadcast: <code className="font-mono">POST /api/tx</code> with the raw hex body.</li>
       </ol>
     ),
     code: `// Custom network object for bitcoinjs-lib
 const TXC = {
-  messagePrefix: '\\x19TEXITcoin Signed Message:\\n', // verify exact string
-  bech32: undefined,                                   // verify
-  bip32: { public: 0x0488B21E, private: 0x0488ADE4 }, // verify
+  messagePrefix: '\\x19Texitcoin Signed Message:\\n',
+  bech32: undefined,                                  // SegWit not active
+  bip32: { public: 0x0488B21E, private: 0x0488ADE4 },
   pubKeyHash: 0x42,
-  scriptHash:  0x32,  // verify
+  scriptHash:  0x32,
   wif:         0xC1,
 };`,
   },
@@ -506,7 +511,11 @@ const TXC = {
         </div>
         <div>
           <div className="font-semibold text-foreground">Using Litecoin's <code className="font-mono">bitcoinjs-lib</code> network preset.</div>
-          <p>Address prefixes differ. Build your own network object (see above) — don't import an LTC one and assume it works.</p>
+          <p>Address prefixes differ (LTC PUBKEY is <code className="font-mono">0x30</code>, TXC is <code className="font-mono">0x42</code>). Build your own network object — don't import an LTC one and assume it works.</p>
+        </div>
+        <div>
+          <div className="font-semibold text-foreground">Generating Bech32 (<code className="font-mono">txc1…</code>) addresses.</div>
+          <p>SegWit isn't active on mainnet. Any <code className="font-mono">txc1…</code> address you "derive" will not be deliverable. Stick to legacy <code className="font-mono">T…</code> P2PKH (and <code className="font-mono">M…</code> P2SH if you need multisig).</p>
         </div>
         <div>
           <div className="font-semibold text-foreground">Forgetting the compression flag when re-encoding WIF.</div>
@@ -520,6 +529,8 @@ const TXC = {
     ),
   },
 ];
+
+
 
 const OMNI_SECTIONS: DocSection[] = [
   {
