@@ -1101,8 +1101,10 @@ function BuildPage() {
             <Tabs defaultValue="network" className="mt-10">
               <TabsList className="bg-card border border-border h-auto p-1 flex-wrap">
                 <TabsTrigger value="network" className="gap-2"><Database className="h-3.5 w-3.5" /> Network REST</TabsTrigger>
+                <TabsTrigger value="chain" className="gap-2"><Settings2 className="h-3.5 w-3.5" /> Chain Params</TabsTrigger>
                 <TabsTrigger value="omni" className="gap-2"><Layers className="h-3.5 w-3.5" /> Omni Layer (Tokens)</TabsTrigger>
                 <TabsTrigger value="stream" className="gap-2"><Server className="h-3.5 w-3.5" /> IPFS + Proof</TabsTrigger>
+
               </TabsList>
 
               {/* Network REST */}
