@@ -1174,14 +1174,14 @@ function BuildPage() {
                   title="Everything a wallet or signer needs to interop with TXC"
                   intro={
                     <>
-                      Address prefixes, BIP standards, ports, magic bytes, and the worked
-                      example of building & broadcasting a transaction. Items marked{" "}
-                      <Verify /> still need to be confirmed against{" "}
-                      <code className="font-mono text-foreground">src/chainparams.cpp</code> in
-                      TEXITcoin Core — one screenshot of the <code className="font-mono text-foreground">CMainParams</code> constructor
-                      fills in nearly all of them.
+                      Address prefixes, BIP standards, the genesis block, and a worked example
+                      of building & broadcasting a transaction. PUBKEY and WIF version bytes are
+                      confirmed against live mainnet addresses; the rest are the inherited
+                      Litecoin-family defaults that <code className="font-mono text-foreground">bitcoinjs-lib</code>{" "}
+                      and equivalent libraries expect.
                     </>
                   }
+
                   sections={CHAIN_SECTIONS}
                 />
               </TabsContent>
