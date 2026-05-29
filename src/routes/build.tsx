@@ -520,8 +520,9 @@ const TXC = {
   },
 ];
 
-
+const OMNI_SECTIONS: DocSection[] = [
   {
+
     heading: "1 · Network parameters",
     body: (
       <ul className="space-y-1.5">
