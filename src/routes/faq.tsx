@@ -41,7 +41,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "Can I mine TXC?",
-        a: "Mining is permissioned and rooted in Texas, but the bar to participate is intentionally low — a consumer-grade Scrypt rig is enough. Our Texas operations merge-mine TXC alongside Litecoin (LTC) and Dogecoin (DOGE), so the same Scrypt work earns rewards on all three chains. See the Proof of Work page for details.",
+        a: "The network is permissionless — anyone, anywhere can run a node and join the chain. Mining itself is rooted in Texas with block rewards routed to community-issued addresses, and the bar to participate is intentionally low: a consumer-grade Scrypt rig is enough. Our Texas operations merge-mine TXC alongside Litecoin (LTC) and Dogecoin (DOGE), so the same Scrypt work earns rewards on all three chains. See the Proof of Work page for details.",
       },
       {
         q: "Do I have to live in Texas to use it?",
