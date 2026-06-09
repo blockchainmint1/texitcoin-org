@@ -8,6 +8,7 @@ import {
   Database,
   ExternalLink,
   Gauge,
+  Github,
   GitBranch,
   Globe,
   Layers,
@@ -16,10 +17,14 @@ import {
   Rocket,
   Server,
   Settings2,
+  ShieldCheck,
   Terminal,
+  Unlock,
   Wallet,
   Zap,
 } from "lucide-react";
+
+const GITHUB_REPO_URL = "https://github.com/blockchainmint1/texitcoin";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
