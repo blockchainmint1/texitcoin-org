@@ -8,6 +8,7 @@ import {
   Database,
   ExternalLink,
   Gauge,
+  GitFork,
   GitBranch,
   Globe,
   Layers,
@@ -16,10 +17,14 @@ import {
   Rocket,
   Server,
   Settings2,
+  ShieldCheck,
   Terminal,
+  Unlock,
   Wallet,
   Zap,
 } from "lucide-react";
+
+const GITHUB_REPO_URL = "https://github.com/blockchainmint1/texitcoin";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -911,6 +916,117 @@ function BuildPage() {
               >
                 <Rocket className="h-4 w-4" /> Network resources
               </a>
+            </div>
+          </div>
+        </section>
+
+        {/* OPEN SOURCE — TXC Core is now public */}
+        <section className="relative overflow-hidden border-b border-border bg-background">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary)/0.18),transparent_55%),radial-gradient(circle_at_80%_80%,hsl(var(--primary)/0.12),transparent_55%)]" />
+          <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-28">
+            <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-primary">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  Just shipped · Open Source
+                </div>
+                <h2 className="mt-5 font-display text-4xl font-bold leading-[1.05] md:text-6xl text-balance">
+                  TEXITcoin Core is now <span className="text-primary">100% open source</span>.
+                </h2>
+                <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+                  For the first time since genesis, the full, unredacted source code — and the
+                  complete commit history — is public. Audit it. Fork it. Spin up your own node.
+                  Build on top of it. The chain has nothing to hide.
+                </p>
+
+                <div className="mt-6 rounded-xl border border-primary/30 bg-primary/5 p-5">
+                  <div className="flex items-start gap-3">
+                    <Unlock className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    <div className="text-sm">
+                      <div className="font-semibold text-foreground">Permission key — removed.</div>
+                      <p className="mt-1 text-muted-foreground">
+                        The key that made TEXITcoin a permissioned network is gone. Anyone, anywhere,
+                        can now run a node and join the network. Mining rewards still route exclusively
+                        to community-issued addresses — so banks, nation-states, and unlimited-capital
+                        actors can't slurp them up. The more <em>you</em> participate, the more hash power
+                        you accumulate.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href={GITHUB_REPO_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md bg-red-gradient px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
+                  >
+                    <GitFork className="h-4 w-4" /> View the repo on GitHub
+                    <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+                  </a>
+                  <a
+                    href={`${GITHUB_REPO_URL}/blob/master/README.md`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-surface"
+                  >
+                    <Terminal className="h-4 w-4" /> Spin up a node
+                  </a>
+                  <a
+                    href={`${GITHUB_REPO_URL}/issues`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-surface"
+                  >
+                    <Code2 className="h-4 w-4" /> Contribute
+                  </a>
+                </div>
+              </div>
+
+              {/* Right column — terminal + bullets */}
+              <div className="space-y-6">
+                <div className="rounded-xl border border-border bg-[#0b0b0b] shadow-card overflow-hidden">
+                  <div className="flex items-center gap-2 border-b border-border/60 px-4 py-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
+                    <span className="ml-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                      ~/texitcoin
+                    </span>
+                  </div>
+                  <pre className="overflow-x-auto p-5 text-xs leading-relaxed text-foreground/90 font-mono">
+{`# clone the source
+git clone ${GITHUB_REPO_URL}.git
+cd texitcoin
+
+# build TEXITcoin Core
+./autogen.sh && ./configure && make -j$(nproc)
+
+# run a full node — no permission key required
+./src/texitcoind -daemon
+
+# verify you're on the canonical chain
+./src/texitcoin-cli getblockhash 0
+# → b628195b74011675c216718bba39e04b631c1c82c060e8ee3e975ea87377b8ca`}
+                  </pre>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {[
+                    { icon: ShieldCheck, t: "Auditable", d: "Every line of consensus code, in the open." },
+                    { icon: Server, t: "Run your node", d: "Permissionless. Join the network in minutes." },
+                    { icon: GitBranch, t: "Full commit history", d: "From genesis to today — nothing redacted." },
+                    { icon: Code2, t: "Build on TXC", d: "Wallets, tools, L2s, integrations — go." },
+                  ].map((f) => (
+                    <div key={f.t} className="rounded-xl border border-border bg-card p-5">
+                      <f.icon className="h-5 w-5 text-primary" />
+                      <div className="mt-3 font-display text-base font-bold">{f.t}</div>
+                      <div className="mt-1 text-xs text-muted-foreground">{f.d}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
