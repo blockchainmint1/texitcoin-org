@@ -19,7 +19,7 @@ export const Route = createFileRoute("/proof-of-work")({
       {
         property: "og:description",
         content:
-          "Permissioned, Scrypt-based, Texas-rooted mining designed for transparency, accessibility, and long-term sustainability.",
+          "Permissionless, Scrypt-based, Texas-rooted mining designed for transparency, accessibility, and long-term sustainability.",
       },
     ],
   }),
