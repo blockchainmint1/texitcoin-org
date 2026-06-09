@@ -11,6 +11,25 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "security-incident-web-wallet-may-2026",
+    title: "Security Incident: Web Wallet Exploit (May 28, 2026)",
+    date: "2026-06-09",
+    author: "Bobby Gray",
+    tag: "Security",
+    readMinutes: 4,
+    excerpt: "On May 28, 2026 we discovered an exploit in our web wallet at wallet.texitcoin.org that exfiltrated user private keys on unlock. The server has been shut down, a clean wallet is now live at the same URL, and a migration tool is in place. Here is exactly what happened and what we are doing about it.",
+    body: [
+      "In crypto, staying safe is a top priority. There are no chargebacks, no password resets, no wallet replacements, and no second chances. Carelessness — ours or anyone else's — can cost real people real money. We owe you the full story when something goes wrong, and something did.",
+      "In the Honest Money Ecosystem, we work hard to partner with developers who share our commitment to integrity. Unfortunately, hackers work around the clock to take what we value, and those threats come from both inside and outside an organization.",
+      "On 28 May 2026, we discovered that an exploit had been installed in our trusted web wallet at wallet.texitcoin.org. Even though the browser-based wallet is non-custodial, the exploit sent a copy of the user's wallet private key to the attacker the moment the browser unlocked the wallet.",
+      "We do not yet know whether this was done by a developer on our team with access to that server, or by someone outside the organization who obtained access. Either way, it was able to happen because of poor rules governing who could publish updates to the live wallet. That is on us.",
+      "The affected server resource has been completely shut down. A new wallet — with corrected access permissions (nobody besides Bobby can publish to it) — is now live at the same URL. A migration function is in place to help users move from the previous browser-based wallet to the new wallet code. If you use the web wallet, please open it, follow the migration prompts, and rotate to a fresh seed if you have any reason to suspect your previous key was exposed.",
+      "We deeply regret this lapse in providing a secure, reliable wallet for our community, and we hope it does not cause you frustration or loss. If it has, please reach out via help.honest.money and we will do everything we can to help resolve the situation.",
+      "We take your security and the health of our systems seriously, and we are ashamed that this was allowed to happen. A deep security review is underway across every system. Every resource that was accessible to the development team involved has been shut off and is being replaced from scratch. You may notice small disruptions in some applications as we migrate everything to new code over the coming days.",
+      "Thank you for your patience, your kind understanding, and your continued trust. We will keep earning it."
+    ],
+  },
+  {
     slug: "texitcoin-core-is-now-open-source",
     title: "TEXITcoin Core Is Now Open Source — And the Network Is Permissionless",
     date: "2026-06-09",
