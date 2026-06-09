@@ -11,6 +11,32 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "texitcoin-core-is-now-open-source",
+    title: "TEXITcoin Core Is Now Open Source — And the Network Is Permissionless",
+    date: "2026-06-09",
+    author: "Bobby Gray",
+    tag: "Milestone",
+    readMinutes: 5,
+    excerpt: "We just made the full TEXITcoin Core source code public for the first time since genesis — and removed the key that made the network permissioned. Anyone can now audit the code, run a node, and join the chain.",
+    body: [
+      "Today is, without exaggeration, the biggest technical milestone in TEXITcoin's history since the genesis block was mined in McKinney, Texas on January 26, 2024.",
+      "Effective immediately, the full, unredacted source code for TEXITcoin Core — along with the complete commit history going all the way back to day one — is public on GitHub. You can browse it, clone it, audit it, fork it, or use it to spin up your own node. It's all right here: https://github.com/blockchainmint1/texitcoin",
+      "At the same time, we have removed the key requirement that made TEXITcoin a permissioned network. Anyone, anywhere, can now start a node and join the chain — no allow-list, no application, no gatekeeper. The network is open.",
+      "Why this matters — five reasons.",
+      "1. It strengthens our legal posture. One of the recurring questions during the last year of regulatory scrutiny has been: 'How do regulators, courts, or anyone else verify this is a real, functioning blockchain when the source is private?' Fair question. The answer, as of today, is: read the code. It's all there. Honest money has to be honest in public.",
+      "2. It enables real, independent audits. Until now, security claims about TEXITcoin Core had to be taken on trust. With the source public, any developer, researcher, or competing project can review consensus rules, the PoW implementation, the merge-mining logic, the address derivation, the RPC surface — all of it. We expect bugs to be found. We want them to be found. That's the point.",
+      "3. It proves we're real. There has been no shortage of trolls, skeptics, and bad-faith critics claiming TEXITcoin is fake, or vaporware, or a wrapper around someone else's chain. The full source — and the full commit history, with every change, every author, every timestamp from genesis forward — is the most definitive answer we can give.",
+      "4. Anyone can now run a node. Until today, joining the TEXITcoin network as a full node required a key. That made onboarding simpler in the early days, but it also concentrated trust in a way that's incompatible with where we want this network to go. As of today, that key requirement is gone. Clone the repo, build it, run texitcoind, and you're on the chain. Period.",
+      "5. Builders can build. Wallets, exchanges, payment processors, L2s, indexers, block explorers, mining tools — anyone who wanted to integrate TXC but was blocked by 'we can't audit the code' now has the green light. The build page documents the chain parameters, address formats, and REST APIs you'll need. The source code is the ground truth underneath all of it.",
+      "Now — the question some of you are already asking: if anyone can run a node and anyone can mine, doesn't that mean foreign nations, sovereign-wealth funds, central banks, and entities with effectively unlimited capital could just point ASICs at the chain and absorb all the rewards?",
+      "No. And this is important.",
+      "Mining rewards on TEXITcoin are still routed exclusively to a curated set of community-issued addresses. The chain is open and permissionless to participate in. The block reward is not open to capture by deep-pocketed institutions trying to extract hash power and walk away with the coins. The reward goes to people who are part of this community — miners, builders, members, contributors. The more you participate, the more hash power you accumulate, and the more of the emission curve flows to you.",
+      "This is the design we believe in: an open network, a permissionless protocol, and a reward system that rewards human participation rather than concentrated capital. Bitcoin chose one set of trade-offs. We're choosing another. Two years in, we're confident enough in the security, the architecture, and the community to put the code on the table and let it speak.",
+      "If you're a developer: clone the repo, audit it, file issues, send pull requests. If you're a miner: you can now run your own validating node alongside your mining rig — no permission required. If you're a builder: the chain is yours to build on. If you're a skeptic: read the code. Then come back and tell us what you found.",
+      "We've been waiting a long time to write this post. Welcome to the open era of TEXITcoin."
+    ],
+  },
+  {
     slug: "welcome-to-texitcoin-season-3",
     title: "Welcome to TEXITcoin: Season 3",
     date: "2026-03-26",
