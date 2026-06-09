@@ -352,7 +352,7 @@ function WhitepaperPage() {
                 <h4 className="font-display text-lg font-semibold pt-2">5.1 Delivered</h4>
                 <ul className="list-disc space-y-2 pl-5 text-muted-foreground leading-relaxed marker:text-primary">
                   <li><strong className="text-foreground">Genesis (Jan 26, 2024).</strong> First TXC block mined after 12+ years of research.</li>
-                  <li><strong className="text-foreground">Network permissioning (Block 31,343).</strong> TXC successfully deployed Texas-permissioned mining.</li>
+                  <li><strong className="text-foreground">Permissionless network (2026).</strong> Released TEXITcoin Core as open source and removed the key requirement — anyone can now run a node and join the chain.</li>
                   <li><strong className="text-foreground">Cold Storage Coin.</strong> Sleek copper TXC cold-storage wallet by Blockchain Mint, debuted at Consensus 2024 in Austin.</li>
                   <li><strong className="text-foreground">100 active miners (Jun 8, 2024).</strong> TXC welcomes its 100th mining member.</li>
                   <li><strong className="text-foreground">Public exchange listing (Jun 11, 2024).</strong> TXC/USDT live on dex-trade.com.</li>
