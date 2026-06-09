@@ -9,7 +9,7 @@ const PILLARS = [
   {
     tag: "Proof of Work",
     title: "Mining, returned to the people",
-    body: "Before institutions captured crypto, individuals mined coins on their own rigs. TXC restores that original spirit with permissioned, Texas-rooted mining.",
+    body: "Before institutions captured crypto, individuals mined coins on their own rigs. TXC restores that original spirit with a permissionless network and Texas-rooted, community-rewarded mining.",
     img: mining,
     href: "/proof-of-work",
   },
