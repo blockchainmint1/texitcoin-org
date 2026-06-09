@@ -182,10 +182,12 @@ function WhitepaperPage() {
                   Layer&nbsp;1 Scrypt Proof-of-Work blockchain forked from Litecoin and tuned for
                   everyday trade: 3-minute blocks, a 254 TXC starting reward, a hard cap of
                   353,396,296 coins, zero pre-mine, and a halving roughly every 695,662 blocks
-                  that stretches issuance across about 138 years. Mining is permissioned to
-                  Texas to keep the network decentralized among individuals rather than captured
-                  by overseas conglomerates, and TXC merge-mines with Litecoin and Dogecoin so
-                  participants earn without subsidising an electric bill.
+                  that stretches issuance across about 138 years. The network is permissionless —
+                  anyone, anywhere can run a node and join the chain — while block rewards are
+                  routed exclusively to a curated set of community-issued addresses so that
+                  emission flows to individual participants rather than being captured by overseas
+                  conglomerates. TXC merge-mines with Litecoin and Dogecoin so participants earn
+                  without subsidising an electric bill.
                 </p>
               </section>
 
@@ -271,7 +273,8 @@ function WhitepaperPage() {
                         ["Emission window", "~138 years to final block"],
                         ["Pre-mine / team / VC allocation", "0 TXC"],
                         ["Merge mining", "Litecoin (LTC), Dogecoin (DOGE)"],
-                        ["Mining jurisdiction", "Permissioned to Texas"],
+                        ["Network access", "Permissionless (open to all nodes)"],
+                        ["Reward distribution", "Curated community addresses"],
                         ["First block mined", "January 26, 2024"],
                       ].map(([k, v]) => (
                         <tr key={k} className="border-b border-border last:border-0">
@@ -349,7 +352,7 @@ function WhitepaperPage() {
                 <h4 className="font-display text-lg font-semibold pt-2">5.1 Delivered</h4>
                 <ul className="list-disc space-y-2 pl-5 text-muted-foreground leading-relaxed marker:text-primary">
                   <li><strong className="text-foreground">Genesis (Jan 26, 2024).</strong> First TXC block mined after 12+ years of research.</li>
-                  <li><strong className="text-foreground">Network permissioning (Block 31,343).</strong> TXC successfully deployed Texas-permissioned mining.</li>
+                  <li><strong className="text-foreground">Permissionless network (2026).</strong> Released TEXITcoin Core as open source and removed the key requirement — anyone can now run a node and join the chain.</li>
                   <li><strong className="text-foreground">Cold Storage Coin.</strong> Sleek copper TXC cold-storage wallet by Blockchain Mint, debuted at Consensus 2024 in Austin.</li>
                   <li><strong className="text-foreground">100 active miners (Jun 8, 2024).</strong> TXC welcomes its 100th mining member.</li>
                   <li><strong className="text-foreground">Public exchange listing (Jun 11, 2024).</strong> TXC/USDT live on dex-trade.com.</li>

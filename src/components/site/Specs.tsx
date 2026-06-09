@@ -161,7 +161,7 @@ function useLiveStats() {
 }
 
 const SPECS = [
-  { icon: Coins, title: "0.00 pre-mine", body: "Nobody starts with a head start. Mining is permissioned for Texas." },
+  { icon: Coins, title: "0.00 pre-mine", body: "Nobody starts with a head start. Permissionless network, Texas-rooted mining." },
   { icon: Coins, title: "254 block reward", body: "An inflation-resistant reward issued every 3 minutes to secure the chain." },
   { icon: Timer, title: "3-minute spacing", body: "Fast confirmations that keep the network nimble and responsive." },
   { icon: TrendingDown, title: "695,662 halving", body: "Engineered for a century-long emission curve — value preserved across generations." },

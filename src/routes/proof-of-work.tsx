@@ -19,7 +19,7 @@ export const Route = createFileRoute("/proof-of-work")({
       {
         property: "og:description",
         content:
-          "Permissioned, Scrypt-based, Texas-rooted mining designed for transparency, accessibility, and long-term sustainability.",
+          "Permissionless, Scrypt-based, Texas-rooted mining designed for transparency, accessibility, and long-term sustainability.",
       },
     ],
   }),
@@ -90,11 +90,11 @@ function ProofOfWorkPage() {
               right here in Texas.
             </p>
             <p className="mt-4 max-w-xl text-muted-foreground">
-              TEXITcoin is a permissioned, Scrypt-based proof-of-work network designed
-              for transparency, accessibility, and long-term sustainability. Our mining
-              operation is built exclusively in Texas, with deliberate limits to ensure
-              the network remains decentralized, profitable for everyday participants,
-              and truly community-driven.
+              TEXITcoin is a permissionless, Scrypt-based proof-of-work network designed
+              for transparency, accessibility, and long-term sustainability. Anyone can
+              run a node and join the chain, while our Texas-rooted mining operation is
+              deliberately scaled to keep the network decentralized, profitable for
+              everyday participants, and truly community-driven.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -219,10 +219,11 @@ function ProofOfWorkPage() {
               Proof-of-Work: <span className="text-primary">secure, fair, and focused</span>
             </h2>
             <p className="mt-6 text-muted-foreground">
-              TXC uses a permissioned mining model to maintain control over who
-              participates in the network's hashrate. This ensures mining stays aligned
-              with our core principles: Texas-centric operations, capped scale, and
-              protection against external domination and 51% attacks.
+              TXC is a permissionless network — anyone can run a node and contribute
+              hashrate — while block rewards are routed exclusively to community-issued
+              addresses. This keeps mining aligned with our core principles: Texas-centric
+              operations, capped scale, and protection against external domination and
+              51% attacks, without locking anyone out of running the chain.
             </p>
             <p className="mt-4 text-muted-foreground">
               Merge mining with established Scrypt chains like Litecoin and Dogecoin adds
