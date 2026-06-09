@@ -2,9 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+@custom-variant dark (&:where(.dark, .dark *));
 
 /*
  * TEXITcoin-inspired design system.
@@ -106,7 +104,47 @@
 }
 
 .dark {
-  /* light theme only */
+  --background: oklch(0.16 0.03 250);
+  --foreground: oklch(0.96 0.02 90);
+  --surface: oklch(0.20 0.035 250);
+  --surface-2: oklch(0.24 0.04 250);
+
+  --card: oklch(0.20 0.035 250);
+  --card-foreground: oklch(0.96 0.02 90);
+  --popover: oklch(0.20 0.035 250);
+  --popover-foreground: oklch(0.96 0.02 90);
+
+  --primary: oklch(0.66 0.22 25);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.26 0.04 250);
+  --secondary-foreground: oklch(0.96 0.02 90);
+
+  --muted: oklch(0.24 0.035 250);
+  --muted-foreground: oklch(0.72 0.03 250);
+
+  --accent: oklch(0.62 0.14 230);
+  --accent-foreground: oklch(0.99 0 0);
+
+  --sky-line: oklch(0.62 0.14 230);
+  --cream: oklch(0.22 0.04 250);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.96 0.02 90 / 14%);
+  --input: oklch(0.96 0.02 90 / 16%);
+  --ring: oklch(0.66 0.22 25 / 55%);
+
+  --gradient-hero: radial-gradient(
+      ellipse at 70% 30%,
+      oklch(0.24 0.04 250) 0%,
+      oklch(0.18 0.04 250) 55%,
+      oklch(0.14 0.03 250) 100%
+    );
+  --gradient-red: linear-gradient(135deg, oklch(0.66 0.22 25), oklch(0.54 0.20 18));
+  --shadow-glow: 0 30px 80px -30px oklch(0.66 0.22 25 / 55%);
+  --shadow-card: 0 20px 40px -20px oklch(0 0 0 / 55%);
 }
 
 @layer base {
