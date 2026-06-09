@@ -23,7 +23,7 @@ const FAQS = [
   },
   {
     q: "Is mining really open to everyone?",
-    a: "Mining is permissioned to keep TXC rooted in Texas, but the participation bar is intentionally low. You don't need an industrial farm — a regular rig and an internet connection are enough to be part of securing the chain.",
+    a: "TEXITcoin is permissionless — anyone, anywhere can run a node and join the chain. Mining stays rooted in Texas with rewards going to community-issued addresses, but the participation bar is intentionally low. You don't need an industrial farm — a regular rig and an internet connection are enough to be part of securing the chain.",
   },
   {
     q: "Where does the value of TXC come from?",
