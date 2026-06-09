@@ -90,11 +90,11 @@ function ProofOfWorkPage() {
               right here in Texas.
             </p>
             <p className="mt-4 max-w-xl text-muted-foreground">
-              TEXITcoin is a permissioned, Scrypt-based proof-of-work network designed
-              for transparency, accessibility, and long-term sustainability. Our mining
-              operation is built exclusively in Texas, with deliberate limits to ensure
-              the network remains decentralized, profitable for everyday participants,
-              and truly community-driven.
+              TEXITcoin is a permissionless, Scrypt-based proof-of-work network designed
+              for transparency, accessibility, and long-term sustainability. Anyone can
+              run a node and join the chain, while our Texas-rooted mining operation is
+              deliberately scaled to keep the network decentralized, profitable for
+              everyday participants, and truly community-driven.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
