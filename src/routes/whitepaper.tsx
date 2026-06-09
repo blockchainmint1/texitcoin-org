@@ -273,7 +273,8 @@ function WhitepaperPage() {
                         ["Emission window", "~138 years to final block"],
                         ["Pre-mine / team / VC allocation", "0 TXC"],
                         ["Merge mining", "Litecoin (LTC), Dogecoin (DOGE)"],
-                        ["Mining jurisdiction", "Permissioned to Texas"],
+                        ["Network access", "Permissionless (open to all nodes)"],
+                        ["Reward distribution", "Curated community addresses"],
                         ["First block mined", "January 26, 2024"],
                       ].map(([k, v]) => (
                         <tr key={k} className="border-b border-border last:border-0">
