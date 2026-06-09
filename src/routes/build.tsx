@@ -8,7 +8,7 @@ import {
   Database,
   ExternalLink,
   Gauge,
-  Github,
+  Github as GithubIcon,
   GitBranch,
   Globe,
   Layers,
