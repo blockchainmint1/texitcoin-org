@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/txc-logo.png";
 import { LivePrice } from "./LivePrice";
+import { ThemeToggle } from "./ThemeToggle";
 
 type NavLink = { label: string; href: string; external?: boolean; internal?: boolean };
 type NavItem =
@@ -191,6 +192,7 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <LivePrice variant="desktop" />
+          <ThemeToggle className="hidden sm:grid" />
           <Link
             to="/buy"
             className="hidden sm:inline-flex items-center gap-2 rounded-md bg-red-gradient px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-glow hover:brightness-110 transition"
