@@ -182,10 +182,12 @@ function WhitepaperPage() {
                   Layer&nbsp;1 Scrypt Proof-of-Work blockchain forked from Litecoin and tuned for
                   everyday trade: 3-minute blocks, a 254 TXC starting reward, a hard cap of
                   353,396,296 coins, zero pre-mine, and a halving roughly every 695,662 blocks
-                  that stretches issuance across about 138 years. Mining is permissioned to
-                  Texas to keep the network decentralized among individuals rather than captured
-                  by overseas conglomerates, and TXC merge-mines with Litecoin and Dogecoin so
-                  participants earn without subsidising an electric bill.
+                  that stretches issuance across about 138 years. The network is permissionless —
+                  anyone, anywhere can run a node and join the chain — while block rewards are
+                  routed exclusively to a curated set of community-issued addresses so that
+                  emission flows to individual participants rather than being captured by overseas
+                  conglomerates. TXC merge-mines with Litecoin and Dogecoin so participants earn
+                  without subsidising an electric bill.
                 </p>
               </section>
 
