@@ -219,10 +219,11 @@ function ProofOfWorkPage() {
               Proof-of-Work: <span className="text-primary">secure, fair, and focused</span>
             </h2>
             <p className="mt-6 text-muted-foreground">
-              TXC uses a permissioned mining model to maintain control over who
-              participates in the network's hashrate. This ensures mining stays aligned
-              with our core principles: Texas-centric operations, capped scale, and
-              protection against external domination and 51% attacks.
+              TXC is a permissionless network — anyone can run a node and contribute
+              hashrate — while block rewards are routed exclusively to community-issued
+              addresses. This keeps mining aligned with our core principles: Texas-centric
+              operations, capped scale, and protection against external domination and
+              51% attacks, without locking anyone out of running the chain.
             </p>
             <p className="mt-4 text-muted-foreground">
               Merge mining with established Scrypt chains like Litecoin and Dogecoin adds
