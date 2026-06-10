@@ -1031,6 +1031,98 @@ cd texitcoin
           </div>
         </section>
 
+        {/* SPIN UP A NODE — Node Spinner app */}
+        <section id="spin-up-node" className="relative border-b border-border bg-surface/40">
+          <div className="mx-auto max-w-7xl px-6 py-24 md:py-28">
+            <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-primary">
+                  <Server className="h-3 w-3" />
+                  New · Node Spinner
+                </div>
+                <h2 className="mt-5 font-display text-4xl font-bold leading-[1.05] md:text-5xl text-balance">
+                  Spin up a TXC node <span className="text-primary">from scratch</span> — guided, in minutes.
+                </h2>
+                <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+                  Don't want to wrangle <code className="font-mono text-foreground/90">autogen.sh</code>,
+                  build flags, and config files by hand? The TXC Node Setup app walks you through
+                  every step — pick your OS, answer a few questions, and get a copy-paste recipe
+                  that gets a full node synced and listening on the network.
+                </p>
+
+                <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /> Step-by-step install for Linux, macOS, and Windows (WSL).</li>
+                  <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /> Auto-generates a <code className="font-mono text-foreground/90">texitcoin.conf</code> tuned to how you'll use the node.</li>
+                  <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /> Sanity checks: genesis hash, peer count, sync progress, RPC reachability.</li>
+                  <li className="flex items-start gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /> Optional add-ons: mining, Esplora/mempool, Omni layer, systemd service.</li>
+                </ul>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href="https://spinner.texitcoin.org"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md bg-red-gradient px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
+                  >
+                    <Rocket className="h-4 w-4" /> Launch the Node Spinner
+                    <ExternalLink className="h-3.5 w-3.5 opacity-80" />
+                  </a>
+                  <a
+                    href={`${GITHUB_REPO_URL}/blob/master/README.md`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-surface"
+                  >
+                    <Terminal className="h-4 w-4" /> Or read the manual
+                  </a>
+                </div>
+              </div>
+
+              {/* Right column — visual */}
+              <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                <div className="flex items-center gap-3 border-b border-border/60 pb-4">
+                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-red-gradient shadow-glow">
+                    <Server className="h-5 w-5 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <div className="font-display text-base font-bold">spinner.texitcoin.org</div>
+                    <div className="text-xs text-muted-foreground">TXC Node Setup · guided installer</div>
+                  </div>
+                </div>
+
+                <ol className="mt-5 space-y-4 text-sm">
+                  {[
+                    { n: "1", t: "Pick your platform", d: "Ubuntu/Debian, Fedora, macOS, or Windows (WSL2)." },
+                    { n: "2", t: "Choose a node profile", d: "Full node, pruned, mining, or Esplora/mempool index." },
+                    { n: "3", t: "Copy the generated commands", d: "Dependencies, build, config, firewall, and service unit." },
+                    { n: "4", t: "Verify & join the network", d: "Genesis hash check, peer count, and sync progress." },
+                  ].map((s) => (
+                    <li key={s.n} className="flex items-start gap-3">
+                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md border border-primary/40 bg-primary/10 font-mono text-xs font-semibold text-primary">
+                        {s.n}
+                      </span>
+                      <div>
+                        <div className="font-semibold">{s.t}</div>
+                        <div className="text-xs text-muted-foreground">{s.d}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+
+                <a
+                  href="https://spinner.texitcoin.org"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+                >
+                  Open spinner.texitcoin.org
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Why build here */}
         <section className="py-24">
           <div className="mx-auto max-w-7xl px-6">
