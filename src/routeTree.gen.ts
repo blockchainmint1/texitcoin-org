@@ -20,6 +20,7 @@ import { Route as TexasRouteImport } from './routes/texas'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SecAndCryptoRouteImport } from './routes/sec-and-crypto'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -98,6 +99,11 @@ const TeamRoute = TeamRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecAndCryptoRoute = SecAndCryptoRouteImport.update({
+  id: '/sec-and-crypto',
+  path: '/sec-and-crypto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -245,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
@@ -282,6 +289,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
@@ -320,6 +328,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
@@ -359,6 +368,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/team'
     | '/terms'
@@ -396,6 +406,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/team'
     | '/terms'
@@ -433,6 +444,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/team'
     | '/terms'
@@ -471,6 +483,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   RoadmapRoute: typeof RoadmapRoute
+  SecAndCryptoRoute: typeof SecAndCryptoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
@@ -565,6 +578,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sec-and-crypto': {
+      id: '/sec-and-crypto'
+      path: '/sec-and-crypto'
+      fullPath: '/sec-and-crypto'
+      preLoaderRoute: typeof SecAndCryptoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/roadmap': {
@@ -759,6 +779,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
   RoadmapRoute: RoadmapRoute,
+  SecAndCryptoRoute: SecAndCryptoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
@@ -778,13 +799,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
