@@ -17,6 +17,7 @@ import {
   HelpCircle,
   Eye,
   DoorOpen,
+  ExternalLink,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
