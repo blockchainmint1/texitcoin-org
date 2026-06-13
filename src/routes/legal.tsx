@@ -260,8 +260,9 @@ function LegalPage() {
                 TL;DR
               </div>
               <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">
-                Where things stand right now
+                TSSB case — where things stand right now
               </h2>
+
               <ul className="mt-6 grid gap-3 md:grid-cols-2">
                 {TLDR.map((item) => (
                   <li
