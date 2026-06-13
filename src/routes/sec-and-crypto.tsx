@@ -103,7 +103,7 @@ const CONTRASTS = [
     label: "How it started",
     security: "A founding team raises money from the public, often pre-launch, with a whitepaper and a roadmap.",
     currency:
-      "TXC's genesis block was mined on January 26, 2024 in McKinney, Texas. No pre-mine. No raise. No team allocation. Same emission schedule available to anyone with a rig.",
+      "TXC's genesis block was mined on January 26, 2024 in McKinney, Texas. No pre-mine. No raise. No team allocation. Same emission schedule available to anyone that joins through mineTXC.",
   },
   {
     label: "Where new coins come from",
@@ -115,7 +115,7 @@ const CONTRASTS = [
     label: "Who profits from whose work",
     security: "Buyers expect profit from the efforts of the founding team and promoters.",
     currency:
-      "Holders profit from using TXC, accepting it, and the broad network of independent miners and merchants doing their own thing. There is no 'team' that can ship features that make the token go up.",
+      "Holders profit from using TXC, accepting it, and the broad network of independent traders and merchants doing their own thing. There is no 'team' that can ship features that make the token go up.",
   },
   {
     label: "What we promise",
@@ -619,12 +619,12 @@ function SecAndCryptoPage() {
           <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl text-balance">
             Excited about the upside. Disciplined about how we talk about it.
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            We believe TXC will become more valuable as more people use it, accept it, and mine it.
-            That's how currencies appreciate — through utility and demand, not through a team
-            shipping features. But there is a real, important difference between believing in a
-            currency's future and pitching it like a stock. We refuse to do the second.
-          </p>
+      <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+        We believe TXC will become more valuable as more people use it, accept it, and mine it.
+        That's how currencies appreciate — through utility and demand, not through a team
+        shipping features or influencer pumps. But there is a real, important difference between believing in a
+        currency's future and pitching it like a stock. We refuse to do the second.
+      </p>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
