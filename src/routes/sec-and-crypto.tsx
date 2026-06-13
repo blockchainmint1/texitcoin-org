@@ -882,3 +882,31 @@ function SecAndCryptoPage() {
     </div>
   );
 }
+
+type RefItem = { label: string; href: string; note?: string };
+
+function RefGroup({ title, items }: { title: string; items: RefItem[] }) {
+  return (
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-7">
+      <div className="text-xs font-bold uppercase tracking-[0.22em] text-primary">{title}</div>
+      <ul className="mt-4 space-y-4">
+        {items.map((item) => (
+          <li key={item.href} className="text-sm md:text-base">
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-start gap-1.5 font-semibold text-foreground underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+            >
+              <span>{item.label}</span>
+              <ExternalLink className="mt-1 h-3.5 w-3.5 flex-shrink-0 opacity-70" />
+            </a>
+            {item.note && (
+              <div className="mt-1 text-xs text-muted-foreground md:text-sm">{item.note}</div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
