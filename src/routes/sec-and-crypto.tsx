@@ -832,6 +832,22 @@ function SecAndCryptoPage() {
                 },
               ]}
             />
+
+            <RefGroup
+              title="DOJ criminal cases (not SEC, but same fraud pattern)"
+              items={[
+                {
+                  label: "United States v. Goettsche et al. — BitClub Network (D.N.J. 2019)",
+                  href: "https://www.justice.gov/usao-nj/bitclub",
+                  note: "Charged as a $722M wire-fraud conspiracy and Ponzi run inside a 'cryptocurrency mining pool.' DOJ prosecuted it as fraud, not as a securities case.",
+                },
+                {
+                  label: "DOJ indictment — BitClub Network (Dec 2019)",
+                  href: "https://www.justice.gov/usao-nj/page/file/1225076/dl?inline=",
+                },
+              ]}
+            />
+
           </div>
         </section>
 
