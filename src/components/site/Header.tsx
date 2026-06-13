@@ -28,7 +28,7 @@ const NAV: NavItem[] = [
       { label: "The Mine", href: "/mine", internal: true },
       { label: "Tokenomics", href: "/tokenomics", internal: true },
       { label: "TXC in the News", href: "/in-the-news", internal: true },
-      { label: "TSSB Legal Updates", href: "/legal", internal: true },
+      { label: "Legal Updates", href: "/legal", internal: true },
       { label: "Troll Index", href: "/trolls", internal: true },
       { label: "Videos & Media", href: "/videos", internal: true },
       { label: "Why Texas", href: "/texas", internal: true },
