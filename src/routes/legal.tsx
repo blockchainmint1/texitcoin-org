@@ -19,20 +19,21 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/legal")({
   head: () => ({
     meta: [
-      { title: "TSSB vs. TEXITcoin — Real-Time Legal Updates" },
+      { title: "Legal & Regulatory — TEXITcoin" },
       {
         name: "description",
         content:
-          "The full chronology of the Texas State Securities Board case against TEXITcoin. No spin, just the filings, the dates, and our side of the story.",
+          "TEXITcoin's legal and regulatory hub: the full TSSB case chronology, primary filings, and a deep dive on how the SEC has actually engaged with crypto.",
       },
-      { property: "og:title", content: "TSSB vs. TEXITcoin — Real-Time Legal Updates" },
+      { property: "og:title", content: "Legal & Regulatory — TEXITcoin" },
       {
         property: "og:description",
         content:
-          "Transparency as the law allows. Every motion, every hearing date, every filing — laid out in plain English.",
+          "The TSSB case timeline, primary filings, and the bigger regulatory picture — in plain English.",
       },
     ],
   }),
+
   component: LegalPage,
 });
 
