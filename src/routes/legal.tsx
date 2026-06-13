@@ -19,20 +19,21 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/legal")({
   head: () => ({
     meta: [
-      { title: "TSSB vs. TEXITcoin — Real-Time Legal Updates" },
+      { title: "Legal & Regulatory — TEXITcoin" },
       {
         name: "description",
         content:
-          "The full chronology of the Texas State Securities Board case against TEXITcoin. No spin, just the filings, the dates, and our side of the story.",
+          "TEXITcoin's legal and regulatory hub: the full TSSB case chronology, primary filings, and a deep dive on how the SEC has actually engaged with crypto.",
       },
-      { property: "og:title", content: "TSSB vs. TEXITcoin — Real-Time Legal Updates" },
+      { property: "og:title", content: "Legal & Regulatory — TEXITcoin" },
       {
         property: "og:description",
         content:
-          "Transparency as the law allows. Every motion, every hearing date, every filing — laid out in plain English.",
+          "The TSSB case timeline, primary filings, and the bigger regulatory picture — in plain English.",
       },
     ],
   }),
+
   component: LegalPage,
 });
 
@@ -259,8 +260,9 @@ function LegalPage() {
                 TL;DR
               </div>
               <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">
-                Where things stand right now
+                TSSB case — where things stand right now
               </h2>
+
               <ul className="mt-6 grid gap-3 md:grid-cols-2">
                 {TLDR.map((item) => (
                   <li
@@ -275,82 +277,21 @@ function LegalPage() {
             </div>
           </motion.div>
 
-          {/* Featured: SEC & Crypto deep dive */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="relative mt-10 overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-card via-card to-primary/10 p-8 shadow-card md:p-12"
-          >
-            <div className="pointer-events-none absolute -left-24 -bottom-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
-            <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
-            <div className="relative grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-                  <BookOpen className="h-3.5 w-3.5" />
-                  Featured deep dive
-                </div>
-                <h2 className="mt-5 font-display text-3xl font-bold leading-tight md:text-5xl text-balance">
-                  The SEC didn&apos;t show up for currency.{" "}
-                  <span className="text-primary">They showed up for the ICO.</span>
-                </h2>
-                <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg text-balance">
-                  Want the bigger picture behind the TSSB case? We mapped the
-                  full timeline of the SEC&apos;s relationship with crypto —
-                  when they actually walked in, what they went after, the
-                  Ethereum parallel, and why a Texas-mined, proof-of-work
-                  currency like TXC looks nothing like the things securities
-                  regulators were built for.
-                </p>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <Link
-                    to="/sec-and-crypto"
-                    className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
-                  >
-                    Read the deep dive
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <div className="inline-flex items-center gap-2 rounded-md border border-border bg-background/60 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    <ScrollText className="h-3.5 w-3.5 text-primary" />
-                    Primary sources linked throughout
-                  </div>
-                </div>
-              </div>
-
-              <ul className="grid gap-2.5 rounded-2xl border border-border bg-background/50 p-5 text-sm md:p-6">
-                {[
-                  "Pre-ICO fraud cases (Shavers, Voorhees)",
-                  "The 2017 DAO Report & ICO wave",
-                  "DeFi, exchanges & staking enforcement",
-                  "The Ethereum parallel + DAO rollback",
-                  "What &quot;decentralized&quot; & &quot;permissionless&quot; really mean",
-                  "Other regulators: FinCEN, OFAC, CFTC, FTC, DOJ",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span
-                      className="text-foreground/85"
-                      dangerouslySetInnerHTML={{ __html: item }}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
         </section>
+
 
         {/* Timeline */}
         <section className="relative mx-auto mt-24 max-w-5xl px-6">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-              <ScrollText className="h-4 w-4" /> The full chronology
+              <ScrollText className="h-4 w-4" /> TSSB case · full chronology
             </div>
             <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">
-              Every <span className="text-primary">filing</span>, every{" "}
+              Every <span className="text-primary">TSSB filing</span>, every{" "}
               <span className="text-primary">hearing</span>, every{" "}
               <span className="text-primary">twist</span>.
             </h2>
+
             <p className="mt-4 mx-auto max-w-2xl text-muted-foreground">
               Newest at the top. Click through to read the actual filings on
               IPFS — pinned, immutable, no edits.
@@ -407,7 +348,72 @@ function LegalPage() {
             })}
           </ol>
 
+          {/* Featured: SEC & Crypto deep dive */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative mt-16 overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-card via-card to-primary/10 p-8 shadow-card md:p-12"
+          >
+            <div className="pointer-events-none absolute -left-24 -bottom-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+            <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
+            <div className="relative grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+                  <BookOpen className="h-3.5 w-3.5" />
+                  Featured deep dive · Beyond the TSSB
+                </div>
+                <h2 className="mt-5 font-display text-3xl font-bold leading-tight md:text-5xl text-balance">
+                  The SEC didn&apos;t show up for currency.{" "}
+                  <span className="text-primary">They showed up for the ICO.</span>
+                </h2>
+                <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg text-balance">
+                  Want the bigger picture behind the TSSB case? We mapped the
+                  full timeline of the SEC&apos;s relationship with crypto —
+                  when they actually walked in, what they went after, the
+                  Ethereum parallel, and why a Texas-mined, proof-of-work
+                  currency like TXC looks nothing like the things securities
+                  regulators were built for.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <Link
+                    to="/sec-and-crypto"
+                    className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
+                  >
+                    Read the deep dive
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <div className="inline-flex items-center gap-2 rounded-md border border-border bg-background/60 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    <ScrollText className="h-3.5 w-3.5 text-primary" />
+                    Primary sources linked throughout
+                  </div>
+                </div>
+              </div>
+
+              <ul className="grid gap-2.5 rounded-2xl border border-border bg-background/50 p-5 text-sm md:p-6">
+                {[
+                  "Pre-ICO fraud cases (Shavers, Voorhees)",
+                  "The 2017 DAO Report & ICO wave",
+                  "DeFi, exchanges & staking enforcement",
+                  "The Ethereum parallel + DAO rollback",
+                  "What &quot;decentralized&quot; & &quot;permissionless&quot; really mean",
+                  "Other regulators: FinCEN, OFAC, CFTC, FTC, DOJ",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span
+                      className="text-foreground/85"
+                      dangerouslySetInnerHTML={{ __html: item }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+
           <div className="mt-16 rounded-3xl border border-border bg-card/60 p-8 text-center shadow-card md:p-10">
+
             <div className="mx-auto inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
               <Sparkles className="h-3.5 w-3.5" /> More to come
             </div>
