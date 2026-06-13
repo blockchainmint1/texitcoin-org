@@ -284,13 +284,14 @@ function LegalPage() {
         <section className="relative mx-auto mt-24 max-w-5xl px-6">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-              <ScrollText className="h-4 w-4" /> The full chronology
+              <ScrollText className="h-4 w-4" /> TSSB case · full chronology
             </div>
             <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl">
-              Every <span className="text-primary">filing</span>, every{" "}
+              Every <span className="text-primary">TSSB filing</span>, every{" "}
               <span className="text-primary">hearing</span>, every{" "}
               <span className="text-primary">twist</span>.
             </h2>
+
             <p className="mt-4 mx-auto max-w-2xl text-muted-foreground">
               Newest at the top. Click through to read the actual filings on
               IPFS — pinned, immutable, no edits.
