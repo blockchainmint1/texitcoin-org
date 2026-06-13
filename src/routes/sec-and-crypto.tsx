@@ -17,6 +17,7 @@ import {
   HelpCircle,
   Eye,
   DoorOpen,
+  ExternalLink,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -673,6 +674,167 @@ function SecAndCryptoPage() {
           </div>
         </section>
 
+        {/* Sources & references */}
+        <section className="mx-auto mt-24 max-w-5xl px-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            Sources &amp; references
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl text-balance">
+            Don't take our word for it — read the filings.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Every case and document referenced above is public. Here are the primary sources so you
+            can verify the history yourself.
+          </p>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <RefGroup
+              title="Pre-ICO era (2013–2015)"
+              items={[
+                {
+                  label: "SEC v. Trendon Shavers / Bitcoin Savings & Trust (2013)",
+                  href: "https://www.sec.gov/litigation/litreleases/2013/lr22792.htm",
+                  note: "First major SEC crypto enforcement — a Bitcoin-denominated Ponzi.",
+                },
+                {
+                  label: "SEC v. Erik T. Voorhees (2014)",
+                  href: "https://www.sec.gov/news/press-release/2014-111",
+                  note: "Unregistered offerings of SatoshiDice and FeedZeBirds shares.",
+                },
+                {
+                  label: "SEC Investor Alert: Bitcoin and Other Virtual Currency-Related Investments (2014)",
+                  href: "https://www.sec.gov/investor/alerts/ia_bitcoin.pdf",
+                },
+              ]}
+            />
+
+            <RefGroup
+              title="The DAO Report and the ICO wave"
+              items={[
+                {
+                  label: "SEC Report of Investigation: The DAO (July 2017)",
+                  href: "https://www.sec.gov/litigation/investreport/34-81207.pdf",
+                  note: "The formal statement that tokens can be securities under Howey.",
+                },
+                {
+                  label: "SEC v. Munchee Inc. (2017)",
+                  href: "https://www.sec.gov/litigation/admin/2017/33-10445.pdf",
+                },
+                {
+                  label: "SEC v. Telegram (2020) — $1.2B returned, $18.5M penalty",
+                  href: "https://www.sec.gov/news/press-release/2020-146",
+                },
+                {
+                  label: "SEC v. Kik Interactive (Kin)",
+                  href: "https://www.sec.gov/news/press-release/2019-87",
+                },
+                {
+                  label: "SEC v. Block.one (EOS)",
+                  href: "https://www.sec.gov/news/press-release/2019-202",
+                },
+              ]}
+            />
+
+            <RefGroup
+              title="DeFi, exchanges, staking (2021–2023)"
+              items={[
+                {
+                  label: "SEC v. Ripple Labs",
+                  href: "https://www.sec.gov/news/press-release/2020-338",
+                  note: "Lost on institutional sales, won on programmatic sales.",
+                },
+                {
+                  label: "SEC v. Coinbase (2023)",
+                  href: "https://www.sec.gov/news/press-release/2023-102",
+                },
+                {
+                  label: "SEC v. Binance (2023)",
+                  href: "https://www.sec.gov/news/press-release/2023-101",
+                },
+                {
+                  label: "Kraken staking settlement (2023)",
+                  href: "https://www.sec.gov/news/press-release/2023-25",
+                },
+                {
+                  label: "SEC v. Terraform Labs and Do Kwon",
+                  href: "https://www.sec.gov/news/press-release/2023-32",
+                },
+                {
+                  label: "SEC v. Celsius Network and Alex Mashinsky",
+                  href: "https://www.sec.gov/news/press-release/2023-141",
+                },
+                {
+                  label: "SEC v. BitConnect",
+                  href: "https://www.sec.gov/news/press-release/2021-172",
+                },
+              ]}
+            />
+
+            <RefGroup
+              title="The 2024–2026 retreat"
+              items={[
+                {
+                  label: "Spot Bitcoin ETF approvals (Jan 2024)",
+                  href: "https://www.sec.gov/news/statement/gensler-statement-spot-bitcoin-011023",
+                },
+                {
+                  label: "SEC Division of Corporation Finance — Statement on Meme Coins (2025)",
+                  href: "https://www.sec.gov/newsroom/speeches-statements/staff-statement-meme-coins",
+                },
+                {
+                  label: "SEC Crypto Task Force",
+                  href: "https://www.sec.gov/about/crypto-task-force",
+                },
+              ]}
+            />
+
+            <RefGroup
+              title="Background and other regulators"
+              items={[
+                {
+                  label: "The Howey Test — SEC v. W.J. Howey Co. (1946)",
+                  href: "https://supreme.justia.com/cases/federal/us/328/293/",
+                },
+                {
+                  label: "Hinman 'sufficiently decentralized' speech (2018)",
+                  href: "https://www.sec.gov/news/speech/speech-hinman-061418",
+                  note: "A speech, not a rule — and the SEC has walked back its precedential weight.",
+                },
+                {
+                  label: "OFAC sanctions on Tornado Cash (2022)",
+                  href: "https://home.treasury.gov/news/press-releases/jy0916",
+                },
+                {
+                  label: "FinCEN guidance on virtual currency",
+                  href: "https://www.fincen.gov/resources/statutes-regulations/guidance/application-fincens-regulations-persons-administering",
+                },
+                {
+                  label: "CFTC crypto enforcement",
+                  href: "https://www.cftc.gov/digitalassets/index.htm",
+                },
+                {
+                  label: "FTC actions on crypto MLM and deceptive marketing",
+                  href: "https://www.ftc.gov/news-events/topics/consumer-finance/cryptocurrency",
+                },
+              ]}
+            />
+
+            <RefGroup
+              title="The Ethereum / DAO rollback"
+              items={[
+                {
+                  label: "The DAO hack and Ethereum hard fork — historical overview",
+                  href: "https://www.coindesk.com/learn/understanding-the-dao-attack",
+                },
+                {
+                  label: "Ethereum Classic — the chain that refused to fork",
+                  href: "https://ethereumclassic.org/why-classic",
+                },
+              ]}
+            />
+          </div>
+        </section>
+
         {/* CTAs */}
         <section className="mx-auto mt-24 max-w-4xl px-6">
           <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-8 shadow-card md:p-12">
@@ -717,6 +879,34 @@ function SecAndCryptoPage() {
       </main>
 
       <Footer />
+    </div>
+  );
+}
+
+type RefItem = { label: string; href: string; note?: string };
+
+function RefGroup({ title, items }: { title: string; items: RefItem[] }) {
+  return (
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-7">
+      <div className="text-xs font-bold uppercase tracking-[0.22em] text-primary">{title}</div>
+      <ul className="mt-4 space-y-4">
+        {items.map((item) => (
+          <li key={item.href} className="text-sm md:text-base">
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-start gap-1.5 font-semibold text-foreground underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+            >
+              <span>{item.label}</span>
+              <ExternalLink className="mt-1 h-3.5 w-3.5 flex-shrink-0 opacity-70" />
+            </a>
+            {item.note && (
+              <div className="mt-1 text-xs text-muted-foreground md:text-sm">{item.note}</div>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
