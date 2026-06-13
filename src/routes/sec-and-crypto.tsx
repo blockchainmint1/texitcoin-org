@@ -10,6 +10,13 @@ import {
   AlertTriangle,
   Sparkles,
   ArrowRight,
+  Network,
+  Undo2,
+  Landmark,
+  Search,
+  HelpCircle,
+  Eye,
+  DoorOpen,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -36,12 +43,21 @@ export const Route = createFileRoute("/sec-and-crypto")({
 
 const TIMELINE = [
   {
+    year: "2013–2015",
+    title: "Early, Fraud-Focused Appearances",
+    icon: Search,
+    body:
+      "The SEC's first crypto cases weren't about Bitcoin-the-currency. They were about people using Bitcoin to run old-fashioned scams. Trendon Shavers / 'Bitcoin Savings & Trust' (2013) was a textbook Ponzi — he raised 700,000 BTC promising 7% weekly returns and paid early investors with new deposits. Erik Voorhees settled in 2014 over unregistered securities sales tied to SatoshiDice and FeedZeBirds shares. In 2014 the SEC put out an Investor Alert warning about Bitcoin-denominated Ponzis. The through-line is the same one we'll see for the next decade: the SEC shows up when somebody raises money from the public and lies about what they'll do with it.",
+    secActivity:
+      "SEC v. Shavers (2013) — first major crypto enforcement, a Ponzi, not an attack on Bitcoin itself. Voorhees settlement (2014) over unregistered share sales.",
+  },
+  {
     year: "2009–2015",
-    title: "Currency Era",
+    title: "The Currency Era (in parallel)",
     icon: Coins,
     body:
-      "Bitcoin launches. Litecoin, Dogecoin, Monero, and a handful of forks follow. The whole pitch is the same: peer-to-peer electronic cash, open mining, no issuer, no promoter, no roadmap to riches. The SEC barely acknowledges crypto exists. There's nothing for them to do — nobody is selling shares of anything.",
-    secActivity: "Essentially none.",
+      "While those fraud cases played out, the broader crypto world stayed mostly currency-shaped. Bitcoin, Litecoin, Dogecoin, Monero — peer-to-peer cash, open mining, no issuer, no promoter, no roadmap to riches. The SEC engaged with crypto only when it was wrapped around a fundraise or a fraud. The asset class itself was not the target.",
+    secActivity: "No general 'crypto is securities' position. Targeted only at fraud and unregistered share sales.",
   },
   {
     year: "2016–2017",
@@ -66,7 +82,7 @@ const TIMELINE = [
     title: "DeFi, Staking, and Exchanges",
     icon: ShieldAlert,
     body:
-      "The fundraising never stopped — it just rebranded. Yield farms, governance tokens, staking-as-a-service, lending protocols, NFT 'projects' with roadmaps and treasuries. The SEC widens the net: Coinbase, Binance, Kraken's staking program, BlockFi, Celsius, LBRY, Ripple. Almost every action involves either an issuer raising money or an intermediary running an unregistered investment product.",
+      "The fundraising never stopped — it just rebranded. Yield farms, governance tokens, staking-as-a-service, lending protocols, NFT 'projects' with roadmaps and treasuries. The SEC widens the net: Coinbase, Binance, Kraken's staking program, BlockFi, Celsius, LBRY, Ripple. Almost every action involves either an issuer raising money or an intermediary running an unregistered investment product — and a striking number also involve outright fraud (Celsius, FTX-adjacent actors, Terraform Labs).",
     secActivity:
       "Gensler-era SEC files record numbers of crypto enforcement actions. Ripple loses on institutional sales, wins on programmatic sales — the line is drawn around fundraising, not around the asset itself.",
   },
@@ -105,6 +121,88 @@ const CONTRASTS = [
     security: "Returns. Yield. APY. 'To the moon.' Price targets. Token unlocks.",
     currency:
       "Cheap, fast, peer-to-peer payments. A scarce supply. A community rooted in Texas. That's the pitch. Period.",
+  },
+];
+
+const REGULATORS = [
+  {
+    name: "FinCEN",
+    icon: Landmark,
+    role: "Money transmission, KYC/AML.",
+    note: "Treats crypto businesses as money services businesses. Cares about how value moves, not whether the asset is a security.",
+  },
+  {
+    name: "OFAC",
+    icon: ShieldAlert,
+    role: "Sanctions enforcement.",
+    note: "Has gone after mixers (Tornado Cash) and wallets linked to sanctioned entities. Doesn't care what you call the asset.",
+  },
+  {
+    name: "CFTC",
+    icon: Scale,
+    role: "Commodities and derivatives.",
+    note: "Considers Bitcoin and Ether commodities. Polices fraud and manipulation in crypto derivatives markets. Has its own enforcement docket — separate from the SEC's.",
+  },
+  {
+    name: "FTC",
+    icon: AlertTriangle,
+    role: "Consumer protection, deceptive marketing, MLM.",
+    note: "When 'crypto' shows up as a multi-level marketing pitch — recruit-to-earn, downlines, guaranteed returns — the FTC takes the case as deceptive practice. The asset is incidental.",
+  },
+];
+
+const DEFINITIONS = [
+  {
+    term: "Decentralized",
+    icon: Network,
+    meanings: [
+      {
+        whose: "To us",
+        text:
+          "No single party can stop the network, no single party controls issuance, and the rules are enforced by independent nodes anyone can run.",
+      },
+      {
+        whose: "To crypto generally",
+        text:
+          "Often a marketing word. Routinely applied to networks with a small set of validators, an upgradeable contract, or a foundation that can ship a hard fork.",
+      },
+      {
+        whose: "To the SEC",
+        text:
+          "A factual question about who is doing the essential managerial work. If a team is still indispensable, the SEC tends to treat the network as centralized regardless of the marketing.",
+      },
+      {
+        whose: "Defined in law?",
+        text:
+          "No — there is no statutory definition. 'Sufficiently decentralized' was a William Hinman speech in 2018, not a rule, and the SEC has since walked back its precedential weight.",
+      },
+    ],
+  },
+  {
+    term: "Permissionless",
+    icon: DoorOpen,
+    meanings: [
+      {
+        whose: "To us",
+        text:
+          "Anyone can run a node, anyone can mine through the public mining front door, anyone can hold a wallet, anyone can send and receive, anyone can read the full block history.",
+      },
+      {
+        whose: "To crypto generally",
+        text:
+          "Usually means 'no KYC to use the protocol.' But the asset, the bridges, the front-ends, and the on-ramps almost always have permissions of their own.",
+      },
+      {
+        whose: "To the SEC",
+        text:
+          "Largely irrelevant on its own. They care about who is selling, who is promoting, and what investors were promised — not whether the underlying protocol is open.",
+      },
+      {
+        whose: "Defined in law?",
+        text:
+          "No. Like 'decentralized,' it's an industry term, not a statutory one. Useful as a description; meaningless as a defense.",
+      },
+    ],
   },
 ];
 
@@ -147,9 +245,10 @@ function SecAndCryptoPage() {
               choice, not in spite of it.
             </p>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-              Bitcoin in 2009 was boring to securities regulators. Nobody raised money. Nobody
-              promised returns. There was no team to sue. The asset was, simply, a currency. If
-              crypto had stayed on that path, the SEC would have had almost nothing to do.
+              Bitcoin in 2009 was boring to securities regulators. The handful of SEC actions
+              before 2016 were narrow and fraud-focused — Ponzis denominated in BTC, unregistered
+              share sales by crypto entrepreneurs. The asset class itself wasn't the target. That
+              changed the second teams started raising money by selling tokens.
             </p>
           </div>
         </section>
@@ -168,7 +267,7 @@ function SecAndCryptoPage() {
               const Icon = era.icon;
               return (
                 <motion.div
-                  key={era.year}
+                  key={era.year + era.title}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -203,6 +302,32 @@ function SecAndCryptoPage() {
           </div>
         </section>
 
+        {/* Fraud is the through-line */}
+        <section className="mx-auto mt-24 max-w-4xl px-6">
+          <div className="rounded-2xl border border-border bg-card p-8 shadow-card md:p-10">
+            <div className="flex items-center gap-3">
+              <Search className="h-6 w-6 text-primary" />
+              <div className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
+                The through-line
+              </div>
+            </div>
+            <h2 className="mt-4 font-display text-3xl font-bold md:text-4xl text-balance">
+              Strip away the asset class, and most of these cases are about fraud.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-foreground/85">
+              Shavers — Ponzi. Telegram — promised tokens that were never delivered as described.
+              Celsius — lied to depositors about how their assets were used. Terraform / Do Kwon
+              — misrepresented the stability mechanism behind UST. FTX-adjacent actors —
+              commingling and theft. BitConnect — Ponzi with a referral pyramid.
+            </p>
+            <p className="mt-4 text-lg leading-relaxed text-foreground/85">
+              The SEC's job isn't to dislike crypto. Their job is to protect investors from lies.
+              When you read the cases instead of the headlines, the cases overwhelmingly involve
+              someone lying to the public to get their money. That's the work. We support it.
+            </p>
+          </div>
+        </section>
+
         {/* Pattern */}
         <section className="mx-auto mt-24 max-w-4xl px-6">
           <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
@@ -217,10 +342,212 @@ function SecAndCryptoPage() {
             profit. That's the Howey test, applied honestly.
           </p>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Almost nothing the SEC has ever prosecuted in crypto has been an attack on a
-            permissionless, no-pre-mine, mined-from-zero currency. The closest they've come is
-            enforcement against intermediaries — exchanges, lenders, and staking products — that
-            wrapped real currencies in investment-contract packaging.
+            Almost nothing the SEC has ever prosecuted in crypto has been an attack on a no-pre-mine,
+            mined-from-zero currency. The closest they've come is enforcement against intermediaries
+            — exchanges, lenders, and staking products — that wrapped real currencies in
+            investment-contract packaging.
+          </p>
+        </section>
+
+        {/* The Ethereum parallel */}
+        <section className="mx-auto mt-24 max-w-5xl px-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            The Ethereum parallel
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl text-balance">
+            Even the networks held up as "decentralized" started centralized — and stayed reversible.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Ethereum is the easiest comparison. It launched with a presale, a foundation, a small
+            core team writing the code, and a clear central point of leadership in Vitalik
+            Buterin. It grew into something broader over time — more clients, more validators, a
+            global developer base — and that maturation is, fairly, why it gets called
+            decentralized today.
+          </p>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+            TEXITcoin has been honest about the same arc. We started extremely concentrated — one
+            mining operation, one location, closed source, a small set of nodes we ran ourselves.
+            We've been steadily opening every layer: public mining through mineTXC, open-source
+            wallet and node software, third-party nodes anyone can spin up, a published
+            block-explorer, and a roadmap that keeps pushing in that direction. In our SEC
+            deposition this week, the agency itself noted the progress — that today anyone with
+            the skill and the hardware can spin up a TXC node and join the network.
+          </p>
+
+          {/* The DAO rollback callout */}
+          <div className="mt-10 rounded-2xl border-2 border-primary/40 bg-card p-8 shadow-card md:p-10">
+            <div className="flex items-center gap-3">
+              <Undo2 className="h-6 w-6 text-primary" />
+              <div className="text-xs font-bold uppercase tracking-[0.22em] text-primary">
+                Feature: decentralized AND permanent — but reversible?
+              </div>
+            </div>
+            <h3 className="mt-4 font-display text-2xl font-bold md:text-3xl text-balance">
+              In 2016, Ethereum was hacked. The community didn't patch around it. They rolled
+              back the chain.
+            </h3>
+            <p className="mt-5 text-lg leading-relaxed text-foreground/85">
+              The DAO hack drained about $60M of ETH. Ethereum's leadership and the largest
+              stakeholders coordinated a hard fork that rewrote history — undoing the theft and
+              returning the funds. The chain that refused to roll back still exists today as
+              Ethereum Classic, a much smaller network.
+            </p>
+            <p className="mt-4 text-lg leading-relaxed text-foreground/85">
+              This is the central tension in crypto's self-description. A network that can be
+              hard-forked by a small group of leaders and exchanges, on a tight timeline, to
+              reverse a specific outcome, is — by any honest reading — not as immutable as the
+              pitch deck suggests. Either decentralization is real and outcomes are permanent, or
+              someone has the authority to undo them. You cannot have both.
+            </p>
+            <p className="mt-4 text-lg leading-relaxed text-foreground/85">
+              We're not throwing rocks at Ethereum. We're pointing at the standard. If the
+              flagship "decentralized" network has reversed itself once already, the bar for what
+              counts as decentralized is a lot lower than the marketing implies — and the
+              questions the SEC asks about who really controls a network are entirely fair.
+            </p>
+          </div>
+        </section>
+
+        {/* Honest about TXC's network */}
+        <section className="mx-auto mt-24 max-w-4xl px-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            Our network, honestly described
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl text-balance">
+            What "anyone can participate" actually means on TXC today.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            We won't oversell this. Here's the honest line-by-line on what is open to anyone on the
+            TEXITcoin network right now, and what still has a front door.
+          </p>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+              <div className="flex items-center gap-2 text-primary">
+                <Eye className="h-5 w-5" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em]">
+                  Fully open to anyone
+                </span>
+              </div>
+              <ul className="mt-4 space-y-3 text-sm text-foreground/85 md:text-base">
+                <li>• Download a wallet.</li>
+                <li>• Send TXC to anyone, anywhere, without asking us.</li>
+                <li>• Receive TXC from anyone.</li>
+                <li>• Read the full block history in our public explorer.</li>
+                <li>• Spin up a TXC node from the open-source code.</li>
+                <li>• Build on top of TXC without permission from the project.</li>
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+              <div className="flex items-center gap-2 text-primary">
+                <DoorOpen className="h-5 w-5" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em]">
+                  Open, with a front door
+                </span>
+              </div>
+              <ul className="mt-4 space-y-3 text-sm text-foreground/85 md:text-base">
+                <li>
+                  • <strong>Mining.</strong> Today, the practical path into mining TXC is through
+                  the public mineTXC front door. That door is open to anyone who wants to walk
+                  through it, but it is a door — we're being precise. We are not yet at "pull
+                  rigs off a shelf and point them at a public pool from anywhere on Earth."
+                </li>
+                <li>
+                  • <strong>Network maturation.</strong> Like every young chain, the number of
+                  independent nodes and miners is still growing. We're transparent about the
+                  current state and the direction.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Definitions */}
+        <section className="mx-auto mt-24 max-w-5xl px-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            What do these words even mean?
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl text-balance">
+            "Decentralized" and "permissionless" came up again and again in our deposition. Here's
+            how we use them.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Neither word is defined in U.S. securities law. That matters, because the industry uses
+            them loosely, the SEC uses them carefully, and the gap between those two usages is
+            where a lot of the disagreement lives.
+          </p>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {DEFINITIONS.map((def) => {
+              const Icon = def.icon;
+              return (
+                <div
+                  key={def.term}
+                  className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-8"
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-6 w-6 text-primary" />
+                    <div className="font-display text-2xl font-bold">{def.term}</div>
+                  </div>
+                  <div className="mt-5 space-y-4">
+                    {def.meanings.map((m) => (
+                      <div key={m.whose} className="rounded-lg border border-border/70 bg-background/60 p-4">
+                        <div className="flex items-center gap-2 text-primary">
+                          <HelpCircle className="h-3.5 w-3.5" />
+                          <div className="text-[10px] font-bold uppercase tracking-[0.22em]">
+                            {m.whose}
+                          </div>
+                        </div>
+                        <p className="mt-2 text-sm leading-relaxed text-foreground/85">{m.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Other regulators */}
+        <section className="mx-auto mt-24 max-w-5xl px-6">
+          <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            One more thing
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold md:text-5xl text-balance">
+            The SEC isn't the only sheriff in town.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Even if a network is clearly a currency and clearly not a security, other federal
+            regulators still care about the conduct around it. This page focuses on the SEC because
+            that's where most of the public confusion lives, but we want to be straight about the
+            broader map.
+          </p>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {REGULATORS.map((r) => {
+              const Icon = r.icon;
+              return (
+                <div key={r.name} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-5 w-5 text-primary" />
+                    <div className="font-display text-xl font-bold">{r.name}</div>
+                  </div>
+                  <div className="mt-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                    {r.role}
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/85 md:text-base">
+                    {r.note}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          <p className="mt-8 text-base leading-relaxed text-muted-foreground">
+            The reason this matters: a lot of what gets called "an SEC issue" in crypto is really
+            a FinCEN, OFAC, CFTC, or FTC issue. MLM-style crypto recruiting schemes, in
+            particular, are usually FTC and state AG cases, not securities cases. The asset is
+            almost never the problem — the conduct around it is.
           </p>
         </section>
 
@@ -353,9 +680,10 @@ function SecAndCryptoPage() {
               The short version.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-foreground/85">
-              The SEC came for the ICO era and the fundraising machine that followed. TEXITcoin
-              isn't on that road and never has been. We're a currency — designed, mined, and used
-              like one. We'll keep talking about it that way.
+              The SEC came for the ICO era and the fundraising machine that followed. Before that,
+              they showed up for fraud. TEXITcoin isn't either of those things — and we're
+              disciplined about not becoming them. We're a currency. We talk like one, we ship like
+              one, and we describe our own network honestly, front doors and all.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
