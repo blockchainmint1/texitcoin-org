@@ -125,7 +125,14 @@ function ZoomIndex() {
                 {/* Left: video */}
                 {latest.video_cid ? (
                   <figure className="overflow-hidden rounded-2xl border border-border bg-black shadow-card">
-                    <div className="relative aspect-video w-full">
+                    <div
+                      className="relative aspect-video w-full bg-cover bg-center"
+                      style={
+                        latest.thumbnail_url
+                          ? { backgroundImage: `url(${latest.thumbnail_url})` }
+                          : undefined
+                      }
+                    >
                       <iframe
                         src={`https://streamtxc.com/embed/${latest.video_cid}`}
                         title={latest.title}
