@@ -308,3 +308,78 @@ function ArchiveCard({ call }: { call: ZoomCall }) {
     </Link>
   );
 }
+
+function nextThursday7pmCT(): Date {
+  // Find the next date whose Chicago local time is Thursday at/after 19:00.
+  const now = new Date();
+  for (let i = 0; i < 8; i++) {
+    const candidate = new Date(now.getTime() + i * 86400000);
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      weekday: "short",
+      hour: "numeric",
+      hour12: false,
+    }).formatToParts(candidate);
+    const weekday = parts.find((p) => p.type === "weekday")?.value;
+    const hour = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10);
+    if (weekday === "Thu" && (i > 0 || hour < 19)) {
+      // Build an ISO-ish date for that Thursday at 19:00 CT.
+      const ymd = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Chicago",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(candidate); // YYYY-MM-DD
+      // Determine CT offset (CDT=-05, CST=-06) for that date at 19:00.
+      const probe = new Date(`${ymd}T19:00:00Z`);
+      const tzName = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Chicago",
+        timeZoneName: "short",
+      })
+        .formatToParts(probe)
+        .find((p) => p.type === "timeZoneName")?.value;
+      const offset = tzName === "CDT" ? "-05:00" : "-06:00";
+      return new Date(`${ymd}T19:00:00${offset}`);
+    }
+  }
+  return now;
+}
+
+function NextThursdayRow() {
+  const date = nextThursday7pmCT();
+  const dateLabel = date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    timeZone: "America/Chicago",
+  });
+  const timeLabel = date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short",
+    timeZone: "America/Chicago",
+  });
+  return (
+    <div className="flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-4">
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+            Recurring
+          </span>
+          <div className="font-display text-lg font-semibold">
+            Honest Money Hour
+          </div>
+        </div>
+        <div className="mt-1 text-sm text-muted-foreground">
+          {dateLabel} · {timeLabel}
+        </div>
+      </div>
+      <a
+        href="#zoom-register"
+        className="inline-flex items-center gap-1 rounded-md border border-primary/40 bg-background px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary hover:bg-primary/10"
+      >
+        <Lock className="h-3.5 w-3.5" /> Get link
+      </a>
+    </div>
+  );
+}
