@@ -44,11 +44,6 @@ const TEAM: Member[] = [
     bio: "Lead on wallet, explorer, and pool infrastructure. The plumbing that makes TXC usable, day in and day out.",
   },
   {
-    name: "Vitalii Ovodenko",
-    role: "Network Security",
-    bio: "Node operations, hardening, and incident response. The reason the chain stays standing.",
-  },
-  {
     name: "Eddie Allen",
     role: "Currency Director",
     bio: "Merchant adoption and complementary-currency operations. Turning TXC into something you can actually spend.",

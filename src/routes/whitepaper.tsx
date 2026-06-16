@@ -236,7 +236,7 @@ function WhitepaperPage() {
                 <ul className="space-y-2 text-muted-foreground leading-relaxed">
                   {[
                     ["Bohdan Shlikhutka", "Application Architect — lead on wallet, explorer, and pool infrastructure."],
-                    ["Vitalii Ovodenko", "Network Security — node operations, hardening, and incident response."],
+                    
                     ["Eddie Allen", "Currency Director — merchant adoption and complementary-currency operations."],
                     ["Kira Gray", "Events — conferences, the weekly Honest Money Hour, and community programming."],
                     ["Wit Olszewski", "Creative — brand, content, and storytelling."],
