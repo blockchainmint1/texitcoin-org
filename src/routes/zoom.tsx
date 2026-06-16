@@ -150,10 +150,10 @@ function ZoomIndex() {
                   <h2 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl">
                     {latest.title}
                   </h2>
-                  <p className="mt-2 text-sm text-muted-foreground">
+                  <p className="mt-2 text-sm uppercase tracking-wider text-muted-foreground">
                     {formatDate(latest.call_date)}
                     {formatDuration(latest.duration_seconds) && (
-                      <> · {formatDuration(latest.duration_seconds)}</>
+                      <>\u00a0· {formatDuration(latest.duration_seconds)}</>
                     )}
                   </p>
                   {latest.summary && (
@@ -288,10 +288,10 @@ function ArchiveCard({ call }: { call: ZoomCall }) {
         )}
       </div>
       <div className="p-5">
-        <div className="text-xs uppercase tracking-wider text-muted-foreground">
+        <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
           {formatDate(call.call_date)}
           {formatDuration(call.duration_seconds) && (
-            <> · {formatDuration(call.duration_seconds)}</>
+            <>\u00a0· {formatDuration(call.duration_seconds)}</>
           )}
         </div>
         <div className="mt-1 font-display text-lg font-semibold group-hover:text-primary">
