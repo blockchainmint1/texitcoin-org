@@ -119,62 +119,59 @@ function ZoomIndex() {
         {latest && (
           <section className="border-b border-border">
             <div className="mx-auto max-w-6xl px-6 py-16">
-              <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+              <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
+                {/* Left: meta */}
                 <div>
                   <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                    Most recent call
+                    Most Recent Call
                   </div>
-                  <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl">
+                  <h2 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl">
                     {latest.title}
                   </h2>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                  <p className="mt-2 text-sm text-muted-foreground">
                     {formatDate(latest.call_date)}
                     {formatDuration(latest.duration_seconds) && (
                       <> · {formatDuration(latest.duration_seconds)}</>
                     )}
                   </p>
+                  {latest.summary && (
+                    <p className="mt-5 line-clamp-4 text-base leading-relaxed text-foreground/80">
+                      {latest.summary.split(/\n\n|(?<=\.)\s+/).slice(0, 2).join(" ")}
+                    </p>
+                  )}
+                  <Link
+                    to="/zoom/$slug"
+                    params={{ slug: latest.slug }}
+                    className="mt-6 inline-flex items-center gap-1 rounded-md bg-red-gradient px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-primary-foreground"
+                  >
+                    Open full recording <ChevronRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <Link
-                  to="/zoom/$slug"
-                  params={{ slug: latest.slug }}
-                  className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
-                >
-                  Open full recording <ChevronRight className="h-4 w-4" />
-                </Link>
+
+                {/* Right: video */}
+                {latest.video_cid ? (
+                  <figure className="overflow-hidden rounded-2xl border border-border bg-black shadow-card">
+                    <div className="relative aspect-video w-full">
+                      <iframe
+                        src={`https://streamtxc.com/embed/${latest.video_cid}`}
+                        title={latest.title}
+                        loading="lazy"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 h-full w-full"
+                      />
+                    </div>
+                  </figure>
+                ) : (
+                  <div className="rounded-2xl border border-border bg-card p-8 text-center text-muted-foreground">
+                    Recording is processing — check back shortly.
+                  </div>
+                )}
               </div>
-
-              {latest.video_cid ? (
-                <figure className="overflow-hidden rounded-2xl border border-border bg-black shadow-card">
-                  <div className="relative aspect-video w-full">
-                    <iframe
-                      src={`https://streamtxc.com/embed/${latest.video_cid}`}
-                      title={latest.title}
-                      loading="lazy"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      className="absolute inset-0 h-full w-full"
-                    />
-                  </div>
-                </figure>
-              ) : (
-                <div className="rounded-2xl border border-border bg-card p-8 text-center text-muted-foreground">
-                  Recording is processing — check back shortly.
-                </div>
-              )}
-
-              {latest.summary && (
-                <div className="mt-6 rounded-2xl border border-border bg-card p-6">
-                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                    AI Summary
-                  </div>
-                  <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-foreground/90">
-                    {latest.summary}
-                  </p>
-                </div>
-              )}
             </div>
           </section>
         )}
+
 
         {/* Two-column: upcoming + register */}
         <section className="border-b border-border">
