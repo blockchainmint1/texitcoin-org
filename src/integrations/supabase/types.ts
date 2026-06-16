@@ -146,6 +146,54 @@ export type Database = {
         }
         Relationships: []
       }
+      zoom_calls: {
+        Row: {
+          call_date: string
+          created_at: string
+          description: string | null
+          duration_seconds: number | null
+          id: string
+          slug: string
+          status: string
+          summary: string | null
+          thumbnail_url: string | null
+          title: string
+          transcript: string | null
+          updated_at: string
+          video_cid: string | null
+        }
+        Insert: {
+          call_date: string
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number | null
+          id?: string
+          slug: string
+          status?: string
+          summary?: string | null
+          thumbnail_url?: string | null
+          title: string
+          transcript?: string | null
+          updated_at?: string
+          video_cid?: string | null
+        }
+        Update: {
+          call_date?: string
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number | null
+          id?: string
+          slug?: string
+          status?: string
+          summary?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          transcript?: string | null
+          updated_at?: string
+          video_cid?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
