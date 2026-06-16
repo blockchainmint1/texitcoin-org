@@ -115,10 +115,8 @@ export function Header() {
           : "bg-transparent"
       }`}
     >
-      <a
-        href="https://zoom.us/j/95305973167"
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to="/zoom"
         className="group block bg-red-gradient text-primary-foreground"
       >
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-1 px-6 py-2 text-center text-xs sm:text-sm font-medium">
@@ -128,10 +126,10 @@ export function Header() {
             Honest Money Hour with Bobby Gray · 7pm Central
           </span>
           <span className="inline-flex items-center gap-1 underline-offset-2 group-hover:underline">
-            Join the Zoom <span aria-hidden>→</span>
+            Watch &amp; Register <span aria-hidden>→</span>
           </span>
         </div>
-      </a>
+      </Link>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-3 group">
           <img
