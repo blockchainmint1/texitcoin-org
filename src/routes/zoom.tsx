@@ -291,7 +291,7 @@ function ArchiveCard({ call }: { call: ZoomCall }) {
         <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
           {formatDate(call.call_date)}
           {formatDuration(call.duration_seconds) && (
-            <> · {formatDuration(call.duration_seconds)}</>
+            <>\u00a0· {formatDuration(call.duration_seconds)}</>
           )}
         </div>
         <div className="mt-1 font-display text-lg font-semibold group-hover:text-primary">
