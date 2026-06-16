@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZoomRouteImport } from './routes/zoom'
 import { Route as WtxcRouteImport } from './routes/wtxc'
 import { Route as WhitepaperRouteImport } from './routes/whitepaper'
 import { Route as WalletsRouteImport } from './routes/wallets'
@@ -41,11 +42,17 @@ import { Route as NewsAndUpdatesDothtmlRouteImport } from './routes/News-and-Upd
 import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.]html'
 import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ZoomSlugRouteImport } from './routes/zoom.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 
+const ZoomRoute = ZoomRouteImport.update({
+  id: '/zoom',
+  path: '/zoom',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WtxcRoute = WtxcRouteImport.update({
   id: '/wtxc',
   path: '/wtxc',
@@ -208,6 +215,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ZoomSlugRoute = ZoomSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ZoomRoute,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog_/$slug',
   path: '/blog/$slug',
@@ -263,7 +275,9 @@ export interface FileRoutesByFullPath {
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
+  '/zoom': typeof ZoomRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/zoom/$slug': typeof ZoomSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -301,7 +315,9 @@ export interface FileRoutesByTo {
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
+  '/zoom': typeof ZoomRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/zoom/$slug': typeof ZoomSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -340,7 +356,9 @@ export interface FileRoutesById {
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
+  '/zoom': typeof ZoomRouteWithChildren
   '/blog_/$slug': typeof BlogSlugRoute
+  '/zoom/$slug': typeof ZoomSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -380,7 +398,9 @@ export interface FileRouteTypes {
     | '/wallets'
     | '/whitepaper'
     | '/wtxc'
+    | '/zoom'
     | '/blog/$slug'
+    | '/zoom/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -418,7 +438,9 @@ export interface FileRouteTypes {
     | '/wallets'
     | '/whitepaper'
     | '/wtxc'
+    | '/zoom'
     | '/blog/$slug'
+    | '/zoom/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -456,7 +478,9 @@ export interface FileRouteTypes {
     | '/wallets'
     | '/whitepaper'
     | '/wtxc'
+    | '/zoom'
     | '/blog_/$slug'
+    | '/zoom/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -495,6 +519,7 @@ export interface RootRouteChildren {
   WalletsRoute: typeof WalletsRoute
   WhitepaperRoute: typeof WhitepaperRoute
   WtxcRoute: typeof WtxcRoute
+  ZoomRoute: typeof ZoomRouteWithChildren
   BlogSlugRoute: typeof BlogSlugRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -503,6 +528,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zoom': {
+      id: '/zoom'
+      path: '/zoom'
+      fullPath: '/zoom'
+      preLoaderRoute: typeof ZoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wtxc': {
       id: '/wtxc'
       path: '/wtxc'
@@ -727,6 +759,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/zoom/$slug': {
+      id: '/zoom/$slug'
+      path: '/$slug'
+      fullPath: '/zoom/$slug'
+      preLoaderRoute: typeof ZoomSlugRouteImport
+      parentRoute: typeof ZoomRoute
+    }
     '/blog_/$slug': {
       id: '/blog_/$slug'
       path: '/blog/$slug'
@@ -757,6 +796,16 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface ZoomRouteChildren {
+  ZoomSlugRoute: typeof ZoomSlugRoute
+}
+
+const ZoomRouteChildren: ZoomRouteChildren = {
+  ZoomSlugRoute: ZoomSlugRoute,
+}
+
+const ZoomRouteWithChildren = ZoomRoute._addFileChildren(ZoomRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -791,6 +840,7 @@ const rootRouteChildren: RootRouteChildren = {
   WalletsRoute: WalletsRoute,
   WhitepaperRoute: WhitepaperRoute,
   WtxcRoute: WtxcRoute,
+  ZoomRoute: ZoomRouteWithChildren,
   BlogSlugRoute: BlogSlugRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

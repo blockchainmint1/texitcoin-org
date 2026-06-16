@@ -11,7 +11,7 @@ const callQuery = (slug: string) =>
     queryFn: () => getZoomCall({ data: { slug } }),
   });
 
-export const Route = createFileRoute("/zoom/$slug")({
+export const Route = createFileRoute("/zoom_/$slug")({
   loader: async ({ params, context }) => {
     const call = await context.queryClient.ensureQueryData(callQuery(params.slug));
     if (!call) throw notFound();
