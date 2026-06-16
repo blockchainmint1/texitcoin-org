@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { Radio, Calendar, PlayCircle, ChevronRight } from "lucide-react";
+import { Radio, Calendar, PlayCircle, ChevronRight, Lock } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ZoomRegister } from "@/components/site/ZoomRegister";
