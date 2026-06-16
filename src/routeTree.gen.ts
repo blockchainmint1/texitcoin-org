@@ -42,7 +42,7 @@ import { Route as NewsAndUpdatesDothtmlRouteImport } from './routes/News-and-Upd
 import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.]html'
 import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ZoomSlugRouteImport } from './routes/zoom.$slug'
+import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
@@ -216,9 +216,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ZoomSlugRoute = ZoomSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ZoomRoute,
+  id: '/zoom_/$slug',
+  path: '/zoom/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog_/$slug',
@@ -275,7 +275,7 @@ export interface FileRoutesByFullPath {
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
-  '/zoom': typeof ZoomRouteWithChildren
+  '/zoom': typeof ZoomRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -315,7 +315,7 @@ export interface FileRoutesByTo {
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
-  '/zoom': typeof ZoomRouteWithChildren
+  '/zoom': typeof ZoomRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -356,9 +356,9 @@ export interface FileRoutesById {
   '/wallets': typeof WalletsRoute
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
-  '/zoom': typeof ZoomRouteWithChildren
+  '/zoom': typeof ZoomRoute
   '/blog_/$slug': typeof BlogSlugRoute
-  '/zoom/$slug': typeof ZoomSlugRoute
+  '/zoom_/$slug': typeof ZoomSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -480,7 +480,7 @@ export interface FileRouteTypes {
     | '/wtxc'
     | '/zoom'
     | '/blog_/$slug'
-    | '/zoom/$slug'
+    | '/zoom_/$slug'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -519,8 +519,9 @@ export interface RootRouteChildren {
   WalletsRoute: typeof WalletsRoute
   WhitepaperRoute: typeof WhitepaperRoute
   WtxcRoute: typeof WtxcRoute
-  ZoomRoute: typeof ZoomRouteWithChildren
+  ZoomRoute: typeof ZoomRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  ZoomSlugRoute: typeof ZoomSlugRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -759,12 +760,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/zoom/$slug': {
-      id: '/zoom/$slug'
-      path: '/$slug'
+    '/zoom_/$slug': {
+      id: '/zoom_/$slug'
+      path: '/zoom/$slug'
       fullPath: '/zoom/$slug'
       preLoaderRoute: typeof ZoomSlugRouteImport
-      parentRoute: typeof ZoomRoute
+      parentRoute: typeof rootRouteImport
     }
     '/blog_/$slug': {
       id: '/blog_/$slug'
@@ -796,16 +797,6 @@ declare module '@tanstack/react-router' {
     }
   }
 }
-
-interface ZoomRouteChildren {
-  ZoomSlugRoute: typeof ZoomSlugRoute
-}
-
-const ZoomRouteChildren: ZoomRouteChildren = {
-  ZoomSlugRoute: ZoomSlugRoute,
-}
-
-const ZoomRouteWithChildren = ZoomRoute._addFileChildren(ZoomRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -840,8 +831,9 @@ const rootRouteChildren: RootRouteChildren = {
   WalletsRoute: WalletsRoute,
   WhitepaperRoute: WhitepaperRoute,
   WtxcRoute: WtxcRoute,
-  ZoomRoute: ZoomRouteWithChildren,
+  ZoomRoute: ZoomRoute,
   BlogSlugRoute: BlogSlugRoute,
+  ZoomSlugRoute: ZoomSlugRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
