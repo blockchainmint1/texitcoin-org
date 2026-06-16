@@ -35,9 +35,9 @@ export function LegalStarburst() {
         <div className="px-3">
           <Scale className="mx-auto h-5 w-5 text-primary-foreground" />
           <div className="mt-1 font-display text-[11px] font-bold uppercase leading-tight tracking-wider text-primary-foreground">
-            TSSB Legal
+            LEGAL
             <br />
-            Updates
+            UPDATES
           </div>
           <div className="mt-1 text-[9px] font-bold uppercase tracking-widest text-primary-foreground/90">
             Click here →
