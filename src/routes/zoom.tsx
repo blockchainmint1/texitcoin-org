@@ -66,8 +66,10 @@ function formatDate(iso: string) {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "America/Chicago",
   });
 }
+
 
 function formatTime(iso: string) {
   return new Date(iso).toLocaleTimeString("en-US", {
