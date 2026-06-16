@@ -153,7 +153,7 @@ function ZoomIndex() {
                   <p className="mt-2 text-sm uppercase tracking-wider text-muted-foreground">
                     {formatDate(latest.call_date)}
                     {formatDuration(latest.duration_seconds) && (
-                      <>\u00a0· {formatDuration(latest.duration_seconds)}</>
+                      <>\u00a0· {formatDuration(latest.duration_seconds).toLowerCase()}</>
                     )}
                   </p>
                   {latest.summary && (
