@@ -195,12 +195,7 @@ function ZoomIndex() {
                   What's coming up
                 </h2>
                 <div className="mt-6 space-y-3">
-                  {upcoming.length === 0 && (
-                    <div className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
-                      No calls on the books yet — register below and you'll be
-                      first to know.
-                    </div>
-                  )}
+                  <NextThursdayRow />
                   {upcoming.map((c) => (
                     <UpcomingRow key={c.id} call={c} />
                   ))}
