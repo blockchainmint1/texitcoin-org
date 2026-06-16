@@ -119,8 +119,28 @@ function ZoomIndex() {
         {latest && (
           <section className="border-b border-border">
             <div className="mx-auto max-w-6xl px-6 py-16">
-              <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
-                {/* Left: meta */}
+              <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+                {/* Left: video */}
+                {latest.video_cid ? (
+                  <figure className="overflow-hidden rounded-2xl border border-border bg-black shadow-card">
+                    <div className="relative aspect-video w-full">
+                      <iframe
+                        src={`https://streamtxc.com/embed/${latest.video_cid}`}
+                        title={latest.title}
+                        loading="lazy"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 h-full w-full"
+                      />
+                    </div>
+                  </figure>
+                ) : (
+                  <div className="rounded-2xl border border-border bg-card p-8 text-center text-muted-foreground">
+                    Recording is processing — check back shortly.
+                  </div>
+                )}
+
+                {/* Right: meta */}
                 <div>
                   <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
                     Most Recent Call
@@ -147,27 +167,8 @@ function ZoomIndex() {
                     Open full recording <ChevronRight className="h-4 w-4" />
                   </Link>
                 </div>
-
-                {/* Right: video */}
-                {latest.video_cid ? (
-                  <figure className="overflow-hidden rounded-2xl border border-border bg-black shadow-card">
-                    <div className="relative aspect-video w-full">
-                      <iframe
-                        src={`https://streamtxc.com/embed/${latest.video_cid}`}
-                        title={latest.title}
-                        loading="lazy"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                        className="absolute inset-0 h-full w-full"
-                      />
-                    </div>
-                  </figure>
-                ) : (
-                  <div className="rounded-2xl border border-border bg-card p-8 text-center text-muted-foreground">
-                    Recording is processing — check back shortly.
-                  </div>
-                )}
               </div>
+
             </div>
           </section>
         )}
