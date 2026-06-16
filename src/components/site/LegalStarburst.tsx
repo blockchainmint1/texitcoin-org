@@ -6,7 +6,7 @@ export function LegalStarburst() {
   return (
     <Link
       to="/legal"
-      aria-label="TSSB Legal Updates — click here"
+      aria-label="Legal Updates — click here"
       className="fixed bottom-6 right-6 z-40 hidden md:block group"
     >
       <motion.div
