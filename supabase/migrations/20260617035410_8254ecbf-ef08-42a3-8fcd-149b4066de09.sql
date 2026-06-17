@@ -1,0 +1,2 @@
+UPDATE public.zoom_calls SET title = regexp_replace(title, 'Texacoin', 'TEXITcoin', 'g'), description = regexp_replace(description, 'Texacoin', 'TEXITcoin', 'g'), summary = regexp_replace(summary, 'Texacoin', 'TEXITcoin', 'g') WHERE title ~ 'Texacoin' OR description ~ 'Texacoin' OR summary ~ 'Texacoin';
+UPDATE public.zoom_calls SET slug = replace(slug, 'texacoin', 'texitcoin') WHERE slug LIKE '%texacoin%';
