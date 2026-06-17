@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { useSuspenseQuery, queryOptions, useQueryClient } from "@tanstack/react-query";
 import { Radio, Calendar, PlayCircle, ChevronRight, Lock, Search, X, ChevronLeft } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ZoomRegister } from "@/components/site/ZoomRegister";
 import { listZoomCalls, type ZoomCall } from "@/lib/zoom.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 const PAGE_SIZE = 6;
 type SortKey = "newest" | "oldest" | "longest" | "shortest";
@@ -93,6 +94,25 @@ function formatDuration(s: number | null) {
 function ZoomIndex() {
   const { data } = useSuspenseQuery(zoomListQuery);
   const { upcoming, recorded, latest } = data;
+  const queryClient = useQueryClient();
+
+  // Live updates: re-fetch the list whenever zoom_calls changes in the DB.
+  useEffect(() => {
+    const channel = supabase
+      .channel("zoom_calls-live")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "zoom_calls" },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ["zoom-calls"] });
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
