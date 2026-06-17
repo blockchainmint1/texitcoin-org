@@ -94,6 +94,25 @@ function formatDuration(s: number | null) {
 function ZoomIndex() {
   const { data } = useSuspenseQuery(zoomListQuery);
   const { upcoming, recorded, latest } = data;
+  const queryClient = useQueryClient();
+
+  // Live updates: re-fetch the list whenever zoom_calls changes in the DB.
+  useEffect(() => {
+    const channel = supabase
+      .channel("zoom_calls-live")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "zoom_calls" },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ["zoom-calls"] });
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
