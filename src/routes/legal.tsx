@@ -183,6 +183,10 @@ const ENTRIES: Entry[] = [
     tone: "regulator",
     tag: "INCOMING",
     body: "The TSSB issued Emergency Cease and Desist Order No. ENF-26-CDO-1893 against TEXITcoin, MineTXC, Blockchain Mint, and founder Robert J. (Bobby) Gray, alleging the Mining Packages constitute unregistered securities sold through a multi-level marketing structure. For 98 weeks prior, mineTXC operated as a community currency project in Texas without any prior regulatory incidents. We are fully complying while pursuing a robust legal strategy.",
+    link: {
+      label: "Read the Cease & Desist Order",
+      href: "https://ipfs.blockchainmint.com/ipfs/bafybeihd7ialliyuru5gabyctpdjsfas7a6yvhka37ifxxmiw5tku4p4lq",
+    },
   },
 ];
 
