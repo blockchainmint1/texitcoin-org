@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { useSuspenseQuery, queryOptions, useQueryClient } from "@tanstack/react-query";
 import { Radio, Calendar, PlayCircle, ChevronRight, Lock, Search, X, ChevronLeft } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ZoomRegister } from "@/components/site/ZoomRegister";
 import { listZoomCalls, type ZoomCall } from "@/lib/zoom.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 const PAGE_SIZE = 6;
 type SortKey = "newest" | "oldest" | "longest" | "shortest";
