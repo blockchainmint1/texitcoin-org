@@ -11,6 +11,36 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "mexc-delisting-june-2026",
+    title: "Delisted from MEXC — The Honest Update, and Why We're Not Slowing Down",
+    date: "2026-06-21",
+    author: "Bobby Gray",
+    tag: "Markets",
+    readMinutes: 4,
+    excerpt: "On June 18, 2026, MEXC delisted the TXC/USDT trading pair. We listed there during Token2049 Singapore last September at a cost of about $100,000. Here is the honest story of what happened, what it means, and why we are more focused than ever on building real utility.",
+    body: [
+      "Earlier this week, MEXC notified us that the TXC/USDT trading pair would be delisted on June 18, 2026. The decision came after a 30-day review window in which the pair failed to meet MEXC's ongoing listing requirements — minimum holder counts, average holdings, order book depth, spread, and non-self-dealing volume. We did not meet the bar. The pair is now gone.",
+      "We owe the community a straight answer about what this means, so here it is.",
+      "We went live on MEXC in September 2025 during Token2049 Singapore. It was one of the proudest moments of Season 2 — a major Tier-1 listing, a ribbon-cutting on the world stage, and a real validation of how far the project had come from a McKinney garage. It also cost roughly $100,000 in listing fees, market-making commitments, and surrounding launch activity. That was real money, and we spent it because we believed — and still believe — that broad exchange access matters for honest money.",
+      "Between then and now, a lot changed. The regulatory environment in Texas tightened. Some core team members moved on. The market cooled, the community scattered for a while, and our daily trading volume on MEXC drifted below the levels needed to keep a Tier-1 pair healthy. By the time the assessment-zone notice arrived in May, the math was already against us. By June 18, the delisting was final.",
+      "We are sad about it. We are not going to pretend otherwise. A lot of people put work into that listing and a lot of community members were proud to see TXC on a global exchange. Losing the pair stings.",
+      "But here is the part that matters: nothing about this changes the chain, the coin, or the mission.",
+      "TEXITcoin is still the same Layer 1 it was last week. The network is open. The source code is public. Block production is steady. Wallets work. Mining works. MainPool, MainEx, MainBuy, the wTXC bridge, the Polygon liquidity pool, and the rest of the Honest Money Ecosystem are all running. CryptoPop is shipping. StreamTXC is shipping. The new web wallet is live. The Marathon is rolling. None of that depends on any single centralized exchange.",
+      "This is also a useful reminder of something we have said from day one: centralized exchanges are convenient, but they are not the network. They are a venue. Venues come and go. The chain — and the community that mines it, holds it, and uses it — is what actually matters.",
+      "What we are doing about it:",
+      "1. Doubling down on real utility. CryptoPop, StreamTXC, Honest Money Marketplace, and the wallet ecosystem are where actual TXC usage lives. The more people use TXC for something — buying, tipping, streaming, building — the easier the next listing conversation becomes.",
+      "2. Growing the holder base honestly. The MEXC criteria we missed — holder counts, average holdings, real (non-wash) volume — are exactly the metrics that grow naturally when more humans use the coin. We are not going to fake them. We are going to earn them.",
+      "3. Deepening on-chain and DEX liquidity. Wrapped TXC on Polygon and the on-chain pools we run ourselves are not subject to any exchange's risk-management team. That liquidity stays put. We are going to keep growing it.",
+      "4. Earning the next Tier-1 listing the right way. When TXC is ready to be back on a major centralized exchange, we will know — because the metrics will be there, the community will be there, and the utility will be there. Not before.",
+      "If you traded TXC on MEXC, your funds are safe. Per MEXC's notice, withdrawals remain open after delisting — please move any TXC off the platform to your own wallet (wallet.texitcoin.org or any compatible self-custody wallet) at your earliest convenience.",
+      "If you are holding TXC: thank you. You are the reason any of this works. The delisting does not change what the coin is, what the network does, or what we are building.",
+      "If you are new and watching from the sidelines: this is what a real project looks like when things get hard. We tell you what happened, we tell you what it cost, we tell you what we learned, and we get back to work.",
+      "Season 3 was always about building real utility on top of an honest network — not chasing listings, not chasing hype, not chasing a chart. Today's news is a setback. It is not a course change.",
+      "We will be back on a major Tier-1 exchange. When we are, it will be because we earned it.",
+      "Onward."
+    ],
+  },
+  {
     slug: "security-incident-web-wallet-may-2026",
     title: "Security Incident: Web Wallet Exploit (May 28, 2026)",
     date: "2026-06-09",
