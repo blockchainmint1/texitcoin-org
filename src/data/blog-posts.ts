@@ -30,7 +30,7 @@ export const posts: BlogPost[] = [
       "What we are doing about it:",
       "1. Doubling down on real utility. CryptoPop, StreamTXC, Honest Money Marketplace, and the wallet ecosystem are where actual TXC usage lives. The more people use TXC for something — buying, tipping, streaming, building — the easier the next listing conversation becomes.",
       "2. Growing the holder base honestly. The MEXC criteria we missed — holder counts, average holdings, real (non-wash) volume — are exactly the metrics that grow naturally when more humans use the coin. We are not going to fake them. We are going to earn them.",
-      "3. Deepening on-chain and DEX liquidity. Wrapped TXC on Polygon and the on-chain pools we run ourselves are not subject to any exchange's risk-management team. That liquidity stays put. We are going to keep growing it.",
+      "3. Deepening on-chain and DEX liquidity. Wrapped TXC and the on-chain pools we run ourselves are not subject to any exchange's risk-management team. That liquidity stays put. We are going to keep growing it.",
       "4. Earning the next Tier-1 listing the right way. When TXC is ready to be back on a major centralized exchange, we will know — because the metrics will be there, the community will be there, and the utility will be there. Not before.",
       "If you traded TXC on MEXC, your funds are safe. Per MEXC's notice, withdrawals remain open after delisting — please move any TXC off the platform to your own wallet (wallet.texitcoin.org or any compatible self-custody wallet) at your earliest convenience.",
       "If you are holding TXC: thank you. You are the reason any of this works. The delisting does not change what the coin is, what the network does, or what we are building.",
