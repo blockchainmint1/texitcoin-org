@@ -372,6 +372,28 @@ export const posts: BlogPost[] = [
     ],
   },
   {
+    slug: "wdms-2025-bitmain-world-digital-mining-summit",
+    title: "TEXITcoin Takes the Global Stage at WDMS 2025",
+    date: "2025-05-27",
+    author: "Bobby Gray",
+    tag: "Community",
+    readMinutes: 5,
+    excerpt: "Our founder, Bobby Gray, presented TEXITcoin's vision at the World Digital Mining Summit. He shared our mission to restore honest money and bring the crypto world back to its roots, directly with the global mining industry.",
+    body: [
+      "Last week, TEXITcoin was on the global stage. Our founder, Bobby Gray, was invited to speak at the 2025 World Digital Mining Summit (WDMS) in front of the entire international mining industry. WDMS is Bitmain's flagship event, the place where the best and brightest minds in digital mining gather. For us, it was a massive opportunity to share our story with the world.",
+      "This wasn't an easy invitation to get. As Bobby said on stage, we paid $15,000 for the time slot. Why? Because the message is that important. We believe in what we are building, and we will put our own money on the line to spread the word. This is our Super Bowl commercial—a chance to tell the world that a real-deal Bitcoin redo is here, and it's called TEXITcoin.",
+      "The core message was simple and direct: TEXITcoin is a crypto time machine. We are deliberately taking cryptocurrency back to its early days. Back before the hype, before the institutional sellouts, back to when it was a pure mission to create a decentralized, peer-to-peer currency for the people.",
+      "People always ask about our 'utility.' Bobby answered that question head-on. The utility of TEXITcoin is to pick up where Bitcoin's original mission left off. We are here to build honest money—a digital, decentralized currency that allows people to transact directly with one another, without needing permission from a bank or a government.",
+      "This journey came full circle for Bobby. Just last year, he attended WDMS as a regular attendee, looking for solutions to the noise and heat from the L3s screaming in his garage. He came to learn from the best, and he did. He connected with industry leaders from Bitmain and FogHashing and learned how to build our network more efficiently with modern immersion and hydro cooling technologies.",
+      "That experience of sourcing the best equipment from around the world highlighted a major problem: trade wars and tariffs. As Bobby said, 'How are we supposed to make friends and build relationships with our partners overseas when we have to pay these crazy costs?' At the end of the day, it's individuals like us, the builders and the miners, who pay the price for these political games.",
+      "This goes against the very principles of free trade and peaceful commerce that our founders advocated for 250 years ago. Their advice was 'free trade with all and alliances with none.' Today, the dollar is weaponized, and tariffs are used to create division. We believe there is a better way.",
+      "TEXITcoin is our answer. It is our second chance to get it right. It's an opportunity to build a truly honest money system that enables people to trade value and build relationships freely across borders. It is a tool for peace and prosperity, not a weapon of economic control.",
+      "We are building this network to be big and strong enough to support the future of community currencies in Texas, powered by our upcoming layer 2. We currently mine a block every three minutes with a reward of 254 TEXITcoin. We invite you to be a part of this mission. You can learn more about our currency at texitcoin.org and join our mining program at minetxc.com.",
+      "This isn't just Bobby's project; it's a community movement. That's why he brought 70 of our community members to the conference. We came to learn together, to share ideas, and to take what we learned back home to make the TEXITcoin network even bigger, better, and stronger.",
+      "The presentation at WDMS was more than just a speech. It was a declaration of our principles and an open invitation to the world. We are building the future of money in Texas, and we want you to build it with us."
+    ],
+  },
+  {
     slug: "green-flags-red-flags-risks-and-rewards",
     title: "Green Flags, Red Flags, Risks & Rewards",
     date: "2025-05-19",
