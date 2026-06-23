@@ -1,19 +1,36 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import ReactMarkdown from "react-markdown";
+import { ArrowLeft, ArrowUpRight, Clock, User } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { posts, getPost, getPostImage, getSecondaryImage } from "@/data/blog-posts";
-import { User } from "lucide-react";
+import { getPostImage, getSecondaryImage } from "@/data/blog-images";
+import { getBlogPost, listBlogPosts } from "@/lib/blog.functions";
+
+const postQuery = (slug: string) =>
+  queryOptions({
+    queryKey: ["blog-post", slug],
+    queryFn: () => getBlogPost({ data: { slug } }),
+    staleTime: 60_000,
+  });
+
+const relatedQuery = queryOptions({
+  queryKey: ["blog-posts"],
+  queryFn: () => listBlogPosts(),
+  staleTime: 60_000,
+});
 
 export const Route = createFileRoute("/blog_/$slug")({
-  loader: ({ params }) => {
-    const post = getPost(params.slug);
-    if (!post) throw notFound();
+  loader: async ({ params, context }) => {
+    const [post] = await Promise.all([
+      context.queryClient.ensureQueryData(postQuery(params.slug)),
+      context.queryClient.ensureQueryData(relatedQuery),
+    ]);
     return { post };
   },
   head: ({ loaderData, params }) => {
     const post = loaderData?.post;
-    if (!post) return { meta: [{ title: "Post not found — TEXITcoin" }] };
+    if (!post) return { meta: [{ title: "Post — TEXITcoin" }] };
     const url = `https://texitcoin.org/blog/${params.slug}`;
     return {
       meta: [
@@ -68,7 +85,7 @@ export const Route = createFileRoute("/blog_/$slug")({
       </div>
     </div>
   ),
-  component: BlogPost,
+  component: BlogPostPage,
 });
 
 function formatDate(iso: string) {
@@ -79,10 +96,11 @@ function formatDate(iso: string) {
   });
 }
 
-function BlogPost() {
-  const { post } = Route.useLoaderData();
-  const idx = posts.findIndex((p) => p.slug === post.slug);
-  const related = posts.filter((_, i) => i !== idx).slice(0, 3);
+function BlogPostPage() {
+  const { slug } = Route.useParams();
+  const { data: post } = useSuspenseQuery(postQuery(slug));
+  const { data: posts } = useSuspenseQuery(relatedQuery);
+  const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -140,34 +158,20 @@ function BlogPost() {
           </div>
 
           <div className="mx-auto max-w-3xl px-6">
-            <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90">
-              {post.body.map((para: string, i: number) => {
-                const insertImageAt = Math.floor(post.body.length / 2);
-                const insertPullquoteAt = Math.min(2, post.body.length - 1);
-                return (
-                  <div key={i} className="space-y-6">
-                    <p>{para}</p>
-                    {i === insertPullquoteAt && post.body.length > 4 && (
-                      <blockquote className="border-l-4 border-primary pl-6 py-2 my-8 font-display text-2xl leading-snug text-foreground/90 italic">
-                        {post.excerpt}
-                      </blockquote>
-                    )}
-                    {i === insertImageAt && post.body.length > 5 && (
-                      <figure className="my-10 -mx-6 md:mx-0">
-                        <div className="relative h-56 md:h-80 overflow-hidden rounded-2xl">
-                          <img
-                            src={getSecondaryImage(post)}
-                            alt=""
-                            loading="lazy"
-                            className="absolute inset-0 h-full w-full object-cover"
-                          />
-                        </div>
-                      </figure>
-                    )}
-                  </div>
-                );
-              })}
+            <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90 [&_p]:my-0 [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-10 [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:text-primary [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-foreground/90 [&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm">
+              <ReactMarkdown>{post.bodyMarkdown}</ReactMarkdown>
             </div>
+
+            <figure className="my-12 -mx-6 md:mx-0">
+              <div className="relative h-56 md:h-80 overflow-hidden rounded-2xl">
+                <img
+                  src={getSecondaryImage(post)}
+                  alt=""
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </div>
+            </figure>
 
             <div className="mt-16 rounded-2xl border border-border bg-card p-8 shadow-card">
               <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">

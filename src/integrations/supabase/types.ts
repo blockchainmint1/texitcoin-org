@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          author: string
+          body_markdown: string
+          created_at: string
+          date: string
+          excerpt: string
+          published: boolean
+          read_minutes: number
+          slug: string
+          tag: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author: string
+          body_markdown: string
+          created_at?: string
+          date: string
+          excerpt: string
+          published?: boolean
+          read_minutes?: number
+          slug: string
+          tag: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          body_markdown?: string
+          created_at?: string
+          date?: string
+          excerpt?: string
+          published?: boolean
+          read_minutes?: number
+          slug?: string
+          tag?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
