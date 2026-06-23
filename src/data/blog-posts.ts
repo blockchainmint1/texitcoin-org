@@ -17,7 +17,7 @@ export const posts: BlogPost[] = [
     author: "Bobby Gray",
     tag: "Markets",
     readMinutes: 3,
-    excerpt: "Dex-Trade was TEXITcoin's first exchange home and a solid partner for over a year. New restrictions, deposit issues, and refund fees have made the platform unpredictable, and we no longer feel comfortable recommending it. If you hold funds there, please withdraw at your earliest convenience.",
+    excerpt: "Dex-Trade was TEXITcoin's first exchange home and a solid partner for over 2 years. New restrictions, deposit issues, and refund fees have made the platform unpredictable, and we no longer feel comfortable recommending it. If you hold funds there, please withdraw at your earliest convenience.",
     body: [
       "Dex-Trade holds a special place in this project's history. They were our very first exchange listing — the place where TEXITcoin first met the open market. For that, we will always be grateful. They were never the biggest venue in the world, and they were never the smallest. They were a solid, reliable mid-tier exchange that gave us a shot when we were brand new, and that meant something.",
       "For a long stretch, Dex-Trade was the go-to destination for miners and everyday holders who wanted a simple on-ramp. Account setup was straightforward, and the no-KYC policy for small volumes made it easy for community members to trade without jumping through hoops. A lot of people got their first TXC there. A lot of miners turned hash into liquidity there. It worked.",
