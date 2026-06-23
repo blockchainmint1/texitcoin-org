@@ -1,11 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Clock, ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { posts, getPostImage } from "@/data/blog-posts";
+import { getPostImage } from "@/data/blog-images";
+import { listBlogPosts } from "@/lib/blog.functions";
+
+const blogListQuery = queryOptions({
+  queryKey: ["blog-posts"],
+  queryFn: () => listBlogPosts(),
+  staleTime: 60_000,
+});
 
 export const Route = createFileRoute("/blog")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(blogListQuery),
   head: () => ({
     meta: [
       { title: "Blog — TEXITcoin News & Updates" },
@@ -21,6 +30,19 @@ export const Route = createFileRoute("/blog")({
       },
     ],
   }),
+  errorComponent: ({ error }) => (
+    <div className="min-h-screen grid place-items-center bg-background text-foreground p-8">
+      <div className="max-w-md text-center">
+        <h1 className="font-display text-3xl font-bold">Couldn't load the blog</h1>
+        <p className="mt-3 text-muted-foreground">{error.message}</p>
+      </div>
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="min-h-screen grid place-items-center bg-background text-foreground p-8">
+      <h1 className="font-display text-3xl font-bold">No posts yet</h1>
+    </div>
+  ),
   component: BlogIndex,
 });
 
@@ -33,6 +55,21 @@ function formatDate(iso: string) {
 }
 
 function BlogIndex() {
+  const { data: posts } = useSuspenseQuery(blogListQuery);
+
+  if (posts.length === 0) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <Header />
+        <main className="pt-40 pb-24 mx-auto max-w-3xl px-6 text-center">
+          <h1 className="font-display text-4xl font-bold">No posts yet</h1>
+          <p className="mt-4 text-muted-foreground">Check back soon.</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   const [featured, ...rest] = posts;
 
   return (

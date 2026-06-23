@@ -1,10 +1,19 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { Clock, ArrowUpRight } from "lucide-react";
-import { posts, getPostImage } from "@/data/blog-posts";
+import { getPostImage } from "@/data/blog-images";
+import { listBlogPosts } from "@/lib/blog.functions";
 
 export function Insights() {
-  const featured = posts.slice(0, 3);
+  const { data } = useQuery({
+    queryKey: ["blog-posts"],
+    queryFn: () => listBlogPosts(),
+    staleTime: 60_000,
+  });
+  const featured = (data ?? []).slice(0, 3);
+
+  if (featured.length === 0) return null;
 
   return (
     <section id="insights" className="relative py-28 bg-surface/40">

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { posts } from "@/data/blog-posts";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 
 const BASE_URL = "https://texitcoin.org";
 
@@ -22,13 +23,24 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
+        const supabase = createClient<Database>(
+          process.env.SUPABASE_URL!,
+          process.env.SUPABASE_PUBLISHABLE_KEY!,
+          { auth: { storage: undefined, persistSession: false, autoRefreshToken: false } },
+        );
+        const { data: posts } = await supabase
+          .from("blog_posts")
+          .select("slug,date")
+          .eq("published", true)
+          .order("date", { ascending: false });
+
         const entries: SitemapEntry[] = [
           ...STATIC_PATHS.map((path) => ({
             path,
             changefreq: "weekly" as const,
             priority: path === "/" ? "1.0" : "0.7",
           })),
-          ...posts.map((p) => ({
+          ...(posts ?? []).map((p) => ({
             path: `/blog/${p.slug}`,
             lastmod: p.date,
             changefreq: "monthly" as const,
