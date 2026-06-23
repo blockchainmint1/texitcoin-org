@@ -158,20 +158,38 @@ function BlogPostPage() {
           </div>
 
           <div className="mx-auto max-w-3xl px-6">
-            <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90 [&_p]:my-0 [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-10 [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:text-primary [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-6 [&_blockquote]:italic [&_blockquote]:text-foreground/90 [&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm">
-              <ReactMarkdown>{post.bodyMarkdown}</ReactMarkdown>
+            <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90 [&_p]:my-0 [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-10 [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:text-primary [&_a]:underline [&_strong]:text-foreground [&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm">
+              {(() => {
+                const blocks = post.bodyMarkdown
+                  .split(/\n{2,}/)
+                  .map((b) => b.trim())
+                  .filter(Boolean);
+                const insertImageAt = Math.floor(blocks.length / 2);
+                const insertPullquoteAt = Math.min(2, blocks.length - 1);
+                return blocks.map((block, i) => (
+                  <div key={i} className="space-y-6">
+                    <ReactMarkdown>{block}</ReactMarkdown>
+                    {i === insertPullquoteAt && blocks.length > 4 && (
+                      <blockquote className="border-l-4 border-primary pl-6 py-2 my-8 font-display text-2xl leading-snug text-foreground/90 italic">
+                        {post.excerpt}
+                      </blockquote>
+                    )}
+                    {i === insertImageAt && blocks.length > 5 && (
+                      <figure className="my-10 -mx-6 md:mx-0">
+                        <div className="relative h-56 md:h-80 overflow-hidden rounded-2xl">
+                          <img
+                            src={getSecondaryImage(post)}
+                            alt=""
+                            loading="lazy"
+                            className="absolute inset-0 h-full w-full object-cover"
+                          />
+                        </div>
+                      </figure>
+                    )}
+                  </div>
+                ));
+              })()}
             </div>
-
-            <figure className="my-12 -mx-6 md:mx-0">
-              <div className="relative h-56 md:h-80 overflow-hidden rounded-2xl">
-                <img
-                  src={getSecondaryImage(post)}
-                  alt=""
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </div>
-            </figure>
 
             <div className="mt-16 rounded-2xl border border-border bg-card p-8 shadow-card">
               <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">
