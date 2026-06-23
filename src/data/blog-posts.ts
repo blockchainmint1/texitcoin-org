@@ -11,6 +11,29 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "dex-trade-warning-june-2026",
+    title: "Warning: Dex-Trade Restrictions — It's Time to Move Your Funds",
+    date: "2026-06-23",
+    author: "Bobby Gray",
+    tag: "Markets",
+    readMinutes: 3,
+    excerpt: "Dex-Trade was TEXITcoin's first exchange home and a solid partner for over a year. New restrictions, deposit issues, and refund fees have made the platform unpredictable, and we no longer feel comfortable recommending it. If you hold funds there, please withdraw at your earliest convenience.",
+    body: [
+      "Dex-Trade holds a special place in this project's history. They were our very first exchange listing — the place where TEXITcoin first met the open market. For that, we will always be grateful. They were never the biggest venue in the world, and they were never the smallest. They were a solid, reliable mid-tier exchange that gave us a shot when we were brand new, and that meant something.",
+      "For a long stretch, Dex-Trade was the go-to destination for miners and everyday holders who wanted a simple on-ramp. Account setup was straightforward, and the no-KYC policy for small volumes made it easy for community members to trade without jumping through hoops. A lot of people got their first TXC there. A lot of miners turned hash into liquidity there. It worked.",
+      "It wasn't always frictionless. We spent months wrestling with Dex-Trade's team about opening our API and getting our market history shared with CoinMarketCap. Progress was slow, the back-and-forth was exhausting, and at times it felt like we were shouting into a void. But eventually the data flowed, the pages updated, and the connection held. That is the reality of working with exchanges in this industry: nothing is easy, and persistence is half the battle.",
+      "Unfortunately, the landscape has shifted dramatically. Dex-Trade has rolled out a wave of new restrictions that make the platform almost unrecognizable from the friendly venue we once knew. KYC requirements have tightened, withdrawal limits have dropped, and the compliance burden on users has skyrocketed. What used to be a simple, accessible exchange now feels like a maze of verification tiers, hold periods, and arbitrary policy changes.",
+      "Worse, the behavior has turned genuinely concerning. We have received multiple reports from community members about deposits that simply disappeared — coins sent, confirmations received, but no balance ever credited. When those users reached out for help, the responses were slow, opaque, or nonexistent. In several cases, users were told they could recover their funds only by paying an 'account refund fee.' That is not how an honest exchange operates. That feels scammy, and we do not use that word lightly.",
+      "We have waited, watched, and hoped this was a temporary rough patch. It is not. The direction is clear, and we cannot in good conscience continue to point new users toward a platform where funds go missing and customer support extracts fees to fix its own mistakes.",
+      "If you currently hold TXC or any other assets on Dex-Trade, our strong recommendation is to withdraw them to a self-custody wallet at your earliest convenience. The official TEXITcoin web wallet is available at wallet.texitcoin.org, and any compatible desktop or mobile wallet will serve you well. Not your keys, not your coins — that principle has never been more relevant.",
+      "None of this is a reflection on Dex-Trade's past service. They were good to us when it mattered, and we wish them well navigating the same regulatory meat grinder that every exchange on earth is currently trying to survive. Compliance is hard. Jurisdictions conflict. Rules change overnight. The burden on smaller and mid-tier platforms is immense, and not every team handles that pressure gracefully. Some tighten operations, some lose their way, and some make decisions that erode the trust they once enjoyed.",
+      "We also want to acknowledge the broader reality: every centralized exchange is fighting an uphill battle against ever-changing rules, overlapping regulators, and a global policy environment that seems designed to make honest operation as difficult as possible. The teams running these platforms are not villains. They are business owners, engineers, and support staff trying to keep the lights on while the rulebook gets rewritten underneath them. When an exchange falters, it is worth remembering that the regulatory climate did a lot of the pushing.",
+      "That said, our first loyalty is to this community. If a venue cannot receive deposits reliably, if it charges users to recover missing funds, and if its policies shift unpredictably, then it is no longer a safe home for TXC. We are moving on, and we encourage you to do the same.",
+      "TEXITcoin is bigger than any single exchange. It always has been. The chain keeps running, the blocks keep mining, and honest money does not depend on the goodwill of a trading platform. We will continue pursuing new listings, deeper liquidity, and better on-ramps — but never at the cost of recommending a venue we no longer trust.",
+      "Thank you, Dex-Trade, for the early chapter. And thank you, community, for paying attention. Onward."
+    ],
+  },
+  {
     slug: "mexc-delisting-june-2026",
     title: "Delisted from MEXC — The Honest Update, and Why We're Not Slowing Down",
     date: "2026-06-21",
