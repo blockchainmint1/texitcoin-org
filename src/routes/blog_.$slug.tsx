@@ -22,15 +22,14 @@ const relatedQuery = queryOptions({
 
 export const Route = createFileRoute("/blog_/$slug")({
   loader: async ({ params, context }) => {
-    await Promise.all([
+    const [post] = await Promise.all([
       context.queryClient.ensureQueryData(postQuery(params.slug)),
       context.queryClient.ensureQueryData(relatedQuery),
     ]);
+    return { post };
   },
-  head: ({ params, match }) => {
-    const post = match.context?.queryClient?.getQueryData<
-      Awaited<ReturnType<typeof getBlogPost>>
-    >(["blog-post", params.slug]);
+  head: ({ loaderData, params }) => {
+    const post = loaderData?.post;
     if (!post) return { meta: [{ title: "Post — TEXITcoin" }] };
     const url = `https://texitcoin.org/blog/${params.slug}`;
     return {
