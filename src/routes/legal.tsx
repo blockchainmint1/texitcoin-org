@@ -247,6 +247,8 @@ const TONE_STYLES: Record<NonNullable<Entry["tone"]>, { label: string; bg: strin
 };
 
 function LegalPage() {
+  const feesAmount = useLegalFees();
+  const tldr = getTLDR(feesAmount);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
