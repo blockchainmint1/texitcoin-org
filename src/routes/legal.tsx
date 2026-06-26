@@ -364,9 +364,15 @@ function LegalPage() {
                         <span className="text-sm font-semibold text-muted-foreground line-through">
                           {e.link.label}
                         </span>
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-300">
+                        <a
+                          href={e.link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-300 transition hover:bg-amber-500/25 hover:text-amber-200"
+                        >
                           {e.link.deadNote}
-                        </span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
                       </div>
                     )}
                   </div>
