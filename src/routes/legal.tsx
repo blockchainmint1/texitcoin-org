@@ -319,7 +319,7 @@ function LegalPage() {
               </h2>
 
               <ul className="mt-6 grid gap-3 md:grid-cols-2">
-                {TLDR.map((item) => (
+                {tldr.map((item) => (
                   <li
                     key={item}
                     className="flex items-start gap-3 rounded-xl border border-border bg-background/50 p-4"
