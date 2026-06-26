@@ -38,7 +38,7 @@ export const Route = createFileRoute("/legal")({
   component: LegalPage,
 });
 
-const LEGAL_FEES_API = "https://minetxc.lovable.app/api/public/stats/legal-fees";
+const LEGAL_FEES_API = "/api/public/legal-fees";
 
 function useLegalFees() {
   const [amount, setAmount] = useState<string | null>(null);

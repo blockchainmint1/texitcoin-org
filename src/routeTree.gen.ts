@@ -44,6 +44,7 @@ import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -225,6 +226,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicLegalFeesRoute = ApiPublicLegalFeesRouteImport.update({
+  id: '/api/public/legal-fees',
+  path: '/api/public/legal-fees',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -278,6 +284,7 @@ export interface FileRoutesByFullPath {
   '/zoom': typeof ZoomRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
+  '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -318,6 +325,7 @@ export interface FileRoutesByTo {
   '/zoom': typeof ZoomRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
+  '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -359,6 +367,7 @@ export interface FileRoutesById {
   '/zoom': typeof ZoomRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/zoom_/$slug': typeof ZoomSlugRoute
+  '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -401,6 +410,7 @@ export interface FileRouteTypes {
     | '/zoom'
     | '/blog/$slug'
     | '/zoom/$slug'
+    | '/api/public/legal-fees'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -441,6 +451,7 @@ export interface FileRouteTypes {
     | '/zoom'
     | '/blog/$slug'
     | '/zoom/$slug'
+    | '/api/public/legal-fees'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -481,6 +492,7 @@ export interface FileRouteTypes {
     | '/zoom'
     | '/blog_/$slug'
     | '/zoom_/$slug'
+    | '/api/public/legal-fees'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -522,6 +534,7 @@ export interface RootRouteChildren {
   ZoomRoute: typeof ZoomRoute
   BlogSlugRoute: typeof BlogSlugRoute
   ZoomSlugRoute: typeof ZoomSlugRoute
+  ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -774,6 +787,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/legal-fees': {
+      id: '/api/public/legal-fees'
+      path: '/api/public/legal-fees'
+      fullPath: '/api/public/legal-fees'
+      preLoaderRoute: typeof ApiPublicLegalFeesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/queue/process': {
       id: '/lovable/email/queue/process'
       path: '/lovable/email/queue/process'
@@ -834,6 +854,7 @@ const rootRouteChildren: RootRouteChildren = {
   ZoomRoute: ZoomRoute,
   BlogSlugRoute: BlogSlugRoute,
   ZoomSlugRoute: ZoomSlugRoute,
+  ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
