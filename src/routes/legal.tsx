@@ -38,13 +38,48 @@ export const Route = createFileRoute("/legal")({
   component: LegalPage,
 });
 
-const TLDR = [
-  "Texas SOAH hearing is scheduled for August 17–20, 2026",
-  "Mining Packages are not available in Texas until the Cease & Desist is lifted",
-  "Avi Perry from Quinn Emanuel leads our legal team",
-  "$973,000+ out of pocket so far on legal costs (and climbing)",
-  "TEXITcoin network remains active — no disruption in service to community",
-];
+const LEGAL_FEES_API = "https://minetxc.lovable.app/api/public/stats/legal-fees";
+
+function useLegalFees() {
+  const [amount, setAmount] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch(LEGAL_FEES_API, { cache: "no-store" });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (cancelled) return;
+        const total = data?.total_usd as number | undefined;
+        if (typeof total === "number") {
+          const rounded = Math.floor(total / 1000) * 1000;
+          setAmount(`$${rounded.toLocaleString("en-US")}+`);
+        }
+      } catch {
+        // silently fail — keep hardcoded fallback
+      }
+    }
+    load();
+    const id = setInterval(load, 60_000);
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
+  }, []);
+
+  return amount;
+}
+
+function getTLDR(feesAmount: string | null) {
+  return [
+    "Texas SOAH hearing is scheduled for August 17–20, 2026",
+    "Mining Packages are not available in Texas until the Cease & Desist is lifted",
+    "Avi Perry from Quinn Emanuel leads our legal team",
+    `${feesAmount ?? "$973,000+"} out of pocket so far on legal costs (and climbing)`,
+    "TEXITcoin network remains active — no disruption in service to community",
+  ];
+}
 
 type Entry = {
   date: string;
