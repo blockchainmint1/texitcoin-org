@@ -63,9 +63,9 @@ const ENTRIES: Entry[] = [
     body: "It's been quiet for a while — no news is often good news while we patiently wait for our August hearing. We just received the TSSB's witness list. Before sharing it publicly, we redacted the names to protect identities and avoid any possibility of witness tampering from our passionate community. We don't recognize any of the names listed — no rangers, no project team managers. Interesting.",
     link: {
       label: "View the redacted witness list",
-      href: "https://ipfs.blockchainmint.com/ipfs/bafybeiczhgjf43f62tih4rhsoyigj7gjhnr5nko5argzoyfsadxtqokbde",
+      href: "https://ipfs.blockchainmint.com/ipfs/bafkreigddcjuqgkhsmdtco7kzrnv6hnhavotgqjues6ijha3m2xxlavrmu",
       dead: true,
-      deadNote: "TSSB said no 👶",
+      deadNote: "TSSB said no 👶 (proof)",
     },
   },
   {
