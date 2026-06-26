@@ -132,8 +132,8 @@ function useNetworkStats() {
     async function load() {
       try {
         const [blocksRes, hashRes, feesRes, diffRes, poolsRes] = await Promise.all([
-          fetch(`${MEMPOOL_API}/blocks`),
-          fetch(`${MEMPOOL_API}/v1/mining/hashrate/3d`),
+          fetch(`${MEMPOOL_API}/v1/blocks`),
+          fetch(`${MEMPOOL_API}/v1/mining/hashrate`),
           fetch(`${MEMPOOL_API}/v1/fees/recommended`),
           fetch(`${MEMPOOL_API}/v1/difficulty-adjustment`),
           fetch(`${MEMPOOL_API}/v1/mining/pools/1w`),
