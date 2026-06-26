@@ -64,6 +64,8 @@ const ENTRIES: Entry[] = [
     link: {
       label: "View the redacted witness list",
       href: "https://ipfs.blockchainmint.com/ipfs/bafybeiczhgjf43f62tih4rhsoyigj7gjhnr5nko5argzoyfsadxtqokbde",
+      dead: true,
+      deadNote: "TSSB said no 👶",
     },
   },
   {
