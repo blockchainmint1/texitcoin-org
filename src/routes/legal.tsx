@@ -49,7 +49,7 @@ type Entry = {
   date: string;
   title: string;
   body: string;
-  link?: { label: string; href: string };
+  link?: { label: string; href: string; dead?: boolean; deadNote?: string };
   tone?: "win" | "filing" | "context" | "regulator";
   tag?: string;
 };
@@ -64,6 +64,8 @@ const ENTRIES: Entry[] = [
     link: {
       label: "View the redacted witness list",
       href: "https://ipfs.blockchainmint.com/ipfs/bafybeiczhgjf43f62tih4rhsoyigj7gjhnr5nko5argzoyfsadxtqokbde",
+      dead: true,
+      deadNote: "TSSB said no 👶",
     },
   },
   {
@@ -346,7 +348,7 @@ function LegalPage() {
                       {e.title}
                     </h3>
                     <p className="mt-3 text-muted-foreground">{e.body}</p>
-                    {e.link && (
+                    {e.link && !e.link.dead && (
                       <a
                         href={e.link.href}
                         target="_blank"
@@ -356,6 +358,16 @@ function LegalPage() {
                         {e.link.label}
                         <ExternalLink className="h-4 w-4" />
                       </a>
+                    )}
+                    {e.link?.dead && (
+                      <div className="mt-4 flex flex-wrap items-center gap-3">
+                        <span className="text-sm font-semibold text-muted-foreground line-through">
+                          {e.link.label}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-300">
+                          {e.link.deadNote}
+                        </span>
+                      </div>
                     )}
                   </div>
                 </motion.li>
