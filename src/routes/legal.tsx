@@ -49,7 +49,7 @@ type Entry = {
   date: string;
   title: string;
   body: string;
-  link?: { label: string; href: string };
+  link?: { label: string; href: string; dead?: boolean; deadNote?: string };
   tone?: "win" | "filing" | "context" | "regulator";
   tag?: string;
 };
