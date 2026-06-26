@@ -100,8 +100,8 @@ function useLiveStats() {
     async function load() {
       try {
         const [blocksRes, hashRes, feesRes] = await Promise.all([
-          fetch(`${MEMPOOL_API}/blocks`),
-          fetch(`${MEMPOOL_API}/v1/mining/hashrate/3d`),
+          fetch(`${MEMPOOL_API}/v1/blocks`),
+          fetch(`${MEMPOOL_API}/v1/mining/hashrate`),
           fetch(`${MEMPOOL_API}/v1/fees/recommended`),
         ]);
         if (!blocksRes.ok || !hashRes.ok) throw new Error("api");
