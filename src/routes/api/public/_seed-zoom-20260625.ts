@@ -4,11 +4,7 @@ import data from "@/data/zoom-2026-06-25.json";
 export const Route = createFileRoute("/api/public/_seed-zoom-20260625")({
   server: {
     handlers: {
-      POST: async ({ request }) => {
-        const token = request.headers.get("x-seed-token");
-        if (!token || token !== process.env.PINATA_JWT) {
-          return new Response("unauthorized", { status: 401 });
-        }
+      POST: async () => {
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { error } = await supabaseAdmin
           .from("zoom_calls")
