@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import data from "@/data/zoom-2026-06-25.json";
 
-export const Route = createFileRoute("/api/public/_seed-zoom-20260625")({
+export const Route = createFileRoute("/api/public/seed-zoom-20260625")({
   server: {
     handlers: {
       POST: async () => {
