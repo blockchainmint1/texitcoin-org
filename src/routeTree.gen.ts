@@ -44,7 +44,6 @@ import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
-import { Route as ApiPublicSeedZoom20260625RouteImport } from './routes/api/public/seed-zoom-20260625'
 import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
@@ -227,12 +226,6 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicSeedZoom20260625Route =
-  ApiPublicSeedZoom20260625RouteImport.update({
-    id: '/api/public/seed-zoom-20260625',
-    path: '/api/public/seed-zoom-20260625',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiPublicLegalFeesRoute = ApiPublicLegalFeesRouteImport.update({
   id: '/api/public/legal-fees',
   path: '/api/public/legal-fees',
@@ -292,7 +285,6 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
-  '/api/public/seed-zoom-20260625': typeof ApiPublicSeedZoom20260625Route
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -334,7 +326,6 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
-  '/api/public/seed-zoom-20260625': typeof ApiPublicSeedZoom20260625Route
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -377,7 +368,6 @@ export interface FileRoutesById {
   '/blog_/$slug': typeof BlogSlugRoute
   '/zoom_/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
-  '/api/public/seed-zoom-20260625': typeof ApiPublicSeedZoom20260625Route
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -421,7 +411,6 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/zoom/$slug'
     | '/api/public/legal-fees'
-    | '/api/public/seed-zoom-20260625'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -463,7 +452,6 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/zoom/$slug'
     | '/api/public/legal-fees'
-    | '/api/public/seed-zoom-20260625'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -505,7 +493,6 @@ export interface FileRouteTypes {
     | '/blog_/$slug'
     | '/zoom_/$slug'
     | '/api/public/legal-fees'
-    | '/api/public/seed-zoom-20260625'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -548,7 +535,6 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   ZoomSlugRoute: typeof ZoomSlugRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
-  ApiPublicSeedZoom20260625Route: typeof ApiPublicSeedZoom20260625Route
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -801,13 +787,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/seed-zoom-20260625': {
-      id: '/api/public/seed-zoom-20260625'
-      path: '/api/public/seed-zoom-20260625'
-      fullPath: '/api/public/seed-zoom-20260625'
-      preLoaderRoute: typeof ApiPublicSeedZoom20260625RouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/legal-fees': {
       id: '/api/public/legal-fees'
       path: '/api/public/legal-fees'
@@ -876,7 +855,6 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   ZoomSlugRoute: ZoomSlugRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
-  ApiPublicSeedZoom20260625Route: ApiPublicSeedZoom20260625Route,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
