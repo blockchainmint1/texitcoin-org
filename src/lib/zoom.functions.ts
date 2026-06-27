@@ -39,6 +39,14 @@ const slugSchema = z
   .object({ slug: z.string().min(1).max(120).regex(/^[a-zA-Z0-9._-]+$/) })
   .strict();
 
+// File-based transcript/summary fallbacks. Used when the row in the DB
+// doesn't carry transcript text (e.g. very long transcripts shipped via the
+// repo). Keyed by zoom_calls.slug.
+const FILE_FALLBACKS: Record<string, () => Promise<{ summary?: string; transcript?: string }>> = {
+  "2026-06-25-we-did-it": () =>
+    import("@/data/transcripts/2026-06-25-we-did-it.json").then((m) => m.default ?? m),
+};
+
 export const getZoomCall = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => slugSchema.parse(input))
   .handler(async ({ data }): Promise<ZoomCall | null> => {
@@ -51,5 +59,18 @@ export const getZoomCall = createServerFn({ method: "GET" })
       .eq("slug", data.slug)
       .maybeSingle();
     if (error) throw new Error(error.message);
-    return (row as ZoomCall | null) ?? null;
+    const call = (row as ZoomCall | null) ?? null;
+    if (!call) return null;
+    const loader = FILE_FALLBACKS[call.slug];
+    if (loader && (!call.transcript || !call.summary)) {
+      try {
+        const fallback = await loader();
+        if (!call.transcript && fallback.transcript) call.transcript = fallback.transcript;
+        if (!call.summary && fallback.summary) call.summary = fallback.summary;
+      } catch {
+        // ignore — fall back to whatever the DB returned
+      }
+    }
+    return call;
   });
+
