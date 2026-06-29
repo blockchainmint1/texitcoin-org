@@ -66,7 +66,10 @@ export const getBlogPost = createServerFn({ method: "GET" })
       .eq("published", true)
       .eq("slug", data.slug)
       .maybeSingle();
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("getBlogPost failed", error);
+      throw new Error("Failed to load post");
+    }
     if (!row) throw notFound();
     return toDTO(row as Row);
   });
