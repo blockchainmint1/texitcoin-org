@@ -45,7 +45,10 @@ export const listBlogPosts = createServerFn({ method: "GET" }).handler(
       .select("slug,title,date,author,tag,read_minutes,excerpt,body_markdown")
       .eq("published", true)
       .order("date", { ascending: false });
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("listBlogPosts failed", error);
+      throw new Error("Failed to load posts");
+    }
     return (data ?? []).map((r) => toDTO(r as Row));
   },
 );
