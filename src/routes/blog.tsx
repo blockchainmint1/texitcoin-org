@@ -34,7 +34,7 @@ export const Route = createFileRoute("/blog")({
     <div className="min-h-screen grid place-items-center bg-background text-foreground p-8">
       <div className="max-w-md text-center">
         <h1 className="font-display text-3xl font-bold">Couldn't load the blog</h1>
-        <p className="mt-3 text-muted-foreground">{error.message}</p>
+        <p className="mt-3 text-muted-foreground">Something went wrong loading the blog. Please try again.</p>
       </div>
     </div>
   ),

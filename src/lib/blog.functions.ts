@@ -45,7 +45,10 @@ export const listBlogPosts = createServerFn({ method: "GET" }).handler(
       .select("slug,title,date,author,tag,read_minutes,excerpt,body_markdown")
       .eq("published", true)
       .order("date", { ascending: false });
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("listBlogPosts failed", error);
+      throw new Error("Failed to load posts");
+    }
     return (data ?? []).map((r) => toDTO(r as Row));
   },
 );
@@ -63,7 +66,10 @@ export const getBlogPost = createServerFn({ method: "GET" })
       .eq("published", true)
       .eq("slug", data.slug)
       .maybeSingle();
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("getBlogPost failed", error);
+      throw new Error("Failed to load post");
+    }
     if (!row) throw notFound();
     return toDTO(row as Row);
   });
