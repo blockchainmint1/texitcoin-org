@@ -1,4 +1,4 @@
-import { Radio, Calendar, Youtube, Facebook, ExternalLink } from "lucide-react";
+import { Radio, Calendar, ExternalLink } from "lucide-react";
 import { useLiveWindow, icsForNextCall } from "@/lib/live-window";
 import { useCallback } from "react";
 
@@ -10,16 +10,28 @@ const FACEBOOK_LIVE_URL = "https://www.facebook.com/profile.php?id=6155987517665
 
 function XIcon({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-      className={className}
-    >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
       <path d="M18.244 2H21.5l-7.5 8.573L23 22h-6.828l-5.35-6.99L4.7 22H1.44l8.02-9.164L1 2h6.914l4.84 6.396L18.244 2Zm-1.2 18h1.86L7.06 4H5.09l11.955 16Z" />
     </svg>
   );
 }
+
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.5 2.9h-2.4v7A10 10 0 0 0 22 12Z" />
+    </svg>
+  );
+}
+
 
 type ChipProps = {
   href: string;
