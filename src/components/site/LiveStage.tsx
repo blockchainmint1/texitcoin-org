@@ -1,4 +1,4 @@
-import { Radio, Calendar, ExternalLink } from "lucide-react";
+import { Radio, Calendar } from "lucide-react";
 import { useLiveWindow, icsForNextCall } from "@/lib/live-window";
 import { useLiveStatus } from "@/lib/use-live-status";
 import { useCallback } from "react";
@@ -11,7 +11,6 @@ const X_LIVE_URL = "https://x.com/texitcoin";
 const FACEBOOK_LIVE_URL = "https://www.facebook.com/profile.php?id=61559875176657";
 const YOUTUBE_LIVE_URL = "https://www.youtube.com/@IDMC-fans";
 
-
 function XIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
@@ -19,7 +18,6 @@ function XIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -37,24 +35,30 @@ function YouTubeIcon({ className }: { className?: string }) {
   );
 }
 
+function StreamTXCIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+    </svg>
+  );
+}
 
-type ChipProps = {
+type IconLinkProps = {
   href: string;
   label: string;
   icon: React.ReactNode;
 };
 
-function WatchChip({ href, label, icon }: ChipProps) {
+function IconLink({ href, label, icon }: IconLinkProps) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-foreground/80 transition hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
+      aria-label={label}
+      className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-card text-foreground/80 transition hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
     >
       {icon}
-      <span className="hidden sm:inline">{label}</span>
-      <ExternalLink className="h-3 w-3 opacity-40 transition group-hover:opacity-70" />
     </a>
   );
 }
