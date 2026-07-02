@@ -98,6 +98,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
+  const { isLive } = useLiveWindow();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
