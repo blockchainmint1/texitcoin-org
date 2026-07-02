@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/txc-logo.png";
 import { LivePrice } from "./LivePrice";
 import { ThemeToggle } from "./ThemeToggle";
+import { useLiveWindow } from "@/lib/live-window";
 
 type NavLink = { label: string; href: string; external?: boolean; internal?: boolean };
 type NavItem =
@@ -97,6 +98,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
+  const { isLive } = useLiveWindow();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -115,17 +117,37 @@ export function Header() {
     >
       <Link
         to="/zoom"
-        className="group block bg-red-gradient text-primary-foreground"
+        className={`group block text-primary-foreground ${
+          isLive ? "bg-primary" : "bg-red-gradient"
+        }`}
       >
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-3 gap-y-1 px-6 py-2 text-center text-xs sm:text-sm font-medium">
-          <span className="inline-flex h-2 w-2 rounded-full bg-primary-foreground animate-pulse" aria-hidden />
-          <span>
-            <span className="font-display uppercase tracking-[0.18em] mr-2">Live Thursdays</span>
-            Honest Money Hour with Bobby Gray · 7pm Central
-          </span>
-          <span className="inline-flex items-center gap-1 underline-offset-2 group-hover:underline">
-            Watch &amp; Register <span aria-hidden>→</span>
-          </span>
+          {isLive ? (
+            <>
+              <span className="relative inline-flex h-2.5 w-2.5" aria-hidden>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-foreground opacity-75" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-foreground" />
+              </span>
+              <span>
+                <span className="font-display uppercase tracking-[0.22em] mr-2">Live now</span>
+                Honest Money Hour is on the air
+              </span>
+              <span className="inline-flex items-center gap-1 underline-offset-2 group-hover:underline">
+                Watch <span aria-hidden>→</span>
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="inline-flex h-2 w-2 rounded-full bg-primary-foreground animate-pulse" aria-hidden />
+              <span>
+                <span className="font-display uppercase tracking-[0.18em] mr-2">Live Thursdays</span>
+                Honest Money Hour with Bobby Gray · 7pm Central
+              </span>
+              <span className="inline-flex items-center gap-1 underline-offset-2 group-hover:underline">
+                Watch &amp; Register <span aria-hidden>→</span>
+              </span>
+            </>
+          )}
         </div>
       </Link>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">

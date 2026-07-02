@@ -1,10 +1,11 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions, useQueryClient } from "@tanstack/react-query";
-import { Radio, Calendar, PlayCircle, ChevronRight, Lock, Search, X, ChevronLeft } from "lucide-react";
+import { Calendar, PlayCircle, ChevronRight, BellRing, Search, X, ChevronLeft } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ZoomRegister } from "@/components/site/ZoomRegister";
+import { LiveStage } from "@/components/site/LiveStage";
 import { listZoomCalls, type ZoomCall } from "@/lib/zoom.functions";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -119,25 +120,14 @@ function ZoomIndex() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden border-b border-border pt-32 pb-12">
+        <section className="relative overflow-hidden border-b border-border pt-32 pb-16">
           <div
             className="absolute inset-0 -z-10 opacity-60"
             style={{ background: "var(--gradient-hero)" }}
             aria-hidden
           />
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-              <Radio className="h-3 w-3 text-primary animate-pulse" />
-              Honest Money Hour · Live Thursdays 7pm CT
-            </div>
-            <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-6xl text-balance">
-              Live{"\u00a0"}Video{"\u00a0"}<span className="text-primary">Updates</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-              Watch the latest call right here, browse the archive with AI
-              summaries and full transcripts, and grab your seat for the next
-              one.
-            </p>
+          <div className="mx-auto max-w-6xl px-6">
+            <LiveStage />
           </div>
         </section>
 
@@ -596,10 +586,10 @@ function NextThursdayRow() {
         </div>
       </div>
       <a
-        href="#zoom-register"
+        href="#live-reminder"
         className="inline-flex items-center gap-1 rounded-md border border-primary/40 bg-background px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary hover:bg-primary/10"
       >
-        <Lock className="h-3.5 w-3.5" /> SUBSCRIBE & GET LINK
+        <BellRing className="h-3.5 w-3.5" /> Remind me
       </a>
     </div>
   );
