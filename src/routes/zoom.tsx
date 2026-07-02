@@ -131,7 +131,7 @@ function ZoomIndex() {
               Honest Money Hour · Live Thursdays 7pm CT
             </div>
             <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-6xl text-balance">
-              Live{"\u00a0"}Zoom <span className="text-primary">Updates</span>
+              Live{"\u00a0"}Video{"\u00a0"}<span className="text-primary">Updates</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
               Watch the latest call right here, browse the archive with AI
