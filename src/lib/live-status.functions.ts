@@ -15,31 +15,57 @@ export type LiveStatus = {
   checkedAt: number;
 };
 
+// TSR server functions expect a Seroval-encoded `payload` query param plus a
+// couple of framing headers. This is the exact shape streamTXC's client sends
+// for `getLiveStreamByWallet({ data: { wallet } })`.
+function serovalPayload(wallet: string): string {
+  return JSON.stringify({
+    t: {
+      t: 10,
+      i: 0,
+      p: {
+        k: ["data"],
+        v: [
+          {
+            t: 10,
+            i: 1,
+            p: { k: ["wallet"], v: [{ t: 1, s: wallet }] },
+            o: 0,
+          },
+        ],
+      },
+      o: 0,
+    },
+    f: 63,
+    m: [],
+  });
+}
+
 export const getLiveStatus = createServerFn({ method: "GET" }).handler(
   async (): Promise<LiveStatus> => {
-    const url = `${STREAM_RPC}?data=${encodeURIComponent(
-      JSON.stringify({ wallet: LIVE_WALLET }),
-    )}`;
+    const url = `${STREAM_RPC}?payload=${encodeURIComponent(serovalPayload(LIVE_WALLET))}`;
     try {
       const res = await fetch(url, {
         method: "GET",
-        headers: { accept: "application/json" },
+        headers: {
+          accept: "application/x-tss-framed, application/x-ndjson, application/json",
+          "x-tsr-serverfn": "true",
+        },
       });
       if (!res.ok) {
         return { isLive: false, startedAt: null, checkedAt: Date.now() };
       }
       const text = await res.text();
-      // streamTXC returns an empty body when there is no active stream row,
-      // and a serialized `{ stream: { status, hls_url, started_at, ... } }`
-      // payload when one exists in status 'live' or 'starting'.
       if (!text) {
         return { isLive: false, startedAt: null, checkedAt: Date.now() };
       }
+      // Response is a Seroval tree; the fields we care about are surfaced as
+      // simple `"status":"live"` and `"hls_url":"https://..."` string nodes.
       const live =
-        /"status"\s*:\s*"(live|starting)"/i.test(text) ||
-        /"hls_url"\s*:\s*"https?:/i.test(text);
+        /"status"[^]{0,40}"(live|starting)"/i.test(text) ||
+        /"hls_url"[^]{0,40}"https?:/i.test(text);
       let startedAt: string | null = null;
-      const m = text.match(/"started_at"\s*:\s*"([^"]+)"/);
+      const m = text.match(/"started_at"[^]{0,40}"([^"]+)"/);
       if (m) startedAt = m[1];
       return { isLive: live, startedAt, checkedAt: Date.now() };
     } catch {
