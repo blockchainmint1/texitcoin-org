@@ -34,7 +34,7 @@ export function BrutalTransparency() {
         {/* Heading */}
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-3xl font-bold uppercase tracking-wide md:text-4xl text-balance">
-            Brural{" "}
+            Brutal{" "}
             <span className="text-primary">Transparency</span>
           </h2>
           <p className="mt-4 text-muted-foreground md:text-lg">
