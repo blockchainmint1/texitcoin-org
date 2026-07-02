@@ -9,6 +9,7 @@ const STREAM_WATCH_URL = "https://streamtxc.com/live";
 const X_LIVE_URL = "https://x.com/texitcoin";
 
 const FACEBOOK_LIVE_URL = "https://www.facebook.com/profile.php?id=61559875176657";
+const YOUTUBE_LIVE_URL = "https://www.youtube.com/@IDMC-fans";
 
 
 function XIcon({ className }: { className?: string }) {
