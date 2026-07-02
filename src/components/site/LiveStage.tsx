@@ -5,7 +5,7 @@ import { useCallback } from "react";
 const STREAM_EMBED_URL = "https://streamtxc.com/embed/live";
 const STREAM_WATCH_URL = "https://streamtxc.com/live";
 const X_LIVE_URL = "https://x.com/texitcoin";
-const YOUTUBE_LIVE_URL = "https://www.youtube.com/@texitcoin/live";
+
 const FACEBOOK_LIVE_URL = "https://www.facebook.com/profile.php?id=61559875176657";
 
 function XIcon({ className }: { className?: string }) {
@@ -16,13 +16,6 @@ function XIcon({ className }: { className?: string }) {
   );
 }
 
-function YouTubeIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
-      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z" />
-    </svg>
-  );
-}
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -182,11 +175,6 @@ export function LiveStage() {
             href={X_LIVE_URL}
             label="X"
             icon={<XIcon className="h-3 w-3" />}
-          />
-          <WatchChip
-            href={YOUTUBE_LIVE_URL}
-            label="YouTube"
-            icon={<YouTubeIcon className="h-3.5 w-3.5 text-[#ff0033]" />}
           />
           <WatchChip
             href={FACEBOOK_LIVE_URL}
