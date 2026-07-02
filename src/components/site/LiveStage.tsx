@@ -167,7 +167,7 @@ export function LiveStage() {
         <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-6xl text-balance">
           {isLive ? (
             <>
-              We're{"\u00a0"}<span className="text-primary">live</span> right now.
+              We{"\u00a0"}<span className="text-primary">live</span> right now.
             </>
           ) : (
             <>
@@ -182,26 +182,26 @@ export function LiveStage() {
             : "Watch every week wherever you already hang out. We simulcast the Honest Money Hour to all of them."}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-1.5">
-          <WatchChip
+        <div className="mt-6 flex flex-wrap gap-3">
+          <IconLink
             href={STREAM_WATCH_URL}
-            label="streamTXC"
-            icon={<Radio className="h-3.5 w-3.5 text-primary" />}
+            label="Watch on streamTXC"
+            icon={<StreamTXCIcon className="h-6 w-6 text-primary" />}
           />
-          <WatchChip
+          <IconLink
             href={X_LIVE_URL}
-            label="X"
-            icon={<XIcon className="h-3 w-3" />}
+            label="Watch on X"
+            icon={<XIcon className="h-6 w-6" />}
           />
-          <WatchChip
+          <IconLink
             href={FACEBOOK_LIVE_URL}
-            label="Facebook"
-            icon={<FacebookIcon className="h-3.5 w-3.5 text-[#1877f2]" />}
+            label="Watch on Facebook"
+            icon={<FacebookIcon className="h-6 w-6 text-[#1877f2]" />}
           />
-          <WatchChip
+          <IconLink
             href={YOUTUBE_LIVE_URL}
-            label="YouTube"
-            icon={<YouTubeIcon className="h-3.5 w-3.5 text-[#FF0000]" />}
+            label="Watch on YouTube"
+            icon={<YouTubeIcon className="h-6 w-6 text-[#FF0000]" />}
           />
         </div>
 
