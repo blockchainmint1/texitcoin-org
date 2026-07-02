@@ -121,6 +121,9 @@ function ZoomIndex() {
           </div>
         </section>
 
+        {/* Brutal Transparency */}
+        <BrutalTransparency />
+
         {/* Archive */}
         <ArchiveSection recorded={recorded} />
       </main>
