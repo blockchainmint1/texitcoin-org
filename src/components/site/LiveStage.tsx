@@ -9,6 +9,7 @@ const STREAM_WATCH_URL = "https://streamtxc.com/live";
 const X_LIVE_URL = "https://x.com/texitcoin";
 
 const FACEBOOK_LIVE_URL = "https://www.facebook.com/profile.php?id=61559875176657";
+const YOUTUBE_LIVE_URL = "https://www.youtube.com/@IDMC-fans";
 
 
 function XIcon({ className }: { className?: string }) {
@@ -28,6 +29,14 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M23.5 6.2c-.3-1.2-1.3-2.2-2.5-2.5-1.9-.5-9-.5-9-.5s-7.1 0-9 .5c-1.2.3-2.2 1.3-2.5 2.5C0 8.8 0 12 0 12s0 3.2.5 5.1c.3 1.2 1.3 2.2 2.5 2.5 1.9.5 9 .5 9 .5s7.1 0 9-.5c1.2-.3 2.2-1.3 2.5-2.5.5-1.9.5-5.1.5-5.1s0-3.2-.5-5.1zM9.5 15.5v-7L15.8 12l-6.3 3.5z" />
+    </svg>
+  );
+}
+
 
 type ChipProps = {
   href: string;
@@ -41,10 +50,10 @@ function WatchChip({ href, label, icon }: ChipProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground/80 transition hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
+      className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-foreground/80 transition hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
     >
       {icon}
-      {label}
+      <span className="hidden sm:inline">{label}</span>
       <ExternalLink className="h-3 w-3 opacity-40 transition group-hover:opacity-70" />
     </a>
   );
@@ -169,7 +178,7 @@ export function LiveStage() {
             : "Watch every week wherever you already hang out. We simulcast the Honest Money Hour to all of them."}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-1.5">
           <WatchChip
             href={STREAM_WATCH_URL}
             label="streamTXC"
@@ -184,6 +193,11 @@ export function LiveStage() {
             href={FACEBOOK_LIVE_URL}
             label="Facebook"
             icon={<FacebookIcon className="h-3.5 w-3.5 text-[#1877f2]" />}
+          />
+          <WatchChip
+            href={YOUTUBE_LIVE_URL}
+            label="YouTube"
+            icon={<YouTubeIcon className="h-3.5 w-3.5 text-[#FF0000]" />}
           />
         </div>
 
