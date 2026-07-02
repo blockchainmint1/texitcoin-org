@@ -1,12 +1,15 @@
 import { Radio, Calendar, ExternalLink } from "lucide-react";
 import { useLiveWindow, icsForNextCall } from "@/lib/live-window";
+import { useLiveStatus } from "@/lib/use-live-status";
 import { useCallback } from "react";
 
-const STREAM_EMBED_URL = "https://streamtxc.com/embed/live";
+const STREAM_EMBED_URL =
+  "https://stream.texitcoin.org/embed/live/by-wallet/TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc?autoplay=1&mute=1";
 const STREAM_WATCH_URL = "https://streamtxc.com/live";
 const X_LIVE_URL = "https://x.com/texitcoin";
 
 const FACEBOOK_LIVE_URL = "https://www.facebook.com/profile.php?id=61559875176657";
+
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -62,7 +65,8 @@ function TimeCell({ value, label }: { value: number; label: string }) {
 }
 
 export function LiveStage() {
-  const { isLive, nextStart, days, hours, minutes, seconds } = useLiveWindow();
+  const { nextStart, days, hours, minutes, seconds } = useLiveWindow();
+  const { isLive } = useLiveStatus();
 
   const downloadIcs = useCallback(() => {
     const blob = new Blob([icsForNextCall()], { type: "text/calendar" });
