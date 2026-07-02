@@ -50,10 +50,10 @@ function WatchChip({ href, label, icon }: ChipProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground/80 transition hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
+      className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-foreground/80 transition hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
     >
       {icon}
-      {label}
+      <span className="hidden sm:inline">{label}</span>
       <ExternalLink className="h-3 w-3 opacity-40 transition group-hover:opacity-70" />
     </a>
   );
