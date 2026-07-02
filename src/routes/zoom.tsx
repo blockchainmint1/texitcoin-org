@@ -586,10 +586,10 @@ function NextThursdayRow() {
         </div>
       </div>
       <a
-        href="#zoom-register"
+        href="#live-reminder"
         className="inline-flex items-center gap-1 rounded-md border border-primary/40 bg-background px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary hover:bg-primary/10"
       >
-        <Lock className="h-3.5 w-3.5" /> SUBSCRIBE & GET LINK
+        <BellRing className="h-3.5 w-3.5" /> Remind me
       </a>
     </div>
   );
