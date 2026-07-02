@@ -3,27 +3,27 @@ import { Eye, Megaphone, ShieldCheck, Zap, Scale, Gem } from "lucide-react";
 const pillars = [
   {
     icon: <Megaphone className="h-5 w-5 text-primary" />,
-    text: "We share as much as we can think of with you and the public.",
+    text: "We open the books, share the calls, and say the quiet parts out loud. If we know it, you know it.",
   },
   {
     icon: <Eye className="h-5 w-5 text-primary" />,
-    text: "The news isn't always good. You might not like what we have to say, but we'll always tell you the truth.",
+    text: "Hard news included. You may not always like what you hear, but you'll never wonder if we're holding back.",
   },
   {
     icon: <ShieldCheck className="h-5 w-5 text-primary" />,
-    text: "Risk and trust are how we got to where we are today; transparency is how we prove that risk and trust were not misplaced.",
+    text: "Risk and trust built this community. Transparency is how we prove that trust wasn't misplaced.",
   },
   {
     icon: <Zap className="h-5 w-5 text-primary" />,
-    text: "It's real-time. We share with you as soon as we know — or know enough to make it public.",
+    text: "No waiting for the press release. When we know something worth sharing, it goes live — usually before the dust settles.",
   },
   {
     icon: <Scale className="h-5 w-5 text-primary" />,
-    text: "We're constantly questioned on how much transparency is too much. We don't know the answer, but we'd like to err on the side of transparent.",
+    text: "People ask how much transparency is too much. Our answer: we'd rather overshare than leave you guessing.",
   },
   {
     icon: <Gem className="h-5 w-5 text-primary" />,
-    text: "In 2026, authenticity is the new coin of the realm. Fake shit is everywhere. You should join us for a dose of something real.",
+    text: "In an era of AI slop and scripted sincerity, authenticity is scarce. Consider this your weekly dose of something real.",
   },
 ];
 
