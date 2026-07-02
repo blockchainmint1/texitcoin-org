@@ -59,15 +59,42 @@ export const getLiveStatus = createServerFn({ method: "GET" }).handler(
       if (!text) {
         return { isLive: false, startedAt: null, checkedAt: Date.now() };
       }
-      // Response is a Seroval tree; the fields we care about are surfaced as
-      // simple `"status":"live"` and `"hls_url":"https://..."` string nodes.
+      // Response is a Seroval tree where keys and values live in separate
+      // arrays: { t: 10, p: { k: [...keys], v: [...nodes] } }. Walk it and
+      // collect key -> string value pairs.
+      const fields: Record<string, string> = {};
+      const walk = (node: unknown): void => {
+        if (!node || typeof node !== "object") return;
+        const n = node as {
+          p?: { k?: unknown[]; v?: unknown[] };
+          a?: unknown[];
+        };
+        if (n.p?.k && n.p?.v) {
+          n.p.k.forEach((key, i) => {
+            const val = n.p!.v![i] as { t?: number; s?: unknown } | undefined;
+            if (typeof key === "string" && val && typeof val.s === "string") {
+              fields[key] = val.s;
+            }
+            walk(val);
+          });
+        }
+        if (Array.isArray(n.a)) n.a.forEach(walk);
+      };
+      try {
+        walk(JSON.parse(text));
+      } catch {
+        // Not JSON — fall through with empty fields (treated as offline).
+      }
+      const status = (fields.status ?? "").toLowerCase();
       const live =
-        /"status"[^]{0,40}"(live|starting)"/i.test(text) ||
-        /"hls_url"[^]{0,40}"https?:/i.test(text);
-      let startedAt: string | null = null;
-      const m = text.match(/"started_at"[^]{0,40}"([^"]+)"/);
-      if (m) startedAt = m[1];
-      return { isLive: live, startedAt, checkedAt: Date.now() };
+        status === "live" ||
+        status === "starting" ||
+        /^https?:/.test(fields.hls_url ?? "");
+      return {
+        isLive: live,
+        startedAt: fields.started_at ?? null,
+        checkedAt: Date.now(),
+      };
     } catch {
       return { isLive: false, startedAt: null, checkedAt: Date.now() };
     }
