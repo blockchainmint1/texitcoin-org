@@ -1,10 +1,9 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions, useQueryClient } from "@tanstack/react-query";
-import { Calendar, PlayCircle, ChevronRight, BellRing, Search, X, ChevronLeft } from "lucide-react";
+import { PlayCircle, ChevronRight, Search, X, ChevronLeft } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { ZoomRegister } from "@/components/site/ZoomRegister";
 import { LiveStage } from "@/components/site/LiveStage";
 import { listZoomCalls, type ZoomCall } from "@/lib/zoom.functions";
 import { supabase } from "@/integrations/supabase/client";
