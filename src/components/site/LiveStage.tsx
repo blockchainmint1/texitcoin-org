@@ -186,12 +186,12 @@ export function LiveStage() {
           <WatchChip
             href={YOUTUBE_LIVE_URL}
             label="YouTube"
-            icon={<Youtube className="h-3.5 w-3.5 text-[#ff0033]" />}
+            icon={<YouTubeIcon className="h-3.5 w-3.5 text-[#ff0033]" />}
           />
           <WatchChip
             href={FACEBOOK_LIVE_URL}
             label="Facebook"
-            icon={<Facebook className="h-3.5 w-3.5 text-[#1877f2]" />}
+            icon={<FacebookIcon className="h-3.5 w-3.5 text-[#1877f2]" />}
           />
         </div>
 
