@@ -184,11 +184,6 @@ export function LiveStage() {
             icon={<XIcon className="h-3 w-3" />}
           />
           <WatchChip
-            href={YOUTUBE_LIVE_URL}
-            label="YouTube"
-            icon={<YouTubeIcon className="h-3.5 w-3.5 text-[#ff0033]" />}
-          />
-          <WatchChip
             href={FACEBOOK_LIVE_URL}
             label="Facebook"
             icon={<FacebookIcon className="h-3.5 w-3.5 text-[#1877f2]" />}
