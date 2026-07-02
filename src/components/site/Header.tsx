@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/txc-logo.png";
 import { LivePrice } from "./LivePrice";
 import { ThemeToggle } from "./ThemeToggle";
+import { useLiveWindow } from "@/lib/live-window";
 
 type NavLink = { label: string; href: string; external?: boolean; internal?: boolean };
 type NavItem =
