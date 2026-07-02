@@ -178,7 +178,7 @@ export function LiveStage() {
             : "Watch every week wherever you already hang out. We simulcast the Honest Money Hour to all of them."}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-1.5">
           <WatchChip
             href={STREAM_WATCH_URL}
             label="streamTXC"
@@ -193,6 +193,11 @@ export function LiveStage() {
             href={FACEBOOK_LIVE_URL}
             label="Facebook"
             icon={<FacebookIcon className="h-3.5 w-3.5 text-[#1877f2]" />}
+          />
+          <WatchChip
+            href={YOUTUBE_LIVE_URL}
+            label="YouTube"
+            icon={<YouTubeIcon className="h-3.5 w-3.5 text-[#FF0000]" />}
           />
         </div>
 
