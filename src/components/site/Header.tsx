@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/txc-logo.png";
 import { LivePrice } from "./LivePrice";
 import { ThemeToggle } from "./ThemeToggle";
-import { useLiveWindow } from "@/lib/live-window";
+import { useLiveStatus } from "@/lib/use-live-status";
 
 type NavLink = { label: string; href: string; external?: boolean; internal?: boolean };
 type NavItem =
@@ -98,7 +98,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
-  const { isLive } = useLiveWindow();
+  const { isLive } = useLiveStatus();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
