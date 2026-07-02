@@ -5,6 +5,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { LiveStage } from "@/components/site/LiveStage";
+import { BrutalTransparency } from "@/components/site/BrutalTransparency";
 import { listZoomCalls, type ZoomCall } from "@/lib/zoom.functions";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -119,6 +120,9 @@ function ZoomIndex() {
             <LiveStage />
           </div>
         </section>
+
+        {/* Brutal Transparency */}
+        <BrutalTransparency />
 
         {/* Archive */}
         <ArchiveSection recorded={recorded} />
