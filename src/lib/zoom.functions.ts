@@ -45,6 +45,8 @@ const slugSchema = z
 const FILE_FALLBACKS: Record<string, () => Promise<{ summary?: string; transcript?: string }>> = {
   "2026-06-25-we-did-it": () =>
     import("@/data/transcripts/2026-06-25-we-did-it.json").then((m) => m.default ?? m),
+  "2026-07-02-introducing-nectar-pay": () =>
+    import("@/data/transcripts/2026-07-02-introducing-nectar-pay.json").then((m) => m.default ?? m),
 };
 
 export const getZoomCall = createServerFn({ method: "GET" })
