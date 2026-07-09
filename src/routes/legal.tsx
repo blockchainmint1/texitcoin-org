@@ -92,6 +92,17 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
+    date: "8 Jul 2026",
+    title: "Motion for Summary Disposition Filed — Quinn Emanuel Swings Back",
+    tone: "win",
+    tag: "BIG SWING",
+    body: "Our team filed a Motion for Summary Disposition asking the ALJ to end the case now, on the law, before the August hearing. Backed by a sworn declaration from Bobby Gray and a 26-page expert report from Andrew Sotak, CPA (Ankura Consulting) — six numbered opinions covering: TXC is a digital commodity, Mining Package purchasers joined a mining pool, MineTXC performed mining pool operator functions, customers could take physical possession of rigs (200+ did), Respondents operated exactly as advertised (verified on-chain), and under U.S. GAAP the packages are ASC 606 revenue contracts — not securities. This is a big filing. We wrote a full breakdown on the blog explaining what was filed, what each opinion means, and why it matters for August.",
+    link: {
+      label: "Read the full breakdown on the blog →",
+      href: "/blog/msd-filed-quinn-emanuel-swings-back",
+    },
+  },
+  {
     date: "19 Jun 2026",
     title: "TSSB Witness List Received and Redacted",
     tone: "filing",
@@ -104,6 +115,7 @@ const ENTRIES: Entry[] = [
       deadNote: "TSSB said no 👶",
     },
   },
+
   {
     date: "6 Apr 2026",
     title: "Formal Answer Filed — Full Denial of All Allegations",
