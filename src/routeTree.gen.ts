@@ -48,6 +48,7 @@ import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/lega
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicIpfsCidRouteImport } from './routes/api/public/ipfs.$cid'
 
 const ZoomRoute = ZoomRouteImport.update({
   id: '/zoom',
@@ -247,6 +248,11 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicIpfsCidRoute = ApiPublicIpfsCidRouteImport.update({
+  id: '/api/public/ipfs/$cid',
+  path: '/api/public/ipfs/$cid',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -285,6 +291,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
+  '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -326,6 +333,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
+  '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -368,6 +376,7 @@ export interface FileRoutesById {
   '/blog_/$slug': typeof BlogSlugRoute
   '/zoom_/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
+  '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -411,6 +420,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/zoom/$slug'
     | '/api/public/legal-fees'
+    | '/api/public/ipfs/$cid'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -452,6 +462,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/zoom/$slug'
     | '/api/public/legal-fees'
+    | '/api/public/ipfs/$cid'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -493,6 +504,7 @@ export interface FileRouteTypes {
     | '/blog_/$slug'
     | '/zoom_/$slug'
     | '/api/public/legal-fees'
+    | '/api/public/ipfs/$cid'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -535,6 +547,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   ZoomSlugRoute: typeof ZoomSlugRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
+  ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -815,6 +828,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/ipfs/$cid': {
+      id: '/api/public/ipfs/$cid'
+      path: '/api/public/ipfs/$cid'
+      fullPath: '/api/public/ipfs/$cid'
+      preLoaderRoute: typeof ApiPublicIpfsCidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -855,6 +875,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   ZoomSlugRoute: ZoomSlugRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
+  ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
