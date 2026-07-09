@@ -110,7 +110,7 @@ const ENTRIES: Entry[] = [
     body: "It's been quiet for a while — no news is often good news while we patiently wait for our August hearing. We just received the TSSB's witness list. Before sharing it publicly, we redacted the names to protect identities and avoid any possibility of witness tampering from our passionate community. We don't recognize any of the names listed — no rangers, no project team managers. Interesting.",
     link: {
       label: "View the redacted witness list",
-      href: "https://ipfs.blockchainmint.com/ipfs/bafkreigddcjuqgkhsmdtco7kzrnv6hnhavotgqjues6ijha3m2xxlavrmu",
+      href: "/api/public/ipfs/bafkreigddcjuqgkhsmdtco7kzrnv6hnhavotgqjues6ijha3m2xxlavrmu",
       dead: true,
       deadNote: "TSSB said no 👶",
     },
@@ -124,7 +124,7 @@ const ENTRIES: Entry[] = [
     body: "We filed our official Answer to the TSSB's Notice of Hearing in SOAH Docket No. 312-26-14427, categorically denying every allegation in the Emergency Cease and Desist Order. Mining Packages aren't investment contracts under Howey. The TSSB does not even claim TEXITcoin itself is a security. Fraud allegations are legally and factually deficient — no specific false statements, no duty to disclose shown, zero allegation of misappropriated funds, no investor losses. This Answer lays the foundation for our Motion for Summary Adjudication and our defense at the August hearing.",
     link: {
       label: "Read the full response",
-      href: "https://ipfs.blockchainmint.com/ipfs/QmWxa1ZRbifq17rosoHj7GYjUpUv3Td7bGnAaG2hB1UH48",
+      href: "/api/public/ipfs/QmWxa1ZRbifq17rosoHj7GYjUpUv3Td7bGnAaG2hB1UH48",
     },
   },
   {
@@ -135,7 +135,7 @@ const ENTRIES: Entry[] = [
     body: "Administrative Law Judge Katerina DeAngelo granted our motion in part: the four-day merits hearing (Aug 17–20, 2026) will be conducted live at SOAH in Austin, with full in-person attendance for our legal team, witnesses, and community. Remote Zoom attendance still available. Same order also granted pro hac vice for Avi Perry, Alex Rossmiller, and Kurt Wolfe.",
     link: {
       label: "Read the order",
-      href: "https://ipfs.blockchainmint.com/ipfs/QmYhSYoEzPvzowwrcXXFjhWhrLy93D5myaq3GvgMiekgDT",
+      href: "/api/public/ipfs/QmYhSYoEzPvzowwrcXXFjhWhrLy93D5myaq3GvgMiekgDT",
     },
   },
   {
@@ -146,7 +146,7 @@ const ENTRIES: Entry[] = [
     body: "Official Notice of Hearing received from the Texas State Securities Board (SOAH Docket No. 312-26-14427). Formally schedules our contested-case hearing on the merits for August 17–20, 2026 starting 9:00 AM CT — to affirm, modify, or set aside the February 11 Emergency Cease and Desist Order.",
     link: {
       label: "Read the Notice",
-      href: "https://ipfs.blockchainmint.com/ipfs/QmY5guEqUqgAMJkjuyCyC4GPHoNAghKsdrtRvFdonZkVn1",
+      href: "/api/public/ipfs/QmY5guEqUqgAMJkjuyCyC4GPHoNAghKsdrtRvFdonZkVn1",
     },
   },
   {
@@ -157,7 +157,7 @@ const ENTRIES: Entry[] = [
     body: "SEC Interpretive Release No. 33-11412 is a landmark step toward regulatory clarity. It explicitly states that protocol mining on public proof-of-work networks — including pool operations and reward distribution — does not involve the offer and sale of securities under Howey. The TSSB's core premise (shoehorning Mining Packages into unregistered securities based on alleged passive returns) is now at odds with federal standards. Our team is integrating this directly into our hearing prep.",
     link: {
       label: "Read the SEC release",
-      href: "https://ipfs.blockchainmint.com/ipfs/QmdKWzWfsft598GddznvVwRy8fZttiVHrokQuDUANBd4Tj",
+      href: "/api/public/ipfs/QmdKWzWfsft598GddznvVwRy8fZttiVHrokQuDUANBd4Tj",
     },
   },
   {
@@ -168,7 +168,7 @@ const ENTRIES: Entry[] = [
     body: "SOAH issued an Order Scheduling Hearing on the Merits in Docket No. 312-26-14427, setting the contested case hearing for August 17–20, 2026, starting 9:00 AM CT. Though Zoom was offered, we elected to attend in person. This multi-day proceeding gives us the full forum to present evidence, expert testimony, and legal arguments.",
     link: {
       label: "Read the scheduling order",
-      href: "https://ipfs.blockchainmint.com/ipfs/QmTLdYZAutr4nQswynGiwKr8qtenn36KSzfQXmFmVUsCpN",
+      href: "/api/public/ipfs/QmTLdYZAutr4nQswynGiwKr8qtenn36KSzfQXmFmVUsCpN",
     },
   },
   {
@@ -214,7 +214,7 @@ const ENTRIES: Entry[] = [
     body: "Quinn Emanuel formally submitted a hearing request to Deputy Securities Commissioner Cristi Ramón Ochoa. The filing asserts the Mining Packages don't qualify as securities under the Texas Securities Act, that the order's fraud allegations lack specific false statements, and that the order alleges 'immediate and irreparable public harm' without identifying any actual investor losses or injured parties.",
     link: {
       label: "Read the hearing request",
-      href: "https://ipfs.blockchainmint.com/ipfs/QmaXHTFwDKvw1jJmTEmJR9VTo3otD3QifCnpXm9X8fRjff",
+      href: "/api/public/ipfs/QmaXHTFwDKvw1jJmTEmJR9VTo3otD3QifCnpXm9X8fRjff",
     },
   },
   {
@@ -246,7 +246,7 @@ const ENTRIES: Entry[] = [
     body: "The TSSB issued Emergency Cease and Desist Order No. ENF-26-CDO-1893 against TEXITcoin, MineTXC, Blockchain Mint, and founder Robert J. (Bobby) Gray, alleging the Mining Packages constitute unregistered securities sold through a multi-level marketing structure. For 98 weeks prior, mineTXC operated as a community currency project in Texas without any prior regulatory incidents. We are fully complying while pursuing a robust legal strategy.",
     link: {
       label: "Read the Cease & Desist Order",
-      href: "https://ipfs.blockchainmint.com/ipfs/bafybeihd7ialliyuru5gabyctpdjsfas7a6yvhka37ifxxmiw5tku4p4lq",
+      href: "/api/public/ipfs/bafybeihd7ialliyuru5gabyctpdjsfas7a6yvhka37ifxxmiw5tku4p4lq",
     },
   },
 ];

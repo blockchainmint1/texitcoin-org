@@ -26,7 +26,7 @@ export const Route = createFileRoute("/whitepaper")({
 });
 
 const PDF_URL =
-  "https://txc.mypinata.cloud/ipfs/bafkreifm3jo26wlq6fapaq57xqe6oxpfj2xgztum3czqtgze6amtlfqdre";
+  "/api/public/ipfs/bafkreifm3jo26wlq6fapaq57xqe6oxpfj2xgztum3czqtgze6amtlfqdre";
 
 function WhitepaperPage() {
   return (
