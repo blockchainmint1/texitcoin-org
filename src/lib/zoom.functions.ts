@@ -66,11 +66,11 @@ export const getZoomCall = createServerFn({ method: "GET" })
     const call = (row as ZoomCall | null) ?? null;
     if (!call) return null;
     const loader = FILE_FALLBACKS[call.slug];
-    if (loader && (!call.transcript || !call.summary)) {
+    if (loader) {
       try {
         const fallback = await loader();
-        if (!call.transcript && fallback.transcript) call.transcript = fallback.transcript;
-        if (!call.summary && fallback.summary) call.summary = fallback.summary;
+        if (fallback.transcript) call.transcript = fallback.transcript;
+        if (fallback.summary) call.summary = fallback.summary;
       } catch {
         // ignore — fall back to whatever the DB returned
       }
