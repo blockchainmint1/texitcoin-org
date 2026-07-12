@@ -48,6 +48,7 @@ import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/lega
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
 import { Route as ApiPublicIpfsCidRouteImport } from './routes/api/public/ipfs.$cid'
 
 const ZoomRoute = ZoomRouteImport.update({
@@ -248,6 +249,12 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicTelegramWebhookRoute =
+  ApiPublicTelegramWebhookRouteImport.update({
+    id: '/api/public/telegram/webhook',
+    path: '/api/public/telegram/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicIpfsCidRoute = ApiPublicIpfsCidRouteImport.update({
   id: '/api/public/ipfs/$cid',
   path: '/api/public/ipfs/$cid',
@@ -292,6 +299,7 @@ export interface FileRoutesByFullPath {
   '/zoom/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -334,6 +342,7 @@ export interface FileRoutesByTo {
   '/zoom/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -377,6 +386,7 @@ export interface FileRoutesById {
   '/zoom_/$slug': typeof ZoomSlugRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -421,6 +431,7 @@ export interface FileRouteTypes {
     | '/zoom/$slug'
     | '/api/public/legal-fees'
     | '/api/public/ipfs/$cid'
+    | '/api/public/telegram/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -463,6 +474,7 @@ export interface FileRouteTypes {
     | '/zoom/$slug'
     | '/api/public/legal-fees'
     | '/api/public/ipfs/$cid'
+    | '/api/public/telegram/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -505,6 +517,7 @@ export interface FileRouteTypes {
     | '/zoom_/$slug'
     | '/api/public/legal-fees'
     | '/api/public/ipfs/$cid'
+    | '/api/public/telegram/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -548,6 +561,7 @@ export interface RootRouteChildren {
   ZoomSlugRoute: typeof ZoomSlugRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
   ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
+  ApiPublicTelegramWebhookRoute: typeof ApiPublicTelegramWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -828,6 +842,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/telegram/webhook': {
+      id: '/api/public/telegram/webhook'
+      path: '/api/public/telegram/webhook'
+      fullPath: '/api/public/telegram/webhook'
+      preLoaderRoute: typeof ApiPublicTelegramWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/ipfs/$cid': {
       id: '/api/public/ipfs/$cid'
       path: '/api/public/ipfs/$cid'
@@ -876,6 +897,7 @@ const rootRouteChildren: RootRouteChildren = {
   ZoomSlugRoute: ZoomSlugRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
   ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
+  ApiPublicTelegramWebhookRoute: ApiPublicTelegramWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
