@@ -236,24 +236,6 @@ export type Database = {
         }
         Relationships: []
       }
-      zoom_transcript_staging: {
-        Row: {
-          slug: string
-          summary: string
-          transcript: string
-        }
-        Insert: {
-          slug: string
-          summary: string
-          transcript: string
-        }
-        Update: {
-          slug?: string
-          summary?: string
-          transcript?: string
-        }
-        Relationships: []
-      }
     }
     Views: {
       [_ in never]: never
