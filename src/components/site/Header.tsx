@@ -48,7 +48,7 @@ const NAV: NavItem[] = [
       { label: "Pool", href: "https://pool.texitcoin.org/", external: true },
       { label: "Layer 2 & Tokens", href: "https://tokens.texitcoin.org/", external: true },
       { label: "Build on TXC", href: "/build", internal: true },
-      { label: "Gear & Swag", href: "https://shoptxc.com/", external: true },
+      { label: "Gear & Swag", href: "https://blockchainmint.com", external: true },
     ],
   },
   {
