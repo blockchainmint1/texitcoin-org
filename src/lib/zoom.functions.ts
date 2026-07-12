@@ -39,20 +39,6 @@ const slugSchema = z
   .object({ slug: z.string().min(1).max(120).regex(/^[a-zA-Z0-9._-]+$/) })
   .strict();
 
-// File-based transcript/summary fallbacks. Used when the row in the DB
-// doesn't carry transcript text (e.g. very long transcripts shipped via the
-// repo). Keyed by zoom_calls.slug.
-const FILE_FALLBACKS: Record<string, () => Promise<{ summary?: string; transcript?: string }>> = {
-  "2026-06-25-we-did-it": () =>
-    import("@/data/transcripts/2026-06-25-we-did-it.json").then((m) => m.default ?? m),
-  "2026-07-02-introducing-nectar-pay": () =>
-    import("@/data/transcripts/2026-07-02-introducing-nectar-pay.json").then((m) => m.default ?? m),
-  "2026-07-09-grow-the-mine-nectarpay-referrals": () =>
-    import("@/data/transcripts/2026-07-09-grow-the-mine-nectarpay-referrals.json").then((m) => m.default ?? m),
-  "2026-07-11-emergency-txc-market-update": () =>
-    import("@/data/transcripts/2026-07-11-emergency-txc-market-update.json").then((m) => m.default ?? m),
-};
-
 export const getZoomCall = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => slugSchema.parse(input))
   .handler(async ({ data }): Promise<ZoomCall | null> => {
@@ -65,18 +51,7 @@ export const getZoomCall = createServerFn({ method: "GET" })
       .eq("slug", data.slug)
       .maybeSingle();
     if (error) throw new Error(error.message);
-    const call = (row as ZoomCall | null) ?? null;
-    if (!call) return null;
-    const loader = FILE_FALLBACKS[call.slug];
-    if (loader) {
-      try {
-        const fallback = await loader();
-        if (fallback.transcript) call.transcript = fallback.transcript;
-        if (fallback.summary) call.summary = fallback.summary;
-      } catch {
-        // ignore — fall back to whatever the DB returned
-      }
-    }
-    return call;
+    return (row as ZoomCall | null) ?? null;
   });
+
 
