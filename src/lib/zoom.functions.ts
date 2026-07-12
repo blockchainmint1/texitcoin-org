@@ -49,6 +49,8 @@ const FILE_FALLBACKS: Record<string, () => Promise<{ summary?: string; transcrip
     import("@/data/transcripts/2026-07-02-introducing-nectar-pay.json").then((m) => m.default ?? m),
   "2026-07-09-grow-the-mine-nectarpay-referrals": () =>
     import("@/data/transcripts/2026-07-09-grow-the-mine-nectarpay-referrals.json").then((m) => m.default ?? m),
+  "2026-07-11-emergency-txc-market-update": () =>
+    import("@/data/transcripts/2026-07-11-emergency-txc-market-update.json").then((m) => m.default ?? m),
 };
 
 export const getZoomCall = createServerFn({ method: "GET" })
