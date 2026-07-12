@@ -258,7 +258,8 @@ async function pinToPinata(bytes: Uint8Array, filename: string): Promise<string>
   const jwt = process.env.PINATA_JWT;
   if (!jwt) throw new Error("PINATA_JWT not configured");
   const form = new FormData();
-  form.append("file", new Blob([bytes]), filename);
+  const ab = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
+  form.append("file", new Blob([ab]), filename);
   const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
     method: "POST",
     headers: { Authorization: `Bearer ${jwt}` },
