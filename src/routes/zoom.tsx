@@ -383,11 +383,12 @@ function ArchiveCard({ call }: { call: ZoomCall }) {
         <div className="mt-1 font-display text-lg font-semibold group-hover:text-primary">
           {call.title}
         </div>
-        {call.summary && (
+        {(call.description ?? call.summary) && (
           <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">
-            {call.summary}
+            {call.description ?? call.summary}
           </p>
         )}
+
       </div>
     </Link>
   );
