@@ -218,17 +218,17 @@ export function SwapTerminal() {
               </div>
             </div>
 
-            {/* To: TXC (fixed) */}
-            <div className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[10px] font-bold text-primary-foreground shadow-glow">
+            {/* To: TXC (fixed, compact) */}
+            <div className="flex min-w-0 items-center gap-2 rounded-xl px-3 py-3">
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[9px] font-bold text-primary-foreground shadow-glow">
                 TXC
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   To
                 </div>
-                <div className="font-display text-base font-bold">
-                  TEXITcoin <span className="text-muted-foreground">· native</span>
+                <div className="font-display text-sm font-bold truncate">
+                  TEXITcoin
                 </div>
               </div>
             </div>
