@@ -36,6 +36,7 @@ import { Route as InTheNewsRouteImport } from './routes/in-the-news'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DisclosuresRouteImport } from './routes/disclosures'
 import { Route as CurrencyRouteImport } from './routes/currency'
+import { Route as ClarityRouteImport } from './routes/clarity'
 import { Route as BuyRouteImport } from './routes/buy'
 import { Route as BuildRouteImport } from './routes/build'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -192,6 +193,11 @@ const CurrencyRoute = CurrencyRouteImport.update({
   path: '/currency',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClarityRoute = ClarityRouteImport.update({
+  id: '/clarity',
+  path: '/clarity',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BuyRoute = BuyRouteImport.update({
   id: '/buy',
   path: '/buy',
@@ -309,6 +315,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
+  '/clarity': typeof ClarityRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/faq': typeof FaqRoute
@@ -358,6 +365,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
+  '/clarity': typeof ClarityRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/faq': typeof FaqRoute
@@ -408,6 +416,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
+  '/clarity': typeof ClarityRoute
   '/currency': typeof CurrencyRoute
   '/disclosures': typeof DisclosuresRoute
   '/faq': typeof FaqRoute
@@ -459,6 +468,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/build'
     | '/buy'
+    | '/clarity'
     | '/currency'
     | '/disclosures'
     | '/faq'
@@ -508,6 +518,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/build'
     | '/buy'
+    | '/clarity'
     | '/currency'
     | '/disclosures'
     | '/faq'
@@ -557,6 +568,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/build'
     | '/buy'
+    | '/clarity'
     | '/currency'
     | '/disclosures'
     | '/faq'
@@ -607,6 +619,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   BuildRoute: typeof BuildRoute
   BuyRoute: typeof BuyRoute
+  ClarityRoute: typeof ClarityRoute
   CurrencyRoute: typeof CurrencyRoute
   DisclosuresRoute: typeof DisclosuresRoute
   FaqRoute: typeof FaqRoute
@@ -839,6 +852,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CurrencyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clarity': {
+      id: '/clarity'
+      path: '/clarity'
+      fullPath: '/clarity'
+      preLoaderRoute: typeof ClarityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/buy': {
       id: '/buy'
       path: '/buy'
@@ -991,6 +1011,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   BuildRoute: BuildRoute,
   BuyRoute: BuyRoute,
+  ClarityRoute: ClarityRoute,
   CurrencyRoute: CurrencyRoute,
   DisclosuresRoute: DisclosuresRoute,
   FaqRoute: FaqRoute,
