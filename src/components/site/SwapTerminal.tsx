@@ -267,7 +267,11 @@ export function SwapTerminal() {
             </div>
 
             {/* TXC recipient address — required before autostart */}
-            <label className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
+            <label
+              className={`flex min-w-0 items-center gap-3 rounded-xl px-4 py-3 transition ${
+                addressValid ? "" : "animate-throb ring-1 ring-primary/30"
+              }`}
+            >
               <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[9px] font-bold text-primary-foreground shadow-glow">
                 TXC
               </div>
@@ -292,6 +296,7 @@ export function SwapTerminal() {
                   type="text"
                   spellCheck={false}
                   autoComplete="off"
+                  maxLength={64}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Paste TXC address"
