@@ -239,7 +239,7 @@ export function SwapTerminal() {
             </div>
 
             {/* Amount */}
-            <label className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
+            <label className="flex min-w-0 items-center gap-3 rounded-xl px-3 py-3">
               <div className="min-w-0 flex-1">
                 <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   You send
@@ -249,10 +249,11 @@ export function SwapTerminal() {
                     type="number"
                     inputMode="decimal"
                     min="0"
+                    max="50000"
                     step="1"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full min-w-0 bg-transparent font-display text-2xl font-bold tabular-nums outline-none placeholder:text-muted-foreground"
+                    className="w-full min-w-0 bg-transparent font-display text-xl font-bold tabular-nums outline-none placeholder:text-muted-foreground"
                     placeholder="0"
                   />
                   <span className="font-mono text-xs text-muted-foreground">{stable}</span>
