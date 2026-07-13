@@ -160,8 +160,9 @@ export function TxcPriceChart() {
       </div>
 
       <div className="mt-4 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-        Price data · CoinGecko · cached 5 min
+        Price data · CoinMarketCap · cached 5 min
       </div>
+
     </div>
   );
 }
