@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, Zap } from "lucide-react";
+import { ArrowRight, ChevronDown, Wallet, Zap } from "lucide-react";
 
 const SWAP_BASE = "https://swap.honest.money/swap";
 const PRICE_URL =
@@ -265,9 +265,16 @@ export function SwapTerminal() {
                 addressValid ? "" : "animate-throb ring-1 ring-primary/30"
               }`}
             >
-              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[9px] font-bold text-primary-foreground shadow-glow">
-                TXC
-              </div>
+              <a
+                href="/wallets"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                aria-label="Get a TXC wallet"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient text-primary-foreground shadow-glow transition hover:brightness-110"
+              >
+                <Wallet className="h-4 w-4" />
+              </a>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
