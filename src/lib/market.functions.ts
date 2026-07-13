@@ -187,7 +187,24 @@ const TXC_CMC_ID = 32744;
 export const getTxcSnapshot = createServerFn({ method: "GET" }).handler(
   async (): Promise<CmcQuote | null> => {
     try {
-      return await fetchCmcQuoteById(TXC_CMC_ID);
+      const quote = await fetchCmcQuoteById(TXC_CMC_ID);
+      // Authoritative circulating supply comes from our own node, not CMC.
+      try {
+        const r = await fetch("https://mempool.texitcoin.org/api/v1/supply", {
+          headers: { Accept: "application/json" },
+        });
+        if (r.ok) {
+          const s = (await r.json()) as { circulating?: number; max?: number };
+          if (quote && typeof s.circulating === "number") {
+            quote.circulatingSupply = s.circulating;
+            if (typeof s.max === "number") quote.maxSupply = s.max;
+            if (quote.price != null) quote.marketCap = quote.price * s.circulating;
+          }
+        }
+      } catch (e) {
+        console.error("mempool supply fetch failed", e);
+      }
+      return quote;
     } catch (e) {
       console.error("getTxcSnapshot failed", e);
       return null;
@@ -204,20 +221,45 @@ export const getTxcPriceHistory = createServerFn({ method: "GET" })
     return { days };
   })
   .handler(async ({ data }): Promise<PricePoint[]> => {
+    const key = process.env.CMC_API_KEY;
+    if (!key) {
+      console.error("getTxcPriceHistory: CMC_API_KEY missing");
+      return [];
+    }
+    // Interval + count sized to keep ~100-200 points per range.
+    const cfg: Record<number, { interval: string; count: number }> = {
+      7: { interval: "1h", count: 168 },
+      30: { interval: "4h", count: 180 },
+      90: { interval: "12h", count: 180 },
+      365: { interval: "1d", count: 365 },
+    };
+    const { interval, count } = cfg[data.days];
     try {
-      const url = new URL("https://api.coingecko.com/api/v3/coins/texitcoin/market_chart");
-      url.searchParams.set("vs_currency", "usd");
-      url.searchParams.set("days", String(data.days));
-      const res = await fetch(url.toString(), { headers: { Accept: "application/json" } });
+      const url = new URL(
+        "https://pro-api.coinmarketcap.com/v3/cryptocurrency/quotes/historical",
+      );
+      url.searchParams.set("id", String(TXC_CMC_ID));
+      url.searchParams.set("interval", interval);
+      url.searchParams.set("count", String(count));
+      url.searchParams.set("convert", "USD");
+      const res = await fetch(url.toString(), {
+        headers: { "X-CMC_PRO_API_KEY": key, Accept: "application/json" },
+      });
       if (!res.ok) {
-        console.error("CoinGecko market_chart failed", res.status, await res.text());
+        console.error("CMC quotes/historical failed", res.status, await res.text());
         return [];
       }
-      const json = (await res.json()) as { prices?: [number, number][] };
-      return (json.prices ?? []).map(([t, p]) => ({ t, p }));
+      const json = (await res.json()) as {
+        data?: Record<string, { quotes?: { timestamp: string; quote: { USD: { price: number } } }[] }>;
+      };
+      const quotes = json.data?.[String(TXC_CMC_ID)]?.quotes ?? [];
+      return quotes
+        .map((q) => ({ t: new Date(q.timestamp).getTime(), p: q.quote.USD.price }))
+        .filter((pt) => Number.isFinite(pt.t) && Number.isFinite(pt.p));
     } catch (e) {
       console.error("getTxcPriceHistory failed", e);
       return [];
     }
   });
+
 
