@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, Zap } from "lucide-react";
+import { ArrowRight, ChevronDown, Wallet, Zap } from "lucide-react";
 
 const SWAP_BASE = "https://swap.honest.money/swap";
 const PRICE_URL =
