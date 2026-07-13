@@ -29,6 +29,7 @@ import { Route as PressRouteImport } from './routes/press'
 import { Route as MineRouteImport } from './routes/mine'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MarketRouteImport } from './routes/market'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as InTheNewsRouteImport } from './routes/in-the-news'
@@ -153,6 +154,11 @@ const MerchRoute = MerchRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketRoute = MarketRouteImport.update({
+  id: '/market',
+  path: '/market',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -303,6 +309,7 @@ export interface FileRoutesByFullPath {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/market': typeof MarketRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
@@ -350,6 +357,7 @@ export interface FileRoutesByTo {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/market': typeof MarketRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
@@ -398,6 +406,7 @@ export interface FileRoutesById {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/market': typeof MarketRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
@@ -447,6 +456,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/market'
     | '/mcp'
     | '/merch'
     | '/mine'
@@ -494,6 +504,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/market'
     | '/mcp'
     | '/merch'
     | '/mine'
@@ -541,6 +552,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/market'
     | '/mcp'
     | '/merch'
     | '/mine'
@@ -589,6 +601,7 @@ export interface RootRouteChildren {
   InTheNewsRoute: typeof InTheNewsRoute
   LeadershipRoute: typeof LeadershipRoute
   LegalRoute: typeof LegalRoute
+  MarketRoute: typeof MarketRoute
   McpRoute: typeof McpRoute
   MerchRoute: typeof MerchRoute
   MineRoute: typeof MineRoute
@@ -762,6 +775,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/market': {
+      id: '/market'
+      path: '/market'
+      fullPath: '/market'
+      preLoaderRoute: typeof MarketRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -957,6 +977,7 @@ const rootRouteChildren: RootRouteChildren = {
   InTheNewsRoute: InTheNewsRoute,
   LeadershipRoute: LeadershipRoute,
   LegalRoute: LegalRoute,
+  MarketRoute: MarketRoute,
   McpRoute: McpRoute,
   MerchRoute: MerchRoute,
   MineRoute: MineRoute,
