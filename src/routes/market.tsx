@@ -4,6 +4,7 @@ import { ArrowUpRight, Crosshair, TrendingUp, Users } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CoinCaseStudy } from "@/components/site/CoinCaseStudy";
+import { TxcPriceChart } from "@/components/site/TxcPriceChart";
 import { listHitList, getHitListCoin, getTxcSnapshot } from "@/lib/market.functions";
 
 const FEATURED_SLUG = "dash";
