@@ -147,7 +147,7 @@ export function SwapTerminal() {
           </div>
 
           {/* Booking-style horizontal row — everything on one line */}
-          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.2fr_auto_1.1fr_auto_1fr_auto_1.2fr_auto]">
+          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.35fr_auto_0.65fr_auto_0.75fr_auto_1.55fr_auto]">
             {/* From: chain circle (click to switch) + stable selector */}
             <div className="group flex min-w-0 items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-background">
               {/* Chain fan-out */}
