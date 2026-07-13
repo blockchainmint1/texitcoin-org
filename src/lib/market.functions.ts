@@ -180,9 +180,9 @@ export const getCmcQuote = createServerFn({ method: "GET" })
     }
   });
 
-// TXC's CMC ID — TEXITcoin: 25231 (verified via CMC listing texitcoin).
+// TXC's CMC ID — TEXITcoin: 32744 (verified via CMC map endpoint, slug=texitcoin).
 // If not yet listed / errors, the server fn returns null and the UI shows a fallback.
-const TXC_CMC_ID = 25231;
+const TXC_CMC_ID = 32744;
 
 export const getTxcSnapshot = createServerFn({ method: "GET" }).handler(
   async (): Promise<CmcQuote | null> => {
