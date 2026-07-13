@@ -31,7 +31,6 @@ const USD = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
-const NUM = new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 });
 
 export function SwapTerminal() {
   const [chain, setChain] = useState<string>("base");
