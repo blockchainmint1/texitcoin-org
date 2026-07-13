@@ -147,7 +147,7 @@ export function SwapTerminal() {
           </div>
 
           {/* Booking-style horizontal row — everything on one line */}
-          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.2fr_auto_1.1fr_auto_1fr_auto_1.2fr_auto]">
+          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.35fr_auto_0.65fr_auto_0.75fr_auto_1.55fr_auto]">
             {/* From: chain circle (click to switch) + stable selector */}
             <div className="group flex min-w-0 items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-background">
               {/* Chain fan-out */}
@@ -218,17 +218,17 @@ export function SwapTerminal() {
               </div>
             </div>
 
-            {/* To: TXC (fixed) */}
-            <div className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[10px] font-bold text-primary-foreground shadow-glow">
+            {/* To: TXC (fixed, compact) */}
+            <div className="flex min-w-0 items-center gap-2 rounded-xl px-3 py-3">
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[9px] font-bold text-primary-foreground shadow-glow">
                 TXC
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   To
                 </div>
-                <div className="font-display text-base font-bold">
-                  TEXITcoin <span className="text-muted-foreground">· native</span>
+                <div className="font-display text-sm font-bold truncate">
+                  TEXITcoin
                 </div>
               </div>
             </div>
@@ -239,7 +239,7 @@ export function SwapTerminal() {
             </div>
 
             {/* Amount */}
-            <label className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
+            <label className="flex min-w-0 items-center gap-3 rounded-xl px-3 py-3">
               <div className="min-w-0 flex-1">
                 <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   You send
@@ -249,10 +249,11 @@ export function SwapTerminal() {
                     type="number"
                     inputMode="decimal"
                     min="0"
+                    max="50000"
                     step="1"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full min-w-0 bg-transparent font-display text-2xl font-bold tabular-nums outline-none placeholder:text-muted-foreground"
+                    className="w-full min-w-0 bg-transparent font-display text-xl font-bold tabular-nums outline-none placeholder:text-muted-foreground"
                     placeholder="0"
                   />
                   <span className="font-mono text-xs text-muted-foreground">{stable}</span>
@@ -266,7 +267,11 @@ export function SwapTerminal() {
             </div>
 
             {/* TXC recipient address — required before autostart */}
-            <label className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
+            <label
+              className={`flex min-w-0 items-center gap-3 rounded-xl px-4 py-3 transition ${
+                addressValid ? "" : "animate-throb ring-1 ring-primary/30"
+              }`}
+            >
               <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[9px] font-bold text-primary-foreground shadow-glow">
                 TXC
               </div>
@@ -291,6 +296,7 @@ export function SwapTerminal() {
                   type="text"
                   spellCheck={false}
                   autoComplete="off"
+                  maxLength={64}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Paste TXC address"
