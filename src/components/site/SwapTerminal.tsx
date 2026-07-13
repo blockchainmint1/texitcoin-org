@@ -80,12 +80,6 @@ export function SwapTerminal() {
 
   const parsed = Number(amount);
   const usdIn = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
-  const afterFee = usdIn * (1 - PROTOCOL_FEE);
-
-  const estimatedTxc = useMemo(() => {
-    if (!txcPrice || !usdIn) return null;
-    return afterFee / txcPrice;
-  }, [txcPrice, usdIn, afterFee]);
 
   const addressValid = /^[a-zA-Z0-9]{26,64}$/.test(address.trim());
   const canStart = addressValid && usdIn > 0;
