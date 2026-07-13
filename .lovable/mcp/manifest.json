@@ -84,6 +84,64 @@
           ]
         },
         "outputSchema": null
+      },
+      {
+        "name": "list_hit_list",
+        "title": "List Hit List coins",
+        "description": "List TEXITcoin's 'Hit List' evaluations of CoinMarketCap Top 100 coins (slug, name, symbol, CMC rank, X handle/followers, verdict, verdict note). Use get_hit_list_coin with a slug to fetch the full case study.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "verdict": {
+              "description": "Filter by verdict.",
+              "type": "string",
+              "enum": [
+                "leftover",
+                "coasting",
+                "earned",
+                "unrated"
+              ]
+            },
+            "limit": {
+              "description": "Max coins to return (default 100).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_hit_list_coin",
+        "title": "Get Hit List coin case study",
+        "description": "Fetch a full TEXITcoin Hit List case study for one coin by slug — includes market data snapshot, X social signals, verdict, argument markdown, and TXC-vs-them gap analysis.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Coin slug, e.g. 'kaspa'."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
       }
     ]
   }
