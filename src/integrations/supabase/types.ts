@@ -143,6 +143,87 @@ export type Database = {
         }
         Relationships: []
       }
+      hit_list_coins: {
+        Row: {
+          argument_markdown: string | null
+          cmc_id: number | null
+          cmc_rank: number | null
+          created_at: string
+          gaps_json: Json | null
+          name: string
+          published: boolean
+          slug: string
+          snapshot_at: string
+          symbol: string
+          updated_at: string
+          verdict: string
+          verdict_note: string | null
+          website: string | null
+          x_account_created: string | null
+          x_avg_likes: number | null
+          x_avg_replies: number | null
+          x_avg_reposts: number | null
+          x_default_avatar_pct: number | null
+          x_followers: number | null
+          x_following: number | null
+          x_handle: string | null
+          x_last_post_at: string | null
+          x_posts_30d: number | null
+        }
+        Insert: {
+          argument_markdown?: string | null
+          cmc_id?: number | null
+          cmc_rank?: number | null
+          created_at?: string
+          gaps_json?: Json | null
+          name: string
+          published?: boolean
+          slug: string
+          snapshot_at?: string
+          symbol: string
+          updated_at?: string
+          verdict?: string
+          verdict_note?: string | null
+          website?: string | null
+          x_account_created?: string | null
+          x_avg_likes?: number | null
+          x_avg_replies?: number | null
+          x_avg_reposts?: number | null
+          x_default_avatar_pct?: number | null
+          x_followers?: number | null
+          x_following?: number | null
+          x_handle?: string | null
+          x_last_post_at?: string | null
+          x_posts_30d?: number | null
+        }
+        Update: {
+          argument_markdown?: string | null
+          cmc_id?: number | null
+          cmc_rank?: number | null
+          created_at?: string
+          gaps_json?: Json | null
+          name?: string
+          published?: boolean
+          slug?: string
+          snapshot_at?: string
+          symbol?: string
+          updated_at?: string
+          verdict?: string
+          verdict_note?: string | null
+          website?: string | null
+          x_account_created?: string | null
+          x_avg_likes?: number | null
+          x_avg_replies?: number | null
+          x_avg_reposts?: number | null
+          x_default_avatar_pct?: number | null
+          x_followers?: number | null
+          x_following?: number | null
+          x_handle?: string | null
+          x_last_post_at?: string | null
+          x_posts_30d?: number | null
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           created_at: string

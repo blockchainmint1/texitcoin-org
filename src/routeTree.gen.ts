@@ -29,6 +29,7 @@ import { Route as PressRouteImport } from './routes/press'
 import { Route as MineRouteImport } from './routes/mine'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MarketRouteImport } from './routes/market'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as InTheNewsRouteImport } from './routes/in-the-news'
@@ -44,6 +45,7 @@ import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.
 import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
+import { Route as MarketSlugRouteImport } from './routes/market_.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -155,6 +157,11 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketRoute = MarketRouteImport.update({
+  id: '/market',
+  path: '/market',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LegalRoute = LegalRouteImport.update({
   id: '/legal',
   path: '/legal',
@@ -232,6 +239,11 @@ const ZoomSlugRoute = ZoomSlugRouteImport.update({
   path: '/zoom/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketSlugRoute = MarketSlugRouteImport.update({
+  id: '/market_/$slug',
+  path: '/market/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog_/$slug',
   path: '/blog/$slug',
@@ -303,6 +315,7 @@ export interface FileRoutesByFullPath {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/market': typeof MarketRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
@@ -326,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/market/$slug': typeof MarketSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
@@ -350,6 +364,7 @@ export interface FileRoutesByTo {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/market': typeof MarketRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
@@ -373,6 +388,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/market/$slug': typeof MarketSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
@@ -398,6 +414,7 @@ export interface FileRoutesById {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/market': typeof MarketRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
@@ -421,6 +438,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog_/$slug': typeof BlogSlugRoute
+  '/market_/$slug': typeof MarketSlugRoute
   '/zoom_/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
@@ -447,6 +465,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/market'
     | '/mcp'
     | '/merch'
     | '/mine'
@@ -470,6 +489,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
+    | '/market/$slug'
     | '/zoom/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
@@ -494,6 +514,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/market'
     | '/mcp'
     | '/merch'
     | '/mine'
@@ -517,6 +538,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
+    | '/market/$slug'
     | '/zoom/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
@@ -541,6 +563,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/market'
     | '/mcp'
     | '/merch'
     | '/mine'
@@ -564,6 +587,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog_/$slug'
+    | '/market_/$slug'
     | '/zoom_/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
@@ -589,6 +613,7 @@ export interface RootRouteChildren {
   InTheNewsRoute: typeof InTheNewsRoute
   LeadershipRoute: typeof LeadershipRoute
   LegalRoute: typeof LegalRoute
+  MarketRoute: typeof MarketRoute
   McpRoute: typeof McpRoute
   MerchRoute: typeof MerchRoute
   MineRoute: typeof MineRoute
@@ -612,6 +637,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  MarketSlugRoute: typeof MarketSlugRoute
   ZoomSlugRoute: typeof ZoomSlugRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
@@ -764,6 +790,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/market': {
+      id: '/market'
+      path: '/market'
+      fullPath: '/market'
+      preLoaderRoute: typeof MarketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/legal': {
       id: '/legal'
       path: '/legal'
@@ -869,6 +902,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZoomSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/market_/$slug': {
+      id: '/market_/$slug'
+      path: '/market/$slug'
+      fullPath: '/market/$slug'
+      preLoaderRoute: typeof MarketSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog_/$slug': {
       id: '/blog_/$slug'
       path: '/blog/$slug'
@@ -957,6 +997,7 @@ const rootRouteChildren: RootRouteChildren = {
   InTheNewsRoute: InTheNewsRoute,
   LeadershipRoute: LeadershipRoute,
   LegalRoute: LegalRoute,
+  MarketRoute: MarketRoute,
   McpRoute: McpRoute,
   MerchRoute: MerchRoute,
   MineRoute: MineRoute,
@@ -981,6 +1022,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   BlogSlugRoute: BlogSlugRoute,
+  MarketSlugRoute: MarketSlugRoute,
   ZoomSlugRoute: ZoomSlugRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
