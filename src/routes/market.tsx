@@ -139,6 +139,13 @@ function MarketPage() {
           </div>
         </section>
 
+        {/* Big price chart */}
+        <section className="pb-8">
+          <div className="mx-auto max-w-6xl px-6">
+            <TxcPriceChart />
+          </div>
+        </section>
+
         {/* TXC snapshot */}
         <section className="py-16 border-t border-border">
           <div className="mx-auto max-w-6xl px-6">
@@ -170,23 +177,33 @@ function MarketPage() {
           </div>
         </section>
 
-        {/* Key milestones */}
-        <section className="py-16 bg-surface/40 border-t border-border">
+        {/* Key milestones — condensed */}
+        <section className="py-14 bg-surface/40 border-t border-border">
           <div className="mx-auto max-w-6xl px-6">
-            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Key milestones</div>
-            <h2 className="mt-3 font-display text-3xl md:text-4xl font-bold">How we got here</h2>
-            <ol className="mt-10 relative border-l border-border pl-8 space-y-8">
-              {MILESTONES.map((m) => (
-                <li key={m.date}>
-                  <span className="absolute -left-2 mt-1.5 grid h-4 w-4 place-items-center rounded-full bg-primary shadow-glow" />
-                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{m.date}</div>
-                  <div className="mt-1 font-display text-xl font-bold">{m.label}</div>
-                  <div className="mt-1 text-sm text-muted-foreground">{m.detail}</div>
+            <div className="flex items-baseline justify-between gap-4 flex-wrap">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">How we got here</div>
+                <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold">Two years, receipts only.</h2>
+              </div>
+              <div className="text-xs text-muted-foreground">no marketing budget · no premine · no permission</div>
+            </div>
+            <ul className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+              {MILESTONES.map((m, i) => (
+                <li
+                  key={i}
+                  className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-card hover:border-primary/50 transition-colors"
+                >
+                  <span className="text-2xl leading-none shrink-0" aria-hidden>{m.emoji}</span>
+                  <div className="min-w-0">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-primary">{m.date}</div>
+                    <div className="mt-1 text-sm text-foreground leading-snug">{m.label}</div>
+                  </div>
                 </li>
               ))}
-            </ol>
+            </ul>
           </div>
         </section>
+
 
         {/* CLARITY Act blurb */}
         <section className="py-16 border-t border-border">
