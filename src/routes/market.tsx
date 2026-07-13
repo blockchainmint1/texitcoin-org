@@ -66,16 +66,14 @@ export const Route = createFileRoute("/market")({
   component: MarketPage,
 });
 
-const MILESTONES: { date: string; label: string; detail: string }[] = [
-  { date: "Jan 26, 2024", label: "Genesis block", detail: "First TEXITcoin block mined in McKinney, Texas. Fair-launch, proof-of-work, no premine." },
-  { date: "Jul 18, 2024", label: "First public presentation", detail: "Bobby Gray unveils TEXITcoin to the world — the honest-money thesis goes public." },
-  { date: "Aug 20, 2024", label: "CoinMarketCap debut", detail: "TXC lists on CoinMarketCap — the first place new investors look. We show up in screeners, tickers, and third-party tools worldwide." },
-  { date: "May 27, 2025", label: "WDMS 2025 — global stage", detail: "TXC takes the stage at Bitmain's World Digital Mining Summit in front of the international mining industry." },
-  { date: "Feb 11, 2026", label: "Regulatory challenge", detail: "Texas State Securities Board issues an emergency cease and desist. We cooperate, we defend, we keep building." },
-  { date: "Mar 26, 2026", label: "Season 3 begins", detail: "Two years in. The team, the network, and the mission enter their most focused chapter yet." },
-  { date: "Jun 9, 2026", label: "TEXITcoin Core open-sourced", detail: "Full unredacted source code published to GitHub with complete commit history from day one. The network becomes truly permissionless." },
-  { date: "Jun 29, 2026", label: "Mining beyond Texas", detail: "In-Home Miner program launches — approved participants can now mine TXC from outside Texas for the first time." },
-  { date: "Now", label: "The Hit List", detail: "We start systematically evaluating every CMC Top 100 project — who earned their seat, and who's just coasting." },
+const MILESTONES: { date: string; label: string; emoji: string }[] = [
+  { date: "Jan '24", emoji: "⛏️", label: "Genesis block mined in McKinney, TX. Fair launch, zero premine." },
+  { date: "Aug '24", emoji: "📈", label: "Listed on CoinMarketCap. TXC hits every screener on earth." },
+  { date: "May '25", emoji: "🌍", label: "On stage at Bitmain's WDMS. First global mining conference for TXC." },
+  { date: "Feb '26", emoji: "⚖️", label: "TSSB cease & desist. We cooperated, defended, kept shipping." },
+  { date: "Jun '26", emoji: "🔓", label: "TEXITcoin Core open-sourced. Fully permissionless network." },
+  { date: "Jun '26", emoji: "🏠", label: "In-Home Miner program — mining goes beyond Texas." },
+  { date: "Now", emoji: "🎯", label: "The Hit List. We start coming for the Top 100." },
 ];
 
 
