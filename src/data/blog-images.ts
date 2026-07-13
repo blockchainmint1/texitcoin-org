@@ -1,41 +1,31 @@
-import hills from "@/assets/blog/tx-hills.jpg";
-import flag from "@/assets/blog/tx-flag.jpg";
-import ranch from "@/assets/blog/tx-ranch.jpg";
-import skyline from "@/assets/blog/tx-skyline.jpg";
-import boots from "@/assets/blog/tx-boots.jpg";
-import mesa from "@/assets/blog/tx-mesa.jpg";
-import star from "@/assets/blog/tx-star.jpg";
-import energy from "@/assets/blog/tx-energy.jpg";
+// Randomized Texas image pool for blog posts.
+// All images live in src/assets/texas/*.asset.json as CDN pointers.
+const modules = import.meta.glob<{ url: string }>(
+  "@/assets/texas/*.asset.json",
+  { eager: true, import: "default" },
+);
 
-const TAG_IMAGE: Record<string, string> = {
-  Community: ranch,
-  Founder: boots,
-  Philosophy: mesa,
-  Mission: flag,
-  Education: skyline,
-  Background: ranch,
-  Strategy: energy,
-  Comparison: star,
-  Roadmap: hills,
-  Diligence: star,
-  Milestone: skyline,
-};
+const POOL: string[] = Object.values(modules)
+  .map((m) => m.url)
+  .sort();
 
-const POOL = [hills, flag, ranch, skyline, boots, mesa, star, energy];
+function hash(str: string) {
+  let h = 0;
+  for (const ch of str) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return h;
+}
 
-type ImagedPost = { slug: string; tag: string; title: string };
+type ImagedPost = { slug: string; tag?: string; title?: string };
 
 export function getPostImage(post: ImagedPost) {
-  if (TAG_IMAGE[post.tag]) return TAG_IMAGE[post.tag];
-  let h = 0;
-  for (const ch of post.slug) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  return POOL[h % POOL.length];
+  if (POOL.length === 0) return "";
+  return POOL[hash(post.slug) % POOL.length];
 }
 
 export function getSecondaryImage(post: ImagedPost) {
-  let h = 0;
-  for (const ch of post.title) h = (h * 33 + ch.charCodeAt(0)) >>> 0;
+  if (POOL.length === 0) return "";
   const primary = getPostImage(post);
   const choices = POOL.filter((p) => p !== primary);
-  return choices[h % choices.length];
+  if (choices.length === 0) return primary;
+  return choices[hash(post.title ?? post.slug) % choices.length];
 }
