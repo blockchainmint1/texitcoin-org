@@ -1,13 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery, useQuery } from "@tanstack/react-query";
-import { ArrowUpRight, Crosshair, TrendingUp, Users, Radio } from "lucide-react";
+import { ArrowUpRight, Crosshair, TrendingUp, Users } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { listHitList, getTxcSnapshot } from "@/lib/market.functions";
+import { CoinCaseStudy } from "@/components/site/CoinCaseStudy";
+import { listHitList, getHitListCoin, getTxcSnapshot } from "@/lib/market.functions";
+
+const FEATURED_SLUG = "dash";
 
 const hitListQuery = queryOptions({
   queryKey: ["hit-list"],
   queryFn: () => listHitList(),
+  staleTime: 60_000,
+});
+
+const featuredCoinQuery = queryOptions({
+  queryKey: ["hit-list-coin", FEATURED_SLUG],
+  queryFn: () => getHitListCoin({ data: { slug: FEATURED_SLUG } }),
   staleTime: 60_000,
 });
 
@@ -18,7 +27,12 @@ const txcSnapshotQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/market")({
-  loader: ({ context }) => context.queryClient.ensureQueryData(hitListQuery),
+  loader: async ({ context }) => {
+    await Promise.all([
+      context.queryClient.ensureQueryData(hitListQuery),
+      context.queryClient.ensureQueryData(featuredCoinQuery),
+    ]);
+  },
   head: () => ({
     meta: [
       { title: "The Hit List — TEXITcoin Market" },
@@ -98,7 +112,13 @@ function verdictBadge(v: string) {
 
 function MarketPage() {
   const { data: coins } = useSuspenseQuery(hitListQuery);
+  const { data: featured } = useSuspenseQuery(featuredCoinQuery);
   const { data: txc } = useQuery(txcSnapshotQuery);
+
+  // On-deck = everything else, ordered "low rank to high rank" (biggest CMC rank number first)
+  const onDeck = [...coins]
+    .filter((c) => c.slug !== FEATURED_SLUG)
+    .sort((a, b) => (b.cmcRank ?? 0) - (a.cmcRank ?? 0));
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -198,68 +218,71 @@ function MarketPage() {
           </div>
         </section>
 
-        {/* Hit list */}
+        {/* Featured case study — Next Up */}
         <section className="py-20 border-t border-border">
+          <div className="mx-auto max-w-4xl px-6">
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+              Next up on the hit list
+            </div>
+            <h2 className="mt-3 font-display text-4xl md:text-5xl font-bold">
+              First target: {featured.name}.
+            </h2>
+            <p className="mt-4 max-w-2xl text-muted-foreground text-lg">
+              The full case study — live market data, X account signals, heuristic fake-follower score, the argument, and where the gap actually is.
+            </p>
 
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="flex items-end justify-between gap-4 flex-wrap">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">The Hit List</div>
+            <div className="mt-12">
+              <CoinCaseStudy coin={featured} />
+            </div>
+
+            {/* On deck */}
+            {onDeck.length > 0 && (
+              <div className="mt-20">
+                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                  On deck
+                </div>
                 <h2 className="mt-3 font-display text-3xl md:text-4xl font-bold">
-                  The coins we're coming for
+                  Case studies queued up next
                 </h2>
                 <p className="mt-3 max-w-2xl text-muted-foreground">
-                  Every entry is a full case study: live market data, X account signals, a heuristic fake-follower score, and an honest verdict on whether they still belong in the Top 100.
+                  Working up the ladder — lower ranks first, moving toward the top.
                 </p>
-              </div>
-              <div className="text-xs text-muted-foreground">
-                {coins.length} of 100 evaluated
-              </div>
-            </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {coins.map((c) => (
-                <Link
-                  key={c.slug}
-                  to="/market/$slug"
-                  params={{ slug: c.slug }}
-                  className="group relative flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card hover:shadow-glow transition-shadow"
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-display text-2xl font-bold">{c.name}</div>
-                      <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                        {c.symbol} {c.cmcRank ? `· CMC #${c.cmcRank}` : ""}
+                <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {onDeck.map((c) => (
+                    <Link
+                      key={c.slug}
+                      to="/market/$slug"
+                      params={{ slug: c.slug }}
+                      className="group relative flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card hover:shadow-glow transition-shadow"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-display text-2xl font-bold">{c.name}</div>
+                          <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                            {c.symbol} {c.cmcRank ? `· CMC #${c.cmcRank}` : ""}
+                          </div>
+                        </div>
+                        {verdictBadge(c.verdict)}
                       </div>
-                    </div>
-                    {verdictBadge(c.verdict)}
-                  </div>
-                  <p className="mt-4 text-sm text-muted-foreground flex-1">
-                    {c.verdictNote ?? "Analysis coming soon."}
-                  </p>
-                  <div className="mt-5 flex items-center justify-between text-xs text-muted-foreground">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Users className="h-3.5 w-3.5" />
-                      {c.xFollowers ? `${(c.xFollowers / 1000).toFixed(0)}k on X` : "—"}
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-primary font-semibold">
-                      Read case study
-                      <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-              {/* Coming soon placeholder */}
-              <div className="rounded-2xl border border-dashed border-border p-6 text-center flex flex-col items-center justify-center min-h-[200px]">
-                <Radio className="h-6 w-6 text-muted-foreground" />
-                <div className="mt-3 font-display text-lg font-bold">
-                  {100 - coins.length} more coming
+                      <p className="mt-4 text-sm text-muted-foreground flex-1">
+                        {c.verdictNote ?? "Analysis coming soon."}
+                      </p>
+                      <div className="mt-5 flex items-center justify-between text-xs text-muted-foreground">
+                        <span className="inline-flex items-center gap-1.5">
+                          <Users className="h-3.5 w-3.5" />
+                          {c.xFollowers ? `${(c.xFollowers / 1000).toFixed(0)}k on X` : "—"}
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-primary font-semibold">
+                          Read case study
+                          <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground max-w-xs">
-                  We're working through the Top 100 one at a time. Check back — or subscribe below and we'll ship them to your inbox.
-                </p>
               </div>
-            </div>
+            )}
 
             <div className="mt-14 rounded-2xl border border-border bg-card p-8 shadow-card">
               <div className="flex items-start gap-4">
