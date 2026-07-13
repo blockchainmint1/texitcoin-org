@@ -170,7 +170,36 @@ function BuyPage() {
 
         <section className="border-b border-border">
           <div className="mx-auto max-w-7xl px-6 py-20">
-            <div className="grid gap-6 md:grid-cols-2">
+            {/* Market risk disclaimer */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="mb-14 flex items-start gap-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-6"
+            >
+              <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-amber-500" />
+              <div>
+                <p className="font-semibold text-amber-600 dark:text-amber-400">
+                  Market risk warning
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-amber-700/80 dark:text-amber-300/80">
+                  Crypto is volatile. Only buy what you can afford to risk. Expect it to go to zero.
+                  Read the{" "}
+                  <Link to="/disclosures" className="underline hover:text-amber-600 dark:hover:text-amber-300">
+                    disclosures page
+                  </Link>
+                  . Buy at your own risk.
+                </p>
+              </div>
+            </motion.div>
+
+            <h2 className="font-display text-3xl font-bold md:text-4xl">Get TXC on a Centralized Exchange</h2>
+            <p className="mt-3 max-w-2xl text-muted-foreground">
+              New to crypto? Follow the four-step guide below to pick a wallet, fund an account, buy TXC, and withdraw to self-custody.
+            </p>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
               {/* Step 01 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
