@@ -43,6 +43,7 @@ const NAV: NavItem[] = [
   {
     label: "Resources",
     children: [
+      { label: "TXC Top 100", href: "/market", internal: true },
       { label: "Block Explorer", href: "https://explorer.texitcoin.org/", external: true },
       { label: "Mempool", href: "https://mempool.texitcoin.org/", external: true },
       { label: "Wallets", href: "/wallets", internal: true },
