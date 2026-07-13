@@ -180,7 +180,7 @@ function BuyPage() {
                   Market risk warning
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-amber-700/80 dark:text-amber-300/80">
-                  Crypto is volatile. Only buy what you can afford to risk. Expect it to go to zero.
+                  Crypto is volatile. Only buy what you can afford. Expect it to go to zero.
                   Read the{" "}
                   <Link to="/disclosures" className="underline hover:text-amber-600 dark:hover:text-amber-300">
                     disclosures page
