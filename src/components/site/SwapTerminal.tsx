@@ -1,18 +1,26 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ChevronDown, Zap } from "lucide-react";
 
 const SWAP_BASE = "https://swap.honest.money/swap";
 const PRICE_URL =
   "https://api.coingecko.com/api/v3/simple/price?ids=texitcoin&vs_currencies=usd&include_24hr_change=true";
 
-type Chain = { id: string; label: string; short: string };
+type Chain = { id: string; label: string; short: string; color: string };
+type Stable = { id: string; label: string; note?: string };
 
 const CHAINS: Chain[] = [
-  { id: "ethereum", label: "Ethereum", short: "ETH" },
-  { id: "base", label: "Base", short: "BASE" },
-  { id: "arbitrum", label: "Arbitrum", short: "ARB" },
-  { id: "polygon", label: "Polygon", short: "POLY" },
-  { id: "bsc", label: "BNB Chain", short: "BNB" },
+  { id: "base", label: "Base", short: "BASE", color: "#0052ff" },
+  { id: "ethereum", label: "Ethereum", short: "ETH", color: "#627eea" },
+  { id: "arbitrum", label: "Arbitrum", short: "ARB", color: "#2d374b" },
+  { id: "polygon", label: "Polygon", short: "POLY", color: "#8247e5" },
+  { id: "bsc", label: "BNB Chain", short: "BNB", color: "#f0b90b" },
+];
+
+const STABLES: Stable[] = [
+  { id: "USDC", label: "USDC", note: "Circle" },
+  { id: "USDT", label: "USDT", note: "Tether" },
+  { id: "PYUSD", label: "PYUSD", note: "PayPal" },
+  { id: "DAI", label: "DAI", note: "MakerDAO" },
 ];
 
 const PROTOCOL_FEE = 0.05;
@@ -27,9 +35,12 @@ const NUM = new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 });
 
 export function SwapTerminal() {
   const [chain, setChain] = useState<string>("base");
+  const [stable, setStable] = useState<string>("USDC");
   const [amount, setAmount] = useState<string>("100");
   const [txcPrice, setTxcPrice] = useState<number | null>(null);
   const [change24h, setChange24h] = useState<number | null>(null);
+  const [chainOpen, setChainOpen] = useState(false);
+  const chainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -55,6 +66,18 @@ export function SwapTerminal() {
     };
   }, []);
 
+  // Close chain fan-out on outside click
+  useEffect(() => {
+    if (!chainOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (chainRef.current && !chainRef.current.contains(e.target as Node)) {
+        setChainOpen(false);
+      }
+    };
+    window.addEventListener("mousedown", onDown);
+    return () => window.removeEventListener("mousedown", onDown);
+  }, [chainOpen]);
+
   const parsed = Number(amount);
   const usdIn = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
   const afterFee = usdIn * (1 - PROTOCOL_FEE);
@@ -64,20 +87,22 @@ export function SwapTerminal() {
     return afterFee / txcPrice;
   }, [txcPrice, usdIn, afterFee]);
 
-  // Pass params so the swap site can deep-link into an active trade
-  // when it accepts them.
+  // Deep-link params. The swap site currently ignores these; see notes.
   const handoffUrl = useMemo(() => {
     const p = new URLSearchParams({
       asset: "TXC",
       chain,
+      token: stable,
       amount: String(usdIn || ""),
       source: "texitcoin.org",
       autostart: "1",
     });
     return `${SWAP_BASE}?${p.toString()}`;
-  }, [chain, usdIn]);
+  }, [chain, stable, usdIn]);
 
   const up = (change24h ?? 0) >= 0;
+  const activeChain = CHAINS.find((c) => c.id === chain) ?? CHAINS[0];
+  const otherChains = CHAINS.filter((c) => c.id !== chain);
 
   return (
     <div className="relative">
@@ -91,7 +116,7 @@ export function SwapTerminal() {
                 Exchange Terminal
               </span>
               <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                USDC → <span className="text-primary">TXC</span>
+                Stablecoin → <span className="text-primary">TXC</span>
               </span>
             </div>
             <div className="flex items-baseline gap-2">
@@ -115,32 +140,69 @@ export function SwapTerminal() {
           </div>
 
           {/* Booking-style horizontal row */}
-          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.1fr_auto_1.1fr_auto_1.3fr_auto]">
-            {/* From: chain + USDC */}
-            <label className="group flex min-w-0 items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-background">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-[10px] font-bold text-primary">
-                {CHAINS.find((c) => c.id === chain)?.short ?? "—"}
+          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.2fr_auto_1.1fr_auto_1.3fr_auto]">
+            {/* From: chain circle (click to switch) + stable selector */}
+            <div className="group flex min-w-0 items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-background">
+              {/* Chain fan-out */}
+              <div ref={chainRef} className="relative shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setChainOpen((v) => !v)}
+                  aria-label={`Network: ${activeChain.label}. Click to change.`}
+                  className="relative grid h-11 w-11 place-items-center rounded-full font-mono text-[10px] font-bold text-white shadow-md ring-2 ring-background transition hover:scale-105"
+                  style={{ backgroundColor: activeChain.color }}
+                >
+                  {activeChain.short}
+                  <span className="absolute -bottom-1 -right-1 grid h-4 w-4 place-items-center rounded-full border border-border bg-background text-[8px] text-muted-foreground">
+                    <ChevronDown className="h-2.5 w-2.5" />
+                  </span>
+                </button>
+
+                {chainOpen && (
+                  <div className="absolute left-1/2 top-full z-30 mt-3 -translate-x-1/2">
+                    <div className="flex items-center gap-2 rounded-full border border-border bg-card px-2 py-2 shadow-lg">
+                      {otherChains.map((c) => (
+                        <button
+                          key={c.id}
+                          type="button"
+                          onClick={() => {
+                            setChain(c.id);
+                            setChainOpen(false);
+                          }}
+                          title={c.label}
+                          className="grid h-10 w-10 place-items-center rounded-full font-mono text-[10px] font-bold text-white shadow transition hover:scale-110"
+                          style={{ backgroundColor: c.color }}
+                        >
+                          {c.short}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Stablecoin selector (the larger From field) */}
               <div className="min-w-0 flex-1">
                 <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                  From
+                  From · {activeChain.label}
                 </div>
                 <div className="relative">
                   <select
-                    value={chain}
-                    onChange={(e) => setChain(e.target.value)}
+                    value={stable}
+                    onChange={(e) => setStable(e.target.value)}
                     className="w-full appearance-none bg-transparent pr-6 font-display text-base font-bold outline-none"
                   >
-                    {CHAINS.map((c) => (
-                      <option key={c.id} value={c.id}>
-                        {c.label} · USDC
+                    {STABLES.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.label}
+                        {s.note ? ` · ${s.note}` : ""}
                       </option>
                     ))}
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 </div>
               </div>
-            </label>
+            </div>
 
             {/* Divider / arrow */}
             <div className="hidden items-center justify-center md:flex">
@@ -151,7 +213,7 @@ export function SwapTerminal() {
 
             {/* To: TXC (fixed) */}
             <div className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[10px] font-bold text-primary-foreground shadow-glow">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[10px] font-bold text-primary-foreground shadow-glow">
                 TXC
               </div>
               <div className="min-w-0 flex-1">
@@ -186,12 +248,12 @@ export function SwapTerminal() {
                     className="w-full min-w-0 bg-transparent font-display text-2xl font-bold tabular-nums outline-none placeholder:text-muted-foreground"
                     placeholder="0"
                   />
-                  <span className="font-mono text-xs text-muted-foreground">USDC</span>
+                  <span className="font-mono text-xs text-muted-foreground">{stable}</span>
                 </div>
               </div>
             </label>
 
-            {/* CTA — full height on md+ */}
+            {/* CTA */}
             <a
               href={handoffUrl}
               target="_blank"
@@ -204,8 +266,15 @@ export function SwapTerminal() {
             </a>
           </div>
 
-          {/* Sub-row: estimate + stats */}
+          {/* Sub-row: stats LEFT, receive RIGHT (reversed) */}
           <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 px-2 text-xs">
+            <div className="flex items-center gap-x-5 gap-y-1 font-mono uppercase tracking-widest text-muted-foreground">
+              <span>5% Fee · Fixed</span>
+              <span className="hidden sm:inline">·</span>
+              <span>~5m Settlement</span>
+              <span className="hidden sm:inline">·</span>
+              <span>5 EVM Chains</span>
+            </div>
             <div className="flex items-center gap-2 font-mono text-muted-foreground">
               <span className="uppercase tracking-widest">You receive (est.)</span>
               <span className="font-display text-base font-bold tabular-nums text-foreground">
@@ -215,13 +284,6 @@ export function SwapTerminal() {
               <span className="text-muted-foreground">
                 ≈ {USD.format(afterFee)} after 5% fee
               </span>
-            </div>
-            <div className="flex items-center gap-x-5 gap-y-1 font-mono uppercase tracking-widest text-muted-foreground">
-              <span>5% Fee · Fixed</span>
-              <span className="hidden sm:inline">·</span>
-              <span>~5m Settlement</span>
-              <span className="hidden sm:inline">·</span>
-              <span>5 EVM Chains</span>
             </div>
           </div>
         </div>
