@@ -1,15 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { TrendingUp, TrendingDown } from "lucide-react";
+import { getTxcSnapshot } from "@/lib/market.functions";
 
 type PriceState = {
   price: number;
   change24h: number;
   updatedAt: number;
 };
-
-const PRICE_URL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=texitcoin&vs_currencies=usd&include_24hr_change=true&include_last_updated_at=true";
 
 const FMT = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -28,18 +26,14 @@ export function LivePrice({ variant = "desktop" }: { variant?: "desktop" | "mobi
 
     const loadPrice = async () => {
       try {
-        const r = await fetch(PRICE_URL);
-        if (!r.ok) return;
-        const j = (await r.json()) as {
-          texitcoin: { usd: number; usd_24h_change: number; last_updated_at: number };
-        };
-        if (cancelled) return;
+        const q = await getTxcSnapshot();
+        if (cancelled || !q || q.price == null) return;
         const next: PriceState = {
-          price: j.texitcoin.usd,
-          change24h: j.texitcoin.usd_24h_change,
-          updatedAt: j.texitcoin.last_updated_at * 1000,
+          price: q.price,
+          change24h: q.percentChange24h ?? 0,
+          updatedAt: Date.now(),
         };
-        setState((cur) => {
+        setState(() => {
           if (prevPrice.current != null && prevPrice.current !== next.price) {
             setFlash(next.price > prevPrice.current ? "up" : "down");
             setTimeout(() => setFlash(null), 700);
@@ -53,7 +47,7 @@ export function LivePrice({ variant = "desktop" }: { variant?: "desktop" | "mobi
     };
 
     loadPrice();
-    const id = setInterval(loadPrice, 30_000);
+    const id = setInterval(loadPrice, 60_000);
     return () => {
       cancelled = true;
       clearInterval(id);
