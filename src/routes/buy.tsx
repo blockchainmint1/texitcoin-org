@@ -165,18 +165,14 @@ function BuyPage() {
             >
               <SwapTerminal />
             </motion.div>
-          </div>
-        </section>
 
-        <section className="border-b border-border">
-          <div className="mx-auto max-w-7xl px-6 py-20">
             {/* Market risk disclaimer */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mb-14 flex items-start gap-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-6"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mx-auto mt-12 flex w-3/4 max-w-4xl items-start gap-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-6"
             >
               <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-amber-500" />
               <div>
@@ -193,7 +189,11 @@ function BuyPage() {
                 </p>
               </div>
             </motion.div>
+          </div>
+        </section>
 
+        <section className="border-b border-border">
+          <div className="mx-auto max-w-7xl px-6 py-20">
             <h2 className="font-display text-3xl font-bold md:text-4xl">Get TXC on a Centralized Exchange</h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">
               New to crypto? Follow the four-step guide below to pick a wallet, fund an account, buy TXC, and withdraw to self-custody.
