@@ -146,8 +146,8 @@ export function SwapTerminal() {
             </div>
           </div>
 
-          {/* Booking-style horizontal row */}
-          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.2fr_auto_1.1fr_auto_1.3fr_auto]">
+          {/* Booking-style horizontal row — everything on one line */}
+          <div className="mt-3 grid grid-cols-1 items-stretch gap-2 rounded-2xl border border-border bg-card p-2 md:grid-cols-[1.2fr_auto_1.1fr_auto_1fr_auto_1.2fr_auto]">
             {/* From: chain circle (click to switch) + stable selector */}
             <div className="group flex min-w-0 items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-background">
               {/* Chain fan-out */}
@@ -260,33 +260,12 @@ export function SwapTerminal() {
               </div>
             </label>
 
-            {/* CTA */}
-            {canStart ? (
-              <a
-                href={handoffUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-red-gradient px-6 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-glow transition hover:brightness-110 md:px-8"
-              >
-                <Zap className="h-4 w-4" />
-                Start swap
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-              </a>
-            ) : (
-              <button
-                type="button"
-                disabled
-                title={usdIn <= 0 ? "Enter an amount" : "Paste your TXC wallet address below"}
-                className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-border bg-muted px-6 py-4 text-sm font-semibold uppercase tracking-widest text-muted-foreground md:px-8"
-              >
-                <Zap className="h-4 w-4" />
-                {usdIn <= 0 ? "Enter amount" : "Add TXC wallet"}
-              </button>
-            )}
-          </div>
+            {/* Divider */}
+            <div className="hidden items-center md:flex" aria-hidden>
+              <div className="h-10 w-px bg-border" />
+            </div>
 
-          {/* TXC recipient address — required before autostart */}
-          <div className="mt-2 rounded-2xl border border-border bg-card p-2">
+            {/* TXC recipient address — required before autostart */}
             <label className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
               <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[9px] font-bold text-primary-foreground shadow-glow">
                 TXC
@@ -294,7 +273,7 @@ export function SwapTerminal() {
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                    Your TXC wallet address
+                    Receive at
                   </span>
                   <span
                     className={`font-mono text-[9px] uppercase tracking-widest ${
@@ -314,11 +293,35 @@ export function SwapTerminal() {
                   autoComplete="off"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Paste your TEXITcoin address (needed to receive TXC)"
+                  placeholder="Paste TXC address"
                   className="w-full min-w-0 bg-transparent font-mono text-sm outline-none placeholder:text-muted-foreground"
                 />
               </div>
             </label>
+
+            {/* CTA */}
+            {canStart ? (
+              <a
+                href={handoffUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-red-gradient px-6 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-glow transition hover:brightness-110 md:px-8"
+              >
+                <Zap className="h-4 w-4" />
+                Start swap
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title={usdIn <= 0 ? "Enter an amount" : "Paste your TXC wallet address"}
+                className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-border bg-muted px-6 py-4 text-sm font-semibold uppercase tracking-widest text-muted-foreground md:px-8"
+              >
+                <Zap className="h-4 w-4" />
+                {usdIn <= 0 ? "Enter amount" : "Add TXC wallet"}
+              </button>
+            )}
           </div>
 
 
