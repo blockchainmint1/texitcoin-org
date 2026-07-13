@@ -31,7 +31,6 @@ const USD = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
-const NUM = new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 });
 
 export function SwapTerminal() {
   const [chain, setChain] = useState<string>("base");
@@ -81,12 +80,6 @@ export function SwapTerminal() {
 
   const parsed = Number(amount);
   const usdIn = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
-  const afterFee = usdIn * (1 - PROTOCOL_FEE);
-
-  const estimatedTxc = useMemo(() => {
-    if (!txcPrice || !usdIn) return null;
-    return afterFee / txcPrice;
-  }, [txcPrice, usdIn, afterFee]);
 
   const addressValid = /^[a-zA-Z0-9]{26,64}$/.test(address.trim());
   const canStart = addressValid && usdIn > 0;
@@ -331,7 +324,7 @@ export function SwapTerminal() {
           </div>
 
 
-          {/* Sub-row: stats LEFT, receive RIGHT (reversed) */}
+          {/* Sub-row: stats LEFT, quote expectation RIGHT */}
           <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 px-2 text-xs">
             <div className="flex items-center gap-x-5 gap-y-1 font-mono uppercase tracking-widest text-muted-foreground">
               <span>5% Fee · Fixed</span>
@@ -341,14 +334,7 @@ export function SwapTerminal() {
               <span>5 EVM Chains</span>
             </div>
             <div className="flex items-center gap-2 font-mono text-muted-foreground">
-              <span className="uppercase tracking-widest">You receive (est.)</span>
-              <span className="font-display text-base font-bold tabular-nums text-foreground">
-                {estimatedTxc != null ? NUM.format(estimatedTxc) : "—"}
-                <span className="ml-1 text-xs font-normal text-muted-foreground">TXC</span>
-              </span>
-              <span className="text-muted-foreground">
-                ≈ {USD.format(afterFee)} after 5% fee
-              </span>
+              <span className="uppercase tracking-widest">Exact quote locked on the next step</span>
             </div>
           </div>
         </div>
