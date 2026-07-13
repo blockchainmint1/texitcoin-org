@@ -187,10 +187,24 @@ const TXC_CMC_ID = 32744;
 export const getTxcSnapshot = createServerFn({ method: "GET" }).handler(
   async (): Promise<CmcQuote | null> => {
     try {
-      // CMC is authoritative for TXC supply + market cap. The mempool /supply
-      // endpoint is a Bitcoin-schedule approximation (max 21M) and does NOT
-      // match TXC's real emission curve — do not use it here.
-      return await fetchCmcQuoteById(TXC_CMC_ID);
+      const quote = await fetchCmcQuoteById(TXC_CMC_ID);
+      // Authoritative circulating/max supply comes from our own node.
+      try {
+        const r = await fetch("https://mempool.texitcoin.org/api/v1/supply", {
+          headers: { Accept: "application/json" },
+        });
+        if (r.ok) {
+          const s = (await r.json()) as { circulating?: number; max?: number };
+          if (quote && typeof s.circulating === "number") {
+            quote.circulatingSupply = s.circulating;
+            if (typeof s.max === "number") quote.maxSupply = s.max;
+            if (quote.price != null) quote.marketCap = quote.price * s.circulating;
+          }
+        }
+      } catch (e) {
+        console.error("mempool supply fetch failed", e);
+      }
+      return quote;
     } catch (e) {
       console.error("getTxcSnapshot failed", e);
       return null;
