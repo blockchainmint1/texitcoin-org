@@ -37,6 +37,7 @@ export function SwapTerminal() {
   const [chain, setChain] = useState<string>("base");
   const [stable, setStable] = useState<string>("USDC");
   const [amount, setAmount] = useState<string>("100");
+  const [address, setAddress] = useState<string>("");
   const [txcPrice, setTxcPrice] = useState<number | null>(null);
   const [change24h, setChange24h] = useState<number | null>(null);
   const [chainOpen, setChainOpen] = useState(false);
@@ -87,7 +88,10 @@ export function SwapTerminal() {
     return afterFee / txcPrice;
   }, [txcPrice, usdIn, afterFee]);
 
-  // Deep-link params. The swap site currently ignores these; see notes.
+  const addressValid = /^[a-zA-Z0-9]{26,64}$/.test(address.trim());
+  const canStart = addressValid && usdIn > 0;
+
+  // Deep-link params handed off to swap.honest.money
   const handoffUrl = useMemo(() => {
     const p = new URLSearchParams({
       asset: "TXC",
@@ -95,10 +99,13 @@ export function SwapTerminal() {
       token: stable,
       amount: String(usdIn || ""),
       source: "texitcoin.org",
-      autostart: "1",
     });
+    if (addressValid) {
+      p.set("address", address.trim());
+      p.set("autostart", "1");
+    }
     return `${SWAP_BASE}?${p.toString()}`;
-  }, [chain, stable, usdIn]);
+  }, [chain, stable, usdIn, address, addressValid]);
 
   const up = (change24h ?? 0) >= 0;
   const activeChain = CHAINS.find((c) => c.id === chain) ?? CHAINS[0];
@@ -254,17 +261,66 @@ export function SwapTerminal() {
             </label>
 
             {/* CTA */}
-            <a
-              href={handoffUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-red-gradient px-6 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-glow transition hover:brightness-110 md:px-8"
-            >
-              <Zap className="h-4 w-4" />
-              Start swap
-              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-            </a>
+            {canStart ? (
+              <a
+                href={handoffUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-red-gradient px-6 py-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-glow transition hover:brightness-110 md:px-8"
+              >
+                <Zap className="h-4 w-4" />
+                Start swap
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title={usdIn <= 0 ? "Enter an amount" : "Paste your TXC wallet address below"}
+                className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-border bg-muted px-6 py-4 text-sm font-semibold uppercase tracking-widest text-muted-foreground md:px-8"
+              >
+                <Zap className="h-4 w-4" />
+                {usdIn <= 0 ? "Enter amount" : "Add TXC wallet"}
+              </button>
+            )}
           </div>
+
+          {/* TXC recipient address — required before autostart */}
+          <div className="mt-2 rounded-2xl border border-border bg-card p-2">
+            <label className="flex min-w-0 items-center gap-3 rounded-xl px-4 py-3">
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-red-gradient font-mono text-[9px] font-bold text-primary-foreground shadow-glow">
+                TXC
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                    Your TXC wallet address
+                  </span>
+                  <span
+                    className={`font-mono text-[9px] uppercase tracking-widest ${
+                      address.length === 0
+                        ? "text-muted-foreground"
+                        : addressValid
+                          ? "text-emerald-500"
+                          : "text-red-500"
+                    }`}
+                  >
+                    {address.length === 0 ? "· required" : addressValid ? "· ok" : "· invalid"}
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  spellCheck={false}
+                  autoComplete="off"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Paste your TEXITcoin address (needed to receive TXC)"
+                  className="w-full min-w-0 bg-transparent font-mono text-sm outline-none placeholder:text-muted-foreground"
+                />
+              </div>
+            </label>
+          </div>
+
 
           {/* Sub-row: stats LEFT, receive RIGHT (reversed) */}
           <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 px-2 text-xs">
