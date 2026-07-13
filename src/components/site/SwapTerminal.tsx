@@ -37,6 +37,7 @@ export function SwapTerminal() {
   const [chain, setChain] = useState<string>("base");
   const [stable, setStable] = useState<string>("USDC");
   const [amount, setAmount] = useState<string>("100");
+  const [address, setAddress] = useState<string>("");
   const [txcPrice, setTxcPrice] = useState<number | null>(null);
   const [change24h, setChange24h] = useState<number | null>(null);
   const [chainOpen, setChainOpen] = useState(false);
