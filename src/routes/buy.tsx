@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Wallet, Coins, ArrowRight, ShieldCheck, ExternalLink, Sparkles, CircleCheck, Globe, MapPin } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { SwapTerminal } from "@/components/site/SwapTerminal";
 
 export const Route = createFileRoute("/buy")({
   head: () => ({
