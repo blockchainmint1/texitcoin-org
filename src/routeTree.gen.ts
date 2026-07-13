@@ -28,6 +28,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PressRouteImport } from './routes/press'
 import { Route as MineRouteImport } from './routes/mine'
 import { Route as MerchRouteImport } from './routes/merch'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as InTheNewsRouteImport } from './routes/in-the-news'
@@ -44,7 +45,10 @@ import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -146,6 +150,11 @@ const MerchRoute = MerchRouteImport.update({
   path: '/merch',
   getParentRoute: () => rootRouteImport,
 } as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LegalRoute = LegalRouteImport.update({
   id: '/legal',
   path: '/legal',
@@ -228,11 +237,29 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicLegalFeesRoute = ApiPublicLegalFeesRouteImport.update({
   id: '/api/public/legal-fees',
   path: '/api/public/legal-fees',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -276,6 +303,7 @@ export interface FileRoutesByFullPath {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
   '/press': typeof PressRoute
@@ -295,8 +323,11 @@ export interface FileRoutesByFullPath {
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
   '/zoom': typeof ZoomRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
@@ -319,6 +350,7 @@ export interface FileRoutesByTo {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
   '/press': typeof PressRoute
@@ -338,8 +370,11 @@ export interface FileRoutesByTo {
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
   '/zoom': typeof ZoomRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/zoom/$slug': typeof ZoomSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
@@ -363,6 +398,7 @@ export interface FileRoutesById {
   '/in-the-news': typeof InTheNewsRoute
   '/leadership': typeof LeadershipRoute
   '/legal': typeof LegalRoute
+  '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
   '/press': typeof PressRoute
@@ -382,8 +418,11 @@ export interface FileRoutesById {
   '/whitepaper': typeof WhitepaperRoute
   '/wtxc': typeof WtxcRoute
   '/zoom': typeof ZoomRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/zoom_/$slug': typeof ZoomSlugRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
@@ -408,6 +447,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/mcp'
     | '/merch'
     | '/mine'
     | '/press'
@@ -427,8 +467,11 @@ export interface FileRouteTypes {
     | '/whitepaper'
     | '/wtxc'
     | '/zoom'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
     | '/zoom/$slug'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/ipfs/$cid'
     | '/api/public/telegram/webhook'
@@ -451,6 +494,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/mcp'
     | '/merch'
     | '/mine'
     | '/press'
@@ -470,8 +514,11 @@ export interface FileRouteTypes {
     | '/whitepaper'
     | '/wtxc'
     | '/zoom'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/blog/$slug'
     | '/zoom/$slug'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/ipfs/$cid'
     | '/api/public/telegram/webhook'
@@ -494,6 +541,7 @@ export interface FileRouteTypes {
     | '/in-the-news'
     | '/leadership'
     | '/legal'
+    | '/mcp'
     | '/merch'
     | '/mine'
     | '/press'
@@ -513,8 +561,11 @@ export interface FileRouteTypes {
     | '/whitepaper'
     | '/wtxc'
     | '/zoom'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/blog_/$slug'
     | '/zoom_/$slug'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/ipfs/$cid'
     | '/api/public/telegram/webhook'
@@ -538,6 +589,7 @@ export interface RootRouteChildren {
   InTheNewsRoute: typeof InTheNewsRoute
   LeadershipRoute: typeof LeadershipRoute
   LegalRoute: typeof LegalRoute
+  McpRoute: typeof McpRoute
   MerchRoute: typeof MerchRoute
   MineRoute: typeof MineRoute
   PressRoute: typeof PressRoute
@@ -557,8 +609,11 @@ export interface RootRouteChildren {
   WhitepaperRoute: typeof WhitepaperRoute
   WtxcRoute: typeof WtxcRoute
   ZoomRoute: typeof ZoomRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   BlogSlugRoute: typeof BlogSlugRoute
   ZoomSlugRoute: typeof ZoomSlugRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
   ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
   ApiPublicTelegramWebhookRoute: typeof ApiPublicTelegramWebhookRoute
@@ -702,6 +757,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MerchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/legal': {
       id: '/legal'
       path: '/legal'
@@ -814,11 +876,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/legal-fees': {
       id: '/api/public/legal-fees'
       path: '/api/public/legal-fees'
       fullPath: '/api/public/legal-fees'
       preLoaderRoute: typeof ApiPublicLegalFeesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
@@ -874,6 +957,7 @@ const rootRouteChildren: RootRouteChildren = {
   InTheNewsRoute: InTheNewsRoute,
   LeadershipRoute: LeadershipRoute,
   LegalRoute: LegalRoute,
+  McpRoute: McpRoute,
   MerchRoute: MerchRoute,
   MineRoute: MineRoute,
   PressRoute: PressRoute,
@@ -893,8 +977,12 @@ const rootRouteChildren: RootRouteChildren = {
   WhitepaperRoute: WhitepaperRoute,
   WtxcRoute: WtxcRoute,
   ZoomRoute: ZoomRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   BlogSlugRoute: BlogSlugRoute,
   ZoomSlugRoute: ZoomSlugRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
   ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
   ApiPublicTelegramWebhookRoute: ApiPublicTelegramWebhookRoute,
