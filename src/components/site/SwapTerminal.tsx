@@ -88,7 +88,10 @@ export function SwapTerminal() {
     return afterFee / txcPrice;
   }, [txcPrice, usdIn, afterFee]);
 
-  // Deep-link params. The swap site currently ignores these; see notes.
+  const addressValid = /^[a-zA-Z0-9]{26,64}$/.test(address.trim());
+  const canStart = addressValid && usdIn > 0;
+
+  // Deep-link params handed off to swap.honest.money
   const handoffUrl = useMemo(() => {
     const p = new URLSearchParams({
       asset: "TXC",
@@ -96,10 +99,13 @@ export function SwapTerminal() {
       token: stable,
       amount: String(usdIn || ""),
       source: "texitcoin.org",
-      autostart: "1",
     });
+    if (addressValid) {
+      p.set("address", address.trim());
+      p.set("autostart", "1");
+    }
     return `${SWAP_BASE}?${p.toString()}`;
-  }, [chain, stable, usdIn]);
+  }, [chain, stable, usdIn, address, addressValid]);
 
   const up = (change24h ?? 0) >= 0;
   const activeChain = CHAINS.find((c) => c.id === chain) ?? CHAINS[0];
