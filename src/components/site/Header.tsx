@@ -28,6 +28,7 @@ const NAV: NavItem[] = [
       { label: "Team", href: "/team", internal: true },
       { label: "The Mine", href: "/mine", internal: true },
       { label: "Tokenomics", href: "/tokenomics", internal: true },
+      { label: "The Hit List", href: "/market", internal: true },
       { label: "TXC in the News", href: "/in-the-news", internal: true },
       { label: "Legal Updates", href: "/legal", internal: true },
       { label: "Troll Index", href: "/trolls", internal: true },
