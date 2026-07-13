@@ -194,3 +194,30 @@ export const getTxcSnapshot = createServerFn({ method: "GET" }).handler(
     }
   },
 );
+
+export type PricePoint = { t: number; p: number };
+
+export const getTxcPriceHistory = createServerFn({ method: "GET" })
+  .inputValidator((data: { days: number }) => {
+    const days = Number(data?.days);
+    if (![7, 30, 90, 365].includes(days)) throw new Error("days must be 7, 30, 90, or 365");
+    return { days };
+  })
+  .handler(async ({ data }): Promise<PricePoint[]> => {
+    try {
+      const url = new URL("https://api.coingecko.com/api/v3/coins/texitcoin/market_chart");
+      url.searchParams.set("vs_currency", "usd");
+      url.searchParams.set("days", String(data.days));
+      const res = await fetch(url.toString(), { headers: { Accept: "application/json" } });
+      if (!res.ok) {
+        console.error("CoinGecko market_chart failed", res.status, await res.text());
+        return [];
+      }
+      const json = (await res.json()) as { prices?: [number, number][] };
+      return (json.prices ?? []).map(([t, p]) => ({ t, p }));
+    } catch (e) {
+      console.error("getTxcPriceHistory failed", e);
+      return [];
+    }
+  });
+
