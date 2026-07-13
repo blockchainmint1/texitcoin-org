@@ -145,27 +145,26 @@ function BuyPage() {
         <section className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_60%)]" />
           <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16">
-            <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  <Sparkles className="h-3 w-3 text-primary" /> First-time buyer's guide
-                </div>
-                <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-7xl">
-                  How to buy <span className="text-primary">TEXITcoin</span>
-                </h1>
-                <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-                  Already got USDC? Swap it right here for native TXC — settled to your wallet in minutes. New to crypto? Follow the four-step guide below.
-                </p>
-              </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                <Sparkles className="h-3 w-3 text-primary" /> First-time buyer's guide
+              </div>
+              <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-7xl">
+                How to buy <span className="text-primary">TEXITcoin</span>
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground md:text-xl">
+                Already got USDC? Swap it right here for native TXC — settled to your wallet in minutes. New to crypto? Follow the four-step guide below.
+              </p>
+            </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <SwapTerminal />
-              </motion.div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mt-10"
+            >
+              <SwapTerminal />
+            </motion.div>
           </div>
         </section>
 
