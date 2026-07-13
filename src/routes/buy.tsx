@@ -145,35 +145,27 @@ function BuyPage() {
         <section className="relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_60%)]" />
           <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                <Sparkles className="h-3 w-3 text-primary" /> First-time buyer's guide
-              </div>
-              <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-7xl">
-                How to buy <span className="text-primary">TEXITcoin</span>
-              </h1>
-              <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-                Four steps from zero to self-custody. No jargon, no upsell — just the plain path to owning TXC.
-              </p>
+            <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  <Sparkles className="h-3 w-3 text-primary" /> First-time buyer's guide
+                </div>
+                <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] md:text-7xl">
+                  How to buy <span className="text-primary">TEXITcoin</span>
+                </h1>
+                <p className="mt-6 text-lg text-muted-foreground md:text-xl">
+                  Already got USDC? Swap it right here for native TXC — settled to your wallet in minutes. New to crypto? Follow the four-step guide below.
+                </p>
+              </motion.div>
 
-              <a
-                href="https://swap.texitcoin.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 flex items-start gap-3 rounded-2xl border border-primary/40 bg-primary/5 p-4 transition hover:bg-primary/10 sm:items-center"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary sm:mt-0">
-                  <Sparkles className="h-4 w-4" />
-                </span>
-                <span className="flex-1 text-sm text-foreground">
-                  <span className="font-semibold">Already got USDC? Know what you're doing?</span>{" "}
-                  <span className="text-muted-foreground">Skip the exchange — use our swap site for a quick trade.</span>
-                </span>
-                <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                  Swap <ExternalLink className="h-3.5 w-3.5" />
-                </span>
-              </a>
-            </motion.div>
+                <SwapTerminal />
+              </motion.div>
+            </div>
           </div>
         </section>
 
