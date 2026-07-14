@@ -66,7 +66,10 @@ const ITEMS: Item[] = [
     title:
       "Dallas Holiday Parade Balloon Donation — TEXITcoin Cryptocurrency",
     source: "WFAA",
+    image:
+      "https://media.wfaa.com/assets/WFAA/images/7011ba12-6b65-4ca2-b175-ddd38e5003d4/20251204T122446/7011ba12-6b65-4ca2-b175-ddd38e5003d4_1920x1080.jpg",
   },
+
   {
     url: "https://techbullion.com/scrutiny-is-not-a-scandal-it-is-a-stress-test/",
     title: "Scrutiny Is Not a Scandal. It Is a Stress Test.",
