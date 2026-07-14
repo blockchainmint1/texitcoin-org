@@ -14,7 +14,6 @@ const PHOTOS: Photo[] = [
   { url: bobbyMain.url, label: "Yacht / navy blazer" },
   { url: bobby150.url, label: "Austin skyline night" },
   { url: bobby000.url, label: "Beach / black suit" },
-  { url: bobby013.url, label: "Beach / grey suit" },
   { url: bobby042.url, label: "Street / white shirt" },
   { url: bobby012.url, label: "Waterfront / navy blazer" },
   { url: bobby156.url, label: "Coastline / v-neck" },
