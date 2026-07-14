@@ -6,6 +6,7 @@ import { Download, Mail, Sparkles, ArrowRight, FileText, Type } from "lucide-rea
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { getIpfsUrl } from "@/lib/ipfs.functions";
+import { BobbyBio } from "@/components/site/BobbyBio";
 
 const BRAND_GUIDELINES_CID = "bafybeicdu53kgb7r32vzn3xnkz5i5kyfgy4k5ny5peifnbmua4mug6gwsu";
 
@@ -136,6 +137,8 @@ function PressPage() {
             </motion.div>
           </div>
         </section>
+
+        <BobbyBio />
 
         <section className="border-b border-border">
           <div className="mx-auto max-w-7xl px-6 py-16">
