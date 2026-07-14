@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import bobbyMain from "@/assets/bobby/bobby-bobby_1.jpg.asset.json";
 import bobby000 from "@/assets/bobby/bobby-000-IURbAk98Fxo.jpg.asset.json";
 import bobby012 from "@/assets/bobby/bobby-012-JWtPAywTTzY.jpg.asset.json";
-import bobby013 from "@/assets/bobby/bobby-013-pAopIqnnnf0.jpg.asset.json";
 import bobby042 from "@/assets/bobby/bobby-042-DMBT3s-7Hfo.jpg.asset.json";
 import bobby150 from "@/assets/bobby/bobby-150-uTcxjkxjgcg.jpg.asset.json";
 import bobby156 from "@/assets/bobby/bobby-156-xN2c1u1P7_Q.jpg.asset.json";
@@ -15,7 +14,6 @@ const PHOTOS: Photo[] = [
   { url: bobbyMain.url, label: "Yacht / navy blazer" },
   { url: bobby150.url, label: "Austin skyline night" },
   { url: bobby000.url, label: "Beach / black suit" },
-  { url: bobby013.url, label: "Beach / grey suit" },
   { url: bobby042.url, label: "Street / white shirt" },
   { url: bobby012.url, label: "Waterfront / navy blazer" },
   { url: bobby156.url, label: "Coastline / v-neck" },
