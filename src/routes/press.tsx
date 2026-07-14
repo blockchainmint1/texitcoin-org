@@ -141,6 +141,8 @@ function PressPage() {
 
         <BobbyBio />
 
+        <MediaCoverage />
+
         <section className="border-b border-border">
           <div className="mx-auto max-w-7xl px-6 py-16">
             <h2 className="font-display text-3xl font-bold">Boilerplate</h2>
@@ -266,8 +268,6 @@ function PressPage() {
             </div>
           </div>
         </section>
-
-        <MediaCoverage />
 
         <section>
           <div className="mx-auto max-w-7xl px-6 py-20 text-center">
