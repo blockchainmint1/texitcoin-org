@@ -138,6 +138,8 @@ function PressPage() {
           </div>
         </section>
 
+        <BobbyBio />
+
         <section className="border-b border-border">
           <div className="mx-auto max-w-7xl px-6 py-16">
             <h2 className="font-display text-3xl font-bold">Boilerplate</h2>
