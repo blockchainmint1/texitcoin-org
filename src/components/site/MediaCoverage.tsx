@@ -1,4 +1,7 @@
 import { ExternalLink, Newspaper } from "lucide-react";
+import theStreetImg from "@/assets/media/thestreet.jpg.asset.json";
+import businessInsiderImg from "@/assets/media/businessinsider.jpg.asset.json";
+
 
 type Item = {
   url: string;
