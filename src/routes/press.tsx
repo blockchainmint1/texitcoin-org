@@ -269,8 +269,6 @@ function PressPage() {
           </div>
         </section>
 
-        <MediaCoverage />
-
         <section>
           <div className="mx-auto max-w-7xl px-6 py-20 text-center">
             <h2 className="font-display text-3xl font-bold md:text-5xl">Media inquiries</h2>
