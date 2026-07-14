@@ -1,4 +1,7 @@
 import { ExternalLink, Newspaper } from "lucide-react";
+import theStreetImg from "@/assets/media/thestreet.jpg.asset.json";
+import businessInsiderImg from "@/assets/media/businessinsider.jpg.asset.json";
+
 
 type Item = {
   url: string;
@@ -36,17 +39,21 @@ const ITEMS: Item[] = [
     title:
       "From Gold to Code: How a Background in Metals Shapes TEXITcoin Founder's View of Crypto and Money",
     source: "The Defiant",
+    image: "https://cdn.thedefiant.io/df792fd3-e141-42d1-8eb7-3ee43eded4dc.jpg",
   },
   {
     url: "https://www.thestreet.com/crypto/newsroom/rebuilding-honest-money-through-community",
     title: "Rebuilding Honest Money Through Community",
     source: "TheStreet",
+    image: theStreetImg.url,
   },
   {
     url: "https://markets.businessinsider.com/news/stocks/texitcoin-engages-asia-s-digital-asset-market-through-dat-summit-1035782689",
     title: "TEXITcoin Engages Asia's Digital Asset Market Through DAT Summit",
     source: "Business Insider",
+    image: businessInsiderImg.url,
   },
+
   {
     url: "https://www.fox4news.com/video/1650156",
     title: "Texit Coin, Should We Let Animals Go Extinct? — DZTV",
@@ -59,7 +66,10 @@ const ITEMS: Item[] = [
     title:
       "Dallas Holiday Parade Balloon Donation — TEXITcoin Cryptocurrency",
     source: "WFAA",
+    image:
+      "https://media.wfaa.com/assets/WFAA/images/7011ba12-6b65-4ca2-b175-ddd38e5003d4/20251204T122446/7011ba12-6b65-4ca2-b175-ddd38e5003d4_1920x1080.jpg",
   },
+
   {
     url: "https://techbullion.com/scrutiny-is-not-a-scandal-it-is-a-stress-test/",
     title: "Scrutiny Is Not a Scandal. It Is a Stress Test.",
@@ -85,7 +95,9 @@ const ITEMS: Item[] = [
     url: "https://techannouncer.com/the-return-of-utility-in-crypto/",
     title: "The Return of Utility in Crypto",
     source: "Tech Announcer",
+    image: "https://techannouncer.com/wp-content/uploads/2026/03/image2.jpg",
   },
+
   {
     url: "https://blockonomi.com/community-currencies-and-the-infrastructure-of-trust/",
     title: "Community Currencies and the Infrastructure of Trust",
