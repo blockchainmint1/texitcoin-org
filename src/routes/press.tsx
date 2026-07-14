@@ -7,6 +7,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { getIpfsUrl } from "@/lib/ipfs.functions";
 import { BobbyBio } from "@/components/site/BobbyBio";
+import { MediaCoverage } from "@/components/site/MediaCoverage";
 
 const BRAND_GUIDELINES_CID = "bafybeicdu53kgb7r32vzn3xnkz5i5kyfgy4k5ny5peifnbmua4mug6gwsu";
 
@@ -265,6 +266,8 @@ function PressPage() {
             </div>
           </div>
         </section>
+
+        <MediaCoverage />
 
         <section>
           <div className="mx-auto max-w-7xl px-6 py-20 text-center">
