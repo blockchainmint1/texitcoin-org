@@ -39,17 +39,21 @@ const ITEMS: Item[] = [
     title:
       "From Gold to Code: How a Background in Metals Shapes TEXITcoin Founder's View of Crypto and Money",
     source: "The Defiant",
+    image: "https://cdn.thedefiant.io/df792fd3-e141-42d1-8eb7-3ee43eded4dc.jpg",
   },
   {
     url: "https://www.thestreet.com/crypto/newsroom/rebuilding-honest-money-through-community",
     title: "Rebuilding Honest Money Through Community",
     source: "TheStreet",
+    image: theStreetImg.url,
   },
   {
     url: "https://markets.businessinsider.com/news/stocks/texitcoin-engages-asia-s-digital-asset-market-through-dat-summit-1035782689",
     title: "TEXITcoin Engages Asia's Digital Asset Market Through DAT Summit",
     source: "Business Insider",
+    image: businessInsiderImg.url,
   },
+
   {
     url: "https://www.fox4news.com/video/1650156",
     title: "Texit Coin, Should We Let Animals Go Extinct? — DZTV",
