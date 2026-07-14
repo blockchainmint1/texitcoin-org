@@ -95,7 +95,9 @@ const ITEMS: Item[] = [
     url: "https://techannouncer.com/the-return-of-utility-in-crypto/",
     title: "The Return of Utility in Crypto",
     source: "Tech Announcer",
+    image: "https://techannouncer.com/wp-content/uploads/2026/03/image2.jpg",
   },
+
   {
     url: "https://blockonomi.com/community-currencies-and-the-infrastructure-of-trust/",
     title: "Community Currencies and the Infrastructure of Trust",
