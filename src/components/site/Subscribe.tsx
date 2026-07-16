@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { ArrowRight, Check, Mail } from "lucide-react";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { subscribeToNewsletter } from "@/lib/newsletter.functions";
 import { Input } from "@/components/ui/input";
 
 const emailSchema = z
@@ -12,6 +13,7 @@ const emailSchema = z
   .email("That doesn't look like an email");
 
 export function Subscribe() {
+  const subscribe = useServerFn(subscribeToNewsletter);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [message, setMessage] = useState<string>("");
@@ -27,26 +29,29 @@ export function Subscribe() {
     setStatus("loading");
     setMessage("");
 
-    const { error } = await supabase
-      .from("newsletter_subscribers")
-      .insert({ email: parsed.data.toLowerCase(), source: "footer" });
-
-    if (error) {
-      // Treat duplicate as success — they're already in
-      if (error.code === "23505") {
-        setStatus("ok");
-        setMessage("You're already on the list. Welcome back.");
+    try {
+      const result = await subscribe({
+        data: { email: parsed.data.toLowerCase(), source: "footer" },
+      });
+      if (!result.ok) {
+        setStatus("error");
+        setMessage(result.error);
         return;
       }
+      setStatus("ok");
+      setMessage(
+        result.alreadySubscribed
+          ? "You're already on the list. Welcome back."
+          : "You're in. Check your inbox for a welcome from Bobby.",
+      );
+      setEmail("");
+    } catch (err) {
+      console.error(err);
       setStatus("error");
       setMessage("Something went sideways. Try again in a moment.");
-      return;
     }
-
-    setStatus("ok");
-    setMessage("You're in. Watch your inbox.");
-    setEmail("");
   }
+
 
   return (
     <section className="relative border-t border-border bg-surface/30 py-20">
