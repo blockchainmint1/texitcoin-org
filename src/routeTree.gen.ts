@@ -15,6 +15,7 @@ import { Route as WhitepaperRouteImport } from './routes/whitepaper'
 import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as VideosRouteImport } from './routes/videos'
 import { Route as ValueRouteImport } from './routes/value'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TokenomicsRouteImport } from './routes/tokenomics'
 import { Route as TexasRouteImport } from './routes/texas'
@@ -90,6 +91,11 @@ const VideosRoute = VideosRouteImport.update({
 const ValueRoute = ValueRouteImport.update({
   id: '/value',
   path: '/value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrollsRoute = TrollsRouteImport.update({
@@ -363,6 +369,7 @@ export interface FileRoutesByFullPath {
   '/texas': typeof TexasRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/value': typeof ValueRoute
   '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
@@ -417,6 +424,7 @@ export interface FileRoutesByTo {
   '/texas': typeof TexasRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/value': typeof ValueRoute
   '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
@@ -472,6 +480,7 @@ export interface FileRoutesById {
   '/texas': typeof TexasRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/value': typeof ValueRoute
   '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
@@ -528,6 +537,7 @@ export interface FileRouteTypes {
     | '/texas'
     | '/tokenomics'
     | '/trolls'
+    | '/unsubscribe'
     | '/value'
     | '/videos'
     | '/wallets'
@@ -582,6 +592,7 @@ export interface FileRouteTypes {
     | '/texas'
     | '/tokenomics'
     | '/trolls'
+    | '/unsubscribe'
     | '/value'
     | '/videos'
     | '/wallets'
@@ -636,6 +647,7 @@ export interface FileRouteTypes {
     | '/texas'
     | '/tokenomics'
     | '/trolls'
+    | '/unsubscribe'
     | '/value'
     | '/videos'
     | '/wallets'
@@ -691,6 +703,7 @@ export interface RootRouteChildren {
   TexasRoute: typeof TexasRoute
   TokenomicsRoute: typeof TokenomicsRoute
   TrollsRoute: typeof TrollsRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   ValueRoute: typeof ValueRoute
   VideosRoute: typeof VideosRoute
   WalletsRoute: typeof WalletsRoute
@@ -757,6 +770,13 @@ declare module '@tanstack/react-router' {
       path: '/value'
       fullPath: '/value'
       preLoaderRoute: typeof ValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trolls': {
@@ -1115,6 +1135,7 @@ const rootRouteChildren: RootRouteChildren = {
   TexasRoute: TexasRoute,
   TokenomicsRoute: TokenomicsRoute,
   TrollsRoute: TrollsRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   ValueRoute: ValueRoute,
   VideosRoute: VideosRoute,
   WalletsRoute: WalletsRoute,
