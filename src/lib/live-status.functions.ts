@@ -1,7 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 
-// Bobby's TEXITcoin wallet — permanent identifier for the live channel on streamTXC.
-const LIVE_WALLET = "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc";
+// Allowlisted TEXITcoin wallets — the /zoom page goes live only when one of
+// these channels is broadcasting on streamTXC. Add more here to authorize
+// additional co-hosts or backup streaming accounts.
+const LIVE_WALLETS = [
+  "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc", // Bobby
+  "TsNCJDv4mK9Ge8gbfGAnsC1JNQc2GHEo5V",
+];
 
 // Server-fn RPC hash for streamTXC's getLiveStreamByWallet (extracted from
 // stream.texitcoin.org's client bundle). If streamTXC redeploys and this hash
@@ -41,62 +46,67 @@ function serovalPayload(wallet: string): string {
   });
 }
 
-export const getLiveStatus = createServerFn({ method: "GET" }).handler(
-  async (): Promise<LiveStatus> => {
-    const url = `${STREAM_RPC}?payload=${encodeURIComponent(serovalPayload(LIVE_WALLET))}`;
-    try {
-      const res = await fetch(url, {
-        method: "GET",
-        headers: {
-          accept: "application/x-tss-framed, application/x-ndjson, application/json",
-          "x-tsr-serverfn": "true",
-        },
-      });
-      if (!res.ok) {
-        return { isLive: false, startedAt: null, checkedAt: Date.now() };
-      }
-      const text = await res.text();
-      if (!text) {
-        return { isLive: false, startedAt: null, checkedAt: Date.now() };
-      }
-      // Response is a Seroval tree where keys and values live in separate
-      // arrays: { t: 10, p: { k: [...keys], v: [...nodes] } }. Walk it and
-      // collect key -> string value pairs.
-      const fields: Record<string, string> = {};
-      const walk = (node: unknown): void => {
-        if (!node || typeof node !== "object") return;
-        const n = node as {
-          p?: { k?: unknown[]; v?: unknown[] };
-          a?: unknown[];
-        };
-        if (n.p?.k && n.p?.v) {
-          n.p.k.forEach((key, i) => {
-            const val = n.p!.v![i] as { t?: number; s?: unknown } | undefined;
-            if (typeof key === "string" && val && typeof val.s === "string") {
-              fields[key] = val.s;
-            }
-            walk(val);
-          });
-        }
-        if (Array.isArray(n.a)) n.a.forEach(walk);
-      };
-      try {
-        walk(JSON.parse(text));
-      } catch {
-        // Not JSON — fall through with empty fields (treated as offline).
-      }
-      const status = (fields.status ?? "").toLowerCase();
-      const live =
-        status === "live" ||
-        status === "starting" ||
-        /^https?:/.test(fields.hls_url ?? "");
-      return {
-        isLive: live,
-        startedAt: fields.started_at ?? null,
-        checkedAt: Date.now(),
-      };
-    } catch {
+async function probeWallet(wallet: string): Promise<LiveStatus> {
+  const url = `${STREAM_RPC}?payload=${encodeURIComponent(serovalPayload(wallet))}`;
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        accept: "application/x-tss-framed, application/x-ndjson, application/json",
+        "x-tsr-serverfn": "true",
+      },
+    });
+    if (!res.ok) {
       return { isLive: false, startedAt: null, checkedAt: Date.now() };
     }
+    const text = await res.text();
+    if (!text) {
+      return { isLive: false, startedAt: null, checkedAt: Date.now() };
+    }
+    const fields: Record<string, string> = {};
+    const walk = (node: unknown): void => {
+      if (!node || typeof node !== "object") return;
+      const n = node as {
+        p?: { k?: unknown[]; v?: unknown[] };
+        a?: unknown[];
+      };
+      if (n.p?.k && n.p?.v) {
+        n.p.k.forEach((key, i) => {
+          const val = n.p!.v![i] as { t?: number; s?: unknown } | undefined;
+          if (typeof key === "string" && val && typeof val.s === "string") {
+            fields[key] = val.s;
+          }
+          walk(val);
+        });
+      }
+      if (Array.isArray(n.a)) n.a.forEach(walk);
+    };
+    try {
+      walk(JSON.parse(text));
+    } catch {
+      // Not JSON — offline.
+    }
+    const status = (fields.status ?? "").toLowerCase();
+    const live =
+      status === "live" ||
+      status === "starting" ||
+      /^https?:/.test(fields.hls_url ?? "");
+    return {
+      isLive: live,
+      startedAt: fields.started_at ?? null,
+      checkedAt: Date.now(),
+    };
+  } catch {
+    return { isLive: false, startedAt: null, checkedAt: Date.now() };
+  }
+}
+
+export const getLiveStatus = createServerFn({ method: "GET" }).handler(
+  async (): Promise<LiveStatus> => {
+    // Probe every allowlisted wallet in parallel; first live one wins.
+    const results = await Promise.all(LIVE_WALLETS.map(probeWallet));
+    const liveHit = results.find((r) => r.isLive);
+    if (liveHit) return liveHit;
+    return { isLive: false, startedAt: null, checkedAt: Date.now() };
   },
 );
