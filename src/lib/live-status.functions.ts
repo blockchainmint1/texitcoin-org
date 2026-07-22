@@ -1,7 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 
-// Bobby's TEXITcoin wallet — permanent identifier for the live channel on streamTXC.
-const LIVE_WALLET = "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc";
+// Allowlisted TEXITcoin wallets — the /zoom page goes live only when one of
+// these channels is broadcasting on streamTXC. Add more here to authorize
+// additional co-hosts or backup streaming accounts.
+const LIVE_WALLETS = [
+  "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc", // Bobby
+  "TsNCJDv4mK9Ge8gbfGAnsC1JNQc2GHEo5V",
+];
 
 // Server-fn RPC hash for streamTXC's getLiveStreamByWallet (extracted from
 // stream.texitcoin.org's client bundle). If streamTXC redeploys and this hash
