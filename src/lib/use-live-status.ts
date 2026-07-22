@@ -15,7 +15,11 @@ const FORCE_LIVE_OFF = false;
  * reality, with the Thursday 7pm CT window as a graceful fallback if the
  * probe fails.
  */
-export function useLiveStatus(): { isLive: boolean; source: "probe" | "window" | "loading" } {
+export function useLiveStatus(): {
+  isLive: boolean;
+  wallet: string | null;
+  source: "probe" | "window" | "loading";
+} {
   const probe = useServerFn(getLiveStatus);
   const q = useQuery<LiveStatus>({
     queryKey: ["live-status"],
@@ -26,15 +30,19 @@ export function useLiveStatus(): { isLive: boolean; source: "probe" | "window" |
   });
 
   if (FORCE_LIVE_OFF) {
-    return { isLive: false, source: "window" };
+    return { isLive: false, wallet: null, source: "window" };
   }
 
   if (q.data) {
     // Probe is authoritative. If probe explicitly says offline, trust it —
     // even inside the Thursday window (we may be running behind schedule).
-    return { isLive: q.data.isLive, source: "probe" };
+    return { isLive: q.data.isLive, wallet: q.data.wallet ?? null, source: "probe" };
   }
   // Before the first successful probe, use the time window as a friendly
   // default so returning viewers see the right countdown/live state.
-  return { isLive: isLiveWindow(), source: q.isLoading ? "loading" : "window" };
+  return {
+    isLive: isLiveWindow(),
+    wallet: null,
+    source: q.isLoading ? "loading" : "window",
+  };
 }

@@ -16,6 +16,7 @@ const STREAM_RPC = `https://streamtxc.com/_serverFn/07b17cf0463d4e0da413c25f9a47
 
 export type LiveStatus = {
   isLive: boolean;
+  wallet: string | null;
   startedAt: string | null;
   checkedAt: number;
 };
@@ -57,11 +58,11 @@ async function probeWallet(wallet: string): Promise<LiveStatus> {
       },
     });
     if (!res.ok) {
-      return { isLive: false, startedAt: null, checkedAt: Date.now() };
+      return { isLive: false, wallet: null, startedAt: null, checkedAt: Date.now() };
     }
     const text = await res.text();
     if (!text) {
-      return { isLive: false, startedAt: null, checkedAt: Date.now() };
+      return { isLive: false, wallet: null, startedAt: null, checkedAt: Date.now() };
     }
     const fields: Record<string, string> = {};
     const walk = (node: unknown): void => {
@@ -93,11 +94,12 @@ async function probeWallet(wallet: string): Promise<LiveStatus> {
       /^https?:/.test(fields.hls_url ?? "");
     return {
       isLive: live,
+      wallet: live ? wallet : null,
       startedAt: fields.started_at ?? null,
       checkedAt: Date.now(),
     };
   } catch {
-    return { isLive: false, startedAt: null, checkedAt: Date.now() };
+    return { isLive: false, wallet: null, startedAt: null, checkedAt: Date.now() };
   }
 }
 
@@ -107,6 +109,6 @@ export const getLiveStatus = createServerFn({ method: "GET" }).handler(
     const results = await Promise.all(LIVE_WALLETS.map(probeWallet));
     const liveHit = results.find((r) => r.isLive);
     if (liveHit) return liveHit;
-    return { isLive: false, startedAt: null, checkedAt: Date.now() };
+    return { isLive: false, wallet: null, startedAt: null, checkedAt: Date.now() };
   },
 );
