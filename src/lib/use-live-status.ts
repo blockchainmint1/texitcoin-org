@@ -6,7 +6,7 @@ import { isLiveWindow } from "./live-window";
 // Manual kill switch. Set to true to force the homepage banner and /zoom page
 // into "offline" mode regardless of what the streamTXC probe says.
 // Flip back to false when you want live detection to run normally again.
-const FORCE_LIVE_OFF = true;
+const FORCE_LIVE_OFF = false;
 
 /**
  * Polls streamTXC every 30s (server-side, no CORS) to detect whether the
