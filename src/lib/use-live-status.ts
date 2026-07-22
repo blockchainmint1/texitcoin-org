@@ -3,6 +3,11 @@ import { useServerFn } from "@tanstack/react-start";
 import { getLiveStatus, type LiveStatus } from "./live-status.functions";
 import { isLiveWindow } from "./live-window";
 
+// Manual kill switch. Set to true to force the homepage banner and /zoom page
+// into "offline" mode regardless of what the streamTXC probe says.
+// Flip back to false when you want live detection to run normally again.
+const FORCE_LIVE_OFF = true;
+
 /**
  * Polls streamTXC every 30s (server-side, no CORS) to detect whether the
  * Honest Money Hour is actually on the air right now — regardless of the
@@ -19,6 +24,10 @@ export function useLiveStatus(): { isLive: boolean; source: "probe" | "window" |
     refetchIntervalInBackground: false,
     staleTime: 15_000,
   });
+
+  if (FORCE_LIVE_OFF) {
+    return { isLive: false, source: "window" };
+  }
 
   if (q.data) {
     // Probe is authoritative. If probe explicitly says offline, trust it —
