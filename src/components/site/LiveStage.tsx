@@ -3,9 +3,12 @@ import { useLiveWindow, icsForNextCall } from "@/lib/live-window";
 import { useLiveStatus } from "@/lib/use-live-status";
 import { useCallback } from "react";
 
-const STREAM_EMBED_URL =
-  "https://stream.texitcoin.org/embed/live/by-wallet/TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc?autoplay=1&mute=1";
 const STREAM_WATCH_URL = "https://streamtxc.com/live";
+
+function embedUrlForWallet(wallet: string | null): string {
+  const id = wallet ?? "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc";
+  return `https://stream.texitcoin.org/embed/live/by-wallet/${id}?autoplay=1&mute=1`;
+}
 const X_LIVE_URL = "https://x.com/texitcoin";
 
 const FACEBOOK_LIVE_URL = "https://www.facebook.com/profile.php?id=61559875176657";
@@ -79,7 +82,8 @@ function TimeCell({ value, label }: { value: number; label: string }) {
 
 export function LiveStage() {
   const { nextStart, days, hours, minutes, seconds } = useLiveWindow();
-  const { isLive } = useLiveStatus();
+  const { isLive, wallet } = useLiveStatus();
+  const streamEmbedUrl = embedUrlForWallet(wallet);
 
   const downloadIcs = useCallback(() => {
     const blob = new Blob([icsForNextCall()], { type: "text/calendar" });
@@ -117,7 +121,7 @@ export function LiveStage() {
         <div className="relative aspect-video w-full">
           {isLive ? (
             <iframe
-              src={STREAM_EMBED_URL}
+              src={streamEmbedUrl}
               title="TEXITcoin Live"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
