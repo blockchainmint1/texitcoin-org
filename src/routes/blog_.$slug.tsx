@@ -158,6 +158,26 @@ function BlogPostPage() {
           </div>
 
           <div className="mx-auto max-w-3xl px-6">
+            {(() => {
+              const m = post.bodyMarkdown.match(
+                /https:\/\/streamtxc\.com\/v\/([a-zA-Z0-9]+)/,
+              );
+              if (!m) return null;
+              return (
+                <figure className="mb-12 overflow-hidden rounded-2xl border border-border bg-black shadow-card">
+                  <div className="relative aspect-video w-full">
+                    <iframe
+                      src={`https://streamtxc.com/embed/${m[1]}?`}
+                      title={post.title}
+                      loading="lazy"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full"
+                    />
+                  </div>
+                </figure>
+              );
+            })()}
             <div className="prose-content space-y-6 text-lg leading-relaxed text-foreground/90 [&_p]:my-0 [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-10 [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:text-primary [&_a]:underline [&_strong]:text-foreground [&_code]:rounded [&_code]:bg-surface [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm">
               {(() => {
                 const blocks = post.bodyMarkdown
