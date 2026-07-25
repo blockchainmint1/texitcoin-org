@@ -103,7 +103,12 @@ const ENTRIES: Entry[] = [
       label: "Read the TSSB's response (45 pages)",
       href: "/api/public/ipfs/QmewcJDBJ7MqMrr2jkpXMYPxUA8ymXS4okC9pEdggrDcxU",
     },
+    secondaryLink: {
+      label: "Full breakdown on the blog →",
+      href: "/blog/tssb-response-the-empire-strikes-back",
+    },
   },
+
 
   {
     date: "8 Jul 2026",
