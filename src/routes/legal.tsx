@@ -445,6 +445,15 @@ function LegalPage() {
                         </a>
                       </div>
                     )}
+                    {e.secondaryLink && (
+                      <a
+                        href={e.secondaryLink.href}
+                        className="mt-3 block text-sm font-semibold text-primary hover:underline"
+                      >
+                        {e.secondaryLink.label}
+                      </a>
+                    )}
+
                   </div>
                 </motion.li>
               );
