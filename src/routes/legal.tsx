@@ -86,6 +86,8 @@ type Entry = {
   title: string;
   body: string;
   link?: { label: string; href: string; dead?: boolean; deadNote?: string };
+  secondaryLink?: { label: string; href: string };
+
   tone?: "win" | "filing" | "context" | "regulator";
   tag?: string;
 };
