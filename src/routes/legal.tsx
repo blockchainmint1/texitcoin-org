@@ -92,7 +92,19 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
+    date: "23 Jul 2026",
+    title: "The Empire Strikes Back — TSSB Responds to Our Motion",
+    tone: "regulator",
+    tag: "THEIR TURN",
+    body: "The TSSB filed its 45-page response opposing our Motion for Summary Disposition. Notably, they do not argue we're wrong on the law — they argue the ALJ can't decide this on paper. Their entire theory is that the case turns on disputed facts requiring live testimony from purchasers in August. They lean on Texas's Life Partners test rather than federal Howey caselaw, dismiss Audet v. Fraser as non-binding Connecticut law, and turn our own SEC guidance against us by citing footnotes 105 and 106 — the passages carving out purchasers who passively rely on a pool operator. They also name two investor declarations (Hesse and Webb) and quote our welcome letter's \"sit back and enjoy the ride\" line. We wrote a full breakdown of what they argued, what they conceded, and what it means for August.",
+    link: {
+      label: "Read the full breakdown on the blog →",
+      href: "/blog/tssb-response-the-empire-strikes-back",
+    },
+  },
+  {
     date: "8 Jul 2026",
+
     title: "Motion for Summary Disposition Filed — Quinn Emanuel Swings Back",
     tone: "win",
     tag: "BIG SWING",
