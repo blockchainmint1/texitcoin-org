@@ -25,6 +25,7 @@ export type Database = {
           read_minutes: number
           slug: string
           tag: string
+          telegram_notified_at: string | null
           title: string
           updated_at: string
         }
@@ -38,6 +39,7 @@ export type Database = {
           read_minutes?: number
           slug: string
           tag: string
+          telegram_notified_at?: string | null
           title: string
           updated_at?: string
         }
@@ -51,6 +53,7 @@ export type Database = {
           read_minutes?: number
           slug?: string
           tag?: string
+          telegram_notified_at?: string | null
           title?: string
           updated_at?: string
         }
@@ -279,6 +282,7 @@ export type Database = {
           slug: string
           status: string
           summary: string | null
+          telegram_notified_at: string | null
           thumbnail_url: string | null
           title: string
           transcript: string | null
@@ -294,6 +298,7 @@ export type Database = {
           slug: string
           status?: string
           summary?: string | null
+          telegram_notified_at?: string | null
           thumbnail_url?: string | null
           title: string
           transcript?: string | null
@@ -309,6 +314,7 @@ export type Database = {
           slug?: string
           status?: string
           summary?: string | null
+          telegram_notified_at?: string | null
           thumbnail_url?: string | null
           title?: string
           transcript?: string | null
