@@ -29,12 +29,6 @@ const EXCHANGES = {
     note: "Recommended for US-based buyers. USDC pair, US-friendly compliance.",
     url: "https://www.pionex.us/en-US/trade/TXC.USDC",
   },
-  bitmart: {
-    name: "Bitmart",
-    pair: "TXC/USDT",
-    note: "Global liquidity hub. Live since 12/31/24. USDT pair.",
-    url: "https://www.bitmart.com/trade/en?symbol=TXC_USDT",
-  },
 } as const;
 
 type ExchangeKey = keyof typeof EXCHANGES;
