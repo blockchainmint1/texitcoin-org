@@ -3,7 +3,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { ENTRIES, entryKey } from "@/data/legal-timeline";
 
 const TG_GATEWAY = "https://connector-gateway.lovable.dev/telegram";
-const FALLBACK_CHAT_ID = "-1002172752143";
+const EXTRA_CHAT_IDS = ["-1002172752143"];
 const SITE = "https://texitcoin.org";
 
 let _sb: ReturnType<typeof createClient<Database>> | null = null;
@@ -30,30 +30,42 @@ async function tgSend(text: string) {
   const lovable = process.env.LOVABLE_API_KEY;
   const tg = process.env.TELEGRAM_API_KEY;
   if (!lovable || !tg) throw new Error("Telegram credentials not configured");
-  const res = await fetch(`${TG_GATEWAY}/sendMessage`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${lovable}`,
-      "X-Connection-Api-Key": tg,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      chat_id: process.env.TELEGRAM_AUTHORIZED_GROUP_ID || FALLBACK_CHAT_ID,
-      text,
-      parse_mode: "HTML",
-      disable_web_page_preview: false,
-    }),
-  });
-  const body = await res.text();
-  if (!res.ok) {
-    console.error(`Telegram sendMessage failed [${res.status}]: ${body}`);
-    throw new Error(`Telegram sendMessage failed: ${res.status}`);
+  const chatIds = [
+    ...(process.env.TELEGRAM_AUTHORIZED_GROUP_ID
+      ? [process.env.TELEGRAM_AUTHORIZED_GROUP_ID]
+      : []),
+    ...EXTRA_CHAT_IDS,
+  ].filter((id, i, all) => all.indexOf(id) === i);
+
+  let delivered = 0;
+  for (const chatId of chatIds) {
+    const res = await fetch(`${TG_GATEWAY}/sendMessage`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${lovable}`,
+        "X-Connection-Api-Key": tg,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "HTML",
+        disable_web_page_preview: false,
+      }),
+    });
+    const body = await res.text();
+    if (!res.ok) {
+      console.error(`Telegram sendMessage failed [${res.status}] ${chatId}: ${body}`);
+      continue;
+    }
+    const parsed = JSON.parse(body);
+    if (parsed?.ok === false) {
+      console.error("Telegram sendMessage error", chatId, parsed);
+      continue;
+    }
+    delivered++;
   }
-  const parsed = JSON.parse(body);
-  if (parsed?.ok === false) {
-    console.error("Telegram sendMessage error", parsed);
-    throw new Error(parsed?.description ?? "Telegram error");
-  }
+  if (delivered === 0) throw new Error("Telegram sendMessage failed for all chats");
 }
 
 async function notifyLegal(sent: string[]) {

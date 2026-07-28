@@ -11,6 +11,17 @@ export type Entry = {
 
 export const ENTRIES: Entry[] = [
   {
+    date: "27 Jul 2026",
+    title: "Motion for Summary Disposition Denied — We're Going to Hearing",
+    tone: "regulator",
+    tag: "DENIED",
+    body: "ALJ Katerina DeAngelo denied our Motion for Summary Disposition. Expected, and not a ruling on the merits: the order says the securities question and the fraud allegations \"depend upon disputed facts and competing inferences\" that aren't appropriate to resolve on paper. In other words, the judge won't end the case before hearing testimony — exactly the argument the TSSB made in their response. Our legal and procedural challenges (immediate-or-irreparable harm, the Commissioner's authority to order refunds, fair notice, and whether all named respondents are proper parties) were preserved but not granted at this stage. Nothing was decided against us on the law. August is the main event, and we're ready for it.",
+    link: {
+      label: "Read the order (2 pages)",
+      href: "/api/public/ipfs/QmbL684f9UgaCvBssqZHSpZdQE5RCrYiRuU6LJkBd66t7F",
+    },
+  },
+  {
     date: "23 Jul 2026",
     title: "The Empire Strikes Back — TSSB Responds to Our Motion",
     tone: "regulator",
