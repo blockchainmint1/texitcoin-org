@@ -227,6 +227,21 @@ export type Database = {
         }
         Relationships: []
       }
+      legal_update_notifications: {
+        Row: {
+          entry_key: string
+          notified_at: string
+        }
+        Insert: {
+          entry_key: string
+          notified_at?: string
+        }
+        Update: {
+          entry_key?: string
+          notified_at?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           created_at: string
