@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { ENTRIES, type Entry } from "@/data/legal-timeline";
+import { checkNewContent } from "@/lib/notify.functions";
 
 export const Route = createFileRoute("/legal")({
   head: () => ({
