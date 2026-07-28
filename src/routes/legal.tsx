@@ -42,6 +42,18 @@ export const Route = createFileRoute("/legal")({
 
 const LEGAL_FEES_API = "/api/public/legal-fees";
 
+/** Announces any legal timeline entry that hasn't hit Telegram yet (once per browser session). */
+function useLegalTelegramSync() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("legal-tg-sync")) return;
+    sessionStorage.setItem("legal-tg-sync", "1");
+    checkNewContent().catch(() => {});
+  }, []);
+}
+
+
+
 function useLegalFees() {
   const [amount, setAmount] = useState<string | null>(null);
 
