@@ -33,8 +33,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "CoinMarketCap", href: "https://coinmarketcap.com/currencies/texitcoin/" },
       { label: "CoinGecko", href: "https://www.coingecko.com/en/coins/texitcoin" },
-      { label: "Bitmart", href: "https://www.bitmart.com/trade/TXC_USDT" },
-      
+      { label: "Pionex.US", href: "https://www.pionex.us/en-US/trade/TXC.USDC" },
       { label: "Dex-Trade", href: "https://dex-trade.com/spot/trading/TXCUSDT" },
       { label: "wTXC Wrap/Unwrap", href: "https://wtxc.texitcoin.org/" },
     ],

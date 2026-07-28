@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Wallet, Coins, ArrowRight, ShieldCheck, ExternalLink, Sparkles, CircleCheck, Globe, MapPin, AlertTriangle } from "lucide-react";
+import { Wallet, Coins, ArrowRight, ShieldCheck, ExternalLink, Sparkles, CircleCheck, AlertTriangle } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { SwapTerminal } from "@/components/site/SwapTerminal";
@@ -29,12 +28,6 @@ const EXCHANGES = {
     note: "Recommended for US-based buyers. USDC pair, US-friendly compliance.",
     url: "https://www.pionex.us/en-US/trade/TXC.USDC",
   },
-  bitmart: {
-    name: "Bitmart",
-    pair: "TXC/USDT",
-    note: "Global liquidity hub. Live since 12/31/24. USDT pair.",
-    url: "https://www.bitmart.com/trade/en?symbol=TXC_USDT",
-  },
 } as const;
 
 type ExchangeKey = keyof typeof EXCHANGES;
@@ -47,34 +40,7 @@ const TIPS = [
 ];
 
 function ExchangeStep() {
-  const [region, setRegion] = useState<"us" | "intl" | null>(null);
-  const [selected, setSelected] = useState<ExchangeKey>("bitmart");
-  const [autoDetected, setAutoDetected] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("https://ipapi.co/json/");
-        if (!res.ok) throw new Error("geo lookup failed");
-        const data = (await res.json()) as { country_code?: string };
-        if (cancelled) return;
-        const isUS = data?.country_code === "US";
-        setRegion(isUS ? "us" : "intl");
-        setSelected(isUS ? "pionex" : "bitmart");
-        setAutoDetected(true);
-      } catch {
-        if (cancelled) return;
-        setRegion("intl");
-        setSelected("bitmart");
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const ex = EXCHANGES[selected];
+  const ex = EXCHANGES.pionex;
 
   return (
     <motion.div
@@ -90,36 +56,23 @@ function ExchangeStep() {
       </div>
       <h2 className="mt-4 font-display text-2xl font-bold">Create an exchange account</h2>
 
-      {/* Region toggle */}
-      <div className="mt-5 inline-flex rounded-full border border-border bg-background p-1 text-xs font-semibold">
-        <button
-          type="button"
-          onClick={() => setSelected("pionex")}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition ${
-            selected === "pionex" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <MapPin className="h-3.5 w-3.5" /> USA — Pionex
-        </button>
-        <button
-          type="button"
-          onClick={() => setSelected("bitmart")}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition ${
-            selected === "bitmart" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <Globe className="h-3.5 w-3.5" /> International — Bitmart
-        </button>
+      <div className="mt-5 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
+          <div>
+            <p className="font-semibold text-amber-600 dark:text-amber-400">BitMart is shutting down</p>
+            <p className="mt-1 text-sm leading-relaxed text-amber-700/80 dark:text-amber-300/80">
+              BitMart — our first major exchange — announced an orderly wind-down on July 26, 2026. If you hold TXC there, withdraw to self-custody immediately. Read the full update{" "}
+              <Link to="/blog/bitmart-shutting-down-txc-holders" className="underline hover:text-amber-600 dark:hover:text-amber-300">
+                here
+              </Link>.
+            </p>
+          </div>
+        </div>
       </div>
 
-      {autoDetected && (
-        <p className="mt-3 text-xs text-muted-foreground">
-          Auto-selected based on your location ({region === "us" ? "United States" : "outside the US"}). Switch anytime.
-        </p>
-      )}
-
-      <p className="mt-4 text-muted-foreground">
-        Sign up at <span className="font-semibold text-foreground">{ex.name}</span>, complete KYC, and fund your account.
+      <p className="mt-5 text-muted-foreground">
+        For US-based buyers, sign up at <span className="font-semibold text-foreground">{ex.name}</span>, complete KYC, and fund your account.
         Buy TXC on the <span className="font-semibold text-foreground">{ex.pair}</span> pair. {ex.note}
       </p>
 
