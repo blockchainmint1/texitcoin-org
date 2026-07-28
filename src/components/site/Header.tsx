@@ -59,8 +59,7 @@ const NAV: NavItem[] = [
     children: [
       { label: "CoinMarketCap", href: "https://coinmarketcap.com/currencies/texitcoin/", external: true },
       { label: "CoinGecko", href: "https://www.coingecko.com/en/coins/texitcoin", external: true },
-      { label: "Bitmart", href: "https://www.bitmart.com/trade/TXC_USDT", external: true },
-      { label: "Pionex.US", href: "https://www.pionex.us/en-US/trade/TXC_USDT", external: true },
+      { label: "Pionex.US", href: "https://www.pionex.us/en-US/trade/TXC.USDC", external: true },
       { label: "wTXC on ETH", href: "/wtxc", internal: true },
     ],
   },

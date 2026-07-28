@@ -37,7 +37,7 @@ const CATEGORIES: Category[] = [
     items: [
       {
         q: "Where can I buy TXC?",
-        a: "TXC has been live on Bitmart since December 31, 2024, trading on the TXC/USDT pair. See our How to Buy page for a four-step walkthrough.",
+        a: "US-based buyers can trade TXC on Pionex via the TXC/USDC pair. You can also swap USDC for native TXC directly on our How to Buy page. See our How to Buy page and TXC Top 100 page for current venues and walkthroughs.",
       },
       {
         q: "Can I mine TXC?",
@@ -89,7 +89,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "What is a crypto exchange and how does it work?",
-        a: "An exchange is a marketplace that matches buyers and sellers of crypto. You deposit one asset (dollars, USDT, BTC), place an order at the price you want, and the exchange pairs it with a counterparty. Centralized exchanges like Bitmart hold your funds while they're on the platform; decentralized exchanges like Uniswap let you trade directly from your own wallet. Either way, the goal is the same: convert between assets at a market-driven price.",
+        a: "An exchange is a marketplace that matches buyers and sellers of crypto. You deposit one asset (dollars, USDT, BTC), place an order at the price you want, and the exchange pairs it with a counterparty. Centralized exchanges hold your funds while they're on the platform; decentralized exchanges like Uniswap let you trade directly from your own wallet. Either way, the goal is the same: convert between assets at a market-driven price. Not your keys, not your coins — withdraw to self-custody when you're done trading.",
       },
     ],
   },
@@ -103,7 +103,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "Where do I get help?",
-        a: "Hit the Build page for community channels, or reach out through the contact links in the footer. Wallet and exchange support is handled by the respective providers (Bitmart support for trading, wallet docs for self-custody).",
+        a: "Hit the Build page for community channels, or reach out through the contact links in the footer. Wallet and exchange support is handled by the respective providers (Pionex support for trading, wallet docs for self-custody).",
       },
     ],
   },
