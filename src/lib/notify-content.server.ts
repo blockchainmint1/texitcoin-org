@@ -3,7 +3,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { ENTRIES, entryKey } from "@/data/legal-timeline";
 
 const TG_GATEWAY = "https://connector-gateway.lovable.dev/telegram";
-const COMMUNITY_CHAT_ID = "-1002172752143";
+const FALLBACK_CHAT_ID = "-1002172752143";
 const SITE = "https://texitcoin.org";
 
 let _sb: ReturnType<typeof createClient<Database>> | null = null;
@@ -38,7 +38,7 @@ async function tgSend(text: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      chat_id: COMMUNITY_CHAT_ID,
+      chat_id: process.env.TELEGRAM_AUTHORIZED_GROUP_ID || FALLBACK_CHAT_ID,
       text,
       parse_mode: "HTML",
       disable_web_page_preview: false,
