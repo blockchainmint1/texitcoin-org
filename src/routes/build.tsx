@@ -434,7 +434,8 @@ time   1706236287   (Jan 26, 2024 — "You may all go to hell and I will go to T
       <ul className="space-y-1.5">
         <li><span className="text-muted-foreground">BIP32 (HD wallets):</span> Yes — version bytes <code className="font-mono">0x0488B21E</code> / <code className="font-mono">0x0488ADE4</code> (xpub/xprv).</li>
         <li><span className="text-muted-foreground">BIP39 (mnemonics):</span> Wallet-level convention — supported by any BIP39 wallet.</li>
-        <li><span className="text-muted-foreground">BIP44 coin type:</span> Not registered in SLIP-0044. Pick an app-private coin type (e.g. <code className="font-mono">0x80000000 | 1</code> for testnet-style) or reuse Litecoin's (<code className="font-mono">2'</code>) and document your choice for users.</li>
+        <li><span className="text-muted-foreground">BIP44 coin type:</span> <strong className="text-foreground">696969'</strong> — TXC is registered in SLIP-0044 (<code className="font-mono">| 696969 | TXC | TEXITcoin |</code>). The canonical account path is <code className="font-mono">m/44'/696969'/0'/0/i</code>. Do <em>not</em> use <code className="font-mono">m/44'/0'/0'</code> — that's Bitcoin's slot, and reusing it makes TXC keys collide with BTC keys derived from the same seed. (Some older forks of BlueWallet-based mobile wallets shipped on <code className="font-mono">0'</code> before the registration landed; wallets supporting those seeds should scan <code className="font-mono">0'</code> as a legacy compatibility path but issue new receive addresses from <code className="font-mono">696969'</code>.)</li>
+        <li><span className="text-muted-foreground">Coin type vs. chain ID:</span> TEXITcoin uses <code className="font-mono">696969</code> in both registries as deliberate branding. They are unrelated technically — chain ID is network identity, coin type is purely an HD-derivation index.</li>
         <li><span className="text-muted-foreground">BIP141 (SegWit):</span> Not active on mainnet today — no <code className="font-mono">txc1…</code> addresses observed on chain. Build P2PKH only.</li>
         <li><span className="text-muted-foreground">BIP173 (Bech32):</span> Not active — see above.</li>
       </ul>
@@ -505,6 +506,10 @@ const TXC = {
     heading: "8 · Common integration mistakes",
     body: (
       <div className="space-y-4">
+        <div>
+          <div className="font-semibold text-foreground">Deriving on <code className="font-mono">m/44'/0'/0'</code>.</div>
+          <p>That's Bitcoin's coin type. TXC's registered SLIP-0044 coin type is <code className="font-mono">696969'</code>, so the correct path is <code className="font-mono">m/44'/696969'/0'/0/i</code>. Wallets that scan only <code className="font-mono">0'</code> will show a zero balance for seeds created by the TXC Web Wallet, the Honest Money Wallet, or the wTXC bridge. If you must support older BlueWallet-derived mobile seeds, scan both paths into one balance and issue new addresses from <code className="font-mono">696969'</code>.</p>
+        </div>
         <div>
           <div className="font-semibold text-foreground">Assuming <code className="font-mono">wif = pubKeyHash + 0x80</code>.</div>
           <p>Wrong for TXC. Use <code className="font-mono">0xC1</code>.</p>
