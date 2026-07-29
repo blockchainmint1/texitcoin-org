@@ -507,6 +507,10 @@ const TXC = {
     body: (
       <div className="space-y-4">
         <div>
+          <div className="font-semibold text-foreground">Deriving on <code className="font-mono">m/44'/0'/0'</code>.</div>
+          <p>That's Bitcoin's coin type. TXC's registered SLIP-0044 coin type is <code className="font-mono">696969'</code>, so the correct path is <code className="font-mono">m/44'/696969'/0'/0/i</code>. Wallets that scan only <code className="font-mono">0'</code> will show a zero balance for seeds created by the TXC Web Wallet, the Honest Money Wallet, or the wTXC bridge. If you must support older BlueWallet-derived mobile seeds, scan both paths into one balance and issue new addresses from <code className="font-mono">696969'</code>.</p>
+        </div>
+        <div>
           <div className="font-semibold text-foreground">Assuming <code className="font-mono">wif = pubKeyHash + 0x80</code>.</div>
           <p>Wrong for TXC. Use <code className="font-mono">0xC1</code>.</p>
         </div>
