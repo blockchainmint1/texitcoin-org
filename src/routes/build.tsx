@@ -129,45 +129,54 @@ function useNetworkStats() {
 
   useEffect(() => {
     let cancelled = false;
-    async function load() {
+
+    async function getJson(path: string, timeoutMs = 8000) {
       try {
-        const [blocksRes, hashRes, feesRes, diffRes, poolsRes] = await Promise.all([
-          fetch(`${MEMPOOL_API}/v1/blocks`),
-          fetch(`${MEMPOOL_API}/v1/mining/hashrate`),
-          fetch(`${MEMPOOL_API}/v1/fees/recommended`),
-          fetch(`${MEMPOOL_API}/v1/difficulty-adjustment`),
-          fetch(`${MEMPOOL_API}/v1/mining/pools/1w`),
-        ]);
-        const blocks: Block[] = blocksRes.ok ? await blocksRes.json() : [];
-        const hashData = hashRes.ok ? await hashRes.json() : null;
-        const fees = feesRes.ok ? await feesRes.json() : null;
-        const diff = diffRes.ok ? await diffRes.json() : null;
-        const pools = poolsRes.ok ? await poolsRes.json() : null;
-
-        const tip = blocks[0];
-        const latestHash =
-          hashData?.hashrates?.length
-            ? hashData.hashrates[hashData.hashrates.length - 1].avgHashrate
-            : hashData?.currentHashrate ?? null;
-
-        if (cancelled) return;
-        setStats({
-          height: tip?.height ?? null,
-          hashrate: latestHash,
-          difficulty: tip?.difficulty ?? null,
-          fastestFee: fees?.fastestFee ?? null,
-          blocks: blocks.slice(0, 6),
-          pools: pools?.pools ?? [],
-          totalPoolBlocks: pools?.blockCount ?? 0,
-          difficultyProgress: diff?.progressPercent ?? null,
-          remainingBlocks: diff?.remainingBlocks ?? null,
-          blockTimeAvg: diff?.adjustedTimeAvg ? diff.adjustedTimeAvg / 1000 : null,
-          healthy: true,
-        });
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), timeoutMs);
+        const res = await fetch(`${MEMPOOL_API}${path}`, { signal: ctrl.signal });
+        clearTimeout(t);
+        if (!res.ok) return null;
+        return await res.json();
       } catch {
-        if (!cancelled) setStats((s) => ({ ...s, healthy: false }));
+        return null;
       }
     }
+
+    async function load() {
+      // Each endpoint is fetched independently: one slow/failing endpoint
+      // (e.g. mining/pools) must not blank out the whole panel.
+      const [blocks, hashData, fees, diff, pools] = await Promise.all([
+        getJson("/v1/blocks"),
+        getJson("/v1/mining/hashrate"),
+        getJson("/v1/fees/recommended"),
+        getJson("/v1/difficulty-adjustment"),
+        getJson("/v1/mining/pools/1w", 12000),
+      ]);
+
+      const blockList: Block[] = Array.isArray(blocks) ? blocks : [];
+      const tip = blockList[0];
+      const latestHash =
+        hashData?.hashrates?.length
+          ? hashData.hashrates[hashData.hashrates.length - 1].avgHashrate
+          : hashData?.currentHashrate ?? null;
+
+      if (cancelled) return;
+      setStats({
+        height: tip?.height ?? null,
+        hashrate: latestHash,
+        difficulty: tip?.difficulty ?? hashData?.currentDifficulty ?? null,
+        fastestFee: fees?.fastestFee ?? null,
+        blocks: blockList.slice(0, 6),
+        pools: pools?.pools ?? [],
+        totalPoolBlocks: pools?.blockCount ?? 0,
+        difficultyProgress: diff?.progressPercent ?? null,
+        remainingBlocks: diff?.remainingBlocks ?? null,
+        blockTimeAvg: diff?.adjustedTimeAvg ? diff.adjustedTimeAvg / 1000 : null,
+        healthy: Boolean(tip),
+      });
+    }
+
     load();
     const id = setInterval(load, 30_000);
     const tick = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 1000);
