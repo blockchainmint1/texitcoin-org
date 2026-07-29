@@ -129,45 +129,54 @@ function useNetworkStats() {
 
   useEffect(() => {
     let cancelled = false;
-    async function load() {
+
+    async function getJson(path: string, timeoutMs = 8000) {
       try {
-        const [blocksRes, hashRes, feesRes, diffRes, poolsRes] = await Promise.all([
-          fetch(`${MEMPOOL_API}/v1/blocks`),
-          fetch(`${MEMPOOL_API}/v1/mining/hashrate`),
-          fetch(`${MEMPOOL_API}/v1/fees/recommended`),
-          fetch(`${MEMPOOL_API}/v1/difficulty-adjustment`),
-          fetch(`${MEMPOOL_API}/v1/mining/pools/1w`),
-        ]);
-        const blocks: Block[] = blocksRes.ok ? await blocksRes.json() : [];
-        const hashData = hashRes.ok ? await hashRes.json() : null;
-        const fees = feesRes.ok ? await feesRes.json() : null;
-        const diff = diffRes.ok ? await diffRes.json() : null;
-        const pools = poolsRes.ok ? await poolsRes.json() : null;
-
-        const tip = blocks[0];
-        const latestHash =
-          hashData?.hashrates?.length
-            ? hashData.hashrates[hashData.hashrates.length - 1].avgHashrate
-            : hashData?.currentHashrate ?? null;
-
-        if (cancelled) return;
-        setStats({
-          height: tip?.height ?? null,
-          hashrate: latestHash,
-          difficulty: tip?.difficulty ?? null,
-          fastestFee: fees?.fastestFee ?? null,
-          blocks: blocks.slice(0, 6),
-          pools: pools?.pools ?? [],
-          totalPoolBlocks: pools?.blockCount ?? 0,
-          difficultyProgress: diff?.progressPercent ?? null,
-          remainingBlocks: diff?.remainingBlocks ?? null,
-          blockTimeAvg: diff?.adjustedTimeAvg ? diff.adjustedTimeAvg / 1000 : null,
-          healthy: true,
-        });
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), timeoutMs);
+        const res = await fetch(`${MEMPOOL_API}${path}`, { signal: ctrl.signal });
+        clearTimeout(t);
+        if (!res.ok) return null;
+        return await res.json();
       } catch {
-        if (!cancelled) setStats((s) => ({ ...s, healthy: false }));
+        return null;
       }
     }
+
+    async function load() {
+      // Each endpoint is fetched independently: one slow/failing endpoint
+      // (e.g. mining/pools) must not blank out the whole panel.
+      const [blocks, hashData, fees, diff, pools] = await Promise.all([
+        getJson("/v1/blocks"),
+        getJson("/v1/mining/hashrate"),
+        getJson("/v1/fees/recommended"),
+        getJson("/v1/difficulty-adjustment"),
+        getJson("/v1/mining/pools/1w", 12000),
+      ]);
+
+      const blockList: Block[] = Array.isArray(blocks) ? blocks : [];
+      const tip = blockList[0];
+      const latestHash =
+        hashData?.hashrates?.length
+          ? hashData.hashrates[hashData.hashrates.length - 1].avgHashrate
+          : hashData?.currentHashrate ?? null;
+
+      if (cancelled) return;
+      setStats({
+        height: tip?.height ?? null,
+        hashrate: latestHash,
+        difficulty: tip?.difficulty ?? hashData?.currentDifficulty ?? null,
+        fastestFee: fees?.fastestFee ?? null,
+        blocks: blockList.slice(0, 6),
+        pools: pools?.pools ?? [],
+        totalPoolBlocks: pools?.blockCount ?? 0,
+        difficultyProgress: diff?.progressPercent ?? null,
+        remainingBlocks: diff?.remainingBlocks ?? null,
+        blockTimeAvg: diff?.adjustedTimeAvg ? diff.adjustedTimeAvg / 1000 : null,
+        healthy: Boolean(tip),
+      });
+    }
+
     load();
     const id = setInterval(load, 30_000);
     const tick = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 1000);
@@ -391,7 +400,7 @@ const CHAIN_SECTIONS: DocSection[] = [
                 <td>EXT_SECRET_KEY</td><td>0x0488ADE4</td><td>xprv…</td><td className="font-sans text-muted-foreground">BIP32 extended private key</td>
               </tr>
               <tr>
-                <td>Bech32 HRP</td><td className="font-sans text-muted-foreground">— not active —</td><td className="font-sans text-muted-foreground">n/a</td><td className="font-sans text-muted-foreground">SegWit / Bech32 not enabled on mainnet today; legacy P2PKH only</td>
+                <td>Bech32 HRP</td><td>txc</td><td>txc1…</td><td className="font-sans text-muted-foreground">SegWit v0 (P2WPKH / P2WSH) — active on mainnet</td>
               </tr>
             </tbody>
           </table>
@@ -436,8 +445,9 @@ time   1706236287   (Jan 26, 2024 — "You may all go to hell and I will go to T
         <li><span className="text-muted-foreground">BIP39 (mnemonics):</span> Wallet-level convention — supported by any BIP39 wallet.</li>
         <li><span className="text-muted-foreground">BIP44 coin type:</span> <strong className="text-foreground">696969'</strong> — TXC is registered in SLIP-0044 (<code className="font-mono">| 696969 | TXC | TEXITcoin |</code>). The canonical account path is <code className="font-mono">m/44'/696969'/0'/0/i</code>. Do <em>not</em> use <code className="font-mono">m/44'/0'/0'</code> — that's Bitcoin's slot, and reusing it makes TXC keys collide with BTC keys derived from the same seed. (Some older forks of BlueWallet-based mobile wallets shipped on <code className="font-mono">0'</code> before the registration landed; wallets supporting those seeds should scan <code className="font-mono">0'</code> as a legacy compatibility path but issue new receive addresses from <code className="font-mono">696969'</code>.)</li>
         <li><span className="text-muted-foreground">Coin type vs. chain ID:</span> TEXITcoin uses <code className="font-mono">696969</code> in both registries as deliberate branding. They are unrelated technically — chain ID is network identity, coin type is purely an HD-derivation index.</li>
-        <li><span className="text-muted-foreground">BIP141 (SegWit):</span> Not active on mainnet today — no <code className="font-mono">txc1…</code> addresses observed on chain. Build P2PKH only.</li>
-        <li><span className="text-muted-foreground">BIP173 (Bech32):</span> Not active — see above.</li>
+        <li><span className="text-muted-foreground">BIP141 (SegWit):</span> <strong className="text-foreground">Active on mainnet.</strong> Blocks carry witness commitments and report a weight distinct from <code className="font-mono">size × 4</code>. Native SegWit v0 outputs (<code className="font-mono">txc1…</code>) are spendable today.</li>
+        <li><span className="text-muted-foreground">BIP173 (Bech32):</span> Active — human-readable part <code className="font-mono">txc</code>, so native SegWit addresses read <code className="font-mono">txc1…</code>. Legacy <code className="font-mono">T…</code> P2PKH and <code className="font-mono">M…</code> P2SH remain fully supported; use them when a counterparty's wallet is legacy-only.</li>
+
       </ul>
     ),
   },
@@ -495,7 +505,7 @@ time   1706236287   (Jan 26, 2024 — "You may all go to hell and I will go to T
     code: `// Custom network object for bitcoinjs-lib
 const TXC = {
   messagePrefix: '\\x19Texitcoin Signed Message:\\n',
-  bech32: undefined,                                  // SegWit not active
+  bech32: 'txc',                                      // native SegWit v0 (txc1…)
   bip32: { public: 0x0488B21E, private: 0x0488ADE4 },
   pubKeyHash: 0x42,
   scriptHash:  0x32,
@@ -519,9 +529,10 @@ const TXC = {
           <p>Address prefixes differ (LTC PUBKEY is <code className="font-mono">0x30</code>, TXC is <code className="font-mono">0x42</code>). Build your own network object — don't import an LTC one and assume it works.</p>
         </div>
         <div>
-          <div className="font-semibold text-foreground">Generating Bech32 (<code className="font-mono">txc1…</code>) addresses.</div>
-          <p>SegWit isn't active on mainnet. Any <code className="font-mono">txc1…</code> address you "derive" will not be deliverable. Stick to legacy <code className="font-mono">T…</code> P2PKH (and <code className="font-mono">M…</code> P2SH if you need multisig).</p>
+          <div className="font-semibold text-foreground">Assuming Bech32 (<code className="font-mono">txc1…</code>) isn't supported.</div>
+          <p>SegWit v0 is active with the HRP <code className="font-mono">txc</code>, so <code className="font-mono">txc1…</code> addresses are valid and spendable. Set <code className="font-mono">bech32: 'txc'</code> in your network object — leaving it <code className="font-mono">undefined</code> makes <code className="font-mono">bitcoinjs-lib</code> reject perfectly good addresses. Still accept legacy <code className="font-mono">T…</code> and <code className="font-mono">M…</code> on the receive side.</p>
         </div>
+
         <div>
           <div className="font-semibold text-foreground">Forgetting the compression flag when re-encoding WIF.</div>
           <p>Same private key, with vs. without the trailing <code className="font-mono">0x01</code>, produces two different addresses. Pick one and stick with it across the whole flow.</p>
