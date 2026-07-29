@@ -529,9 +529,10 @@ const TXC = {
           <p>Address prefixes differ (LTC PUBKEY is <code className="font-mono">0x30</code>, TXC is <code className="font-mono">0x42</code>). Build your own network object — don't import an LTC one and assume it works.</p>
         </div>
         <div>
-          <div className="font-semibold text-foreground">Generating Bech32 (<code className="font-mono">txc1…</code>) addresses.</div>
-          <p>SegWit isn't active on mainnet. Any <code className="font-mono">txc1…</code> address you "derive" will not be deliverable. Stick to legacy <code className="font-mono">T…</code> P2PKH (and <code className="font-mono">M…</code> P2SH if you need multisig).</p>
+          <div className="font-semibold text-foreground">Assuming Bech32 (<code className="font-mono">txc1…</code>) isn't supported.</div>
+          <p>SegWit v0 is active with the HRP <code className="font-mono">txc</code>, so <code className="font-mono">txc1…</code> addresses are valid and spendable. Set <code className="font-mono">bech32: 'txc'</code> in your network object — leaving it <code className="font-mono">undefined</code> makes <code className="font-mono">bitcoinjs-lib</code> reject perfectly good addresses. Still accept legacy <code className="font-mono">T…</code> and <code className="font-mono">M…</code> on the receive side.</p>
         </div>
+
         <div>
           <div className="font-semibold text-foreground">Forgetting the compression flag when re-encoding WIF.</div>
           <p>Same private key, with vs. without the trailing <code className="font-mono">0x01</code>, produces two different addresses. Pick one and stick with it across the whole flow.</p>
