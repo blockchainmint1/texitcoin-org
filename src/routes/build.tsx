@@ -505,7 +505,7 @@ time   1706236287   (Jan 26, 2024 — "You may all go to hell and I will go to T
     code: `// Custom network object for bitcoinjs-lib
 const TXC = {
   messagePrefix: '\\x19Texitcoin Signed Message:\\n',
-  bech32: undefined,                                  // SegWit not active
+  bech32: 'txc',                                      // native SegWit v0 (txc1…)
   bip32: { public: 0x0488B21E, private: 0x0488ADE4 },
   pubKeyHash: 0x42,
   scriptHash:  0x32,
