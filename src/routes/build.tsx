@@ -400,7 +400,7 @@ const CHAIN_SECTIONS: DocSection[] = [
                 <td>EXT_SECRET_KEY</td><td>0x0488ADE4</td><td>xprv…</td><td className="font-sans text-muted-foreground">BIP32 extended private key</td>
               </tr>
               <tr>
-                <td>Bech32 HRP</td><td className="font-sans text-muted-foreground">— not active —</td><td className="font-sans text-muted-foreground">n/a</td><td className="font-sans text-muted-foreground">SegWit / Bech32 not enabled on mainnet today; legacy P2PKH only</td>
+                <td>Bech32 HRP</td><td>txc</td><td>txc1…</td><td className="font-sans text-muted-foreground">SegWit v0 (P2WPKH / P2WSH) — active on mainnet</td>
               </tr>
             </tbody>
           </table>
