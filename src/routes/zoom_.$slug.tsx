@@ -137,7 +137,7 @@ function ZoomCallPage() {
               <figure className="overflow-hidden rounded-2xl border border-border bg-black shadow-card">
                 <div className="relative aspect-video w-full">
                   <iframe
-                    src={`https://streamtxc.com/embed/${call.video_cid}`}
+                    src={`https://streamtxc.com/embed/${call.video_cid}?autoplay=false&mute=false&t=0`}
                     title={call.title}
                     loading="lazy"
                     allow="autoplay; fullscreen; picture-in-picture"
