@@ -97,5 +97,9 @@
     "overrides": {
       "entities": "4.5.0"
     }
+  },
+  "overrides": {
+    "seroval": "^1.5.3",
+    "seroval-plugins": "^1.5.3"
   }
 }
