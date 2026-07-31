@@ -63,10 +63,7 @@ export function CourtCountdown({ className }: { className?: string }) {
   }));
 
   useEffect(() => {
-    console.log("CourtCountdown effect running");
-    const initial = computeCountdown();
-    console.log("initial countdown:", initial);
-    setCountdown(initial);
+    setCountdown(computeCountdown());
     const id = setInterval(() => setCountdown(computeCountdown()), 1000);
     return () => clearInterval(id);
   }, []);
