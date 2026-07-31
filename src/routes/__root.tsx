@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
+import { CourtCountdown } from "@/components/site/CourtCountdown";
 import appCss from "../styles.css?url";
 
 const QUIPS = [
@@ -225,7 +226,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="pb-16">
+        <Outlet />
+      </div>
+      <CourtCountdown />
     </QueryClientProvider>
   );
 }
