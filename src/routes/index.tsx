@@ -9,7 +9,6 @@ import { Insights } from "@/components/site/Insights";
 import { FAQ } from "@/components/site/FAQ";
 import { CTA } from "@/components/site/CTA";
 import { Footer } from "@/components/site/Footer";
-import { LegalStarburst } from "@/components/site/LegalStarburst";
 import heroImg from "@/assets/hero-texas.jpg";
 
 export const Route = createFileRoute("/")({
@@ -73,7 +72,7 @@ function Index() {
         <CTA />
       </main>
       <Footer />
-      <LegalStarburst />
     </div>
   );
 }
+
