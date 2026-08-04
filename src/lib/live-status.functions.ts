@@ -5,7 +5,6 @@ import { createServerFn } from "@tanstack/react-start";
 // additional co-hosts or backup streaming accounts.
 const LIVE_WALLETS = [
   "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc", // Bobby
-  "TsNCJDv4mK9Ge8gbfGAnsC1JNQc2GHEo5V",
 ];
 
 // Server-fn RPC hash for streamTXC's getLiveStreamByWallet (extracted from
