@@ -84,10 +84,10 @@ function WalletsPage() {
               <div className="relative grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
                 <div>
                   <div className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-primary-foreground">
-                    <Crown className="h-3 w-3" /> The honest.money Ecosystem Wallet
+                    <Crown className="h-3 w-3" /> One wallet to rule them all
                   </div>
                   <h2 className="mt-5 font-display text-4xl font-bold leading-tight md:text-5xl">
-                    One wallet to <span className="text-primary">rule them all</span>
+                    Honest.Money <span className="text-primary">Ecosystem Wallet</span>
                   </h2>
                   <p className="mt-4 text-lg text-muted-foreground">
                     A single, self-custody wallet for the entire honest.money ecosystem — plus the
