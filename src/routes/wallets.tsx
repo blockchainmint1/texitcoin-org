@@ -68,6 +68,109 @@ function WalletsPage() {
           </div>
         </section>
 
+        {/* honest.money Ecosystem Wallet — featured */}
+        <section className="relative py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative overflow-hidden rounded-3xl border border-primary/40 bg-gradient-to-br from-primary/15 via-card to-card p-8 md:p-12"
+            >
+              <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/30 blur-3xl" />
+              <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+
+              <div className="relative grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-primary-foreground">
+                    <Crown className="h-3 w-3" /> The honest.money Ecosystem Wallet
+                  </div>
+                  <h2 className="mt-5 font-display text-4xl font-bold leading-tight md:text-5xl">
+                    One wallet to <span className="text-primary">rule them all</span>
+                  </h2>
+                  <p className="mt-4 text-lg text-muted-foreground">
+                    A single, self-custody wallet for the entire honest.money ecosystem — plus the
+                    EVM, UTXO, and stablecoin chains you already use.
+                  </p>
+
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    <Feature icon={Layers} text="TXC, ISK, ZCU & honest.money chains" />
+                    <Feature icon={Globe} text="ETH, Base, BNB, Tron & EVM chains" />
+                    <Feature icon={Coins} text="LTC, DOGE, BCH & DASH" />
+                    <Feature icon={Banknote} text="Easy onramp for Texas Stable Dollar" />
+                  </div>
+
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <a
+                      href="https://honest.money/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition"
+                    >
+                      Get the Ecosystem Wallet <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                    <Link
+                      to="/buy"
+                      className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:border-primary transition"
+                    >
+                      Get TXC first <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
+                    <div className="flex items-center gap-2 border-b border-border pb-3">
+                      <div className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-primary/70" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-muted" />
+                      <div className="ml-3 truncate text-xs text-muted-foreground">
+                        wallet.honest.money
+                      </div>
+                    </div>
+                    <div className="pt-6">
+                      <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                        Connected chains
+                      </div>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {[
+                          "TXC",
+                          "ISK",
+                          "ZCU",
+                          "ETH",
+                          "Base",
+                          "BNB",
+                          "Tron",
+                          "LTC",
+                          "DOGE",
+                          "BCH",
+                          "DASH",
+                        ].map((chain) => (
+                          <span
+                            key={chain}
+                            className="rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold"
+                          >
+                            {chain}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-6 grid grid-cols-2 gap-3">
+                        <div className="rounded-lg border border-border bg-card p-3 text-center text-xs font-semibold">
+                          Send
+                        </div>
+                        <div className="rounded-lg border border-primary bg-primary/10 p-3 text-center text-xs font-semibold text-primary">
+                          Receive
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Web Wallet — featured */}
         <section className="relative py-20">
           <div className="mx-auto max-w-7xl px-6">
