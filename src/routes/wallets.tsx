@@ -387,12 +387,12 @@ function WalletsPage() {
                 </div>
                 <div className="mt-8">
                   <a
-                    href="https://shoptxc.com/"
+                    href="https://blockchainmint.com/product/texitcoin-cold-storage-wallet"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition"
                   >
-                    Order at shoptxc.com <ArrowUpRight className="h-4 w-4" />
+                    Order Cold Storage Coin <ArrowUpRight className="h-4 w-4" />
                   </a>
                 </div>
               </motion.div>
@@ -434,7 +434,7 @@ function WalletsPage() {
                   name: "Cold Storage Coin",
                   best: "Best for long-term holding",
                   body: "Air-gapped, offline, in pure copper. Built to outlast you.",
-                  href: "https://shoptxc.com/",
+                  href: "https://blockchainmint.com/product/texitcoin-cold-storage-wallet",
                   cta: "Order",
                   highlight: false,
                 },
