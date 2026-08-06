@@ -126,7 +126,7 @@ function WalletsPage() {
                       <div className="h-2.5 w-2.5 rounded-full bg-primary/70" />
                       <div className="h-2.5 w-2.5 rounded-full bg-muted" />
                       <div className="ml-3 truncate text-xs text-muted-foreground">
-                        wallet.honest.money
+                        mobile.honest.money
                       </div>
                     </div>
                     <div className="pt-6">
