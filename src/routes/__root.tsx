@@ -231,6 +231,7 @@ function RootComponent() {
         <Outlet />
       </div>
       <CourtCountdown />
+      <Tracker />
     </QueryClientProvider>
   );
 }
