@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { CourtCountdown } from "@/components/site/CourtCountdown";
+import { Tracker } from "@/components/site/Tracker";
 import appCss from "../styles.css?url";
 
 const QUIPS = [

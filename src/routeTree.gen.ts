@@ -21,6 +21,7 @@ import { Route as TokenomicsRouteImport } from './routes/tokenomics'
 import { Route as TexasRouteImport } from './routes/texas'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TeamRouteImport } from './routes/team'
+import { Route as StatsRouteImport } from './routes/stats'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SecAndCryptoRouteImport } from './routes/sec-and-crypto'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
@@ -123,6 +124,11 @@ const TermsRoute = TermsRouteImport.update({
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatsRoute = StatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -377,6 +383,7 @@ export interface FileRoutesByFullPath {
   '/roadmap': typeof RoadmapRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/stats': typeof StatsRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
@@ -434,6 +441,7 @@ export interface FileRoutesByTo {
   '/roadmap': typeof RoadmapRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/stats': typeof StatsRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
@@ -492,6 +500,7 @@ export interface FileRoutesById {
   '/roadmap': typeof RoadmapRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/stats': typeof StatsRoute
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
@@ -551,6 +560,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/sec-and-crypto'
     | '/sitemap.xml'
+    | '/stats'
     | '/team'
     | '/terms'
     | '/texas'
@@ -608,6 +618,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/sec-and-crypto'
     | '/sitemap.xml'
+    | '/stats'
     | '/team'
     | '/terms'
     | '/texas'
@@ -665,6 +676,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/sec-and-crypto'
     | '/sitemap.xml'
+    | '/stats'
     | '/team'
     | '/terms'
     | '/texas'
@@ -723,6 +735,7 @@ export interface RootRouteChildren {
   RoadmapRoute: typeof RoadmapRoute
   SecAndCryptoRoute: typeof SecAndCryptoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StatsRoute: typeof StatsRoute
   TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
   TexasRoute: typeof TexasRoute
@@ -839,6 +852,13 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stats': {
+      id: '/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof StatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -1171,6 +1191,7 @@ const rootRouteChildren: RootRouteChildren = {
   RoadmapRoute: RoadmapRoute,
   SecAndCryptoRoute: SecAndCryptoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StatsRoute: StatsRoute,
   TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
   TexasRoute: TexasRoute,
