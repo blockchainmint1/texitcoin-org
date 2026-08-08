@@ -63,7 +63,7 @@ function ExchangeStep() {
             <p className="font-semibold text-amber-600 dark:text-amber-400">BitMart is shutting down</p>
             <p className="mt-1 text-sm leading-relaxed text-amber-700/80 dark:text-amber-300/80">
               BitMart — our first major exchange — announced an orderly wind-down on July 26, 2026. If you hold TXC there, withdraw to self-custody immediately. Read the full update{" "}
-              <Link to="/blog/bitmart-shutting-down-txc-holders" className="underline hover:text-amber-600 dark:hover:text-amber-300">
+              <Link to="/blog/$slug" params={{ slug: "bitmart-shutting-down-txc-holders" }} className="underline hover:text-amber-600 dark:hover:text-amber-300">
                 here
               </Link>.
             </p>
