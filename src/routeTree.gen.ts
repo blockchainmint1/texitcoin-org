@@ -53,6 +53,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
@@ -288,6 +289,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
+  id: '/api/public/track',
+  path: '/api/public/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicLegalFeesRoute = ApiPublicLegalFeesRouteImport.update({
   id: '/api/public/legal-fees',
   path: '/api/public/legal-fees',
@@ -391,6 +397,7 @@ export interface FileRoutesByFullPath {
   '/zoom/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -447,6 +454,7 @@ export interface FileRoutesByTo {
   '/zoom/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -504,6 +512,7 @@ export interface FileRoutesById {
   '/zoom_/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -562,6 +571,7 @@ export interface FileRouteTypes {
     | '/zoom/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
+    | '/api/public/track'
     | '/lovable/email/suppression'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -618,6 +628,7 @@ export interface FileRouteTypes {
     | '/zoom/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
+    | '/api/public/track'
     | '/lovable/email/suppression'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -674,6 +685,7 @@ export interface FileRouteTypes {
     | '/zoom_/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
+    | '/api/public/track'
     | '/lovable/email/suppression'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -731,6 +743,7 @@ export interface RootRouteChildren {
   ZoomSlugRoute: typeof ZoomSlugRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
+  ApiPublicTrackRoute: typeof ApiPublicTrackRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
   ApiPublicNotifyNewContentRoute: typeof ApiPublicNotifyNewContentRoute
@@ -1052,6 +1065,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/track': {
+      id: '/api/public/track'
+      path: '/api/public/track'
+      fullPath: '/api/public/track'
+      preLoaderRoute: typeof ApiPublicTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/legal-fees': {
       id: '/api/public/legal-fees'
       path: '/api/public/legal-fees'
@@ -1172,6 +1192,7 @@ const rootRouteChildren: RootRouteChildren = {
   ZoomSlugRoute: ZoomSlugRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
+  ApiPublicTrackRoute: ApiPublicTrackRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
   ApiPublicNotifyNewContentRoute: ApiPublicNotifyNewContentRoute,
