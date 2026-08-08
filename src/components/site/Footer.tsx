@@ -125,6 +125,7 @@ export function Footer() {
             <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
             <Link to="/terms" className="hover:text-foreground">Terms</Link>
             <Link to="/disclosures" className="hover:text-foreground">Disclosures</Link>
+            <Link to="/stats" className="hover:text-foreground">Site Stats</Link>
           </div>
         </div>
       </div>
