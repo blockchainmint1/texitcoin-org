@@ -263,6 +263,39 @@ export type Database = {
         }
         Relationships: []
       }
+      site_page_views: {
+        Row: {
+          country: string | null
+          created_at: string
+          device: string | null
+          id: number
+          is_new_session: boolean
+          path: string
+          referrer_host: string | null
+          session_id: string
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          device?: string | null
+          id?: number
+          is_new_session?: boolean
+          path: string
+          referrer_host?: string | null
+          session_id: string
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          device?: string | null
+          id?: number
+          is_new_session?: boolean
+          path?: string
+          referrer_host?: string | null
+          session_id?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string
@@ -367,6 +400,30 @@ export type Database = {
           message: Json
           msg_id: number
           read_ct: number
+        }[]
+      }
+      site_stats_breakdown: {
+        Args: { _days?: number; _dimension: string; _limit?: number }
+        Returns: {
+          label: string
+          value: number
+        }[]
+      }
+      site_stats_daily: {
+        Args: { _days?: number }
+        Returns: {
+          day: string
+          pageviews: number
+          visitors: number
+        }[]
+      }
+      site_stats_totals: {
+        Args: { _days?: number }
+        Returns: {
+          countries: number
+          pages: number
+          pageviews: number
+          visitors: number
         }[]
       }
     }
