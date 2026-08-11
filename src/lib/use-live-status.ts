@@ -46,7 +46,7 @@ export function useLiveStatus(): {
     staleTime: 15_000,
   });
 
-  if (FORCE_LIVE_OFF) {
+  if (FORCE_LIVE_OFF || inBlackout()) {
     return { isLive: false, wallet: null, source: "window" };
   }
 
