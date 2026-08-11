@@ -8,6 +8,23 @@ import { isLiveWindow } from "./live-window";
 // Flip back to false when you want live detection to run normally again.
 const FORCE_LIVE_OFF = false;
 
+// One-off blackout windows (UTC ISO). While "now" falls inside one of these,
+// the site stays offline no matter what the stream probe reports — used when
+// the allowlisted channel is broadcasting something that doesn't belong on
+// /zoom (e.g. the IDMC call). Expired entries are harmless; they auto-clear.
+const BLACKOUTS: { from: string; to: string; note: string }[] = [
+  {
+    // Tue Aug 11 2026, 4:00pm CT -> Wed Aug 12 2026, 6:00am CT (IDMC call)
+    from: "2026-08-11T21:00:00Z",
+    to: "2026-08-12T11:00:00Z",
+    note: "IDMC call — not TEXITcoin content",
+  },
+];
+
+function inBlackout(now = Date.now()): boolean {
+  return BLACKOUTS.some((b) => now >= +new Date(b.from) && now <= +new Date(b.to));
+}
+
 /**
  * Polls streamTXC every 30s (server-side, no CORS) to detect whether the
  * Honest Money Hour is actually on the air right now — regardless of the
@@ -29,7 +46,7 @@ export function useLiveStatus(): {
     staleTime: 15_000,
   });
 
-  if (FORCE_LIVE_OFF) {
+  if (FORCE_LIVE_OFF || inBlackout()) {
     return { isLive: false, wallet: null, source: "window" };
   }
 
