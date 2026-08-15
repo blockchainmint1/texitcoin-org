@@ -35,6 +35,16 @@ type Article = {
 
 const ARTICLES: Article[] = [
   {
+    title: "Moby Media LIVE with TEXITcoin",
+    excerpt:
+      "Bobby Gray joins Moby Media for a live conversation on honest money, the Texas fight, and what comes next for TEXITcoin — recorded the week of the TSSB hearing.",
+    outlet: "Moby Media",
+    url: "https://streamtxc.com/v/bafybeidf6khknmjskdguycwgffy43nvvcr25voeb3bptbctrbe6kh6ivaa",
+    image: "/__l5e/assets-v1/0779c7c2-e7b7-4ae2-bc2c-0714767cd235/news-moby-media-2026-08-14.jpg",
+    tag: "Interview",
+  },
+  {
+
     title: "Texas regulators prepare fraud case against TEXITcoin as founder denies wrongdoing",
     excerpt:
       "Take the mania of cryptocurrency and mix in the vibe of the Texas Nationalist Movement and you get TEXITcoin. On Monday the Texas State Securities Board will present its fraud enforcement case against TEXITcoin.",
