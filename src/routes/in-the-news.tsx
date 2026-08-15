@@ -44,6 +44,15 @@ const ARTICLES: Article[] = [
     tag: "Regulatory",
   },
   {
+    title: "Coldcard flaw exposed $116M self-custody risk: Gray",
+    excerpt:
+      "Coldcard's $116 million seed flaw shows why wallet entropy must be verified, TEXITcoin founder Bobby Gray said in comments to crypto.news.",
+    outlet: "Crypto.news",
+    url: "https://crypto.news/coldcard-flaw-exposed-116m-self-custody-risk-gray/",
+    image: "https://media.crypto.news/2025/10/crypto-news-You-dont-have-to-be-a-coder-to-understand-crypto-security-option03.webp",
+    tag: "Security",
+  },
+  {
     title: "From Speculation to Substance: Rebuilding Honest Money Through Community",
     excerpt:
       "Crypto must return to honest money: utility, transparency, and community-driven trust over speculation and hype.",
