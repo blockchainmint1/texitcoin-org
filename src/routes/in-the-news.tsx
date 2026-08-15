@@ -35,6 +35,15 @@ type Article = {
 
 const ARTICLES: Article[] = [
   {
+    title: "Texas regulators prepare fraud case against TEXITcoin as founder denies wrongdoing",
+    excerpt:
+      "Take the mania of cryptocurrency and mix in the vibe of the Texas Nationalist Movement and you get TEXITcoin. On Monday the Texas State Securities Board will present its fraud enforcement case against TEXITcoin.",
+    outlet: "Texas Public Radio",
+    url: "https://www.tpr.org/economy-and-labor/2026-08-14/texas-regulators-prepare-fraud-case-against-texitcoin-as-founder-denies-wrongdoing",
+    image: "https://npr.brightspotcdn.com/dims4/default/57d44e5/2147483647/strip/true/crop/7718x4052+0+547/resize/1200x630!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F30%2Fd5%2F7e17e52047abb2b8b2ac36c12a84%2F2025-10-01t112301z-179871719-rc2u2hamp36q-rtrmadp-3-asia-crypto.JPG",
+    tag: "Regulatory",
+  },
+  {
     title: "From Speculation to Substance: Rebuilding Honest Money Through Community",
     excerpt:
       "Crypto must return to honest money: utility, transparency, and community-driven trust over speculation and hype.",
