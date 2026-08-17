@@ -95,9 +95,15 @@ export function CourtCountdown({ className }: { className?: string }) {
         <div className="flex items-center gap-4 sm:gap-6">
           {isReady ? (
             isLive ? (
-              <span className="font-display text-lg font-bold uppercase tracking-wide sm:text-xl">
-                TEXITcoin v. TSSB — live now
-              </span>
+              <a
+                href="https://www.youtube.com/watch?v=CRFcQda7RBc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded bg-red-600 px-4 py-1.5 font-display text-sm font-bold uppercase tracking-wide text-white transition hover:bg-red-700"
+              >
+                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-white" aria-hidden="true" />
+                WATCH IT LIVE
+              </a>
             ) : (
               <>
                 <Unit value={countdown.days} label="Days" />
@@ -114,10 +120,12 @@ export function CourtCountdown({ className }: { className?: string }) {
         </div>
 
         <a
-          href="/legal"
+          href="https://www.youtube.com/watch?v=CRFcQda7RBc"
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden text-xs font-semibold uppercase tracking-wider text-primary-foreground/90 underline-offset-2 hover:text-primary-foreground hover:underline sm:inline-block"
         >
-          Read the legal timeline →
+          Watch the hearing →
         </a>
       </div>
     </div>
