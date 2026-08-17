@@ -253,7 +253,7 @@ function LegalPage() {
 
 
         {/* Timeline */}
-        <section className="relative mx-auto mt-24 max-w-5xl px-6">
+        <section id="timeline" className="relative mx-auto mt-24 max-w-5xl px-6">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
               <ScrollText className="h-4 w-4" /> TSSB case · full chronology
