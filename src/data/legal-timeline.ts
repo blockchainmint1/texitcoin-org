@@ -11,6 +11,18 @@ export type Entry = {
 
 export const ENTRIES: Entry[] = [
   {
+    date: "17 Aug 2026",
+    title: "Hearing Day — Live from SOAH, 9:00am CT",
+    tone: "win",
+    tag: "LIVE",
+    body: "The contested hearing in TSSB v. TEXITcoin (SOAH Docket 312-26-14427) is underway this morning at 9:00am Central and runs through August 20. It's being streamed publicly — watch it yourself instead of taking anyone's word for it. Avi Perry and the Quinn Emanuel team argue the core question on the record: whether a mined, proof-of-work currency with no pre-mine and no issuer is a security. We've published every filing, every cost, and every setback on this page as it happened; the main event is no exception. Regulation by enforcement thrives on the absence of a clear record. Today we make one.",
+    link: {
+      label: "Watch the hearing live →",
+      href: "https://www.youtube.com/watch?v=CRFcQda7RBc",
+    },
+  },
+
+  {
     date: "27 Jul 2026",
     title: "Motion for Summary Disposition Denied — We're Going to Hearing",
     tone: "regulator",
