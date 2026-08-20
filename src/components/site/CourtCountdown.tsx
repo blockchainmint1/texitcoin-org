@@ -96,7 +96,7 @@ export function CourtCountdown({ className }: { className?: string }) {
           {isReady ? (
             isLive ? (
               <a
-                href="https://www.youtube.com/watch?v=CRFcQda7RBc"
+                href="https://www.youtube.com/watch?v=LRFibju8xn4"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded bg-red-600 px-4 py-1.5 font-display text-sm font-bold uppercase tracking-wide text-white transition hover:bg-red-700"
@@ -120,7 +120,7 @@ export function CourtCountdown({ className }: { className?: string }) {
         </div>
 
         <a
-          href="https://www.youtube.com/watch?v=CRFcQda7RBc"
+          href="https://www.youtube.com/watch?v=LRFibju8xn4"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden text-xs font-semibold uppercase tracking-wider text-primary-foreground/90 underline-offset-2 hover:text-primary-foreground hover:underline sm:inline-block"
