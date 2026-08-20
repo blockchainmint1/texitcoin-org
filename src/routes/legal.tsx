@@ -199,7 +199,7 @@ function LegalPage() {
               </div>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="https://www.youtube.com/watch?v=CRFcQda7RBc"
+                  href="https://www.youtube.com/watch?v=LRFibju8xn4"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition hover:opacity-90"
