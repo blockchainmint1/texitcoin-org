@@ -260,7 +260,72 @@ function LeadershipPage() {
         </div>
       </section>
 
+      {/* Philosophy & Character feature tile */}
+      <section className="border-t border-border py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <Link
+              to="/philosophy"
+              className="group relative block overflow-hidden rounded-2xl border border-border bg-card p-10 shadow-card transition-colors hover:border-primary/60 md:p-14"
+            >
+              <div
+                className="pointer-events-none absolute inset-0 -z-10 opacity-50"
+                style={{ background: "var(--gradient-hero)" }}
+                aria-hidden
+              />
+              <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+                    Philosophy &amp; Character
+                  </div>
+                  <h2 className="mt-4 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+                    Uncommon results require{" "}
+                    <span className="text-primary">uncommon integrity</span>
+                  </h2>
+                  <p className="mt-6 max-w-2xl text-muted-foreground">
+                    Character, transparency, and honesty aren't a mantra — they're a
+                    promise. And a promise is only worth what you're willing to publish
+                    when the story gets hard to tell. So we published all of it,
+                    including the Mulligan Mint bankruptcy: every article, every court
+                    docket, every link we could find.
+                  </p>
+                  <div className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    Read Philosophy &amp; Character
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1">
+                  {[
+                    ["Character", "Consistent action, watched or not"],
+                    ["Transparency", "Receipts over reassurances"],
+                    ["Honesty", "Bad news ships too"],
+                  ].map(([tag, line]) => (
+                    <div
+                      key={tag}
+                      className="rounded-xl border border-border bg-background/60 px-5 py-4 backdrop-blur"
+                    >
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
+                        {tag}
+                      </div>
+                      <div className="mt-1 text-sm text-muted-foreground">{line}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition group-hover:opacity-100" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Steps Up */}
+
       <section className="relative py-28">
         <div
           className="absolute inset-0 -z-10 opacity-60"
