@@ -94,24 +94,12 @@ export function CourtCountdown({ className }: { className?: string }) {
 
         <div className="flex items-center gap-4 sm:gap-6">
           {isReady ? (
-            isLive ? (
-              <a
-                href="https://www.youtube.com/watch?v=LRFibju8xn4"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded bg-red-600 px-4 py-1.5 font-display text-sm font-bold uppercase tracking-wide text-white transition hover:bg-red-700"
-              >
-                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-white" aria-hidden="true" />
-                WATCH IT LIVE
-              </a>
-            ) : (
-              <>
-                <Unit value={countdown.days} label="Days" />
-                <Unit value={countdown.hours} label="Hrs" />
-                <Unit value={countdown.minutes} label="Min" />
-                <Unit value={countdown.seconds} label="Sec" />
-              </>
-            )
+            <>
+              <Unit value={countdown.days} label="Days" />
+              <Unit value={countdown.hours} label="Hrs" />
+              <Unit value={countdown.minutes} label="Min" />
+              <Unit value={countdown.seconds} label="Sec" />
+            </>
           ) : (
             <span className="font-display text-lg font-bold tabular-nums sm:text-xl">
               -- : -- : -- : --
@@ -120,12 +108,10 @@ export function CourtCountdown({ className }: { className?: string }) {
         </div>
 
         <a
-          href="https://www.youtube.com/watch?v=LRFibju8xn4"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/legal"
           className="hidden text-xs font-semibold uppercase tracking-wider text-primary-foreground/90 underline-offset-2 hover:text-primary-foreground hover:underline sm:inline-block"
         >
-          Watch the hearing →
+          Read the legal timeline →
         </a>
       </div>
     </div>
