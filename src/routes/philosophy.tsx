@@ -552,8 +552,155 @@ function PhilosophyPage() {
         </div>
       </section>
 
+      {/* Time Tells the Truth */}
+      <section className="relative border-t border-border py-24">
+        <div
+          className="absolute inset-0 -z-10 opacity-60"
+          style={{ background: "var(--gradient-hero)" }}
+          aria-hidden
+        />
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+            <Hourglass className="h-4 w-4" />
+            Time Tells the Truth
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+            What happened to <span className="text-primary">everyone else</span>
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
+            A bankruptcy is a snapshot. It tells you who was standing and who wasn't on
+            one particular day. It takes years to find out who was actually running a
+            clean shop. So here's the rest of the story — what became of the company
+            that bought the mint, and the company that sued it. Neither of them is
+            still standing, and neither went out quietly.
+          </p>
+          <p className="mt-4 max-w-3xl text-sm text-muted-foreground">
+            We're not posting this to deflect. Our record is our record and it's all
+            above. We're posting it because the same industry that watched Mulligan
+            Mint fail kept doing business with both of these firms for years afterward,
+            and the public record eventually caught up with everybody. Every claim
+            below is linked.
+          </p>
+
+          <div className="mt-14 space-y-8">
+            {AFTERMATH.map((a, i) => (
+              <motion.article
+                key={a.company}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="rounded-2xl border border-border bg-card p-8 shadow-card md:p-10"
+              >
+                <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                  {a.role}
+                </div>
+                <h3 className="mt-2 font-display text-3xl font-bold leading-tight">
+                  {a.company}
+                </h3>
+                <p className="mt-3 text-lg font-medium text-primary">{a.headline}</p>
+
+                <div className="mt-6 space-y-4 text-muted-foreground">
+                  {a.body.map((p) => (
+                    <p key={p.slice(0, 40)}>{p}</p>
+                  ))}
+                </div>
+
+                <dl className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {a.facts.map((f) => (
+                    <div
+                      key={f.k}
+                      className="rounded-xl border border-border bg-muted/30 p-4"
+                    >
+                      <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        {f.k}
+                      </dt>
+                      <dd className="mt-1 text-sm font-semibold leading-snug">{f.v}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <div className="mt-8 border-t border-dashed border-border pt-6">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    Sources
+                  </div>
+                  <ul className="mt-3 space-y-2">
+                    {a.links.map((l) => (
+                      <li key={l.href}>
+                        <a
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-start gap-2 text-sm text-muted-foreground transition hover:text-primary"
+                        >
+                          <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                          <span className="underline-offset-4 group-hover:underline">
+                            {l.label}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+
+          <p className="mt-10 max-w-3xl text-sm text-muted-foreground">
+            Note on sourcing: nothing above asserts a connection between these
+            prosecutions and Mulligan Mint. NTR bought assets out of the case in 2014;
+            Republic was a supplier and litigant in 2013. Their later collapses are
+            separate matters of public record — we've linked the primary documents so
+            you can read them yourself rather than take our framing for it.
+          </p>
+        </div>
+      </section>
+
+      {/* The video */}
+      <section className="border-t border-border py-24">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+            <PlayCircle className="h-4 w-4" />
+            In His Own Words
+          </div>
+          <h2 className="mt-3 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+            Here's what led up to <span className="text-primary">the bankruptcy</span>
+          </h2>
+          <p className="mt-6 text-lg text-muted-foreground">
+            Everything above this point is the paper trail — dockets, filings, trade
+            press. This is the other half: Bobby Gray's own account of the months
+            leading into the Mulligan Mint bankruptcy, recorded at the time, unedited
+            and unretracted. It's the Silver Bullet Silver Shield story from the inside.
+          </p>
+
+          {SBSS_VIDEO_ID ? (
+            <figure className="mt-10 overflow-hidden rounded-2xl border border-border bg-black shadow-card">
+              <div className="relative aspect-video w-full">
+                <iframe
+                  src={`https://www.youtube.com/embed/${SBSS_VIDEO_ID}`}
+                  title="Silver Bullet Silver Shield — the story behind the Mulligan Mint bankruptcy"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
+            </figure>
+          ) : (
+            <div className="mt-10 rounded-2xl border border-dashed border-border bg-muted/30 p-8">
+              <p className="text-sm text-muted-foreground">
+                Video coming shortly — we're confirming the canonical upload so we link
+                the original rather than a re-upload. Consistent with the rest of this
+                page, we'd rather post nothing than post the wrong thing.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Closing */}
       <section className="border-t border-border py-24">
+
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
             The Standard
