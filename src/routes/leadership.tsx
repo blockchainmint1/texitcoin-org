@@ -425,6 +425,57 @@ function LeadershipPage() {
         </div>
       </section>
 
+      {/* Bobby's personal story tile */}
+      <section className="border-t border-border py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <Link
+              to="/bobby"
+              className="group relative block overflow-hidden rounded-2xl border border-border bg-card p-10 shadow-card transition-colors hover:border-primary/60 md:p-14"
+            >
+              <div className="grid gap-10 md:grid-cols-[1fr_1.4fr] md:items-center">
+                <div className="overflow-hidden rounded-xl border border-border">
+                  <img
+                    src={bobbyStoryImg.url}
+                    alt="Privately minted coins from Bobby Gray's early honest-money years"
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+                    The Personal Story
+                  </div>
+                  <h2 className="mt-4 font-display text-4xl font-bold leading-tight md:text-5xl text-balance">
+                    Build it. Lose it.{" "}
+                    <span className="text-primary">Build it again.</span>
+                  </h2>
+                  <p className="mt-6 max-w-2xl text-muted-foreground">
+                    2007: a family goes down the rabbit hole. 2008: a new
+                    currency standard and a tribal nation's first coin. 2012:
+                    Congress. 2013: the mint breaks and it all goes to zero.
+                    Then seven years abroad with one suitcase — and the long
+                    road back to Texas. The full nineteen-year journey, told
+                    with the hard parts left in.
+                  </p>
+                  <div className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    Read Bobby's story
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition group-hover:opacity-100" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+
       {/* Welcome Letter from Bobby */}
       <section className="relative py-28 border-t border-border bg-card/40">
         <div className="mx-auto max-w-4xl px-6">
