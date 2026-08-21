@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Loader2 } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Loader2, MailCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,26 +29,27 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
     setError("");
-    const { error: signInError } = await supabase.auth.signInWithPassword({
+    const { error: otpError } = await supabase.auth.signInWithOtp({
       email,
-      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/screenplay-admin`,
+      },
     });
     setBusy(false);
-    if (signInError) {
-      setError(signInError.message);
+    if (otpError) {
+      setError(otpError.message);
       return;
     }
-    navigate({ to: "/screenplay-admin" });
+    setSent(true);
   }
 
   return (
@@ -58,39 +59,52 @@ function AuthPage() {
         <div className="mx-auto max-w-md px-6">
           <h1 className="font-display text-4xl font-bold">Sign in</h1>
           <p className="mt-3 text-muted-foreground">
-            Staff access for the writers' room review queue.
+            Staff access for the writers' room review queue. We'll email you a
+            one-time login link — no password required.
           </p>
-          <form onSubmit={onSubmit} className="mt-8 space-y-5">
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-2"
-                required
-              />
+
+          {sent ? (
+            <div className="mt-8 rounded-lg border border-border bg-card p-6">
+              <MailCheck className="h-8 w-8 text-primary" />
+              <h2 className="mt-4 font-display text-xl font-semibold">
+                Check your inbox
+              </h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                A magic link is on its way to{" "}
+                <span className="font-medium text-foreground">{email}</span>.
+                Open it on this device to finish signing in. The link expires
+                shortly.
+              </p>
+              <Button
+                variant="outline"
+                className="mt-5"
+                onClick={() => setSent(false)}
+              >
+                Use a different email
+              </Button>
             </div>
-            <div>
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-2"
-                required
-              />
-            </div>
-            {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full gap-2" disabled={busy}>
-              {busy && <Loader2 className="h-4 w-4 animate-spin" />}
-              Sign in
-            </Button>
-          </form>
+          ) : (
+            <form onSubmit={onSubmit} className="mt-8 space-y-5">
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@honest.money"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-2"
+                  required
+                />
+              </div>
+              {error && <p className="text-sm text-destructive">{error}</p>}
+              <Button type="submit" className="w-full gap-2" disabled={busy}>
+                {busy && <Loader2 className="h-4 w-4 animate-spin" />}
+                Email me a login link
+              </Button>
+            </form>
+          )}
         </div>
       </main>
       <Footer />
