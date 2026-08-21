@@ -1,98 +1,70 @@
 ## Goal
 
-Build a new `/market` page on texitcoin.org that answers one question: **"Should TXC be a CMC Top 100 coin?"** — by showing TXC's own market stats up top, and a growing **Hit List** of Top 100 coins we're evaluating (and eventually replacing). We start with **Kaspa** as the first full case study, and use it as the template for the other 99.
+A `/screenplay` hub on texitcoin.org that holds the living treatment for the TEXITcoin Netflix series — three seasons, written as prose treatment (not episode breakdowns yet) — plus a community writers' room where anyone can pitch scenes, characters, notes, photos and clips, have AI draft them into screenplay-style prose, and land them in a suggestion queue you approve into the canon.
 
-## Phase 1 — Kaspa case study (this pass)
+## Part 1 — The treatment (ships first, static content)
 
-### `/market` page structure
+`/screenplay` — series bible landing page:
+- Logline, tone/comparables ("Ozark meets King of the Hill"), format pitch
+- Three season cards → each links to its own page
+- Character roster with photos/placeholders: Bobby, Kira, Samantha, Matt, Josh, Johnny, Rob, Tim, Gaige, the office
+- "Join the writers' room" CTA into Part 2
+
+`/screenplay/season-1` — **Molten**
+Coin factory to crypto mine. Casting machine blowouts, silver on the floor, JM Bullion killing the Trump coin order, the moment the money runs out. Selling the factory, paying every creditor, and putting what's left into TEXITcoin. The 110° garage full of screaming L3s. Betting the rest on the Consensus launch party — then getting banned from promoting TXC on the expo floor and watching the party flop to an empty ballroom. The mine dying. The Bitmain WDMS trip where immersion cooling shows up like a religion. First tank, first stable hashrate. Thailand, and Samantha's kidney. November 2024: profitable, because the old coin-industry friends who had every reason to walk away didn't.
+
+`/screenplay/season-2` — **Wheels Up**
+Supercars, sold-out events, Bobby on the same WDMS stage he once sat in the back of. Thailand with the leaders. Property, a third of a billion in network value, and a dread you can taste under every win. Ends on the Texas cease & desist: doors kicked in on one continent while a jet lifts off from another.
+
+`/screenplay/season-3` — **The John Galt Line**
+Bobby overseas. Global sales shut off, good people out of work. Building tools and utility with nothing. Dismantling infrastructure piece by piece to keep the core alive. The livestreamed trial of the century for crypto. The SOAH verdict, Christmas 2026.
+
+Each season page: one-paragraph season logline, the beat-by-beat treatment in scene-sized chunks, an "arcs" block per major character, and a "what's real / what we invented" honesty note (fits the site's transparency posture). Creative liberty taken freely — invented dialogue beats, composite scenes, a couple of antagonists.
+
+## Part 2 — The writers' room (interactive)
+
+Anyone can submit to any season, and to any scene within it.
 
 ```text
-┌─ Hero ────────────────────────────────────────────────┐
-│  "The Hit List"                                       │
-│  Why we belong in the Top 100 — and who we're         │
-│  measuring ourselves against.                         │
-└───────────────────────────────────────────────────────┘
-
-┌─ TXC Market Snapshot ─────────────────────────────────┐
-│  Live price · 24h volume · Market cap · Supply        │
-│  Holders · Exchanges listed · Key milestones          │
-│  (pulled live from CMC API via server fn)             │
-└───────────────────────────────────────────────────────┘
-
-┌─ Key Milestones ──────────────────────────────────────┐
-│  Timeline: launch, first exchange, honest.money, etc. │
-└───────────────────────────────────────────────────────┘
-
-┌─ The Hit List ────────────────────────────────────────┐
-│  Coin cards, sortable by CMC rank                     │
-│  [Kaspa #62] ← full case study, links to detail       │
-│  [Coming soon: 99 more]                               │
-└───────────────────────────────────────────────────────┘
+Reader hits "Pitch a scene"
+   ↓ types a rough idea (2 sentences is fine) + optional image/video URL
+   ↓ AI (Lovable AI Gateway) drafts it into screenplay-format prose,
+     matching the season's voice and existing beats as context
+   ↓ contributor sees the draft, can regenerate or edit, then submits
+   ↓ lands in the suggestion queue as `pending`
+   ↓ you review at /screenplay/admin — approve, reject, or approve-with-edits
+   ↓ approved items render inline on the season page, credited to the contributor
 ```
 
-### `/market/kaspa` deep-dive page
+Also supported, same queue:
+- **Notes** on an existing beat (inline "add a note" on each scene; approved notes show as a collapsible margin thread — the wiki feel)
+- **Characters** — pitch a new one; AI fleshes out a one-paragraph bio + arc
+- **Details/corrections** — "the L3s were actually in the second bay"
+- **Media** — images and video links attached to a beat, approved into a small gallery strip
 
-Sections:
-1. **Verdict banner** — our take up top ("Leftover" / "Earned it" / "Coasting"), one paragraph argument.
-2. **The numbers** (live from CMC): rank, price, 24h volume, market cap, circulating supply, ATH, % from ATH.
-3. **The socials** — X account `@KaspaCurrency`:
-   - Followers, following, account age
-   - Newest post date + days since
-   - Post cadence (posts / 30d)
-   - Avg likes, replies, reposts on last N posts
-   - **Engagement rate** = avg engagements / followers
-   - **Heuristic "% likely fake"** score with a plain-English explanation of what went into it (follower/following ratio, engagement-per-follower vs peer baseline, post cadence gap, default-avatar rate on a sample). Labeled clearly as an estimate, not an audit.
-4. **The argument** — prose: *Why is Kaspa on the Top 100? Does it belong?* Sourced bullet points, links.
-5. **What TXC has to beat** — 3–4 concrete gaps (followers, volume, exchange count) with our current number next to Kaspa's.
+Everything approved is versioned, so a season page is the canon plus its accumulated approved contributions, and the page shows a "last updated / N contributions" line.
 
-### Data & backend
+### Access model
+- Submitting: no account needed, but requires a name/handle + email (email hidden publicly), rate-limited per IP.
+- Approving: auth-gated admin route, admin role checked server-side via a `user_roles` table + `has_role()` — the project has no auth yet, so this adds a minimal email/password sign-in used only for the admin route.
 
-- **CMC API** (`CMC_API_KEY` already in secrets) — server function `getCoinSnapshot(symbol)` hitting `/v2/cryptocurrency/quotes/latest` and `/v2/cryptocurrency/info`. Cached ~5 min via TanStack Query `staleTime`.
-- **X / socials** — no X API key configured yet. Two options for the first pass:
-  - (a) **Manual input** into a `hit_list_coins` table (I hand-collect Kaspa's numbers by scraping/observing, store them with a `snapshot_at` timestamp so the page shows "as of {date}"). Zero new secrets, ships today.
-  - (b) **Firecrawl** the public X profile page for follower count + last post; still no fake-score without API access to per-post engagement. Fragile.
+## Technical section
 
-  Plan proposes **(a) for Kaspa** so we can ship the page and the argument now. I'll flag in the plan section below what an X API upgrade would unlock later.
-- **Heuristic fake-follower score** — computed in a small pure function from stored inputs (`followers`, `following`, `avg_engagement`, `posts_last_30d`, `default_avatar_rate`). Formula shown on the page for transparency.
+- `src/routes/screenplay.tsx`, `screenplay_.$season.tsx`, `screenplay_.admin.tsx` (under an auth gate)
+- Tables (with GRANTs + RLS):
+  - `screenplay_seasons` — number, slug, title, logline, status
+  - `screenplay_beats` — season, order, title, body, kind (`scene` | `character` | `note`)
+  - `screenplay_contributions` — season/beat ref, kind, contributor name/email, raw pitch, ai_draft, final_body, media_url, status (`pending`/`approved`/`rejected`), reviewed_at
+  - `user_roles` + `app_role` enum + `has_role()` security-definer fn
+- Season canon (Part 1) seeded as literal INSERTs in the migration so the pages are full on first load.
+- `src/lib/screenplay.functions.ts` — public reads, `draftContribution` (Lovable AI Gateway, `google/gemini-3-flash`-class chat model, screenplay-format system prompt + season context), `submitContribution`; admin fns behind `requireSupabaseAuth` + role check.
+- Auth: `/auth` route, `src/routes/_authenticated/` gate for the admin screen, `attachSupabaseAuth` in `src/start.ts`.
+- Nav: "Screenplay" added to the Resources dropdown; footer link.
+- Head metadata unique per route; footer keeps the standard honest.money / terms / privacy / manifesto set.
 
-### Database
+## Suggested build order
 
-New table `hit_list_coins` (public read via anon SELECT policy; writes admin-only via service role):
-- `slug` (pk, e.g. `kaspa`)
-- `cmc_id`, `cmc_rank`, `symbol`, `name`
-- `x_handle`, `x_followers`, `x_following`, `x_last_post_at`, `x_posts_30d`, `x_avg_likes`, `x_avg_replies`, `x_avg_reposts`, `x_default_avatar_pct`
-- `snapshot_at`
-- `verdict` (`leftover` | `earned` | `coasting` | `unrated`), `verdict_note` (markdown)
-- `argument_markdown` (long-form "should they be here?" writeup)
-- `published` (bool)
+1. Migration + seeded three-season treatment + `/screenplay` and season pages (read-only). You can read it and react.
+2. AI-drafted pitch flow + suggestion queue + admin approval + auth.
 
-Grants + RLS policies included in migration.
-
-### Files created / edited
-
-- `src/routes/market.tsx` — new page (hero, TXC snapshot, milestones, hit list grid)
-- `src/routes/market_.$slug.tsx` — coin deep-dive (Kaspa first)
-- `src/lib/market.functions.ts` — `getCoinSnapshot`, `listHitList`, `getHitListCoin` server fns
-- `src/lib/fake-score.ts` — heuristic scoring util (pure, tested inline)
-- `supabase/migrations/*_hit_list_coins.sql` — table + grants + RLS + seed row for Kaspa
-- `src/components/site/Header.tsx` — add `/market` to nav
-- `src/components/site/Footer.tsx` — link to `/market`
-- `src/lib/mcp/tools/list-hit-list.ts` + register in `src/lib/mcp/index.ts` — expose the hit list to agents too
-
-Head metadata on both routes: unique title/description/og for shareability.
-
-## Phase 2 — scaling to the full 100 (next pass, not this one)
-
-Once Kaspa reads well, we template it:
-1. Seed `hit_list_coins` with the current CMC Top 100 (one-time script using CMC API).
-2. Decide on socials pipeline: either add an X API key (unlocks automated followers/engagement/post cadence + a real fake-score) or continue manual + Firecrawl. I'll surface the tradeoff again once you've seen Kaspa live.
-3. Build a small internal editor route (auth-gated) so you can update verdicts/arguments without SQL.
-4. Add sort/filter on `/market` (rank, followers, engagement, "leftover" verdict).
-
-## Open questions I'm NOT blocking on — will use these defaults unless you say otherwise
-
-- **Nav placement:** add "Market" between "Buy" and "Build".
-- **TXC's own numbers:** pull live from CMC using our CMC ID. If TXC isn't on CMC yet, fall back to on-chain / manual values with a "not yet listed on CMC" note.
-- **Verdict tone:** honest but not snarky — this is a serious argument, not a hit piece. (Even though it's called the Hit List.)
-
-Say the word and I'll build Phase 1.
+Say go and I'll start with step 1 so you have something to read today.
