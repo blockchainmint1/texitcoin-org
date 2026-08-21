@@ -122,9 +122,9 @@ export function Footer() {
             ecosystem.
           </div>
           <div className="flex items-center gap-6">
+            <Link to="/legal" className="hover:text-foreground">Legal</Link>
             <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
             <Link to="/terms" className="hover:text-foreground">Terms</Link>
-            <Link to="/disclosures" className="hover:text-foreground">Disclosures</Link>
             <Link to="/stats" className="hover:text-foreground">Site Stats</Link>
           </div>
         </div>
