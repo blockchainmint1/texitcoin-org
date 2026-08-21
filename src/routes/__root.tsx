@@ -226,10 +226,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="pb-16">
-        <Outlet />
-      </div>
-      <CourtCountdown />
+      <Outlet />
       <Tracker />
     </QueryClientProvider>
   );
