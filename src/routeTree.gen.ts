@@ -45,16 +45,19 @@ import { Route as BuyRouteImport } from './routes/buy'
 import { Route as BuildRouteImport } from './routes/build'
 import { Route as BobbyRouteImport } from './routes/bobby'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as TheCaseForTEXITcoinDothtmlRouteImport } from './routes/The-Case-for-TEXITcoin[.]html'
 import { Route as NewsAndUpdatesDothtmlRouteImport } from './routes/News-and-Updates[.]html'
 import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.]html'
 import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
 import { Route as ScreenplaySeasonRouteImport } from './routes/screenplay_.$season'
 import { Route as MarketSlugRouteImport } from './routes/market_.$slug'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as AuthenticatedScreenplayAdminRouteImport } from './routes/_authenticated/screenplay-admin'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -250,6 +253,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TheCaseForTEXITcoinDothtmlRoute =
   TheCaseForTEXITcoinDothtmlRouteImport.update({
     id: '/The-Case-for-TEXITcoin.html',
@@ -272,6 +280,10 @@ const DiscoverTEXITcoinDothtmlRoute =
     path: '/Discover-TEXITcoin.html',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -302,6 +314,12 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedScreenplayAdminRoute =
+  AuthenticatedScreenplayAdminRouteImport.update({
+    id: '/screenplay-admin',
+    path: '/screenplay-admin',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
   Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
     id: '/.well-known/oauth-protected-resource',
@@ -387,6 +405,7 @@ export interface FileRoutesByFullPath {
   '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
   '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/bobby': typeof BobbyRoute
   '/build': typeof BuildRoute
@@ -425,6 +444,7 @@ export interface FileRoutesByFullPath {
   '/zoom': typeof ZoomRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/market/$slug': typeof MarketSlugRoute
@@ -449,6 +469,7 @@ export interface FileRoutesByTo {
   '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
   '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/bobby': typeof BobbyRoute
   '/build': typeof BuildRoute
@@ -487,6 +508,7 @@ export interface FileRoutesByTo {
   '/zoom': typeof ZoomRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/market/$slug': typeof MarketSlugRoute
@@ -508,10 +530,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/Discover-TEXITcoin.html': typeof DiscoverTEXITcoinDothtmlRoute
   '/Meet-the-Team.html': typeof MeetTheTeamDothtmlRoute
   '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/bobby': typeof BobbyRoute
   '/build': typeof BuildRoute
@@ -550,6 +574,7 @@ export interface FileRoutesById {
   '/zoom': typeof ZoomRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/_authenticated/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/market_/$slug': typeof MarketSlugRoute
@@ -576,6 +601,7 @@ export interface FileRouteTypes {
     | '/Meet-the-Team.html'
     | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
+    | '/auth'
     | '/blog'
     | '/bobby'
     | '/build'
@@ -614,6 +640,7 @@ export interface FileRouteTypes {
     | '/zoom'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/screenplay-admin'
     | '/blog/$slug'
     | '/email/unsubscribe'
     | '/market/$slug'
@@ -638,6 +665,7 @@ export interface FileRouteTypes {
     | '/Meet-the-Team.html'
     | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
+    | '/auth'
     | '/blog'
     | '/bobby'
     | '/build'
@@ -676,6 +704,7 @@ export interface FileRouteTypes {
     | '/zoom'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/screenplay-admin'
     | '/blog/$slug'
     | '/email/unsubscribe'
     | '/market/$slug'
@@ -696,10 +725,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/Discover-TEXITcoin.html'
     | '/Meet-the-Team.html'
     | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
+    | '/auth'
     | '/blog'
     | '/bobby'
     | '/build'
@@ -738,6 +769,7 @@ export interface FileRouteTypes {
     | '/zoom'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/_authenticated/screenplay-admin'
     | '/blog_/$slug'
     | '/email/unsubscribe'
     | '/market_/$slug'
@@ -759,10 +791,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   DiscoverTEXITcoinDothtmlRoute: typeof DiscoverTEXITcoinDothtmlRoute
   MeetTheTeamDothtmlRoute: typeof MeetTheTeamDothtmlRoute
   NewsAndUpdatesDothtmlRoute: typeof NewsAndUpdatesDothtmlRoute
   TheCaseForTEXITcoinDothtmlRoute: typeof TheCaseForTEXITcoinDothtmlRoute
+  AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRoute
   BobbyRoute: typeof BobbyRoute
   BuildRoute: typeof BuildRoute
@@ -1074,6 +1108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/The-Case-for-TEXITcoin.html': {
       id: '/The-Case-for-TEXITcoin.html'
       path: '/The-Case-for-TEXITcoin.html'
@@ -1100,6 +1141,13 @@ declare module '@tanstack/react-router' {
       path: '/Discover-TEXITcoin.html'
       fullPath: '/Discover-TEXITcoin.html'
       preLoaderRoute: typeof DiscoverTEXITcoinDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -1143,6 +1191,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/screenplay-admin': {
+      id: '/_authenticated/screenplay-admin'
+      path: '/screenplay-admin'
+      fullPath: '/screenplay-admin'
+      preLoaderRoute: typeof AuthenticatedScreenplayAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/.well-known/oauth-protected-resource': {
       id: '/.well-known/oauth-protected-resource'
@@ -1245,12 +1300,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedScreenplayAdminRoute: typeof AuthenticatedScreenplayAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedScreenplayAdminRoute: AuthenticatedScreenplayAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   DiscoverTEXITcoinDothtmlRoute: DiscoverTEXITcoinDothtmlRoute,
   MeetTheTeamDothtmlRoute: MeetTheTeamDothtmlRoute,
   NewsAndUpdatesDothtmlRoute: NewsAndUpdatesDothtmlRoute,
   TheCaseForTEXITcoinDothtmlRoute: TheCaseForTEXITcoinDothtmlRoute,
+  AuthRoute: AuthRoute,
   BlogRoute: BlogRoute,
   BobbyRoute: BobbyRoute,
   BuildRoute: BuildRoute,

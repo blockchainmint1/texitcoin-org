@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { ArrowLeft, Clapperboard, Info } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { PitchDialog } from "@/components/site/PitchDialog";
 import { getSeason } from "@/lib/screenplay.functions";
 
 const seasonQuery = (slug: string) =>
@@ -119,6 +120,19 @@ function SeasonPage() {
                       Contributed by {beat.credit}
                     </p>
                   )}
+                  <div className="mt-3">
+                    <PitchDialog
+                      seasonSlug={season.slug}
+                      beatId={beat.id}
+                      beatTitle={beat.title}
+                      defaultKind="note"
+                      trigger={
+                        <button className="text-xs font-mono uppercase tracking-widest text-muted-foreground underline underline-offset-4 hover:text-foreground">
+                          Add a note to this beat
+                        </button>
+                      }
+                    />
+                  </div>
                 </li>
               ))}
             </ol>
@@ -140,9 +154,12 @@ function SeasonPage() {
             <h2 className="font-display text-2xl font-bold">Got a note?</h2>
             <p className="mt-3 text-muted-foreground leading-relaxed">
               Wrong detail, missing scene, better character, a photo or a clip from the
-              actual day — the writers' room submission box opens next, and every
-              approved contribution gets credited right here on the beat.
+              actual day. Pitch it rough — AI drafts it in the house voice, you edit it,
+              and every approved contribution gets credited right here on the beat.
             </p>
+            <div className="mt-6">
+              <PitchDialog seasonSlug={season.slug} />
+            </div>
           </div>
         </article>
       </main>

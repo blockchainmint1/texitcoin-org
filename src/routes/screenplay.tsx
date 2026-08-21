@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Clapperboard, Users, PenLine } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { PitchDialog } from "@/components/site/PitchDialog";
 import { listSeasons } from "@/lib/screenplay.functions";
 
 const seasonsQuery = queryOptions({
@@ -219,15 +220,14 @@ function ScreenplayIndex() {
               You were there. Help write it.
             </h2>
             <p className="mt-4 max-w-2xl text-muted-foreground leading-relaxed">
-              The plan: pitch a scene, a correction, a character, a photo, or a clip in
-              plain language. AI drafts it up in screenplay style, it lands in a
+              Pitch a scene, a correction, a character, a photo, or a clip in plain
+              language. AI drafts it up in screenplay style, you edit it, it lands in a
               suggestion queue, and approved contributions get folded into the season
               treatment with your name on the beat — Wikipedia rules, Texas manners.
             </p>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Submissions open next. In the meantime, read the seasons and start
-              collecting your notes.
-            </p>
+            <div className="mt-6">
+              <PitchDialog />
+            </div>
           </div>
         </section>
       </main>
