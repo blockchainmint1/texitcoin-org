@@ -24,6 +24,7 @@ import { Route as TeamRouteImport } from './routes/team'
 import { Route as StatsRouteImport } from './routes/stats'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SecAndCryptoRouteImport } from './routes/sec-and-crypto'
+import { Route as ScreenplayRouteImport } from './routes/screenplay'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -141,6 +142,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SecAndCryptoRoute = SecAndCryptoRouteImport.update({
   id: '/sec-and-crypto',
   path: '/sec-and-crypto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScreenplayRoute = ScreenplayRouteImport.update({
+  id: '/screenplay',
+  path: '/screenplay',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -395,6 +401,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/screenplay': typeof ScreenplayRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -455,6 +462,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/screenplay': typeof ScreenplayRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -516,6 +524,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/screenplay': typeof ScreenplayRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -578,6 +587,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/screenplay'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -638,6 +648,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/screenplay'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -698,6 +709,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/screenplay'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -759,6 +771,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   RoadmapRoute: typeof RoadmapRoute
+  ScreenplayRoute: typeof ScreenplayRoute
   SecAndCryptoRoute: typeof SecAndCryptoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatsRoute: typeof StatsRoute
@@ -899,6 +912,13 @@ declare module '@tanstack/react-router' {
       path: '/sec-and-crypto'
       fullPath: '/sec-and-crypto'
       preLoaderRoute: typeof SecAndCryptoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/screenplay': {
+      id: '/screenplay'
+      path: '/screenplay'
+      fullPath: '/screenplay'
+      preLoaderRoute: typeof ScreenplayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/roadmap': {
@@ -1231,6 +1251,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
   RoadmapRoute: RoadmapRoute,
+  ScreenplayRoute: ScreenplayRoute,
   SecAndCryptoRoute: SecAndCryptoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatsRoute: StatsRoute,
