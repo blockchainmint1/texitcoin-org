@@ -42,7 +42,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
     title: "Connect",
     links: [
       { label: "X / Twitter", href: "https://x.com/texitcoin" },
-      { label: "YouTube", href: "https://www.youtube.com/@HonestMoneyEcosystem" },
+      { label: "YouTube", href: "https://www.youtube.com/@TEXITcoinOfficial" },
       { label: "TikTok", href: "https://www.tiktok.com/@texitcoins" },
       { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61559875176657" },
     ],
