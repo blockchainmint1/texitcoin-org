@@ -197,6 +197,109 @@ const TIMELINE = [
   { year: "Mar 1, 2021", text: "Case formally terminated after the claims process ran its course." },
 ];
 
+/**
+ * Paste the YouTube video ID here (the part after `v=`) to embed the
+ * "Silver Bullet Silver Shield" story video. Leave null to hide the embed.
+ */
+const SBSS_VIDEO_ID: string | null = null;
+
+type Aftermath = {
+  company: string;
+  role: string;
+  headline: string;
+  body: string[];
+  facts: { k: string; v: string }[];
+  links: { label: string; href: string }[];
+};
+
+const AFTERMATH: Aftermath[] = [
+  {
+    company: "NTR Metals / Elemetal",
+    role: "The buyer of Mulligan Mint's assets",
+    headline: "Bought the mint in 2014. Pleaded guilty to a federal money-laundering failure in 2018.",
+    body: [
+      "NTR Metals, LLC — a Dallas subsidiary of Elemetal, LLC — acquired substantially all of Mulligan Mint's assets out of the Chapter 11 case in March 2014. Four years later, NTR's Miami arm was at the center of one of the largest precious-metals money-laundering prosecutions in U.S. history.",
+      "Federal prosecutors in the Southern District of Florida alleged that NTR Metals Miami imported roughly $3.6 billion in illegally sourced South American gold — much of it from illegal Amazon mining operations in Peru — and that the trade was used to launder narcotics proceeds. Three NTR traders pleaded guilty. Samer Barrage was sentenced to 6 years 8 months and Juan Pablo Granda to 6 years on January 19, 2018; Renato Rodriguez received the longest term of the three.",
+      "On March 30, 2018, Elemetal itself pleaded guilty in Miami federal court to failing to maintain an adequate anti-money-laundering program and agreed to a $15 million fine. A year earlier, on March 31, 2017, the LBMA had quietly moved the Elemetal brand to its Former List — stripping Good Delivery status — and COMEX suspended its bars for futures delivery. Elemetal announced it was exiting South American gold entirely and its refining business wound down.",
+    ],
+    facts: [
+      { k: "Alleged laundered gold", v: "~$3.6 billion" },
+      { k: "Corporate plea", v: "Mar 30, 2018 · AML program failure" },
+      { k: "Corporate fine", v: "$15 million" },
+      { k: "Accreditation", v: "LBMA Good Delivery revoked, Mar 31, 2017" },
+    ],
+    links: [
+      {
+        label: "DOJ: U.S. gold refinery pleads guilty to failure to maintain adequate AML program",
+        href: "https://www.justice.gov/usao-sdfl/pr/us-gold-refinery-pleads-guilty-charge-failure-maintain-adequate-anti-money-laundering",
+      },
+      {
+        label: "DOJ: Four Peruvian members of multi-billion-dollar gold money laundering scheme indicted",
+        href: "https://www.justice.gov/usao-sdfl/pr/four-peruvian-members-multi-billion-dollar-international-gold-money-laundering-scheme",
+      },
+      {
+        label: "AP: Two sentenced for laundering billions in South American gold",
+        href: "https://apnews.com/article/e81052ac75884157872f55958b9728a3",
+      },
+      {
+        label: "Bloomberg: Gold company manager charged in vast Peruvian smuggling scheme",
+        href: "https://www.bloomberg.com/news/articles/2017-03-16/gold-company-manager-charged-in-vast-peruvian-smuggling-scheme",
+      },
+      {
+        label: "Mongabay: Guilty pleas in South American rainforest gold laundering cases",
+        href: "https://news.mongabay.com/2017/09/guilty-pleas-entered-in-south-american-rainforest-gold-laundering-cases/",
+      },
+      {
+        label: "CME notice MKR03-31-17 — brand suspension",
+        href: "https://www.cmegroup.com/notices/market-regulation/2017/03/MKR03-31-17.html",
+      },
+      {
+        label: "Jones Day: NTR Metals purchases substantially all assets of Mulligan Mint",
+        href: "https://www.jonesday.com/en/practices/experience/2014/03/ntr-metals-purchases-substantially-all-assets-of-mulligan-mint",
+      },
+    ],
+  },
+  {
+    company: "Republic Metals Corporation",
+    role: "The bullion supplier that sued Mulligan Mint",
+    headline: "The refiner on the other side of the lawsuit went bankrupt in 2018 — about $100 million of metal unaccounted for.",
+    body: [
+      "Republic Metals Corporation was the Miami refiner that litigated against Mulligan Mint across two federal cases in 2013 and 2014, including the automatic-stay fight that produced the published opinion at 516 B.R. 407.",
+      "On November 2, 2018, Republic filed for Chapter 11 in the Southern District of New York, later renamed Miami Metals I, Inc. (Case No. 18-13359, jointly administered). The stated cause was blunt: a significant discrepancy in its inventory accounting. Reporting put the missing gold and silver at roughly $100 million. The petition listed $100 million to $500 million in liabilities against $1 million to $10 million in assets.",
+      "Japan's Asahi Holdings won the bankruptcy auction and acquired substantially all of Republic's assets for $25.5 million in early 2019. The case terminated April 3, 2020. Within roughly two years, both of the largest private producers of bullion bars and rounds in the United States — Elemetal and Republic — were gone.",
+    ],
+    facts: [
+      { k: "Filed", v: "Nov 2, 2018 · S.D.N.Y." },
+      { k: "Case", v: "No. 18-13359 (Miami Metals I, Inc.)" },
+      { k: "Metal unaccounted for", v: "~$100 million" },
+      { k: "Outcome", v: "Sold to Asahi Holdings for $25.5M" },
+    ],
+    links: [
+      {
+        label: "Bloomberg Law: Republic Metals is said to be $100 million short in gold, silver",
+        href: "https://news.bloomberglaw.com/mergers-and-acquisitions/republic-metals-is-said-to-be-100-million-short-in-gold-silver",
+      },
+      {
+        label: "Bloomberg Law: Precious metal refiner Republic Metals files bankruptcy in New York",
+        href: "https://news.bloomberglaw.com/bankruptcy-law/precious-metal-refiner-republic-metals-files-bankruptcy-in-new-york",
+      },
+      {
+        label: "Reuters: Asahi wins auction for Republic Metals Corporation",
+        href: "https://www.reuters.com/article/business/gold-refiner-asahi-wins-auction-for-republic-metals-corporation-sources-idUSKCN1PQ5A0/",
+      },
+      {
+        label: "Official claims agent docket — In re Miami Metals I, Inc.",
+        href: "https://bankruptcy.angeiongroup.com/Clients/rmetals/Index",
+      },
+      {
+        label: "Asahi Holdings investor disclosure (Feb 1, 2019)",
+        href: "https://www.are-holdings.com/Portals/0/english/news/assets/20190201_2_E.pdf",
+      },
+    ],
+  },
+];
+
+
 function ReceiptList({
   icon: Icon,
   title,
