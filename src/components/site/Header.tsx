@@ -34,6 +34,7 @@ const NAV: NavItem[] = [
       { label: "Legal Updates", href: "/legal", internal: true },
       { label: "Troll Index", href: "/trolls", internal: true },
       { label: "Videos & Media", href: "/videos", internal: true },
+      { label: "The Screenplay", href: "/screenplay", internal: true },
       { label: "Why Texas", href: "/texas", internal: true },
       { label: "Identity & Press Kit", href: "/press", internal: true },
       { label: "Blog", href: "/blog", internal: true },
