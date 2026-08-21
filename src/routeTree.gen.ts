@@ -28,6 +28,7 @@ import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PressRouteImport } from './routes/press'
+import { Route as PhilosophyRouteImport } from './routes/philosophy'
 import { Route as MineRouteImport } from './routes/mine'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -159,6 +160,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PressRoute = PressRouteImport.update({
   id: '/press',
   path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhilosophyRoute = PhilosophyRouteImport.update({
+  id: '/philosophy',
+  path: '/philosophy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MineRoute = MineRouteImport.update({
@@ -377,6 +383,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
+  '/philosophy': typeof PhilosophyRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -435,6 +442,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
+  '/philosophy': typeof PhilosophyRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -494,6 +502,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/mine': typeof MineRoute
+  '/philosophy': typeof PhilosophyRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
@@ -554,6 +563,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/merch'
     | '/mine'
+    | '/philosophy'
     | '/press'
     | '/privacy'
     | '/proof-of-work'
@@ -612,6 +622,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/merch'
     | '/mine'
+    | '/philosophy'
     | '/press'
     | '/privacy'
     | '/proof-of-work'
@@ -670,6 +681,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/merch'
     | '/mine'
+    | '/philosophy'
     | '/press'
     | '/privacy'
     | '/proof-of-work'
@@ -729,6 +741,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   MerchRoute: typeof MerchRoute
   MineRoute: typeof MineRoute
+  PhilosophyRoute: typeof PhilosophyRoute
   PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
@@ -901,6 +914,13 @@ declare module '@tanstack/react-router' {
       path: '/press'
       fullPath: '/press'
       preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/philosophy': {
+      id: '/philosophy'
+      path: '/philosophy'
+      fullPath: '/philosophy'
+      preLoaderRoute: typeof PhilosophyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mine': {
@@ -1185,6 +1205,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   MerchRoute: MerchRoute,
   MineRoute: MineRoute,
+  PhilosophyRoute: PhilosophyRoute,
   PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
