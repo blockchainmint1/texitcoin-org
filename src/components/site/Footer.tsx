@@ -15,6 +15,7 @@ const COLS: { title: string; links: FooterLink[] }[] = [
       { label: "Currency", href: "/currency", internal: true },
       { label: "Community", href: "/value", internal: true },
       { label: "The Hit List", href: "/market", internal: true },
+      { label: "The Screenplay", href: "/screenplay", internal: true },
     ],
   },
   {
