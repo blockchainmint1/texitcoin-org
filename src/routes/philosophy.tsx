@@ -476,11 +476,13 @@ function PhilosophyPage() {
               Open Legal Record
             </Link>
             <Link
-              to="/blog/our-core-values"
+              to="/blog/$slug"
+              params={{ slug: "our-core-values" }}
               className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:border-primary/60 transition"
             >
               Read: Our Core Values
             </Link>
+
           </div>
         </div>
       </section>
