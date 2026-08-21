@@ -201,7 +201,7 @@ const TIMELINE = [
  * Paste the YouTube video ID here (the part after `v=`) to embed the
  * "Silver Bullet Silver Shield" story video. Leave null to hide the embed.
  */
-const SBSS_VIDEO_ID: string | null = null;
+const SBSS_VIDEO_ID: string | null = "eYwBCwM-4XY";
 
 type Aftermath = {
   company: string;
