@@ -24,6 +24,7 @@ import { Route as TeamRouteImport } from './routes/team'
 import { Route as StatsRouteImport } from './routes/stats'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SecAndCryptoRouteImport } from './routes/sec-and-crypto'
+import { Route as ScreenplayRouteImport } from './routes/screenplay'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -50,6 +51,7 @@ import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.
 import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
+import { Route as ScreenplaySeasonRouteImport } from './routes/screenplay_.$season'
 import { Route as MarketSlugRouteImport } from './routes/market_.$slug'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
@@ -141,6 +143,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SecAndCryptoRoute = SecAndCryptoRouteImport.update({
   id: '/sec-and-crypto',
   path: '/sec-and-crypto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScreenplayRoute = ScreenplayRouteImport.update({
+  id: '/screenplay',
+  path: '/screenplay',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -275,6 +282,11 @@ const ZoomSlugRoute = ZoomSlugRouteImport.update({
   path: '/zoom/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScreenplaySeasonRoute = ScreenplaySeasonRouteImport.update({
+  id: '/screenplay_/$season',
+  path: '/screenplay/$season',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketSlugRoute = MarketSlugRouteImport.update({
   id: '/market_/$slug',
   path: '/market/$slug',
@@ -395,6 +407,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/screenplay': typeof ScreenplayRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -415,6 +428,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/market/$slug': typeof MarketSlugRoute
+  '/screenplay/$season': typeof ScreenplaySeasonRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
@@ -455,6 +469,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/screenplay': typeof ScreenplayRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -475,6 +490,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/market/$slug': typeof MarketSlugRoute
+  '/screenplay/$season': typeof ScreenplaySeasonRoute
   '/zoom/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
@@ -516,6 +532,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
+  '/screenplay': typeof ScreenplayRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -536,6 +553,7 @@ export interface FileRoutesById {
   '/blog_/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/market_/$slug': typeof MarketSlugRoute
+  '/screenplay_/$season': typeof ScreenplaySeasonRoute
   '/zoom_/$slug': typeof ZoomSlugRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
@@ -578,6 +596,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/screenplay'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -598,6 +617,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/email/unsubscribe'
     | '/market/$slug'
+    | '/screenplay/$season'
     | '/zoom/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
@@ -638,6 +658,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/screenplay'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -658,6 +679,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/email/unsubscribe'
     | '/market/$slug'
+    | '/screenplay/$season'
     | '/zoom/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
@@ -698,6 +720,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/proof-of-work'
     | '/roadmap'
+    | '/screenplay'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -718,6 +741,7 @@ export interface FileRouteTypes {
     | '/blog_/$slug'
     | '/email/unsubscribe'
     | '/market_/$slug'
+    | '/screenplay_/$season'
     | '/zoom_/$slug'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
@@ -759,6 +783,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   RoadmapRoute: typeof RoadmapRoute
+  ScreenplayRoute: typeof ScreenplayRoute
   SecAndCryptoRoute: typeof SecAndCryptoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatsRoute: typeof StatsRoute
@@ -779,6 +804,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   MarketSlugRoute: typeof MarketSlugRoute
+  ScreenplaySeasonRoute: typeof ScreenplaySeasonRoute
   ZoomSlugRoute: typeof ZoomSlugRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
@@ -899,6 +925,13 @@ declare module '@tanstack/react-router' {
       path: '/sec-and-crypto'
       fullPath: '/sec-and-crypto'
       preLoaderRoute: typeof SecAndCryptoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/screenplay': {
+      id: '/screenplay'
+      path: '/screenplay'
+      fullPath: '/screenplay'
+      preLoaderRoute: typeof ScreenplayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/roadmap': {
@@ -1083,6 +1116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZoomSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/screenplay_/$season': {
+      id: '/screenplay_/$season'
+      path: '/screenplay/$season'
+      fullPath: '/screenplay/$season'
+      preLoaderRoute: typeof ScreenplaySeasonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/market_/$slug': {
       id: '/market_/$slug'
       path: '/market/$slug'
@@ -1231,6 +1271,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProofOfWorkRoute: ProofOfWorkRoute,
   RoadmapRoute: RoadmapRoute,
+  ScreenplayRoute: ScreenplayRoute,
   SecAndCryptoRoute: SecAndCryptoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatsRoute: StatsRoute,
@@ -1252,6 +1293,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   MarketSlugRoute: MarketSlugRoute,
+  ScreenplaySeasonRoute: ScreenplaySeasonRoute,
   ZoomSlugRoute: ZoomSlugRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
