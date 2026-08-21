@@ -42,6 +42,7 @@ import { Route as CurrencyRouteImport } from './routes/currency'
 import { Route as ClarityRouteImport } from './routes/clarity'
 import { Route as BuyRouteImport } from './routes/buy'
 import { Route as BuildRouteImport } from './routes/build'
+import { Route as BobbyRouteImport } from './routes/bobby'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as TheCaseForTEXITcoinDothtmlRouteImport } from './routes/The-Case-for-TEXITcoin[.]html'
 import { Route as NewsAndUpdatesDothtmlRouteImport } from './routes/News-and-Updates[.]html'
@@ -232,6 +233,11 @@ const BuildRoute = BuildRouteImport.update({
   path: '/build',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BobbyRoute = BobbyRouteImport.update({
+  id: '/bobby',
+  path: '/bobby',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -370,6 +376,7 @@ export interface FileRoutesByFullPath {
   '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
+  '/bobby': typeof BobbyRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
   '/clarity': typeof ClarityRoute
@@ -429,6 +436,7 @@ export interface FileRoutesByTo {
   '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
+  '/bobby': typeof BobbyRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
   '/clarity': typeof ClarityRoute
@@ -489,6 +497,7 @@ export interface FileRoutesById {
   '/News-and-Updates.html': typeof NewsAndUpdatesDothtmlRoute
   '/The-Case-for-TEXITcoin.html': typeof TheCaseForTEXITcoinDothtmlRoute
   '/blog': typeof BlogRoute
+  '/bobby': typeof BobbyRoute
   '/build': typeof BuildRoute
   '/buy': typeof BuyRoute
   '/clarity': typeof ClarityRoute
@@ -550,6 +559,7 @@ export interface FileRouteTypes {
     | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
+    | '/bobby'
     | '/build'
     | '/buy'
     | '/clarity'
@@ -609,6 +619,7 @@ export interface FileRouteTypes {
     | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
+    | '/bobby'
     | '/build'
     | '/buy'
     | '/clarity'
@@ -668,6 +679,7 @@ export interface FileRouteTypes {
     | '/News-and-Updates.html'
     | '/The-Case-for-TEXITcoin.html'
     | '/blog'
+    | '/bobby'
     | '/build'
     | '/buy'
     | '/clarity'
@@ -728,6 +740,7 @@ export interface RootRouteChildren {
   NewsAndUpdatesDothtmlRoute: typeof NewsAndUpdatesDothtmlRoute
   TheCaseForTEXITcoinDothtmlRoute: typeof TheCaseForTEXITcoinDothtmlRoute
   BlogRoute: typeof BlogRoute
+  BobbyRoute: typeof BobbyRoute
   BuildRoute: typeof BuildRoute
   BuyRoute: typeof BuyRoute
   ClarityRoute: typeof ClarityRoute
@@ -1014,6 +1027,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuildRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bobby': {
+      id: '/bobby'
+      path: '/bobby'
+      fullPath: '/bobby'
+      preLoaderRoute: typeof BobbyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
@@ -1192,6 +1212,7 @@ const rootRouteChildren: RootRouteChildren = {
   NewsAndUpdatesDothtmlRoute: NewsAndUpdatesDothtmlRoute,
   TheCaseForTEXITcoinDothtmlRoute: TheCaseForTEXITcoinDothtmlRoute,
   BlogRoute: BlogRoute,
+  BobbyRoute: BobbyRoute,
   BuildRoute: BuildRoute,
   BuyRoute: BuyRoute,
   ClarityRoute: ClarityRoute,
