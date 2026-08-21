@@ -4,6 +4,8 @@ import { ArrowRight, Coins, Landmark, Bitcoin, Lock, Flag, Quote } from "lucide-
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import heroImg from "@/assets/leadership-hero.jpg";
+import bobbyStoryImg from "@/assets/bobby-story/story-coins-hero.jpg.asset.json";
+
 
 export const Route = createFileRoute("/leadership")({
   head: () => ({
