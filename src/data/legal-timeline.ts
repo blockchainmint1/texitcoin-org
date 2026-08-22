@@ -11,6 +11,14 @@ export type Entry = {
 
 export const ENTRIES: Entry[] = [
   {
+    date: "23 Aug 2026",
+    title: "We Waited for Clarity; Now We Go Back to Work",
+    tone: "win",
+    tag: "BACK TO WORK",
+    body: "We don't need a new law to tell us what we already knew: we did nothing wrong, and we were never the fraud the state accused us of being. Out of an abundance of caution, we shut down sales everywhere — even though the Cease & Desist technically applied only in Texas — to protect this community and avoid digging a deeper hole. Now the hearing is behind us, the facts are in evidence, and we're ready to reopen Mining Package sales outside of Texas. This is not a reopening in Texas: Texans still cannot buy, sell, or earn hash power, and we will not violate the C&D that remains in place there. We will find other ways for our huge Texas community to stay involved. Sales resume 23 August 2026 at midnight UTC.",
+  },
+
+  {
     date: "20 Aug 2026",
     title: "Court Is Adjourned — What We Learned",
     tone: "win",
@@ -21,6 +29,7 @@ export const ENTRIES: Entry[] = [
       href: "/zoom/2026-08-20-tssb-vs-texitcoin-rewind",
     },
   },
+
 
   {
     date: "17 Aug 2026",
