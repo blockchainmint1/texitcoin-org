@@ -17,6 +17,7 @@ export type Database = {
       blog_posts: {
         Row: {
           author: string
+          author_role: string | null
           body_markdown: string
           created_at: string
           date: string
@@ -31,6 +32,7 @@ export type Database = {
         }
         Insert: {
           author: string
+          author_role?: string | null
           body_markdown: string
           created_at?: string
           date: string
@@ -45,6 +47,7 @@ export type Database = {
         }
         Update: {
           author?: string
+          author_role?: string | null
           body_markdown?: string
           created_at?: string
           date?: string
