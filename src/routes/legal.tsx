@@ -148,9 +148,9 @@ function LegalPage() {
                     <Scale className="mx-auto h-20 w-20 text-primary" strokeWidth={1.5} />
                     <div className="mt-4 font-display text-2xl font-bold">SOAH Docket</div>
                     <div className="mt-1 text-sm text-muted-foreground">312-26-14427</div>
-                    <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                      <Calendar className="h-3.5 w-3.5" />
-                      Aug 17–20, 2026
+                    <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      Court adjourned 20 Aug 2026
                     </div>
                   </div>
                 </div>
