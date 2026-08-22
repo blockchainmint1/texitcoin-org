@@ -23,6 +23,7 @@ function toDTO(row: Row): BlogPostDTO {
     title: row.title,
     date: row.date,
     author: row.author,
+    authorRole: row.author_role,
     tag: row.tag,
     readMinutes: row.read_minutes,
     excerpt: row.excerpt,
