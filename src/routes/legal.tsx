@@ -88,7 +88,8 @@ function useLegalFees() {
 function getTLDR(feesAmount: string | null) {
   return [
     "Court adjourned August 20, 2026 — we stood our ground and made the record",
-    "Mining Packages remain paused globally until the Cease & Desist is lifted",
+    "Mining Package sales resume outside Texas on 23 Aug 2026 at midnight UTC",
+    "Texas remains restricted — no buying, selling, or earning hash power under the C&D",
     "Avi Perry from Quinn Emanuel leads our legal team",
     `${feesAmount ?? "$973,000+"} out of pocket so far on legal costs (and climbing)`,
     "TEXITcoin network remains active — no disruption in service to community",
