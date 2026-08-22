@@ -8,6 +8,7 @@ export type BlogPostDTO = {
   title: string;
   date: string;
   author: string;
+  authorRole: string | null;
   tag: string;
   readMinutes: number;
   excerpt: string;
