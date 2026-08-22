@@ -140,7 +140,7 @@ function BlogPostPage() {
               <div className="text-sm">
                 <div className="font-semibold text-foreground">{post.author}</div>
                 <div className="text-xs uppercase tracking-wider text-muted-foreground">
-                  Founder, TEXITcoin
+                  {post.authorRole || "Founder, TEXITcoin"}
                 </div>
               </div>
             </div>
