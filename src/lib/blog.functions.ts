@@ -8,6 +8,7 @@ export type BlogPostDTO = {
   title: string;
   date: string;
   author: string;
+  authorRole: string | null;
   tag: string;
   readMinutes: number;
   excerpt: string;
@@ -22,6 +23,7 @@ function toDTO(row: Row): BlogPostDTO {
     title: row.title,
     date: row.date,
     author: row.author,
+    authorRole: row.author_role,
     tag: row.tag,
     readMinutes: row.read_minutes,
     excerpt: row.excerpt,
@@ -42,7 +44,7 @@ export const listBlogPosts = createServerFn({ method: "GET" }).handler(
     const supabase = publicClient();
     const { data, error } = await supabase
       .from("blog_posts")
-      .select("slug,title,date,author,tag,read_minutes,excerpt,body_markdown")
+      .select("slug,title,date,author,author_role,tag,read_minutes,excerpt,body_markdown")
       .eq("published", true)
       .order("date", { ascending: false });
     if (error) {
@@ -62,7 +64,7 @@ export const getBlogPost = createServerFn({ method: "GET" })
     const supabase = publicClient();
     const { data: row, error } = await supabase
       .from("blog_posts")
-      .select("slug,title,date,author,tag,read_minutes,excerpt,body_markdown")
+      .select("slug,title,date,author,author_role,tag,read_minutes,excerpt,body_markdown")
       .eq("published", true)
       .eq("slug", data.slug)
       .maybeSingle();
