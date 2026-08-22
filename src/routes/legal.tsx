@@ -158,53 +158,31 @@ function LegalPage() {
             </div>
           </motion.div>
 
-          {/* LIVE hearing banner */}
+          {/* Hearing concluded */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative mt-12 overflow-hidden rounded-3xl border border-primary/40 bg-primary/10 p-8 md:p-10 shadow-glow"
+            className="relative mt-12 overflow-hidden rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-8 md:p-10"
           >
-            <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
+            <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-emerald-500/20 blur-3xl" />
             <div className="relative">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-background/60 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-primary" />
-                Live now · 17 Aug 2026 · 9:00am CT
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-background/60 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-300">
+                <CheckCircle2 className="h-4 w-4" />
+                Court adjourned · 20 Aug 2026
               </div>
               <h2 className="mt-4 font-display text-3xl font-bold md:text-4xl text-balance">
-                Our day in court is <span className="text-primary">today</span> — and you can watch it.
+                We showed up, stood tall, and made the record.
               </h2>
-              <div className="mt-4 space-y-4 text-base leading-relaxed text-foreground/85 md:text-lg">
-                <p>
-                  The SOAH hearing in <strong>TSSB v. TEXITcoin</strong> (Docket 312-26-14427)
-                  begins this morning at 9:00am Central and runs through August 20. It is
-                  being streamed publicly. No closed doors, no filtered recap — watch the
-                  whole thing yourself, live.
-                </p>
-                <p>
-                  This is a big deal. TEXITcoin is the gold standard in transparency: we
-                  published every filing, every cost, every setback on this page as it
-                  happened, and we&apos;re not about to hide the main event.{" "}
-                  <strong>Avi Perry and the Quinn Emanuel team</strong> now get to put on a
-                  masterclass in crypto law — on the record, in front of an administrative
-                  law judge.
-                </p>
-                <p>
-                  What&apos;s at stake goes past one Texas docket. Regulation by enforcement
-                  has been the default posture toward this industry for years: no clear rule,
-                  just a lawsuit after the fact. A clean, fully-argued record on whether a
-                  mined, proof-of-work currency is a security is exactly how that era ends.
-                  We like our case. Come see it.
-                </p>
-              </div>
+              <p className="mt-4 text-base leading-relaxed text-foreground/85 md:text-lg">
+                The contested hearing in <strong>TSSB v. TEXITcoin</strong> has concluded. We didn't back down, we didn't hide, and we didn't let the spotlight slip off the facts. Because this community resources its own defense, we walked into SOAH with the best legal minds in the business, the receipts to back every word, and a network that kept running the whole time. We managed money well, told the truth, operated with zero fraud, and now wait for the briefs and the judge's proposal due by year-end. This is what transparency looks like when it matters most.
+              </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="https://www.youtube.com/watch?v=LRFibju8xn4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition hover:opacity-90"
+                  href="/zoom/2026-08-20-tssb-vs-texitcoin-rewind"
+                  className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:opacity-90"
                 >
-                  Watch the hearing live <ExternalLink className="h-4 w-4" />
+                  Watch the live call review <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="#timeline"
@@ -215,6 +193,7 @@ function LegalPage() {
               </div>
             </div>
           </motion.div>
+
 
 
           {/* TL;DR Card */}
