@@ -44,7 +44,7 @@ export const listBlogPosts = createServerFn({ method: "GET" }).handler(
     const supabase = publicClient();
     const { data, error } = await supabase
       .from("blog_posts")
-      .select("slug,title,date,author,tag,read_minutes,excerpt,body_markdown")
+      .select("slug,title,date,author,author_role,tag,read_minutes,excerpt,body_markdown")
       .eq("published", true)
       .order("date", { ascending: false });
     if (error) {
