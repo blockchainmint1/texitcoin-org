@@ -11,6 +11,18 @@ export type Entry = {
 
 export const ENTRIES: Entry[] = [
   {
+    date: "20 Aug 2026",
+    title: "Court Is Adjourned — What We Learned",
+    tone: "win",
+    tag: "WE STOOD TALL",
+    body: "The SOAH hearing has concluded and the court is adjourned. We didn't back down. We showed up. We stood tall, and we put the spotlight exactly where it needed to go: on the facts, on the record, and on the truth. Because this community resources its own defense, we walked in with the industry's very best at our side. We managed money well, told the truth, operated with zero fraud, and built a public record that speaks for itself. Now we turn to the briefs and the judge's proposal, due by the end of the year. Whatever comes next, the story of TEXITcoin will be one of transparency under pressure.",
+    link: {
+      label: "Watch the live call review →",
+      href: "/zoom/2026-08-20-tssb-vs-texitcoin-rewind",
+    },
+  },
+
+  {
     date: "17 Aug 2026",
     title: "Hearing Day — Live from SOAH, 9:00am CT",
     tone: "win",
@@ -21,6 +33,7 @@ export const ENTRIES: Entry[] = [
       href: "https://www.youtube.com/watch?v=LRFibju8xn4",
     },
   },
+
 
   {
     date: "27 Jul 2026",
