@@ -87,11 +87,12 @@ function useLegalFees() {
 
 function getTLDR(feesAmount: string | null) {
   return [
-    "Texas SOAH hearing is scheduled for August 17–20, 2026",
-    "Mining Packages are not available in Texas until the Cease & Desist is lifted",
+    "Court adjourned August 20, 2026 — we stood our ground and made the record",
+    "Mining Packages remain paused globally until the Cease & Desist is lifted",
     "Avi Perry from Quinn Emanuel leads our legal team",
     `${feesAmount ?? "$973,000+"} out of pocket so far on legal costs (and climbing)`,
     "TEXITcoin network remains active — no disruption in service to community",
+    "Briefs and the judge's proposal expected by year-end",
   ];
 }
 
