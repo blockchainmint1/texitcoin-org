@@ -35,6 +35,7 @@ const NAV: NavItem[] = [
       { label: "Troll Index", href: "/trolls", internal: true },
       { label: "Videos & Media", href: "/videos", internal: true },
       { label: "Why Texas", href: "/texas", internal: true },
+      { label: "TEXIT Explained", href: "/texit", internal: true },
       { label: "Identity & Press Kit", href: "/press", internal: true },
       { label: "Blog", href: "/blog", internal: true },
       { label: "FAQ", href: "/faq", internal: true },

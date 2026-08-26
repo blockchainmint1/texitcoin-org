@@ -15,7 +15,7 @@ interface SitemapEntry {
 const STATIC_PATHS = [
   "/", "/buy", "/mine", "/wallets", "/tokenomics", "/currency", "/value",
   "/proof-of-work", "/whitepaper", "/roadmap", "/leadership", "/team",
-  "/texas", "/build", "/faq", "/blog", "/videos", "/press", "/in-the-news",
+  "/texas", "/texit", "/philosophy", "/bobby", "/build", "/faq", "/blog", "/videos", "/press", "/in-the-news",
   "/merch", "/disclosures", "/legal", "/privacy", "/terms", "/trolls", "/wtxc",
 ];
 
