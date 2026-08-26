@@ -54,4 +54,50 @@ export const getZoomCall = createServerFn({ method: "GET" })
     return (row as ZoomCall | null) ?? null;
   });
 
+export type ZoomSearchHit = {
+  slug: string;
+  title: string;
+  call_date: string;
+  snippet: string;
+  matchedTranscript: boolean;
+};
+
+const querySchema = z.object({ q: z.string().min(2).max(120) }).strict();
+
+function buildSnippet(text: string, term: string) {
+  const plain = text.replace(/\s+/g, " ").trim();
+  const idx = plain.toLowerCase().indexOf(term.toLowerCase());
+  if (idx < 0) return plain.slice(0, 220);
+  const start = Math.max(0, idx - 90);
+  return (start > 0 ? "…" : "") + plain.slice(start, start + 260).trim() + "…";
+}
+
+export const searchZoomCalls = createServerFn({ method: "GET" })
+  .inputValidator((input: unknown) => querySchema.parse(input))
+  .handler(async ({ data }): Promise<ZoomSearchHit[]> => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const term = data.q.replace(/[%_,]/g, " ").trim();
+    if (!term) return [];
+    const pattern = `%${term}%`;
+    const { data: rows, error } = await supabaseAdmin
+      .from("zoom_calls")
+      .select("slug, title, call_date, summary, transcript")
+      .or(`title.ilike.${pattern},summary.ilike.${pattern},transcript.ilike.${pattern}`)
+      .order("call_date", { ascending: false })
+      .limit(15);
+    if (error) throw new Error(error.message);
+    return (rows ?? []).map((r) => {
+      const transcript = (r.transcript as string | null) ?? "";
+      const summary = (r.summary as string | null) ?? "";
+      const inTranscript = transcript.toLowerCase().includes(term.toLowerCase());
+      const source = inTranscript ? transcript : summary || transcript;
+      return {
+        slug: r.slug as string,
+        title: r.title as string,
+        call_date: r.call_date as string,
+        snippet: source ? buildSnippet(source, term) : "",
+        matchedTranscript: inTranscript,
+      };
+    });
+  });
 
