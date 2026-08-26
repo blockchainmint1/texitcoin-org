@@ -25,6 +25,7 @@ import { Route as TeamRouteImport } from './routes/team'
 import { Route as StatsRouteImport } from './routes/stats'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SecAndCryptoRouteImport } from './routes/sec-and-crypto'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as ScreenplayRouteImport } from './routes/screenplay'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
@@ -152,6 +153,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SecAndCryptoRoute = SecAndCryptoRouteImport.update({
   id: '/sec-and-crypto',
   path: '/sec-and-crypto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ScreenplayRoute = ScreenplayRouteImport.update({
@@ -433,6 +439,7 @@ export interface FileRoutesByFullPath {
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/screenplay': typeof ScreenplayRoute
+  '/search': typeof SearchRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -498,6 +505,7 @@ export interface FileRoutesByTo {
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/screenplay': typeof ScreenplayRoute
+  '/search': typeof SearchRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -565,6 +573,7 @@ export interface FileRoutesById {
   '/proof-of-work': typeof ProofOfWorkRoute
   '/roadmap': typeof RoadmapRoute
   '/screenplay': typeof ScreenplayRoute
+  '/search': typeof SearchRoute
   '/sec-and-crypto': typeof SecAndCryptoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/stats': typeof StatsRoute
@@ -632,6 +641,7 @@ export interface FileRouteTypes {
     | '/proof-of-work'
     | '/roadmap'
     | '/screenplay'
+    | '/search'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -697,6 +707,7 @@ export interface FileRouteTypes {
     | '/proof-of-work'
     | '/roadmap'
     | '/screenplay'
+    | '/search'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -763,6 +774,7 @@ export interface FileRouteTypes {
     | '/proof-of-work'
     | '/roadmap'
     | '/screenplay'
+    | '/search'
     | '/sec-and-crypto'
     | '/sitemap.xml'
     | '/stats'
@@ -830,6 +842,7 @@ export interface RootRouteChildren {
   ProofOfWorkRoute: typeof ProofOfWorkRoute
   RoadmapRoute: typeof RoadmapRoute
   ScreenplayRoute: typeof ScreenplayRoute
+  SearchRoute: typeof SearchRoute
   SecAndCryptoRoute: typeof SecAndCryptoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatsRoute: typeof StatsRoute
@@ -979,6 +992,13 @@ declare module '@tanstack/react-router' {
       path: '/sec-and-crypto'
       fullPath: '/sec-and-crypto'
       preLoaderRoute: typeof SecAndCryptoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/screenplay': {
@@ -1360,6 +1380,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProofOfWorkRoute: ProofOfWorkRoute,
   RoadmapRoute: RoadmapRoute,
   ScreenplayRoute: ScreenplayRoute,
+  SearchRoute: SearchRoute,
   SecAndCryptoRoute: SecAndCryptoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatsRoute: StatsRoute,
