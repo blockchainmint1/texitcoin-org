@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery, useQuery } from "@tanstack/react-query";
 import { Search as SearchIcon, ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { SEARCH_ENTRIES } from "@/data/search-index";
 import { listBlogPosts } from "@/lib/blog.functions";
+import { searchZoomCalls } from "@/lib/zoom.functions";
 
 const blogListQuery = queryOptions({
   queryKey: ["blog-posts"],
@@ -83,6 +84,13 @@ function SearchPage() {
   const query = q.trim().slice(0, 120);
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
 
+  const { data: zoomHits = [], isLoading: zoomLoading } = useQuery({
+    queryKey: ["zoom-search", query],
+    queryFn: () => searchZoomCalls({ data: { q: query } }),
+    enabled: query.length >= 2,
+    staleTime: 60_000,
+  });
+
   const results: Result[] = [];
   if (terms.length) {
     for (const e of SEARCH_ENTRIES) {
@@ -113,6 +121,17 @@ function SearchPage() {
           score: 80 + (p.title.toLowerCase().includes(terms[0]) ? 50 : 0),
         });
       }
+    }
+    for (const z of zoomHits) {
+      results.push({
+        key: `zoom-${z.slug}`,
+        title: z.title,
+        kind: z.matchedTranscript ? "Zoom transcript" : "Zoom call",
+        snippet: z.snippet,
+        to: "/zoom/$slug",
+        params: { slug: z.slug },
+        score: 70 + (z.title.toLowerCase().includes(terms[0]) ? 50 : 0),
+      });
     }
     results.sort((a, b) => b.score - a.score);
   }
@@ -156,6 +175,7 @@ function SearchPage() {
           {query ? (
             <p className="mt-6 text-sm text-muted-foreground">
               {results.length} result{results.length === 1 ? "" : "s"} for “{query}”
+              {zoomLoading ? " · searching call transcripts…" : ""}
             </p>
           ) : (
             <p className="mt-6 text-sm text-muted-foreground">
