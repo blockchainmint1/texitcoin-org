@@ -1,16 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { z } from "zod";
 import { Search as SearchIcon, ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { SEARCH_ENTRIES } from "@/data/search-index";
 import { listBlogPosts } from "@/lib/blog.functions";
-
-const searchSchema = z.object({
-  q: fallback(z.string(), "").default(""),
-});
 
 const blogListQuery = queryOptions({
   queryKey: ["blog-posts"],
@@ -19,7 +13,9 @@ const blogListQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/search")({
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (search: Record<string, unknown>): { q: string } => ({
+    q: typeof search.q === "string" ? search.q : "",
+  }),
   loader: ({ context }) => context.queryClient.ensureQueryData(blogListQuery),
   head: () => ({
     meta: [
@@ -55,7 +51,7 @@ type Result = {
 function snippetFor(text: string, terms: string[]) {
   const plain = text.replace(/[#*_>`]/g, "").replace(/\s+/g, " ").trim();
   const lower = plain.toLowerCase();
-  const hit = terms.map((t) => lower.indexOf(t)).filter((i) => i >= 0).sort((a, b) => a - b)[0];
+  const hit = terms.map((t: string) => lower.indexOf(t)).filter((i) => i >= 0).sort((a, b) => a - b)[0];
   if (hit === undefined) return plain.slice(0, 220);
   const start = Math.max(0, hit - 80);
   return (start > 0 ? "…" : "") + plain.slice(start, start + 240).trim() + "…";
@@ -63,7 +59,7 @@ function snippetFor(text: string, terms: string[]) {
 
 function Highlight({ text, terms }: { text: string; terms: string[] }) {
   if (terms.length === 0) return <>{text}</>;
-  const re = new RegExp(`(${terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "ig");
+  const re = new RegExp(`(${terms.map((t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "ig");
   return (
     <>
       {text.split(re).map((part, i) =>
