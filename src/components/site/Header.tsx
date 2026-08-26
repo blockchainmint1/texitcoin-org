@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/txc-logo.png";
 import { LivePrice } from "./LivePrice";
 import { ThemeToggle } from "./ThemeToggle";
+import { SiteSearch } from "./SiteSearch";
 import { useLiveStatus } from "@/lib/use-live-status";
 
 type NavLink = { label: string; href: string; external?: boolean; internal?: boolean };
@@ -212,6 +213,7 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <LivePrice variant="desktop" />
+          <SiteSearch />
           <ThemeToggle className="hidden sm:grid" />
           <Link
             to="/buy"

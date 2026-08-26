@@ -358,12 +358,6 @@ function TexitPage() {
             >
               Why Texas
             </Link>
-            <Link
-              to="/philosophy"
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-bold transition-colors hover:border-primary/50"
-            >
-              Philosophy &amp; Character
-            </Link>
           </div>
 
           <p className="mt-10 rounded-xl border border-border bg-muted/40 p-5 text-xs leading-relaxed text-muted-foreground">
