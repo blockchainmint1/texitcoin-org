@@ -47,9 +47,31 @@ export function SiteSearch({ className = "" }: { className?: string }) {
       </button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search pages… (⌘K)" />
+        <CommandInput
+          placeholder="Search pages and articles… (⌘K)"
+          value={query}
+          onValueChange={setQuery}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && query.trim()) {
+              e.preventDefault();
+              goToResults();
+            }
+          }}
+        />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>
+            <button type="button" onClick={goToResults} className="text-sm font-semibold text-primary">
+              Search all content for “{query}”
+            </button>
+          </CommandEmpty>
+          {query.trim() && (
+            <CommandGroup heading="Full search">
+              <CommandItem value={`__all__ ${query}`} onSelect={goToResults}>
+                <ArrowRight className="mr-2 h-4 w-4" />
+                See all results for “{query}”
+              </CommandItem>
+            </CommandGroup>
+          )}
           {groups.map((g) => (
             <CommandGroup key={g} heading={g}>
               {ENTRIES.filter((e) => e.group === g).map((e) => (
@@ -68,6 +90,7 @@ export function SiteSearch({ className = "" }: { className?: string }) {
           ))}
         </CommandList>
       </CommandDialog>
+
     </>
   );
 }
