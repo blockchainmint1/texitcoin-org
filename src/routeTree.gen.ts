@@ -18,6 +18,7 @@ import { Route as ValueRouteImport } from './routes/value'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TokenomicsRouteImport } from './routes/tokenomics'
+import { Route as TexitRouteImport } from './routes/texit'
 import { Route as TexasRouteImport } from './routes/texas'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TeamRouteImport } from './routes/team'
@@ -116,6 +117,11 @@ const TrollsRoute = TrollsRouteImport.update({
 const TokenomicsRoute = TokenomicsRouteImport.update({
   id: '/tokenomics',
   path: '/tokenomics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TexitRoute = TexitRouteImport.update({
+  id: '/texit',
+  path: '/texit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TexasRoute = TexasRouteImport.update({
@@ -433,6 +439,7 @@ export interface FileRoutesByFullPath {
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
+  '/texit': typeof TexitRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -497,6 +504,7 @@ export interface FileRoutesByTo {
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
+  '/texit': typeof TexitRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -563,6 +571,7 @@ export interface FileRoutesById {
   '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/texas': typeof TexasRoute
+  '/texit': typeof TexitRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -629,6 +638,7 @@ export interface FileRouteTypes {
     | '/team'
     | '/terms'
     | '/texas'
+    | '/texit'
     | '/tokenomics'
     | '/trolls'
     | '/unsubscribe'
@@ -693,6 +703,7 @@ export interface FileRouteTypes {
     | '/team'
     | '/terms'
     | '/texas'
+    | '/texit'
     | '/tokenomics'
     | '/trolls'
     | '/unsubscribe'
@@ -758,6 +769,7 @@ export interface FileRouteTypes {
     | '/team'
     | '/terms'
     | '/texas'
+    | '/texit'
     | '/tokenomics'
     | '/trolls'
     | '/unsubscribe'
@@ -824,6 +836,7 @@ export interface RootRouteChildren {
   TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
   TexasRoute: typeof TexasRoute
+  TexitRoute: typeof TexitRoute
   TokenomicsRoute: typeof TokenomicsRoute
   TrollsRoute: typeof TrollsRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
@@ -917,6 +930,13 @@ declare module '@tanstack/react-router' {
       path: '/tokenomics'
       fullPath: '/tokenomics'
       preLoaderRoute: typeof TokenomicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/texit': {
+      id: '/texit'
+      path: '/texit'
+      fullPath: '/texit'
+      preLoaderRoute: typeof TexitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/texas': {
@@ -1346,6 +1366,7 @@ const rootRouteChildren: RootRouteChildren = {
   TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
   TexasRoute: TexasRoute,
+  TexitRoute: TexitRoute,
   TokenomicsRoute: TokenomicsRoute,
   TrollsRoute: TrollsRoute,
   UnsubscribeRoute: UnsubscribeRoute,
