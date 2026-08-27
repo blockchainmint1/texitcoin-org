@@ -217,7 +217,7 @@ function TexitPage() {
       </section>
 
       {/* Section 1 — Is it possible */}
-      <section className="border-t border-border py-20">
+      <section id="possible" className="border-t border-border py-20">
         <div className="mx-auto max-w-5xl px-6">
           <p className="text-xs font-bold uppercase tracking-widest text-primary">Part One</p>
           <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Is it legally possible?</h2>
@@ -344,7 +344,7 @@ function TexitPage() {
       </section>
 
       {/* Where we stand */}
-      <section className="border-t border-border py-20">
+      <section id="stand" className="border-t border-border py-20">
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs font-bold uppercase tracking-widest text-primary">Where we stand</p>
           <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
