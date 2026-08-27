@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { getPostImage } from "@/data/blog-images";
 import {
-  Star,
   Scale,
   Landmark,
   Vote,
