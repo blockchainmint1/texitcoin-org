@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { getPostImage } from "@/data/blog-images";
 import {
-  Star,
   Scale,
   Landmark,
   Vote,
@@ -146,30 +147,77 @@ function TexitPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden pt-36 pb-20">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.18),transparent_65%)]" />
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            <Star className="h-3.5 w-3.5 text-primary" />
-            The political question, answered honestly
-          </div>
-          <h1 className="mt-6 text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-            TEXIT
-          </h1>
-          <p className="mt-4 text-xl font-semibold text-foreground/90 sm:text-2xl">
-            Could Texas actually leave? What would it take? And is it even a good idea?
-          </p>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            We're not a political organization and we don't tell Texans how to vote. But TEXIT is
-            the question hanging over our name, so we're going to treat it the way we treat
-            everything else: with receipts, both sides, and no sugarcoating. At the end, we'll tell
-            you exactly where we stand — which is narrower, and more useful, than you might expect.
-          </p>
+      <section className="relative overflow-hidden border-b border-border pt-32 pb-20">
+        <div
+          className="absolute inset-0 -z-10"
+          style={{ background: "var(--gradient-hero)" }}
+          aria-hidden
+        />
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-[1.35fr_1fr] md:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+              The political question, answered honestly
+            </div>
+            <h1 className="mt-4 font-display text-5xl font-bold leading-[1.05] md:text-6xl text-balance">
+              Could Texas actually{" "}
+              <span className="text-primary">leave?</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+              We're not a political organization and we don't tell Texans how to vote. But TEXIT is
+              the question hanging over our name, so we're going to treat it the way we treat
+              everything else: with receipts, both sides, and no sugarcoating.
+            </p>
+            <p className="mt-4 max-w-2xl text-muted-foreground">
+              At the end, we'll tell you exactly where we stand — which is narrower, and more useful, than you might expect.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#possible"
+                className="inline-flex items-center gap-2 rounded-md bg-red-gradient px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition hover:brightness-110"
+              >
+                Start with the law <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href="#stand"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold transition hover:border-primary/60"
+              >
+                Where we stand
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="relative"
+          >
+            <div className="overflow-hidden rounded-2xl border border-border shadow-card">
+              <img
+                src={getPostImage({ slug: "texit" })}
+                alt="Texas landscape"
+                loading="eager"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-6 -left-6 rounded-xl border border-border bg-card px-6 py-4 shadow-card">
+              <div className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                A live political question
+              </div>
+              <div className="font-display text-3xl font-bold text-primary">
+                Since 1869
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Section 1 — Is it possible */}
-      <section className="border-t border-border py-20">
+      <section id="possible" className="border-t border-border py-20">
         <div className="mx-auto max-w-5xl px-6">
           <p className="text-xs font-bold uppercase tracking-widest text-primary">Part One</p>
           <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Is it legally possible?</h2>
@@ -296,7 +344,7 @@ function TexitPage() {
       </section>
 
       {/* Where we stand */}
-      <section className="border-t border-border py-20">
+      <section id="stand" className="border-t border-border py-20">
         <div className="mx-auto max-w-4xl px-6">
           <p className="text-xs font-bold uppercase tracking-widest text-primary">Where we stand</p>
           <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
