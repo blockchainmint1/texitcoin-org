@@ -2,12 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Gavel,
   Scale,
-  Shield,
   CheckCircle2,
-  ExternalLink,
-  Calendar,
   Sparkles,
   ScrollText,
   Swords,
@@ -16,7 +12,9 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { ENTRIES, type Entry } from "@/data/legal-timeline";
+import { LegalTimeline } from "@/components/site/LegalTimeline";
+import { CaseDocket } from "@/components/site/CaseDocket";
+import { ENTRIES } from "@/data/legal-timeline";
 import { checkNewContent } from "@/lib/notify.functions";
 
 export const Route = createFileRoute("/legal")({
@@ -98,12 +96,8 @@ function getTLDR(feesAmount: string | null) {
 }
 
 
-const TONE_STYLES: Record<NonNullable<Entry["tone"]>, { label: string; bg: string; icon: typeof Gavel }> = {
-  win: { label: "Win", bg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30", icon: Sparkles },
-  filing: { label: "PAINFUL", bg: "bg-primary/15 text-primary border-primary/30", icon: ScrollText },
-  context: { label: "Context", bg: "bg-accent/15 text-accent border-accent/30", icon: Shield },
-  regulator: { label: "Regulator", bg: "bg-amber-500/15 text-amber-300 border-amber-500/30", icon: Gavel },
-};
+
+
 
 function LegalPage() {
   const feesAmount = useLegalFees();
