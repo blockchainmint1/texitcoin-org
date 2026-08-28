@@ -28,6 +28,7 @@ export const SEARCH_ENTRIES: SearchEntry[] = [
   { label: "The Hit List", to: "/market", group: "Discover", keywords: "top 100 market cap rankings", description: "Live market rankings and TXC's climb toward the Top 100." },
   { label: "TXC in the News", to: "/in-the-news", group: "Discover", keywords: "press media articles", description: "Press coverage, interviews, and media appearances." },
   { label: "Legal Updates", to: "/legal", group: "Discover", keywords: "tssb court hearing soah", description: "The TSSB matter, SOAH hearing, filings, and outcomes." },
+  { label: "Arizona Case File", to: "/legal/arizona", group: "Discover", keywords: "arizona azcc idmc iskander cease desist docket", description: "AZCC v. IDMC — the Arizona temporary cease and desist and running timeline." },
   { label: "Troll Index", to: "/trolls", group: "Discover", description: "Answering the critics, receipts included." },
   { label: "Videos & Media", to: "/videos", group: "Discover", description: "Interviews, explainers, and long-form video." },
   { label: "Zoom Call Archive", to: "/zoom", group: "Discover", keywords: "honest money hour live thursday", description: "Every Honest Money Hour call, with summaries and transcripts." },
