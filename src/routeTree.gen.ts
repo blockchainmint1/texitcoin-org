@@ -57,6 +57,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
 import { Route as ScreenplaySeasonRouteImport } from './routes/screenplay_.$season'
 import { Route as MarketSlugRouteImport } from './routes/market_.$slug'
+import { Route as LegalArizonaRouteImport } from './routes/legal_.arizona'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as AuthenticatedScreenplayAdminRouteImport } from './routes/_authenticated/screenplay-admin'
@@ -316,6 +317,11 @@ const MarketSlugRoute = MarketSlugRouteImport.update({
   path: '/market/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalArizonaRoute = LegalArizonaRouteImport.update({
+  id: '/legal_/arizona',
+  path: '/legal/arizona',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
@@ -461,6 +467,7 @@ export interface FileRoutesByFullPath {
   '/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/legal/arizona': typeof LegalArizonaRoute
   '/market/$slug': typeof MarketSlugRoute
   '/screenplay/$season': typeof ScreenplaySeasonRoute
   '/zoom/$slug': typeof ZoomSlugRoute
@@ -527,6 +534,7 @@ export interface FileRoutesByTo {
   '/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/legal/arizona': typeof LegalArizonaRoute
   '/market/$slug': typeof MarketSlugRoute
   '/screenplay/$season': typeof ScreenplaySeasonRoute
   '/zoom/$slug': typeof ZoomSlugRoute
@@ -595,6 +603,7 @@ export interface FileRoutesById {
   '/_authenticated/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog_/$slug': typeof BlogSlugRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/legal_/arizona': typeof LegalArizonaRoute
   '/market_/$slug': typeof MarketSlugRoute
   '/screenplay_/$season': typeof ScreenplaySeasonRoute
   '/zoom_/$slug': typeof ZoomSlugRoute
@@ -663,6 +672,7 @@ export interface FileRouteTypes {
     | '/screenplay-admin'
     | '/blog/$slug'
     | '/email/unsubscribe'
+    | '/legal/arizona'
     | '/market/$slug'
     | '/screenplay/$season'
     | '/zoom/$slug'
@@ -729,6 +739,7 @@ export interface FileRouteTypes {
     | '/screenplay-admin'
     | '/blog/$slug'
     | '/email/unsubscribe'
+    | '/legal/arizona'
     | '/market/$slug'
     | '/screenplay/$season'
     | '/zoom/$slug'
@@ -796,6 +807,7 @@ export interface FileRouteTypes {
     | '/_authenticated/screenplay-admin'
     | '/blog_/$slug'
     | '/email/unsubscribe'
+    | '/legal_/arizona'
     | '/market_/$slug'
     | '/screenplay_/$season'
     | '/zoom_/$slug'
@@ -863,6 +875,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   BlogSlugRoute: typeof BlogSlugRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  LegalArizonaRoute: typeof LegalArizonaRoute
   MarketSlugRoute: typeof MarketSlugRoute
   ScreenplaySeasonRoute: typeof ScreenplaySeasonRoute
   ZoomSlugRoute: typeof ZoomSlugRoute
@@ -1218,6 +1231,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal_/arizona': {
+      id: '/legal_/arizona'
+      path: '/legal/arizona'
+      fullPath: '/legal/arizona'
+      preLoaderRoute: typeof LegalArizonaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/email/unsubscribe': {
       id: '/email/unsubscribe'
       path: '/email/unsubscribe'
@@ -1402,6 +1422,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   BlogSlugRoute: BlogSlugRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  LegalArizonaRoute: LegalArizonaRoute,
   MarketSlugRoute: MarketSlugRoute,
   ScreenplaySeasonRoute: ScreenplaySeasonRoute,
   ZoomSlugRoute: ZoomSlugRoute,
