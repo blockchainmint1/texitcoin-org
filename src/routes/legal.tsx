@@ -224,7 +224,35 @@ function LegalPage() {
             </div>
           </motion.div>
 
+          {/* New front: Arizona */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-6"
+          >
+            <div>
+              <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-amber-300">
+                New front · 27 Aug 2026
+              </div>
+              <p className="mt-2 max-w-2xl text-sm text-foreground/85 md:text-base">
+                Arizona&apos;s Corporation Commission issued a temporary cease
+                and desist naming Iskander Digital Mining Cooperative and two
+                Arizona promoters. Separate state, separate docket, separate
+                case file — the Texas record stays exactly as it is.
+              </p>
+            </div>
+            <Link
+              to="/legal/arizona"
+              className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-bold uppercase tracking-wider text-background transition hover:opacity-90"
+            >
+              Open the Arizona case file <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
+
         </section>
+
 
 
         {/* Timeline */}
