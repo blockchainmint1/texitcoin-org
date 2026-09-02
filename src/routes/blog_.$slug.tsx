@@ -120,7 +120,13 @@ function BlogPostPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {preview && (
+        <div className="fixed bottom-0 inset-x-0 z-50 bg-primary px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.22em] text-primary-foreground">
+          Unpublished draft — visible only with this preview link
+        </div>
+      )}
       <Header />
+
       <main>
         <article className="pt-32 pb-16">
           <div className="mx-auto max-w-3xl px-6">
