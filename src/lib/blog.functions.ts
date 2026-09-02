@@ -55,12 +55,32 @@ export const listBlogPosts = createServerFn({ method: "GET" }).handler(
   },
 );
 
+export const DRAFT_PREVIEW_HINT = "preview";
+
 export const getBlogPost = createServerFn({ method: "GET" })
-  .inputValidator((data: { slug: string }) => {
+  .inputValidator((data: { slug: string; preview?: string }) => {
     if (!data?.slug || typeof data.slug !== "string") throw new Error("slug required");
     return data;
   })
   .handler(async ({ data }): Promise<BlogPostDTO> => {
+    const token = process.env.BLOG_PREVIEW_TOKEN || "txc-draft-preview";
+    const isPreview = !!data.preview && data.preview === token;
+
+    if (isPreview) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      const { data: row, error } = await supabaseAdmin
+        .from("blog_posts")
+        .select("slug,title,date,author,author_role,tag,read_minutes,excerpt,body_markdown")
+        .eq("slug", data.slug)
+        .maybeSingle();
+      if (error) {
+        console.error("getBlogPost preview failed", error);
+        throw new Error("Failed to load post");
+      }
+      if (!row) throw notFound();
+      return toDTO(row as Row);
+    }
+
     const supabase = publicClient();
     const { data: row, error } = await supabase
       .from("blog_posts")
@@ -75,3 +95,4 @@ export const getBlogPost = createServerFn({ method: "GET" })
     if (!row) throw notFound();
     return toDTO(row as Row);
   });
+

@@ -7,10 +7,10 @@ import { Footer } from "@/components/site/Footer";
 import { getPostImage, getSecondaryImage } from "@/data/blog-images";
 import { getBlogPost, listBlogPosts } from "@/lib/blog.functions";
 
-const postQuery = (slug: string) =>
+const postQuery = (slug: string, preview?: string) =>
   queryOptions({
-    queryKey: ["blog-post", slug],
-    queryFn: () => getBlogPost({ data: { slug } }),
+    queryKey: ["blog-post", slug, preview ?? ""],
+    queryFn: () => getBlogPost({ data: { slug, preview } }),
     staleTime: 60_000,
   });
 
@@ -21,16 +21,30 @@ const relatedQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/blog_/$slug")({
-  loader: async ({ params, context }) => {
+  validateSearch: (search: Record<string, unknown>): { preview?: string } =>
+    typeof search.preview === "string" ? { preview: search.preview } : {},
+
+  loaderDeps: ({ search }) => ({ preview: search.preview }),
+  loader: async ({ params, context, deps }) => {
     const [post] = await Promise.all([
-      context.queryClient.ensureQueryData(postQuery(params.slug)),
+      context.queryClient.ensureQueryData(postQuery(params.slug, deps.preview)),
       context.queryClient.ensureQueryData(relatedQuery),
     ]);
     return { post };
   },
-  head: ({ loaderData, params }) => {
+
+  head: ({ loaderData, params, match }) => {
     const post = loaderData?.post;
+    const isPreview = !!(match?.search as { preview?: string } | undefined)?.preview;
     if (!post) return { meta: [{ title: "Post — TEXITcoin" }] };
+    if (isPreview)
+      return {
+        meta: [
+          { title: `DRAFT — ${post.title}` },
+          { name: "robots", content: "noindex, nofollow" },
+        ],
+      };
+
     const url = `https://texitcoin.org/blog/${params.slug}`;
     return {
       meta: [
@@ -98,13 +112,21 @@ function formatDate(iso: string) {
 
 function BlogPostPage() {
   const { slug } = Route.useParams();
-  const { data: post } = useSuspenseQuery(postQuery(slug));
+  const { preview } = Route.useSearch();
+  const { data: post } = useSuspenseQuery(postQuery(slug, preview));
+
   const { data: posts } = useSuspenseQuery(relatedQuery);
   const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {preview && (
+        <div className="fixed bottom-0 inset-x-0 z-50 bg-primary px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.22em] text-primary-foreground">
+          Unpublished draft — visible only with this preview link
+        </div>
+      )}
       <Header />
+
       <main>
         <article className="pt-32 pb-16">
           <div className="mx-auto max-w-3xl px-6">
