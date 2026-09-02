@@ -21,9 +21,9 @@ const relatedQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/blog_/$slug")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    preview: typeof search.preview === "string" ? search.preview : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { preview?: string } =>
+    typeof search.preview === "string" ? { preview: search.preview } : {},
+
   loaderDeps: ({ search }) => ({ preview: search.preview }),
   loader: async ({ params, context, deps }) => {
     const [post] = await Promise.all([
