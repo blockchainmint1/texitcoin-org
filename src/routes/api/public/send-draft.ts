@@ -2,6 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
+function generateToken(): string {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
 /**
  * One-off endpoint to email an unpublished blog draft to a reviewer.
  * Protected by a simple secret so it can't be used by random visitors.
@@ -39,7 +47,49 @@ export const Route = createFileRoute("/api/public/send-draft")({
           return Response.json({ error: "Draft not found" }, { status: 404 });
         }
 
-        const plainText = `DRAFT for review — ${post.title}\n\nThis is an unpublished draft. Do not share publicly.\n\n---\n\n${post.body_markdown}\n\n---\n\nSent from the TEXITcoin content system.`;
+        const normalizedEmail = recipient.toLowerCase();
+
+        // Fail-closed suppression check
+        const { data: suppressed, error: suppressionError } = await supabase
+          .from("suppressed_emails")
+          .select("id")
+          .eq("email", normalizedEmail)
+          .maybeSingle();
+
+        if (suppressionError) {
+          console.error("send-draft: suppression check failed", suppressionError);
+          return Response.json({ error: "Failed to verify suppression status" }, { status: 500 });
+        }
+        if (suppressed) {
+          return Response.json({ ok: false, reason: "email_suppressed" });
+        }
+
+        // Get or create an unsubscribe token for this address
+        const { data: existingToken } = await supabase
+          .from("email_unsubscribe_tokens")
+          .select("token, used_at")
+          .eq("email", normalizedEmail)
+          .maybeSingle();
+
+        let unsubscribeToken: string;
+        if (existingToken && !existingToken.used_at) {
+          unsubscribeToken = existingToken.token;
+        } else if (!existingToken) {
+          unsubscribeToken = generateToken();
+          await supabase
+            .from("email_unsubscribe_tokens")
+            .upsert({ token: unsubscribeToken, email: normalizedEmail }, { onConflict: "email", ignoreDuplicates: true });
+          const { data: storedToken } = await supabase
+            .from("email_unsubscribe_tokens")
+            .select("token")
+            .eq("email", normalizedEmail)
+            .maybeSingle();
+          unsubscribeToken = storedToken?.token ?? unsubscribeToken;
+        } else {
+          return Response.json({ ok: false, reason: "unsubscribe_token_used" });
+        }
+
+        const plainText = `DRAFT for review — ${post.title}\n\nThis is an unpublished draft. Do not share publicly.\n\n---\n\n${post.body_markdown}\n\n---\n\nSent from the TEXITcoin content system.\n\nUnsubscribe: https://texitcoin.org/email/unsubscribe?token=${unsubscribeToken}`;
 
         const htmlBody = post.body_markdown
           .replace(/&/g, "&amp;")
@@ -62,11 +112,18 @@ export const Route = createFileRoute("/api/public/send-draft")({
     ${htmlBody}
   </article>
   <hr style="border:none;border-top:1px solid #eee;margin:40px 0;" />
-  <p style="color:#999;font-size:12px;">Sent from the TEXITcoin content system.</p>
+  <p style="color:#999;font-size:12px;">Sent from the TEXITcoin content system. · <a href="https://texitcoin.org/email/unsubscribe?token=${unsubscribeToken}" style="color:#999;">Unsubscribe</a></p>
 </body>
 </html>`;
 
         const messageId = crypto.randomUUID();
+        await supabase.from("email_send_log").insert({
+          message_id: messageId,
+          template_name: "draft-review",
+          recipient_email: recipient,
+          status: "pending",
+        });
+
         const { error: enqueueError } = await supabase.rpc("enqueue_email", {
           queue_name: "transactional_emails",
           payload: {
@@ -80,12 +137,20 @@ export const Route = createFileRoute("/api/public/send-draft")({
             purpose: "transactional",
             label: "draft-review",
             idempotency_key: messageId,
+            unsubscribe_token: unsubscribeToken,
             queued_at: new Date().toISOString(),
           },
         });
 
         if (enqueueError) {
           console.error("send-draft: enqueue failed", enqueueError);
+          await supabase.from("email_send_log").insert({
+            message_id: messageId,
+            template_name: "draft-review",
+            recipient_email: recipient,
+            status: "failed",
+            error_message: "Failed to enqueue email",
+          });
           return Response.json({ error: "Failed to enqueue email" }, { status: 500 });
         }
 
