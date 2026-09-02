@@ -104,7 +104,7 @@ export function LiveStage() {
         day: "numeric",
         timeZone: "America/Chicago",
       })
-    : "Thursday";
+    : "Tuesday";
   const timeLabel = nextStart.getTime()
     ? nextStart.toLocaleTimeString("en-US", {
         hour: "numeric",
@@ -163,7 +163,7 @@ export function LiveStage() {
           ) : (
             <>
               <Radio className="h-3 w-3 text-primary animate-pulse" />
-              Honest Money Hour · Thursdays 7pm CT
+              Honest Money Hour · Tue & Thu 7pm CT
             </>
           )}
         </div>

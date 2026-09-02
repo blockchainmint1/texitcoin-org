@@ -17,6 +17,7 @@ const STATIC_PATHS = [
   "/proof-of-work", "/whitepaper", "/roadmap", "/leadership", "/team",
   "/texas", "/texit", "/philosophy", "/bobby", "/build", "/faq", "/blog", "/videos", "/press", "/in-the-news",
   "/merch", "/disclosures", "/legal", "/legal/arizona", "/privacy", "/terms", "/trolls", "/wtxc",
+  "/live", "/zoom",
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({

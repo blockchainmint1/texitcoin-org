@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-// Honest Money Hour: Thursdays, 7:00pm–9:00pm America/Chicago
-const LIVE_WEEKDAY_SHORT = "Thu";
+// Honest Money Hour: Tuesdays & Thursdays, 7:00pm–9:00pm America/Chicago
+const LIVE_WEEKDAYS_SHORT = ["Tue", "Thu"];
 const LIVE_START_HOUR_CT = 19; // 7pm
 const LIVE_END_HOUR_CT = 21; // 9pm (2-hour window)
 
@@ -21,14 +21,18 @@ function chicagoParts(d: Date) {
 
 export function isLiveWindow(now: Date = new Date()): boolean {
   const { weekday, hour } = chicagoParts(now);
-  return weekday === LIVE_WEEKDAY_SHORT && hour >= LIVE_START_HOUR_CT && hour < LIVE_END_HOUR_CT;
+  return (
+    LIVE_WEEKDAYS_SHORT.includes(weekday) &&
+    hour >= LIVE_START_HOUR_CT &&
+    hour < LIVE_END_HOUR_CT
+  );
 }
 
 export function nextThursday7pmCT(from: Date = new Date()): Date {
   for (let i = 0; i < 8; i++) {
     const candidate = new Date(from.getTime() + i * 86400000);
     const { weekday, hour } = chicagoParts(candidate);
-    if (weekday === LIVE_WEEKDAY_SHORT && (i > 0 || hour < LIVE_START_HOUR_CT)) {
+    if (LIVE_WEEKDAYS_SHORT.includes(weekday) && (i > 0 || hour < LIVE_START_HOUR_CT)) {
       const ymd = new Intl.DateTimeFormat("en-CA", {
         timeZone: "America/Chicago",
         year: "numeric",
@@ -119,7 +123,7 @@ export function icsForNextCall(): string {
     "SUMMARY:Honest Money Hour — TEXITcoin Live",
     "DESCRIPTION:Weekly live call with Bobby Gray. Watch at https://streamtxc.com/live",
     "URL:https://texitcoin.org/zoom",
-    "RRULE:FREQ=WEEKLY;BYDAY=TH",
+    "RRULE:FREQ=WEEKLY;BYDAY=TU,TH",
     "END:VEVENT",
     "END:VCALENDAR",
   ].join("\r\n");

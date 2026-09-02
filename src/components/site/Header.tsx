@@ -143,7 +143,7 @@ export function Header() {
             <>
               <span className="inline-flex h-2 w-2 rounded-full bg-primary-foreground animate-pulse" aria-hidden />
               <span>
-                <span className="font-display uppercase tracking-[0.18em] mr-2">Live Thursdays</span>
+                <span className="font-display uppercase tracking-[0.18em] mr-2">Live Tue & Thu</span>
                 Honest Money Hour with Bobby Gray · 7pm Central
               </span>
               <span className="inline-flex items-center gap-1 underline-offset-2 group-hover:underline">

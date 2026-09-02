@@ -69,7 +69,7 @@ export const NewsletterWelcomeEmail = ({
             Honest Money Hour
           </Heading>
           <Text style={calloutMeta}>
-            Thursdays · 7:00pm Central · with Bobby Gray
+            Tuesdays & Thursdays · 7:00pm Central · with Bobby Gray
           </Text>
           <Text style={bodyText}>
             Watch live at{' '}
