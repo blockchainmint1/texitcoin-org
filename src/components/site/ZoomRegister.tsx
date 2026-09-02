@@ -38,7 +38,7 @@ export function ZoomRegister({ source = "live-reminder" }: { source?: string }) 
     if (error) {
       if (error.code === "23505") {
         setStatus("ok");
-        setMessage("You're already on the list — we'll ping you Thursday.");
+        setMessage("You're already on the list — we'll ping you before each call.");
         return;
       }
       setStatus("error");
@@ -60,7 +60,7 @@ export function ZoomRegister({ source = "live-reminder" }: { source?: string }) 
         <BellRing className="h-4 w-4" /> Don't miss the live call
       </div>
       <h3 className="mt-3 font-display text-2xl font-bold leading-tight md:text-3xl text-balance">
-        Get a heads-up every Thursday.
+        Get a heads-up every Tuesday and Thursday.
       </h3>
       <p className="mt-2 text-sm text-muted-foreground">
         We'll email you about an hour before the Honest Money Hour kicks off,

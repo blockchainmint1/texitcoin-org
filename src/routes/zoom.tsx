@@ -30,7 +30,7 @@ export const Route = createFileRoute("/zoom")({
       {
         property: "og:description",
         content:
-          "Live every Thursday at 7pm Central. Watch past calls and read AI summaries.",
+          "Live every Tuesday and Thursday at 7pm Central. Watch past calls and read AI summaries.",
       },
     ],
     links: [{ rel: "canonical", href: "https://texitcoin.org/zoom" }],
