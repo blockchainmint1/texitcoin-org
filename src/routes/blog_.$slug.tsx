@@ -112,7 +112,9 @@ function formatDate(iso: string) {
 
 function BlogPostPage() {
   const { slug } = Route.useParams();
-  const { data: post } = useSuspenseQuery(postQuery(slug));
+  const { preview } = Route.useSearch();
+  const { data: post } = useSuspenseQuery(postQuery(slug, preview));
+
   const { data: posts } = useSuspenseQuery(relatedQuery);
   const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
