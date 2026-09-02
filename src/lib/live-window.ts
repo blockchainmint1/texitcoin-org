@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-// Honest Money Hour: Thursdays, 7:00pm–9:00pm America/Chicago
-const LIVE_WEEKDAY_SHORT = "Thu";
+// Honest Money Hour: Tuesdays & Thursdays, 7:00pm–9:00pm America/Chicago
+const LIVE_WEEKDAYS_SHORT = ["Tue", "Thu"];
 const LIVE_START_HOUR_CT = 19; // 7pm
 const LIVE_END_HOUR_CT = 21; // 9pm (2-hour window)
 
