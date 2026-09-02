@@ -7,10 +7,10 @@ import { Footer } from "@/components/site/Footer";
 import { getPostImage, getSecondaryImage } from "@/data/blog-images";
 import { getBlogPost, listBlogPosts } from "@/lib/blog.functions";
 
-const postQuery = (slug: string) =>
+const postQuery = (slug: string, preview?: string) =>
   queryOptions({
-    queryKey: ["blog-post", slug],
-    queryFn: () => getBlogPost({ data: { slug } }),
+    queryKey: ["blog-post", slug, preview ?? ""],
+    queryFn: () => getBlogPost({ data: { slug, preview } }),
     staleTime: 60_000,
   });
 
@@ -21,13 +21,18 @@ const relatedQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/blog_/$slug")({
-  loader: async ({ params, context }) => {
+  validateSearch: (search: Record<string, unknown>) => ({
+    preview: typeof search.preview === "string" ? search.preview : undefined,
+  }),
+  loaderDeps: ({ search }) => ({ preview: search.preview }),
+  loader: async ({ params, context, deps }) => {
     const [post] = await Promise.all([
-      context.queryClient.ensureQueryData(postQuery(params.slug)),
+      context.queryClient.ensureQueryData(postQuery(params.slug, deps.preview)),
       context.queryClient.ensureQueryData(relatedQuery),
     ]);
     return { post };
   },
+
   head: ({ loaderData, params }) => {
     const post = loaderData?.post;
     if (!post) return { meta: [{ title: "Post — TEXITcoin" }] };
