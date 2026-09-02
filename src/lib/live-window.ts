@@ -21,14 +21,18 @@ function chicagoParts(d: Date) {
 
 export function isLiveWindow(now: Date = new Date()): boolean {
   const { weekday, hour } = chicagoParts(now);
-  return weekday === LIVE_WEEKDAY_SHORT && hour >= LIVE_START_HOUR_CT && hour < LIVE_END_HOUR_CT;
+  return (
+    LIVE_WEEKDAYS_SHORT.includes(weekday) &&
+    hour >= LIVE_START_HOUR_CT &&
+    hour < LIVE_END_HOUR_CT
+  );
 }
 
 export function nextThursday7pmCT(from: Date = new Date()): Date {
   for (let i = 0; i < 8; i++) {
     const candidate = new Date(from.getTime() + i * 86400000);
     const { weekday, hour } = chicagoParts(candidate);
-    if (weekday === LIVE_WEEKDAY_SHORT && (i > 0 || hour < LIVE_START_HOUR_CT)) {
+    if (LIVE_WEEKDAYS_SHORT.includes(weekday) && (i > 0 || hour < LIVE_START_HOUR_CT)) {
       const ymd = new Intl.DateTimeFormat("en-CA", {
         timeZone: "America/Chicago",
         year: "numeric",
