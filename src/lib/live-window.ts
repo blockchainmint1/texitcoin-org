@@ -123,7 +123,7 @@ export function icsForNextCall(): string {
     "SUMMARY:Honest Money Hour — TEXITcoin Live",
     "DESCRIPTION:Weekly live call with Bobby Gray. Watch at https://streamtxc.com/live",
     "URL:https://texitcoin.org/zoom",
-    "RRULE:FREQ=WEEKLY;BYDAY=TH",
+    "RRULE:FREQ=WEEKLY;BYDAY=TU,TH",
     "END:VEVENT",
     "END:VCALENDAR",
   ].join("\r\n");
