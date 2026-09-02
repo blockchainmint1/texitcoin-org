@@ -33,9 +33,18 @@ export const Route = createFileRoute("/blog_/$slug")({
     return { post };
   },
 
-  head: ({ loaderData, params }) => {
+  head: ({ loaderData, params, match }) => {
     const post = loaderData?.post;
+    const isPreview = !!(match?.search as { preview?: string } | undefined)?.preview;
     if (!post) return { meta: [{ title: "Post — TEXITcoin" }] };
+    if (isPreview)
+      return {
+        meta: [
+          { title: `DRAFT — ${post.title}` },
+          { name: "robots", content: "noindex, nofollow" },
+        ],
+      };
+
     const url = `https://texitcoin.org/blog/${params.slug}`;
     return {
       meta: [
