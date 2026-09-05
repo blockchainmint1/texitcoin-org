@@ -76,6 +76,6 @@ export function DraftReviewEmail({ title, previewUrl, excerpt, authorName }: Dra
 
 export const template = {
   component: DraftReviewEmail,
-  subject: ({ title }: DraftReviewData) => `Draft ready for review: ${title}`,
+  subject: (data: Record<string, any>) => `Draft ready for review: ${data.title || 'Untitled'}`,
   displayName: 'Draft review request',
 }
