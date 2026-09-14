@@ -15,7 +15,6 @@ import { Route as WhitepaperRouteImport } from './routes/whitepaper'
 import { Route as WalletsRouteImport } from './routes/wallets'
 import { Route as VideosRouteImport } from './routes/videos'
 import { Route as ValueRouteImport } from './routes/value'
-import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TrollsRouteImport } from './routes/trolls'
 import { Route as TokenomicsRouteImport } from './routes/tokenomics'
 import { Route as TexitRouteImport } from './routes/texit'
@@ -59,18 +58,15 @@ import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
 import { Route as ScreenplaySeasonRouteImport } from './routes/screenplay_.$season'
 import { Route as MarketSlugRouteImport } from './routes/market_.$slug'
 import { Route as LegalArizonaRouteImport } from './routes/legal_.arizona'
-import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as AuthenticatedScreenplayAdminRouteImport } from './routes/_authenticated/screenplay-admin'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
-import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
-import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
-import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
@@ -105,11 +101,6 @@ const VideosRoute = VideosRouteImport.update({
 const ValueRoute = ValueRouteImport.update({
   id: '/value',
   path: '/value',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const UnsubscribeRoute = UnsubscribeRouteImport.update({
-  id: '/unsubscribe',
-  path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrollsRoute = TrollsRouteImport.update({
@@ -328,11 +319,6 @@ const LegalArizonaRoute = LegalArizonaRouteImport.update({
   path: '/legal/arizona',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
-  id: '/email/unsubscribe',
-  path: '/email/unsubscribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog_/$slug',
   path: '/blog/$slug',
@@ -356,9 +342,9 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
-const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
-  id: '/lovable/email/suppression',
-  path: '/lovable/email/suppression',
+const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
+  id: '/lovable/email/events',
+  path: '/lovable/email/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
@@ -377,22 +363,10 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
-const LovableEmailTransactionalSendRoute =
-  LovableEmailTransactionalSendRouteImport.update({
-    id: '/lovable/email/transactional/send',
-    path: '/lovable/email/transactional/send',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
     path: '/lovable/email/transactional/preview',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const LovableEmailQueueProcessRoute =
-  LovableEmailQueueProcessRouteImport.update({
-    id: '/lovable/email/queue/process',
-    path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
   } as any)
 const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
@@ -462,7 +436,6 @@ export interface FileRoutesByFullPath {
   '/texit': typeof TexitRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
-  '/unsubscribe': typeof UnsubscribeRoute
   '/value': typeof ValueRoute
   '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
@@ -473,7 +446,6 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/legal/arizona': typeof LegalArizonaRoute
   '/market/$slug': typeof MarketSlugRoute
   '/screenplay/$season': typeof ScreenplaySeasonRoute
@@ -481,15 +453,13 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
-  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
-  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
-  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -530,7 +500,6 @@ export interface FileRoutesByTo {
   '/texit': typeof TexitRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
-  '/unsubscribe': typeof UnsubscribeRoute
   '/value': typeof ValueRoute
   '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
@@ -541,7 +510,6 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/legal/arizona': typeof LegalArizonaRoute
   '/market/$slug': typeof MarketSlugRoute
   '/screenplay/$season': typeof ScreenplaySeasonRoute
@@ -549,15 +517,13 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
-  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
-  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
-  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -600,7 +566,6 @@ export interface FileRoutesById {
   '/texit': typeof TexitRoute
   '/tokenomics': typeof TokenomicsRoute
   '/trolls': typeof TrollsRoute
-  '/unsubscribe': typeof UnsubscribeRoute
   '/value': typeof ValueRoute
   '/videos': typeof VideosRoute
   '/wallets': typeof WalletsRoute
@@ -611,7 +576,6 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_authenticated/screenplay-admin': typeof AuthenticatedScreenplayAdminRoute
   '/blog_/$slug': typeof BlogSlugRoute
-  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/legal_/arizona': typeof LegalArizonaRoute
   '/market_/$slug': typeof MarketSlugRoute
   '/screenplay_/$season': typeof ScreenplaySeasonRoute
@@ -619,15 +583,13 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
-  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
-  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
-  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -670,7 +632,6 @@ export interface FileRouteTypes {
     | '/texit'
     | '/tokenomics'
     | '/trolls'
-    | '/unsubscribe'
     | '/value'
     | '/videos'
     | '/wallets'
@@ -681,7 +642,6 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/screenplay-admin'
     | '/blog/$slug'
-    | '/email/unsubscribe'
     | '/legal/arizona'
     | '/market/$slug'
     | '/screenplay/$season'
@@ -689,15 +649,13 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/track'
-    | '/lovable/email/suppression'
+    | '/lovable/email/events'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
     | '/api/public/telegram/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
-    | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
-    | '/lovable/email/transactional/send'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -738,7 +696,6 @@ export interface FileRouteTypes {
     | '/texit'
     | '/tokenomics'
     | '/trolls'
-    | '/unsubscribe'
     | '/value'
     | '/videos'
     | '/wallets'
@@ -749,7 +706,6 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/screenplay-admin'
     | '/blog/$slug'
-    | '/email/unsubscribe'
     | '/legal/arizona'
     | '/market/$slug'
     | '/screenplay/$season'
@@ -757,15 +713,13 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/track'
-    | '/lovable/email/suppression'
+    | '/lovable/email/events'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
     | '/api/public/telegram/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
-    | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
-    | '/lovable/email/transactional/send'
   id:
     | '__root__'
     | '/'
@@ -807,7 +761,6 @@ export interface FileRouteTypes {
     | '/texit'
     | '/tokenomics'
     | '/trolls'
-    | '/unsubscribe'
     | '/value'
     | '/videos'
     | '/wallets'
@@ -818,7 +771,6 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/_authenticated/screenplay-admin'
     | '/blog_/$slug'
-    | '/email/unsubscribe'
     | '/legal_/arizona'
     | '/market_/$slug'
     | '/screenplay_/$season'
@@ -826,15 +778,13 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/track'
-    | '/lovable/email/suppression'
+    | '/lovable/email/events'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
     | '/api/public/telegram/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
-    | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
-    | '/lovable/email/transactional/send'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -877,7 +827,6 @@ export interface RootRouteChildren {
   TexitRoute: typeof TexitRoute
   TokenomicsRoute: typeof TokenomicsRoute
   TrollsRoute: typeof TrollsRoute
-  UnsubscribeRoute: typeof UnsubscribeRoute
   ValueRoute: typeof ValueRoute
   VideosRoute: typeof VideosRoute
   WalletsRoute: typeof WalletsRoute
@@ -887,7 +836,6 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   BlogSlugRoute: typeof BlogSlugRoute
-  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   LegalArizonaRoute: typeof LegalArizonaRoute
   MarketSlugRoute: typeof MarketSlugRoute
   ScreenplaySeasonRoute: typeof ScreenplaySeasonRoute
@@ -895,15 +843,13 @@ export interface RootRouteChildren {
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
-  LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
   ApiPublicNotifyNewContentRoute: typeof ApiPublicNotifyNewContentRoute
   ApiPublicTelegramWebhookRoute: typeof ApiPublicTelegramWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
-  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
-  LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -948,13 +894,6 @@ declare module '@tanstack/react-router' {
       path: '/value'
       fullPath: '/value'
       preLoaderRoute: typeof ValueRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/unsubscribe': {
-      id: '/unsubscribe'
-      path: '/unsubscribe'
-      fullPath: '/unsubscribe'
-      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trolls': {
@@ -1258,13 +1197,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalArizonaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/email/unsubscribe': {
-      id: '/email/unsubscribe'
-      path: '/email/unsubscribe'
-      fullPath: '/email/unsubscribe'
-      preLoaderRoute: typeof EmailUnsubscribeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/blog_/$slug': {
       id: '/blog_/$slug'
       path: '/blog/$slug'
@@ -1293,11 +1225,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/suppression': {
-      id: '/lovable/email/suppression'
-      path: '/lovable/email/suppression'
-      fullPath: '/lovable/email/suppression'
-      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+    '/lovable/email/events': {
+      id: '/lovable/email/events'
+      path: '/lovable/email/events'
+      fullPath: '/lovable/email/events'
+      preLoaderRoute: typeof LovableEmailEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/track': {
@@ -1321,25 +1253,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/transactional/send': {
-      id: '/lovable/email/transactional/send'
-      path: '/lovable/email/transactional/send'
-      fullPath: '/lovable/email/transactional/send'
-      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
       fullPath: '/lovable/email/transactional/preview'
       preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lovable/email/queue/process': {
-      id: '/lovable/email/queue/process'
-      path: '/lovable/email/queue/process'
-      fullPath: '/lovable/email/queue/process'
-      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/auth/webhook': {
@@ -1431,7 +1349,6 @@ const rootRouteChildren: RootRouteChildren = {
   TexitRoute: TexitRoute,
   TokenomicsRoute: TokenomicsRoute,
   TrollsRoute: TrollsRoute,
-  UnsubscribeRoute: UnsubscribeRoute,
   ValueRoute: ValueRoute,
   VideosRoute: VideosRoute,
   WalletsRoute: WalletsRoute,
@@ -1442,7 +1359,6 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   BlogSlugRoute: BlogSlugRoute,
-  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   LegalArizonaRoute: LegalArizonaRoute,
   MarketSlugRoute: MarketSlugRoute,
   ScreenplaySeasonRoute: ScreenplaySeasonRoute,
@@ -1450,15 +1366,13 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
-  LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  LovableEmailEventsRoute: LovableEmailEventsRoute,
   ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
   ApiPublicNotifyNewContentRoute: ApiPublicNotifyNewContentRoute,
   ApiPublicTelegramWebhookRoute: ApiPublicTelegramWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
-  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
-  LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

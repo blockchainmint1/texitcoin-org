@@ -15,7 +15,6 @@ import type { TemplateEntry } from './registry'
 
 interface NewsletterWelcomeProps {
   recipientEmail?: string
-  unsubscribeUrl?: string
 }
 
 /**
@@ -23,9 +22,7 @@ interface NewsletterWelcomeProps {
  * Voice: warm, plainspoken, a little Texan. Points to the /zoom page,
  * the next Honest Money Hour, and the X account.
  */
-export const NewsletterWelcomeEmail = ({
-  unsubscribeUrl = 'https://texitcoin.org/unsubscribe',
-}: NewsletterWelcomeProps) => (
+export const NewsletterWelcomeEmail = ({}: NewsletterWelcomeProps) => (
   <Html lang="en" dir="ltr">
     <Head />
     <Preview>You're on the list — honest money, straight from Texas.</Preview>
@@ -119,11 +116,6 @@ export const NewsletterWelcomeEmail = ({
             </Link>{' '}
             ecosystem.
           </Text>
-          <Text style={footerText}>
-            <Link href={unsubscribeUrl} style={footerLink}>
-              Unsubscribe
-            </Link>
-          </Text>
         </Section>
       </Container>
     </Body>
@@ -138,7 +130,6 @@ export const template = {
   displayName: 'Newsletter welcome',
   previewData: {
     recipientEmail: 'friend@example.com',
-    unsubscribeUrl: 'https://texitcoin.org/unsubscribe?token=preview',
   },
 } satisfies TemplateEntry
 
