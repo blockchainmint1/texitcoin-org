@@ -12,12 +12,12 @@ export const Route = createFileRoute("/live")({
       {
         name: "description",
         content:
-          "TEXITcoin goes live with Bobby Gray every Tuesday and Thursday at 7pm Central. Watch the stream here, or catch the simulcast on X, Facebook and YouTube.",
+          "TEXITcoin goes live with Bobby Gray every Tuesday and Thursday at 8pm Central. Watch the stream here, or catch the simulcast on X, Facebook and YouTube.",
       },
       { property: "og:title", content: "Watch Live — TEXITcoin Honest Money Hour" },
       {
         property: "og:description",
-        content: "Live Tuesdays & Thursdays at 7pm Central with Bobby Gray.",
+        content: "Live Tuesdays & Thursdays at 8pm Central with Bobby Gray.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -49,7 +49,7 @@ function LivePage() {
               </h2>
               <p className="mt-4 text-muted-foreground">
                 Bobby hosts the Honest Money Hour live on <strong>Tuesdays</strong>{" "}
-                and <strong>Thursdays</strong> at 7:00pm Central. Same format both
+                and <strong>Thursdays</strong> at 8:00pm Central. Same format both
                 nights: what happened this week, what's shipping next, and open Q&amp;A
                 with no script and no edits.
               </p>

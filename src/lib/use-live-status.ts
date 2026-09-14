@@ -29,7 +29,7 @@ function inBlackout(now = Date.now()): boolean {
  * Polls streamTXC every 30s (server-side, no CORS) to detect whether the
  * Honest Money Hour is actually on the air right now — regardless of the
  * clock. Sometimes we start early or run late; this flips the UI based on
- * reality, with the Thursday 7pm CT window as a graceful fallback if the
+ * reality, with the Thursday 8pm CT window as a graceful fallback if the
  * probe fails.
  */
 export function useLiveStatus(): {
