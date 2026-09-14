@@ -112,7 +112,7 @@ export function LiveStage() {
         timeZoneName: "short",
         timeZone: "America/Chicago",
       })
-    : "7:00 PM CT";
+    : "8:00 PM CT";
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:items-center">
@@ -163,7 +163,7 @@ export function LiveStage() {
           ) : (
             <>
               <Radio className="h-3 w-3 text-primary animate-pulse" />
-              Honest Money Hour · Tue & Thu 7pm CT
+              Honest Money Hour · Tue & Thu 8pm CT
             </>
           )}
         </div>
