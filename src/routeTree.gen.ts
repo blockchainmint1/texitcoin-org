@@ -65,6 +65,7 @@ import { Route as AuthenticatedScreenplayAdminRouteImport } from './routes/_auth
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -361,6 +362,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
+  id: '/lovable/email/events',
+  path: '/lovable/email/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
   id: '/api/public/track',
   path: '/api/public/track',
@@ -481,6 +487,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -549,6 +556,7 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -619,6 +627,7 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -689,6 +698,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/track'
+    | '/lovable/email/events'
     | '/lovable/email/suppression'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -757,6 +767,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/track'
+    | '/lovable/email/events'
     | '/lovable/email/suppression'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -826,6 +837,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/legal-fees'
     | '/api/public/track'
+    | '/lovable/email/events'
     | '/lovable/email/suppression'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -895,6 +907,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
+  LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
   ApiPublicNotifyNewContentRoute: typeof ApiPublicNotifyNewContentRoute
@@ -1300,6 +1313,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/events': {
+      id: '/lovable/email/events'
+      path: '/lovable/email/events'
+      fullPath: '/lovable/email/events'
+      preLoaderRoute: typeof LovableEmailEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/track': {
       id: '/api/public/track'
       path: '/api/public/track'
@@ -1450,6 +1470,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
+  LovableEmailEventsRoute: LovableEmailEventsRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
   ApiPublicNotifyNewContentRoute: ApiPublicNotifyNewContentRoute,
