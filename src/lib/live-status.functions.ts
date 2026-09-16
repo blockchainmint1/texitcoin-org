@@ -4,7 +4,8 @@ import { createServerFn } from "@tanstack/react-start";
 // these channels is broadcasting on streamTXC. Add more here to authorize
 // additional co-hosts or backup streaming accounts.
 const LIVE_WALLETS = [
-  "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc", // Bobby
+  "TmmoqqhcfBZWRG8feCTE2c4N4BsADgwD1m", // Bobby (current)
+  "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc", // Bobby (previous)
 ];
 
 // Server-fn RPC hash for streamTXC's getLiveStreamByWallet (extracted from
