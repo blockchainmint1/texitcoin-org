@@ -6,7 +6,7 @@ import { useCallback } from "react";
 const STREAM_WATCH_URL = "https://streamtxc.com/live";
 
 function embedUrlForWallet(wallet: string | null): string {
-  const id = wallet ?? "TeiqbqMxQG4JrDfrzdvTZcqhhai8KT5JTc";
+  const id = wallet ?? "TmmoqqhcfBZWRG8feCTE2c4N4BsADgwD1m";
   return `https://stream.texitcoin.org/embed/live/by-wallet/${id}?autoplay=1&mute=1`;
 }
 const X_LIVE_URL = "https://x.com/texitcoin";
