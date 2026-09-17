@@ -3,7 +3,7 @@ import type { Database } from "@/integrations/supabase/types";
 import { ENTRIES, entryKey } from "@/data/legal-timeline";
 
 const TG_GATEWAY = "https://connector-gateway.lovable.dev/telegram";
-const EXTRA_CHAT_IDS = ["-1002172752143"];
+const EXTRA_CHAT_IDS = ["-1002172752143", "-5219881042"];
 const SITE = "https://texitcoin.org";
 
 let _sb: ReturnType<typeof createClient<Database>> | null = null;
