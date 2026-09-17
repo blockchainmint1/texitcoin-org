@@ -88,6 +88,15 @@ function safeEqual(a: string, b: string): boolean {
   return A.length === B.length && timingSafeEqual(A, B);
 }
 
+// Chats whose members are trusted to issue commands directly.
+const AUTHORIZED_CHAT_IDS = new Set<string>(["-5219881042", "-1002172752143"]);
+
+function isAuthorizedChat(chatId: number | string): boolean {
+  if (AUTHORIZED_CHAT_IDS.has(String(chatId))) return true;
+  const groupId = process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
+  return !!groupId && String(groupId) === String(chatId);
+}
+
 async function isAuthorizedUser(userId: number): Promise<boolean> {
   const groupId = process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
   if (!groupId) {
