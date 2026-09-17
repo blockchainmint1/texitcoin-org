@@ -245,6 +245,24 @@ Never include emojis. Never mention that this is AI-generated. Keep Bobby Gray's
   );
 }
 
+function slugify(s: string): string {
+  return s
+    .normalize("NFKD")
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function ensureZoomSlug(draft: ZoomDraft, dateISO: string): string {
+  const fromAi = slugify(draft?.slug ?? "");
+  if (fromAi) return fromAi.startsWith(dateISO) ? fromAi : `${dateISO}-${fromAi}`;
+  const fromTitle = slugify(draft?.title ?? "");
+  return `${dateISO}-${fromTitle || "honest-money-hour"}`.slice(0, 120);
+}
+
 type BlogDraft = {
   title: string;
   slug: string;
