@@ -9,14 +9,19 @@ import type { Database } from "@/integrations/supabase/types";
 
 const TG_GATEWAY = "https://connector-gateway.lovable.dev/telegram";
 
+function tgKey(): string {
+  // TEXITcoin Site Bot (new); falls back to the legacy bot key if ever needed.
+  const tg = process.env.TELEGRAM_API_KEY_1 ?? process.env.TELEGRAM_API_KEY;
+  if (!tg) throw new Error("TELEGRAM_API_KEY not configured");
+  return tg;
+}
+
 function tgHeaders() {
   const lovable = process.env.LOVABLE_API_KEY;
-  const tg = process.env.TELEGRAM_API_KEY;
   if (!lovable) throw new Error("LOVABLE_API_KEY not configured");
-  if (!tg) throw new Error("TELEGRAM_API_KEY not configured");
   return {
     Authorization: `Bearer ${lovable}`,
-    "X-Connection-Api-Key": tg,
+    "X-Connection-Api-Key": tgKey(),
     "Content-Type": "application/json",
   };
 }
@@ -60,7 +65,7 @@ async function tgDownloadFile(fileId: string): Promise<Uint8Array> {
   const res = await fetch(`${TG_GATEWAY}/file/${filePath}`, {
     headers: {
       Authorization: `Bearer ${process.env.LOVABLE_API_KEY!}`,
-      "X-Connection-Api-Key": process.env.TELEGRAM_API_KEY!,
+      "X-Connection-Api-Key": tgKey(),
     },
   });
   if (!res.ok) throw new Error(`File download failed: ${res.status}`);
@@ -72,9 +77,9 @@ async function tgDownloadFile(fileId: string): Promise<Uint8Array> {
 /* -------------------------------------------------------------------------- */
 
 function deriveWebhookSecret(): string {
-  const key = process.env.TELEGRAM_API_KEY;
-  if (!key) throw new Error("TELEGRAM_API_KEY not configured");
-  return createHash("sha256").update(`telegram-webhook:${key}`).digest("base64url");
+  return createHash("sha256")
+    .update(`telegram-webhook:${tgKey()}`)
+    .digest("base64url");
 }
 
 function safeEqual(a: string, b: string): boolean {

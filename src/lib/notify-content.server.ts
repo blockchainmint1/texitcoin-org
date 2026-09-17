@@ -28,7 +28,8 @@ function trim(s: string, max = 320) {
 
 async function tgSend(text: string) {
   const lovable = process.env.LOVABLE_API_KEY;
-  const tg = process.env.TELEGRAM_API_KEY;
+  // TEXITcoin Site Bot (new); falls back to the legacy bot key if ever needed.
+  const tg = process.env.TELEGRAM_API_KEY_1 ?? process.env.TELEGRAM_API_KEY;
   if (!lovable || !tg) throw new Error("Telegram credentials not configured");
   const chatIds = [
     ...(process.env.TELEGRAM_AUTHORIZED_GROUP_ID
