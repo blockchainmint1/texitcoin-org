@@ -393,7 +393,7 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
     slug,
     title: draft.title || `Honest Money Hour — ${dateISO}`,
     description: draft.description ?? null,
-    description: draft.description,
+    
     call_date: callDate,
     status: "recorded",
     video_cid: cid,
