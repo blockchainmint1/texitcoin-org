@@ -91,6 +91,10 @@ function safeEqual(a: string, b: string): boolean {
 // Chats whose members are trusted to issue commands directly.
 const AUTHORIZED_CHAT_IDS = new Set<string>(["-5219881042", "-1002172752143"]);
 
+// Individual users always allowed to issue commands, regardless of group
+// membership checks (e.g. Bobby / @ReardenMetals).
+const AUTHORIZED_USER_IDS = new Set<string>(["813867061"]);
+
 function isAuthorizedChat(chatId: number | string): boolean {
   if (AUTHORIZED_CHAT_IDS.has(String(chatId))) return true;
   const groupId = process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
@@ -98,6 +102,7 @@ function isAuthorizedChat(chatId: number | string): boolean {
 }
 
 async function isAuthorizedUser(userId: number): Promise<boolean> {
+  if (AUTHORIZED_USER_IDS.has(String(userId))) return true;
   const groupId = process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
   if (!groupId) {
     console.error("TELEGRAM_AUTHORIZED_GROUP_ID not configured");
