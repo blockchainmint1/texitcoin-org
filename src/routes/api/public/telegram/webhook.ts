@@ -341,8 +341,8 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
     await tgReply(chatId, "Usage: <code>/zoom &lt;streamtxc-url&gt; &lt;YYYY-MM-DD&gt;</code> with the .vtt file attached.");
     return;
   }
-  const url = args[0];
-  const dateISO = parseDate(args[1]);
+  const url = args.find((arg) => /^https?:\/\/(?:www\.)?streamtxc\.com\/v\//i.test(arg)) ?? "";
+  const dateISO = parseDate(args.find((arg) => parseDate(arg)) ?? "");
   if (!dateISO) {
     await tgReply(chatId, "Date must be in <code>YYYY-MM-DD</code> format.");
     return;
@@ -509,10 +509,11 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
 
         const chatId: number = message.chat?.id;
         const userId: number | undefined = message.from?.id;
-        if (!chatId || !userId) return Response.json({ ok: true, ignored: "no user" });
+        if (!chatId) return Response.json({ ok: true, ignored: "no chat" });
 
-        // Auth: user must be in the authorized group
-        const ok = await isAuthorizedUser(userId);
+        // Trust commands posted inside an approved chat. Outside those chats,
+        // require an explicitly approved user or verified group membership.
+        const ok = isAuthorizedChat(chatId) || (userId ? await isAuthorizedUser(userId) : false);
         if (!ok) {
           await tgReply(chatId, "Not authorized. Ask an admin to add you to the TEXITcoin bot group.");
           return Response.json({ ok: true, ignored: "unauthorized user" });
@@ -538,7 +539,20 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
         const args = parts.slice(1);
         const restAfterCommand = rawText.slice(commandRaw.length).trim();
 
+        // In the Zoom intake group, Bobby can simply attach the transcript
+        // with a StreamTXC link and date in either order; /zoom is optional.
+        const inlineZoomArgs = rawText.split(/\s+/).filter(Boolean);
+        const isInlineZoom =
+          isAuthorizedChat(chatId) &&
+          !!docFileId &&
+          inlineZoomArgs.some((part) => /^https?:\/\/(?:www\.)?streamtxc\.com\/v\//i.test(part)) &&
+          inlineZoomArgs.some((part) => !!parseDate(part));
+
         try {
+          if (isInlineZoom && command !== "/zoom") {
+            await handleZoom(chatId, inlineZoomArgs, docFileId);
+            return Response.json({ ok: true });
+          }
           switch (command) {
             case "/start":
             case "/help":
