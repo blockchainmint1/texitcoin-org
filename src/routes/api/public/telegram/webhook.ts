@@ -407,10 +407,10 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
     return;
   }
 
-  const preview = `${siteOrigin()}/zoom/${draft.slug}`;
+  const preview = `${siteOrigin()}/zoom/${slug}`;
   await tgReply(
     chatId,
-    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n<code>${draft.slug}</code>\n\nPreview: ${preview}\n\nSend a photo with caption <code>/thumb ${draft.slug}</code> to set the thumbnail.`,
+    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n<code>${slug}</code>\n\nPreview: ${preview}\n\nSend a photo with caption <code>/thumb ${slug}</code> to set the thumbnail.`,
   );
 }
 
