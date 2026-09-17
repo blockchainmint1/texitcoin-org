@@ -386,11 +386,13 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
   }
 
   const draft = await draftZoomFromTranscript(text, dateISO);
+  const slug = ensureZoomSlug(draft, dateISO);
 
   const callDate = `${dateISO} 23:59:00+00`;
   const { error } = await sb().from("zoom_calls").insert({
-    slug: draft.slug,
-    title: draft.title,
+    slug,
+    title: draft.title || `Honest Money Hour — ${dateISO}`,
+    description: draft.description ?? null,
     description: draft.description,
     call_date: callDate,
     status: "recorded",
