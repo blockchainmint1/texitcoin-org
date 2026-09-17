@@ -245,6 +245,24 @@ Never include emojis. Never mention that this is AI-generated. Keep Bobby Gray's
   );
 }
 
+function slugify(s: string): string {
+  return s
+    .normalize("NFKD")
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function ensureZoomSlug(draft: ZoomDraft, dateISO: string): string {
+  const fromAi = slugify(draft?.slug ?? "");
+  if (fromAi) return fromAi.startsWith(dateISO) ? fromAi : `${dateISO}-${fromAi}`;
+  const fromTitle = slugify(draft?.title ?? "");
+  return `${dateISO}-${fromTitle || "honest-money-hour"}`.slice(0, 120);
+}
+
 type BlogDraft = {
   title: string;
   slug: string;
@@ -368,12 +386,14 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
   }
 
   const draft = await draftZoomFromTranscript(text, dateISO);
+  const slug = ensureZoomSlug(draft, dateISO);
 
   const callDate = `${dateISO} 23:59:00+00`;
   const { error } = await sb().from("zoom_calls").insert({
-    slug: draft.slug,
-    title: draft.title,
-    description: draft.description,
+    slug,
+    title: draft.title || `Honest Money Hour — ${dateISO}`,
+    description: draft.description ?? null,
+    
     call_date: callDate,
     status: "recorded",
     video_cid: cid,
@@ -387,10 +407,10 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
     return;
   }
 
-  const preview = `${siteOrigin()}/zoom/${draft.slug}`;
+  const preview = `${siteOrigin()}/zoom/${slug}`;
   await tgReply(
     chatId,
-    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n<code>${draft.slug}</code>\n\nPreview: ${preview}\n\nSend a photo with caption <code>/thumb ${draft.slug}</code> to set the thumbnail.`,
+    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n<code>${slug}</code>\n\nPreview: ${preview}\n\nSend a photo with caption <code>/thumb ${slug}</code> to set the thumbnail.`,
   );
 }
 
