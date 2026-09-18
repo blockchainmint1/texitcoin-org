@@ -105,14 +105,7 @@ export function LiveStage() {
         timeZone: "America/Chicago",
       })
     : "Tuesday";
-  const timeLabel = nextStart.getTime()
-    ? nextStart.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        timeZoneName: "short",
-        timeZone: "America/Chicago",
-      })
-    : "12:00 PM CT";
+  const timeLabel = "12:00 CDT";
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:items-center">
