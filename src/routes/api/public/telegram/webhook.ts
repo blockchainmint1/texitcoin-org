@@ -380,6 +380,7 @@ async function draftBlogPost(topic: string, context: string, dateISO: string): P
 
 Never invent facts not in the topic/context. If context mentions the TEXITcoin ecosystem, use these names correctly: TEXITcoin (never Texacoin/Texitcoin), Honest Money Hour, NectarPay, streamTXC.`,
     `Date: ${dateISO}\n\nHeadline / topic: ${topic}\n\nContext / notes:\n${context || "(no extra notes)"}`,
+    ["title", "slug", "tag", "excerpt", "bodyMarkdown"],
   );
 }
 
@@ -481,21 +482,33 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
     return;
   }
 
-  const draft = await draftZoomFromTranscript(text, dateISO);
+  let draft: ZoomDraft;
+  try {
+    draft = await draftZoomFromTranscript(text, dateISO);
+  } catch (err) {
+    console.error("zoom drafting failed", err);
+    await tgReply(
+      chatId,
+      `I couldn't write the title and summary for this call (<code>${(err as Error).message}</code>), so I didn't add a half-empty entry. Send the same message again and I'll retry.`,
+    );
+    return;
+  }
   const slug = ensureZoomSlug(draft, dateISO);
+
+  const thumbnail = await generateCoverImage(draft.title, dateISO, slug);
 
   const callDate = `${dateISO} 23:59:00+00`;
   const { error } = await sb().from("zoom_calls").insert({
     slug,
-    title: draft.title || `Honest Money Hour — ${dateISO}`,
-    description: draft.description ?? null,
-    
+    title: draft.title,
+    description: draft.description,
     call_date: callDate,
     status: "recorded",
     video_cid: cid,
     duration_seconds: durationSeconds,
     summary: draft.summary,
     transcript: text,
+    thumbnail_url: thumbnail,
   });
   if (error) {
     console.error("insert zoom_calls failed", error);
@@ -506,7 +519,7 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
   const preview = `${siteOrigin()}/zoom/${slug}`;
   await tgReply(
     chatId,
-    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n<code>${slug}</code>\n\nPreview: ${preview}\n\nSend a photo with caption <code>/thumb ${slug}</code> to set the thumbnail.`,
+    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n${draft.description}\n<code>${slug}</code>\n\nVideo: set • Summary: set • Cover image: ${thumbnail ? "generated" : "FAILED — send a photo with <code>/thumb " + slug + "</code>"}\n\nPreview: ${preview}`,
   );
 }
 
