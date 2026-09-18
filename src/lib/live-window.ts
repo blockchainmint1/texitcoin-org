@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-// Honest Money Hour: Tuesdays & Thursdays, 8:00pm–10:00pm America/Chicago
+// Honest Money Hour: Tuesdays & Thursdays, 12:00pm–2:00pm America/Chicago
 const LIVE_WEEKDAYS_SHORT = ["Tue", "Thu"];
-const LIVE_START_HOUR_CT = 20; // 8pm
-const LIVE_END_HOUR_CT = 22; // 10pm (2-hour window)
+const LIVE_START_HOUR_CT = 12; // noon
+const LIVE_END_HOUR_CT = 14; // 2pm (2-hour window)
 
 function chicagoParts(d: Date) {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -28,7 +28,7 @@ export function isLiveWindow(now: Date = new Date()): boolean {
   );
 }
 
-export function nextThursday7pmCT(from: Date = new Date()): Date {
+export function nextLiveCallAtNoonCT(from: Date = new Date()): Date {
   for (let i = 0; i < 8; i++) {
     const candidate = new Date(from.getTime() + i * 86400000);
     const { weekday, hour } = chicagoParts(candidate);
@@ -39,7 +39,7 @@ export function nextThursday7pmCT(from: Date = new Date()): Date {
         month: "2-digit",
         day: "2-digit",
       }).format(candidate);
-      const probe = new Date(`${ymd}T20:00:00Z`);
+      const probe = new Date(`${ymd}T12:00:00Z`);
       const tzName = new Intl.DateTimeFormat("en-US", {
         timeZone: "America/Chicago",
         timeZoneName: "short",
@@ -47,7 +47,7 @@ export function nextThursday7pmCT(from: Date = new Date()): Date {
         .formatToParts(probe)
         .find((p) => p.type === "timeZoneName")?.value;
       const offset = tzName === "CDT" ? "-05:00" : "-06:00";
-      return new Date(`${ymd}T20:00:00${offset}`);
+      return new Date(`${ymd}T12:00:00${offset}`);
     }
   }
   return from;
@@ -66,7 +66,7 @@ export type LiveState = {
 function compute(): LiveState {
   const now = new Date();
   const live = isLiveWindow(now);
-  const nextStart = nextThursday7pmCT(now);
+  const nextStart = nextLiveCallAtNoonCT(now);
   const remainingMs = Math.max(0, nextStart.getTime() - now.getTime());
   const totalSec = Math.floor(remainingMs / 1000);
   return {
@@ -107,7 +107,7 @@ export function useLiveWindow(): LiveState {
 
 // Calendar (.ics) helper — generates a subscribe-in-place recurring event.
 export function icsForNextCall(): string {
-  const start = nextThursday7pmCT();
+  const start = nextLiveCallAtNoonCT();
   const end = new Date(start.getTime() + 60 * 60 * 1000); // 1hr default duration
   const fmt = (d: Date) =>
     d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
