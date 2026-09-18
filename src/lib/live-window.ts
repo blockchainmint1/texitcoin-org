@@ -28,7 +28,7 @@ export function isLiveWindow(now: Date = new Date()): boolean {
   );
 }
 
-export function nextThursday7pmCT(from: Date = new Date()): Date {
+export function nextLiveCallAtNoonCT(from: Date = new Date()): Date {
   for (let i = 0; i < 8; i++) {
     const candidate = new Date(from.getTime() + i * 86400000);
     const { weekday, hour } = chicagoParts(candidate);
@@ -66,7 +66,7 @@ export type LiveState = {
 function compute(): LiveState {
   const now = new Date();
   const live = isLiveWindow(now);
-  const nextStart = nextThursday7pmCT(now);
+  const nextStart = nextLiveCallAtNoonCT(now);
   const remainingMs = Math.max(0, nextStart.getTime() - now.getTime());
   const totalSec = Math.floor(remainingMs / 1000);
   return {
@@ -107,7 +107,7 @@ export function useLiveWindow(): LiveState {
 
 // Calendar (.ics) helper — generates a subscribe-in-place recurring event.
 export function icsForNextCall(): string {
-  const start = nextThursday7pmCT();
+  const start = nextLiveCallAtNoonCT();
   const end = new Date(start.getTime() + 60 * 60 * 1000); // 1hr default duration
   const fmt = (d: Date) =>
     d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
