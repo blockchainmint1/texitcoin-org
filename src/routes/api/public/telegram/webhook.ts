@@ -194,17 +194,47 @@ function parseVtt(raw: string): ParsedVtt {
 /*  Lovable AI                                                                */
 /* -------------------------------------------------------------------------- */
 
-async function aiJson<T>(system: string, user: string): Promise<T> {
+const AI_GATEWAY = "https://ai.gateway.lovable.dev/v1";
+
+function aiHeaders() {
   const key = process.env.LOVABLE_API_KEY;
   if (!key) throw new Error("LOVABLE_API_KEY missing");
-  const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+  return { "Content-Type": "application/json", "Lovable-API-Key": key };
+}
+
+/** Pull a JSON object out of a model reply, tolerating code fences / prose. */
+function parseLooseJson(content: string): any {
+  const stripped = content
+    .replace(/^\s*```(?:json)?/i, "")
+    .replace(/```\s*$/, "")
+    .trim();
+  try {
+    return JSON.parse(stripped);
+  } catch {
+    const start = stripped.indexOf("{");
+    const end = stripped.lastIndexOf("}");
+    if (start >= 0 && end > start) return JSON.parse(stripped.slice(start, end + 1));
+    throw new Error("AI reply was not JSON");
+  }
+}
+
+/** Some models wrap the payload, e.g. { result: {...} } — unwrap one level. */
+function unwrapPayload(obj: any, keys: string[]): any {
+  if (obj && typeof obj === "object" && !keys.some((k) => k in obj)) {
+    for (const v of Object.values(obj)) {
+      if (v && typeof v === "object" && keys.some((k) => k in (v as any))) return v;
+    }
+  }
+  return obj;
+}
+
+async function aiJsonOnce<T>(system: string, user: string, expectKeys: string[]): Promise<T> {
+  const res = await fetch(`${AI_GATEWAY}/chat/completions`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Lovable-API-Key": key,
-    },
+    headers: aiHeaders(),
     body: JSON.stringify({
-      model: "google/gemini-3-flash-preview",
+      model: "openai/gpt-6-astra",
+      reasoning_effort: "low",
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
@@ -220,7 +250,30 @@ async function aiJson<T>(system: string, user: string): Promise<T> {
   const parsed = JSON.parse(text);
   const content = parsed?.choices?.[0]?.message?.content;
   if (!content) throw new Error("AI returned no content");
-  return JSON.parse(content) as T;
+  return unwrapPayload(parseLooseJson(content), expectKeys) as T;
+}
+
+/** Calls the model, retrying once, and rejects replies missing required fields. */
+async function aiJson<T extends Record<string, any>>(
+  system: string,
+  user: string,
+  requiredKeys: string[],
+): Promise<T> {
+  let lastErr: unknown = null;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const out = await aiJsonOnce<T>(system, user, requiredKeys);
+      const missing = requiredKeys.filter(
+        (k) => typeof out?.[k] !== "string" || !String(out[k]).trim(),
+      );
+      if (missing.length) throw new Error(`AI reply missing: ${missing.join(", ")}`);
+      return out;
+    } catch (err) {
+      lastErr = err;
+      console.error(`AI attempt ${attempt + 1} failed`, err);
+    }
+  }
+  throw lastErr instanceof Error ? lastErr : new Error("AI request failed");
 }
 
 type ZoomDraft = {
@@ -230,19 +283,62 @@ type ZoomDraft = {
   summary: string;
 };
 
+const ZOOM_VOICE = `You are the archivist for TEXITcoin's Honest Money Hour calls, hosted by Bobby Gray.
+Spell the project "TEXITcoin" — never Texacoin, Texicoin or Texitcoin. Other correct names: Honest Money Hour, NectarPay, streamTXC, mineTXC.
+Never use emojis. Never mention AI. Keep Bobby's calm, direct, plainspoken voice.`;
+
 async function draftZoomFromTranscript(transcript: string, dateISO: string): Promise<ZoomDraft> {
   const sample = transcript.length > 40000 ? transcript.slice(0, 40000) : transcript;
-  return aiJson<ZoomDraft>(
-    `You are the archivist for TEXITcoin's weekly Honest Money Hour calls, hosted by Bobby Gray.
-Produce polished archive metadata from a call transcript. Return JSON with:
-- title: engaging headline, 4-9 words, no clickbait, no emojis
-- slug: kebab-case, starts with the ISO date, e.g. "${dateISO}-topic-here", 4-8 words after the date, ASCII only
-- description: 1-2 sentence blurb for the archive card (max 220 chars), plain sober tone
-- summary: 3-6 paragraph AI recap for the detail page (400-700 words). Cover the key announcements, decisions, community context, and any legal/tech/market updates mentioned. Use plain paragraphs, no bullet lists, no headers, no markdown.
 
-Never include emojis. Never mention that this is AI-generated. Keep Bobby Gray's calm, direct voice.`,
+  // 1) Short metadata — small, reliable reply.
+  const meta = await aiJson<{ title: string; slug: string; description: string }>(
+    `${ZOOM_VOICE}
+
+Return JSON with exactly these keys:
+- title: specific, compelling headline naming the real topics of THIS call, 5-12 words. No generic titles like "Honest Money Hour" alone, no clickbait.
+- slug: kebab-case, starting with "${dateISO}-", then 3-6 words from the title, ASCII only.
+- description: 1-2 sentence archive-card blurb naming the concrete topics covered (max 220 chars).`,
     `Call date: ${dateISO}\n\nTranscript:\n${sample}`,
+    ["title", "slug", "description"],
   );
+
+  // 2) Long summary in its own call so length can't truncate the metadata.
+  const rec = await aiJson<{ summary: string }>(
+    `${ZOOM_VOICE}
+
+Return JSON with one key "summary": a 400-700 word recap of the call in 3-6 plain paragraphs separated by blank lines. Cover key announcements, decisions, community context, and any legal, technical, or market updates. No bullet lists, no headers, no markdown.`,
+    `Call date: ${dateISO}\nTitle: ${meta.title}\n\nTranscript:\n${sample}`,
+    ["summary"],
+  );
+
+  return { ...meta, summary: rec.summary };
+}
+
+/** Generates a title card for the call and pins it to IPFS. Returns null on failure. */
+async function generateCoverImage(title: string, dateISO: string, slug: string): Promise<string | null> {
+  try {
+    const res = await fetch(`${AI_GATEWAY}/images/generations`, {
+      method: "POST",
+      headers: aiHeaders(),
+      body: JSON.stringify({
+        model: "google/gemini-3.1-flash-image",
+        prompt: `Cinematic 16:9 title card for a Texas hard-money podcast episode titled "${title}" (recorded ${dateISO}). Moody dark background, warm amber and deep red lighting, subtle lone-star and minted-coin motifs, dramatic depth of field, premium editorial photography look. No text, no letters, no logos, no people's faces.`,
+        n: 1,
+      }),
+    });
+    const text = await res.text();
+    if (!res.ok) {
+      console.error(`Cover image failed [${res.status}]: ${text.slice(0, 400)}`);
+      return null;
+    }
+    const b64 = JSON.parse(text)?.data?.[0]?.b64_json;
+    if (!b64) return null;
+    const bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+    return await pinToPinata(bin, `${slug}-cover.png`);
+  } catch (err) {
+    console.error("generateCoverImage failed", err);
+    return null;
+  }
 }
 
 function slugify(s: string): string {
