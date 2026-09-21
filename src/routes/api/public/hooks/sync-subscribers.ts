@@ -27,7 +27,7 @@ export const Route = createFileRoute("/api/public/hooks/sync-subscribers")({
         // Data API, so read the secret through a SECURITY DEFINER RPC that
         // only service_role may execute.
         const { data: secretData, error: rpcErr } = await supabaseAdmin.rpc(
-          "read_cron_webhook_secret",
+          "read_cron_webhook_secret" as never,
         );
         const expected = typeof secretData === "string" ? secretData : null;
         if (rpcErr || !expected) return new Response("forbidden", { status: 401 });
