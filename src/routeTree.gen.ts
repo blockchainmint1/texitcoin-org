@@ -72,6 +72,7 @@ import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/em
 import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
 import { Route as ApiPublicNotifyNewContentRouteImport } from './routes/api/public/notify/new-content'
 import { Route as ApiPublicIpfsCidRouteImport } from './routes/api/public/ipfs.$cid'
+import { Route as ApiPublicHooksSyncSubscribersRouteImport } from './routes/api/public/hooks/sync-subscribers'
 
 const ZoomRoute = ZoomRouteImport.update({
   id: '/zoom',
@@ -396,6 +397,12 @@ const ApiPublicIpfsCidRoute = ApiPublicIpfsCidRouteImport.update({
   path: '/api/public/ipfs/$cid',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksSyncSubscribersRoute =
+  ApiPublicHooksSyncSubscribersRouteImport.update({
+    id: '/api/public/hooks/sync-subscribers',
+    path: '/api/public/hooks/sync-subscribers',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -454,6 +461,7 @@ export interface FileRoutesByFullPath {
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/api/public/hooks/sync-subscribers': typeof ApiPublicHooksSyncSubscribersRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
@@ -518,6 +526,7 @@ export interface FileRoutesByTo {
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/api/public/hooks/sync-subscribers': typeof ApiPublicHooksSyncSubscribersRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
@@ -584,6 +593,7 @@ export interface FileRoutesById {
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/api/public/hooks/sync-subscribers': typeof ApiPublicHooksSyncSubscribersRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
   '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
@@ -650,6 +660,7 @@ export interface FileRouteTypes {
     | '/api/public/legal-fees'
     | '/api/public/track'
     | '/lovable/email/events'
+    | '/api/public/hooks/sync-subscribers'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
     | '/api/public/telegram/webhook'
@@ -714,6 +725,7 @@ export interface FileRouteTypes {
     | '/api/public/legal-fees'
     | '/api/public/track'
     | '/lovable/email/events'
+    | '/api/public/hooks/sync-subscribers'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
     | '/api/public/telegram/webhook'
@@ -779,6 +791,7 @@ export interface FileRouteTypes {
     | '/api/public/legal-fees'
     | '/api/public/track'
     | '/lovable/email/events'
+    | '/api/public/hooks/sync-subscribers'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
     | '/api/public/telegram/webhook'
@@ -844,6 +857,7 @@ export interface RootRouteChildren {
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
+  ApiPublicHooksSyncSubscribersRoute: typeof ApiPublicHooksSyncSubscribersRoute
   ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
   ApiPublicNotifyNewContentRoute: typeof ApiPublicNotifyNewContentRoute
   ApiPublicTelegramWebhookRoute: typeof ApiPublicTelegramWebhookRoute
@@ -1295,6 +1309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicIpfsCidRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/sync-subscribers': {
+      id: '/api/public/hooks/sync-subscribers'
+      path: '/api/public/hooks/sync-subscribers'
+      fullPath: '/api/public/hooks/sync-subscribers'
+      preLoaderRoute: typeof ApiPublicHooksSyncSubscribersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1367,6 +1388,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
+  ApiPublicHooksSyncSubscribersRoute: ApiPublicHooksSyncSubscribersRoute,
   ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
   ApiPublicNotifyNewContentRoute: ApiPublicNotifyNewContentRoute,
   ApiPublicTelegramWebhookRoute: ApiPublicTelegramWebhookRoute,

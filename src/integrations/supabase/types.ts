@@ -62,6 +62,33 @@ export type Database = {
         }
         Relationships: []
       }
+      ecosystem_subscriber_sync: {
+        Row: {
+          email: string
+          remote_id: string | null
+          signed_up_at: string | null
+          status: string
+          synced_at: string
+          user_id: string
+        }
+        Insert: {
+          email: string
+          remote_id?: string | null
+          signed_up_at?: string | null
+          status?: string
+          synced_at?: string
+          user_id: string
+        }
+        Update: {
+          email?: string
+          remote_id?: string | null
+          signed_up_at?: string | null
+          status?: string
+          synced_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
