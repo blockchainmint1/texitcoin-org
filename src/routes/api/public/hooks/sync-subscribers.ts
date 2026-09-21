@@ -23,16 +23,14 @@ export const Route = createFileRoute("/api/public/hooks/sync-subscribers")({
           "@/integrations/supabase/client.server"
         );
 
-        // Verify the cron caller.
-        const { data: vaultRow, error: vaultErr } = await supabaseAdmin
-          .schema("vault" as never)
-          .from("decrypted_secrets" as never)
-          .select("decrypted_secret")
-          .eq("name", "cron_webhook_secret")
-          .maybeSingle();
-        const expected = (vaultRow as { decrypted_secret?: string } | null)
-          ?.decrypted_secret;
-        if (vaultErr || !expected) return new Response("forbidden", { status: 401 });
+        // Verify the cron caller. The vault schema is not exposed over the
+        // Data API, so read the secret through a SECURITY DEFINER RPC that
+        // only service_role may execute.
+        const { data: secretData, error: rpcErr } = await supabaseAdmin.rpc(
+          "read_cron_webhook_secret",
+        );
+        const expected = typeof secretData === "string" ? secretData : null;
+        if (rpcErr || !expected) return new Response("forbidden", { status: 401 });
 
         const got = request.headers.get("x-cron-secret") ?? "";
         const a = Buffer.from(got);
