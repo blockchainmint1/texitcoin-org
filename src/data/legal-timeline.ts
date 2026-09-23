@@ -1,5 +1,9 @@
-import governorLetter from "@/assets/legal/governor-abbott-letter-2026-09-22.pdf.asset.json";
-import tssbResponse from "@/assets/legal/tssb-response-2026-08-28.jpg.asset.json";
+// Source documents are pinned to IPFS and served through our gateway proxy.
+const governorLetterHref =
+  "/api/public/ipfs/QmbAEg6RgXYqw7nqXvp7e7p9cp31o5seXK6Sb1BmMVvjH9";
+const tssbResponseHref =
+  "/api/public/ipfs/Qmc68HvcxH11cHPS2q19XB6myMSTbyowywE2pBukgj8VBY";
+
 
 export type Entry = {
   date: string;
