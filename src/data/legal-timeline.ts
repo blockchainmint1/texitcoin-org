@@ -1,3 +1,6 @@
+import governorLetter from "@/assets/legal/governor-abbott-letter-2026-09-22.pdf.asset.json";
+import tssbResponse from "@/assets/legal/tssb-response-2026-08-28.jpg.asset.json";
+
 export type Entry = {
   date: string;
   title: string;
