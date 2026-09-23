@@ -595,6 +595,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      read_cron_webhook_secret: { Args: never; Returns: string }
       site_stats_breakdown: {
         Args: { _days?: number; _dimension: string; _limit?: number }
         Returns: {
