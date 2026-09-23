@@ -1,3 +1,6 @@
+import governorLetter from "@/assets/legal/governor-abbott-letter-2026-09-22.pdf.asset.json";
+import tssbResponse from "@/assets/legal/tssb-response-2026-08-28.jpg.asset.json";
+
 export type Entry = {
   date: string;
   title: string;
@@ -10,6 +13,38 @@ export type Entry = {
 };
 
 export const ENTRIES: Entry[] = [
+  {
+    date: "22 Sep 2026",
+    title: "Governor Abbott, This Is Bigger Than TEXITcoin",
+    tone: "win",
+    tag: "GOVERNOR APPEAL",
+    body: "After the TSSB refused its opportunity to correct the record, we asked Governor Abbott to step in. This is about more than one case: unchecked enforcement threatens Texas's crypto industry, the rule of law, and every innovator asked to trust that state government will deal honestly with the facts. We hope the Governor steps in — not because we need the help, but because it's the right thing to do, and someone has to do it.",
+    link: {
+      label: "Read the governor appeal →",
+      href: "/blog/governor-abbott-this-is-bigger-than-texitcoin",
+    },
+    secondaryLink: {
+      label: "Letter to Governor Abbott (PDF)",
+      href: governorLetter.url,
+    },
+  },
+
+  {
+    date: "28 Aug 2026",
+    title: "We Gave the TSSB a Clear Chance to Correct the Record",
+    tone: "regulator",
+    tag: "THEY DECLINED",
+    body: "Our attorneys asked the Board to withdraw the Emergency Order after testimony they say exposed material claims as false. The TSSB declined and chose to continue through post-hearing briefing. We've prepared a documented deep dive into the hearing, our letter, their response, and the cost of leaving disputed accusations standing — because we have to hold each other accountable, in crypto, in society, and above all else, in government.",
+    link: {
+      label: "Read the deep dive →",
+      href: "/blog/the-off-ramp-was-right-there-tssb-after-the-hearing",
+    },
+    secondaryLink: {
+      label: "The TSSB's August 28 response",
+      href: tssbResponse.url,
+    },
+  },
+
   {
     date: "23 Aug 2026",
     title: "We Waited for Clarity; Now We Go Back to Work",
