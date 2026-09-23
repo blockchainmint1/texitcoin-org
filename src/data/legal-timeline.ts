@@ -25,7 +25,7 @@ export const ENTRIES: Entry[] = [
     },
     secondaryLink: {
       label: "Letter to Governor Abbott (PDF)",
-      href: "@@GOV_LETTER",
+      href: governorLetter.url,
     },
   },
 
@@ -41,7 +41,7 @@ export const ENTRIES: Entry[] = [
     },
     secondaryLink: {
       label: "The TSSB's August 28 response",
-      href: "@@TSSB_RESPONSE",
+      href: tssbResponse.url,
     },
   },
 
