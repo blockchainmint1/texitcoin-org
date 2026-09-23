@@ -9,8 +9,6 @@ import {
   Swords,
   BookOpen,
   ArrowRight,
-  FileText,
-  PlayCircle,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -18,12 +16,6 @@ import { LegalTimeline } from "@/components/site/LegalTimeline";
 import { CaseDocket } from "@/components/site/CaseDocket";
 import { ENTRIES } from "@/data/legal-timeline";
 import { checkNewContent } from "@/lib/notify.functions";
-import counselLetter from "@/assets/legal/tssb-letter-2026-08-28.pdf.asset.json";
-import tssbResponse from "@/assets/legal/tssb-response-2026-08-28.jpg.asset.json";
-import governorLetter from "@/assets/legal/governor-abbott-letter-2026-09-22.pdf.asset.json";
-
-const POST_HEARING_ARTICLE_SLUG = "the-off-ramp-was-right-there-tssb-after-the-hearing";
-const GOVERNOR_ARTICLE_SLUG = "governor-abbott-this-is-bigger-than-texitcoin";
 
 export const Route = createFileRoute("/legal")({
   head: () => ({
