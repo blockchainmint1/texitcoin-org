@@ -200,157 +200,6 @@ function LegalPage() {
             </div>
           </motion.div>
 
-          {/* Post-hearing update */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.14 }}
-            className="mt-8 overflow-hidden rounded-2xl border border-primary/40 bg-card shadow-card"
-          >
-            <div className="grid lg:grid-cols-[1.25fr_0.75fr]">
-              <div className="p-7 md:p-9">
-                <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                  Post-hearing update · 28 Aug 2026
-                </div>
-                <h2 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl text-balance">
-                  We gave the TSSB a clear chance to correct the record.
-                </h2>
-                <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                  Our attorneys asked the Board to withdraw the Emergency Order
-                  after testimony they say exposed material claims as false. The
-                  TSSB declined and chose to continue through post-hearing
-                  briefing. We&apos;ve prepared a documented deep dive into the
-                  hearing, our letter, their response, and the cost of leaving
-                  disputed accusations standing.
-                </p>
-                <Link
-                  to="/blog/$slug"
-                  params={{ slug: POST_HEARING_ARTICLE_SLUG }}
-                  className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  Read the deep dive <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-
-              <div className="border-t border-border bg-background/50 p-6 lg:border-l lg:border-t-0 md:p-7">
-                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                  The record
-                </div>
-                <div className="mt-4 grid gap-3">
-                  {[
-                    {
-                      label: "Watch the hearing rewind",
-                      href: "/zoom/2026-08-20-tssb-vs-texitcoin-rewind",
-                      icon: PlayCircle,
-                    },
-                    {
-                      label: "Read Mati Allin’s account",
-                      href: "/blog/guest-post-mati-allin-tssb-v-texitcoin-hearing",
-                      icon: BookOpen,
-                    },
-                    {
-                      label: "Our attorneys’ August 28 letter",
-                      href: counselLetter.url,
-                      icon: FileText,
-                    },
-                    {
-                      label: "The TSSB’s August 28 response",
-                      href: tssbResponse.url,
-                      icon: FileText,
-                    },
-                  ].map(({ label, href, icon: Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex min-h-12 items-center gap-3 rounded-md border border-border bg-card px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/50 hover:text-primary"
-                    >
-                      <Icon className="h-4 w-4 shrink-0 text-primary" />
-                      <span>{label}</span>
-                      <ArrowRight className="ml-auto h-4 w-4 shrink-0" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Governor appeal update */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-8 overflow-hidden rounded-2xl border border-primary/40 bg-card shadow-card"
-          >
-            <div className="grid lg:grid-cols-[1.25fr_0.75fr]">
-              <div className="p-7 md:p-9">
-                <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
-                  Governor appeal · 22 Sep 2026
-                </div>
-                <h2 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl text-balance">
-                  Governor Abbott, this is bigger than TEXITcoin.
-                </h2>
-                <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                  After the TSSB refused its opportunity to correct the record,
-                  we asked Governor Abbott to step in. This is about more than
-                  one case: unchecked enforcement threatens Texas&apos;s crypto
-                  industry, the rule of law, and every innovator asked to trust
-                  that state government will deal honestly with the facts.
-                </p>
-                <Link
-                  to="/blog/$slug"
-                  params={{ slug: GOVERNOR_ARTICLE_SLUG }}
-                  className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  Read the governor appeal <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-
-              <div className="border-t border-border bg-background/50 p-6 lg:border-l lg:border-t-0 md:p-7">
-                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                  Read the record
-                </div>
-                <div className="mt-4 grid gap-3">
-                  {[
-                    {
-                      label: "Letter to Governor Abbott",
-                      href: governorLetter.url,
-                      icon: FileText,
-                    },
-                    {
-                      label: "Read the post-hearing deep dive",
-                      href: `/blog/${POST_HEARING_ARTICLE_SLUG}`,
-                      icon: BookOpen,
-                    },
-                    {
-                      label: "Watch the hearing rewind",
-                      href: "/zoom/2026-08-20-tssb-vs-texitcoin-rewind",
-                      icon: PlayCircle,
-                    },
-                    {
-                      label: "Read Mati Allin’s account",
-                      href: "/blog/guest-post-mati-allin-tssb-v-texitcoin-hearing",
-                      icon: BookOpen,
-                    },
-                  ].map(({ label, href, icon: Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex min-h-12 items-center gap-3 rounded-md border border-border bg-card px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/50 hover:text-primary"
-                    >
-                      <Icon className="h-4 w-4 shrink-0 text-primary" />
-                      <span>{label}</span>
-                      <ArrowRight className="ml-auto h-4 w-4 shrink-0" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
           {/* TL;DR Card */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -435,6 +284,159 @@ function LegalPage() {
           <LegalTimeline entries={ENTRIES} />
 
           <CaseDocket activeSlug="texas" />
+
+          {/* Post-hearing update */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-16 overflow-hidden rounded-2xl border border-primary/40 bg-card shadow-card"
+          >
+            <div className="grid lg:grid-cols-[1.25fr_0.75fr]">
+              <div className="p-7 md:p-9">
+                <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                  Post-hearing update · 28 Aug 2026
+                </div>
+                <h2 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl text-balance">
+                  We gave the TSSB a clear chance to correct the record.
+                </h2>
+                <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                  Our attorneys asked the Board to withdraw the Emergency Order
+                  after testimony they say exposed material claims as false. The
+                  TSSB declined and chose to continue through post-hearing
+                  briefing. We&apos;ve prepared a documented deep dive into the
+                  hearing, our letter, their response, and the cost of leaving
+                  disputed accusations standing.
+                </p>
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: POST_HEARING_ARTICLE_SLUG }}
+                  className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Read the deep dive <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              <div className="border-t border-border bg-background/50 p-6 lg:border-l lg:border-t-0 md:p-7">
+                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                  The record
+                </div>
+                <div className="mt-4 grid gap-3">
+                  {[
+                    {
+                      label: "Watch the hearing rewind",
+                      href: "/zoom/2026-08-20-tssb-vs-texitcoin-rewind",
+                      icon: PlayCircle,
+                    },
+                    {
+                      label: "Read Mati Allin’s account",
+                      href: "/blog/guest-post-mati-allin-tssb-v-texitcoin-hearing",
+                      icon: BookOpen,
+                    },
+                    {
+                      label: "Our attorneys’ August 28 letter",
+                      href: counselLetter.url,
+                      icon: FileText,
+                    },
+                    {
+                      label: "The TSSB’s August 28 response",
+                      href: tssbResponse.url,
+                      icon: FileText,
+                    },
+                  ].map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex min-h-12 items-center gap-3 rounded-md border border-border bg-card px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/50 hover:text-primary"
+                    >
+                      <Icon className="h-4 w-4 shrink-0 text-primary" />
+                      <span>{label}</span>
+                      <ArrowRight className="ml-auto h-4 w-4 shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Governor appeal update */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-8 overflow-hidden rounded-2xl border border-primary/40 bg-card shadow-card"
+          >
+            <div className="grid lg:grid-cols-[1.25fr_0.75fr]">
+              <div className="p-7 md:p-9">
+                <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                  Governor appeal · 22 Sep 2026
+                </div>
+                <h2 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl text-balance">
+                  Governor Abbott, this is bigger than TEXITcoin.
+                </h2>
+                <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                  After the TSSB refused its opportunity to correct the record,
+                  we asked Governor Abbott to step in. This is about more than
+                  one case: unchecked enforcement threatens Texas&apos;s crypto
+                  industry, the rule of law, and every innovator asked to trust
+                  that state government will deal honestly with the facts.
+                </p>
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: GOVERNOR_ARTICLE_SLUG }}
+                  className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Read the governor appeal <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              <div className="border-t border-border bg-background/50 p-6 lg:border-l lg:border-t-0 md:p-7">
+                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                  Read the record
+                </div>
+                <div className="mt-4 grid gap-3">
+                  {[
+                    {
+                      label: "Letter to Governor Abbott",
+                      href: governorLetter.url,
+                      icon: FileText,
+                    },
+                    {
+                      label: "Read the post-hearing deep dive",
+                      href: `/blog/${POST_HEARING_ARTICLE_SLUG}`,
+                      icon: BookOpen,
+                    },
+                    {
+                      label: "Watch the hearing rewind",
+                      href: "/zoom/2026-08-20-tssb-vs-texitcoin-rewind",
+                      icon: PlayCircle,
+                    },
+                    {
+                      label: "Read Mati Allin’s account",
+                      href: "/blog/guest-post-mati-allin-tssb-v-texitcoin-hearing",
+                      icon: BookOpen,
+                    },
+                  ].map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex min-h-12 items-center gap-3 rounded-md border border-border bg-card px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/50 hover:text-primary"
+                    >
+                      <Icon className="h-4 w-4 shrink-0 text-primary" />
+                      <span>{label}</span>
+                      <ArrowRight className="ml-auto h-4 w-4 shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
 
           {/* Featured: SEC & Crypto deep dive */}
