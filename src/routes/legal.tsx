@@ -22,6 +22,7 @@ import counselLetter from "@/assets/legal/tssb-letter-2026-08-28.pdf.asset.json"
 import tssbResponse from "@/assets/legal/tssb-response-2026-08-28.jpg.asset.json";
 
 const DRAFT_SLUG = "the-off-ramp-was-right-there-tssb-after-the-hearing";
+const DRAFT_PREVIEW = "txc-draft-preview";
 
 export const Route = createFileRoute("/legal")({
   head: () => ({
@@ -224,9 +225,10 @@ function LegalPage() {
                 <Link
                   to="/blog/$slug"
                   params={{ slug: DRAFT_SLUG }}
+                  search={{ preview: DRAFT_PREVIEW }}
                   className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-primary/90"
                 >
-                  Read the deep dive <ArrowRight className="h-4 w-4" />
+                  Read the draft deep dive <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
 
