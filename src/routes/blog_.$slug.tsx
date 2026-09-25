@@ -122,8 +122,8 @@ const CALLOUTS = {
   "THE HONEST PART": {
     icon: TriangleAlert,
     label: "The honest part",
-    className: "border-warning/35 bg-warning/8",
-    labelClassName: "text-warning",
+    className: "border-accent/35 bg-accent/8",
+    labelClassName: "text-accent",
   },
   "COURTROOM NOTE": {
     icon: Sparkles,
