@@ -6,3 +6,6 @@
 - [x] Include the Texas crypto-industry stakes, possible press escalation, remedies, and governor-candidacy teaser.
 - [x] Save article two unpublished and verify its private preview.
 - [x] Prepare Yellow.com ColdCard interview answers in Bobby’s voice as a private PDF.
+- [ ] Expand the private TSSB hearing article into a deeply sourced long-form breakdown.
+- [ ] Add testimony quotes, visual callouts, balanced risks, and courtroom sidebars.
+- [ ] Verify the expanded draft on desktop and mobile without publishing it.

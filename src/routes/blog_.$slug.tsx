@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import ReactMarkdown from "react-markdown";
-import { ArrowLeft, ArrowUpRight, Clock, User } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock, Scale, Sparkles, TriangleAlert, User } from "lucide-react";
+import type { ReactNode } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { getPostImage, getSecondaryImage } from "@/data/blog-images";
@@ -55,6 +56,7 @@ export const Route = createFileRoute("/blog_/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
         { property: "article:published_time", content: post.date },
+          { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
@@ -108,6 +110,63 @@ function formatDate(iso: string) {
     month: "long",
     day: "numeric",
   });
+}
+
+const CALLOUTS = {
+  "WHY IT MATTERS": {
+    icon: Scale,
+    label: "Why it matters",
+    className: "border-primary/35 bg-primary/8",
+    labelClassName: "text-primary",
+  },
+  "THE HONEST PART": {
+    icon: TriangleAlert,
+    label: "The honest part",
+    className: "border-accent/35 bg-accent/8",
+    labelClassName: "text-accent",
+  },
+  "COURTROOM NOTE": {
+    icon: Sparkles,
+    label: "Courtroom note",
+    className: "border-border bg-surface/70",
+    labelClassName: "text-muted-foreground",
+  },
+} as const;
+
+function nodeText(node: ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeText).join("");
+  if (node && typeof node === "object" && "props" in node) {
+    return nodeText((node.props as { children?: ReactNode }).children);
+  }
+  return "";
+}
+
+function ArticleBlockquote({ children }: { children?: ReactNode }) {
+  const text = nodeText(children).trim();
+  const entry = Object.entries(CALLOUTS).find(([marker]) => text.startsWith(marker));
+
+  if (!entry) {
+    return (
+      <blockquote className="my-8 border-l-4 border-primary py-2 pl-6 font-display text-2xl italic leading-snug text-foreground/90">
+        {children}
+      </blockquote>
+    );
+  }
+
+  const [, config] = entry;
+  const Icon = config.icon;
+  return (
+    <aside className={`my-9 rounded-lg border px-6 py-5 shadow-card ${config.className}`}>
+      <div className={`mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] ${config.labelClassName}`}>
+        <Icon className="h-4 w-4" aria-hidden />
+        {config.label}
+      </div>
+      <div className="text-base leading-relaxed text-foreground/85 [&_p]:m-0 [&_strong:first-child]:hidden">
+        {children}
+      </div>
+    </aside>
+  );
 }
 
 function BlogPostPage() {
@@ -210,7 +269,7 @@ function BlogPostPage() {
                 const insertPullquoteAt = Math.min(2, blocks.length - 1);
                 return blocks.map((block, i) => (
                   <div key={i} className="space-y-6">
-                    <ReactMarkdown>{block}</ReactMarkdown>
+                    <ReactMarkdown components={{ blockquote: ArticleBlockquote }}>{block}</ReactMarkdown>
                     {i === insertPullquoteAt && blocks.length > 4 && (
                       <blockquote className="border-l-4 border-primary pl-6 py-2 my-8 font-display text-2xl leading-snug text-foreground/90 italic">
                         {post.excerpt}
