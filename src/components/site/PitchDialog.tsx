@@ -69,8 +69,8 @@ export function PitchDialog({
         data: { kind, pitch, seasonSlug: seasonSlug ?? null, beatId: beatId ?? null },
       });
       setDraft(res.draft);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Something went wrong.");
+    } catch {
+      setError("AI polish is reserved for reviewers — just submit your pitch as written and we'll shape it.");
     } finally {
       setBusy(null);
     }

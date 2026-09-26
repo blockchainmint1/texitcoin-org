@@ -97,8 +97,11 @@ function validatePitch(data: PitchInput) {
 }
 
 export const draftContribution = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator(validatePitch)
-  .handler(async ({ data }): Promise<{ draft: string }> => {
+  .handler(async ({ data, context }): Promise<{ draft: string }> => {
+    // Paid AI drafting is restricted to signed-in admins.
+    await assertAdmin(context as never);
     const supabase = publicClient();
     let seasonTitle: string | undefined;
     let seasonLogline: string | undefined;
