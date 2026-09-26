@@ -63,8 +63,9 @@ export const getBlogPost = createServerFn({ method: "GET" })
     return data;
   })
   .handler(async ({ data }): Promise<BlogPostDTO> => {
-    const token = process.env.BLOG_PREVIEW_TOKEN || "txc-draft-preview";
-    const isPreview = !!data.preview && data.preview === token;
+    const token = process.env.BLOG_PREVIEW_TOKEN;
+    const isPreview =
+      !!token && token.length >= 24 && !!data.preview && data.preview === token;
 
     if (isPreview) {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");

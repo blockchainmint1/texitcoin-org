@@ -69,7 +69,21 @@ async function tgDownloadFile(fileId: string): Promise<Uint8Array> {
     },
   });
   if (!res.ok) throw new Error(`File download failed: ${res.status}`);
-  return new Uint8Array(await res.arrayBuffer());
+  const len = Number(res.headers.get("content-length") ?? "0");
+  if (len > MAX_UPLOAD_BYTES) throw new Error("File too large (max 10 MB)");
+  const bytes = new Uint8Array(await res.arrayBuffer());
+  if (bytes.byteLength > MAX_UPLOAD_BYTES) throw new Error("File too large (max 10 MB)");
+  return bytes;
+}
+
+const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+
+function isImageBytes(b: Uint8Array): boolean {
+  if (b.length < 12) return false;
+  const jpg = b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff;
+  const png = b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47;
+  const webp = b[0] === 0x52 && b[1] === 0x49 && b[8] === 0x57 && b[9] === 0x45;
+  return jpg || png || webp;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -539,8 +553,19 @@ async function handleThumb(chatId: number, args: string[], photoFileId: string |
     return;
   }
   await tgReply(chatId, "Uploading photo to IPFS…");
-  const bytes = await tgDownloadFile(photoFileId);
-  const url = await pinToPinata(bytes, `${slug}.jpg`);
+  let bytes: Uint8Array;
+  try {
+    bytes = await tgDownloadFile(photoFileId);
+  } catch {
+    await tgReply(chatId, "Photo rejected: must be under 10 MB.");
+    return;
+  }
+  if (!isImageBytes(bytes)) {
+    await tgReply(chatId, "Photo rejected: only JPEG, PNG or WebP images are accepted.");
+    return;
+  }
+  const safeSlug = slug.replace(/[^a-z0-9-]/gi, "").slice(0, 80) || "thumb";
+  const url = await pinToPinata(bytes, `${safeSlug}.jpg`);
   const { error: updErr } = await sb()
     .from("zoom_calls")
     .update({ thumbnail_url: url, updated_at: new Date().toISOString() })
