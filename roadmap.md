@@ -9,3 +9,5 @@
 - [ ] Expand the private TSSB hearing article into a deeply sourced long-form breakdown.
 - [ ] Add testimony quotes, visual callouts, balanced risks, and courtroom sidebars.
 - [ ] Verify the expanded draft on desktop and mobile without publishing it.
+- [ ] Revise the unpublished hearing article to defend the Path to $16 plan and foreground Bobby's community-currency argument.
+- [ ] Incorporate SEC crypto-assets FAQ 2.3 with careful attribution and verify the revised private preview.
