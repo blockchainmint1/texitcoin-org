@@ -124,7 +124,11 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 flex flex-col transition-all duration-300 ${
-        open ? "max-h-[100dvh]" : ""
+        open
+          ? "max-h-[100dvh] bg-background/95 backdrop-blur-xl border-b border-border"
+          : scrolled
+            ? "bg-background/80 backdrop-blur-xl border-b border-border"
+            : "bg-transparent"
       } ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border"
