@@ -246,8 +246,8 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background/95 backdrop-blur-xl">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
+        <div className="lg:hidden min-h-0 flex-1 overflow-y-auto overscroll-contain border-t border-border bg-background/95 backdrop-blur-xl">
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4 pb-10">
             <div className="pb-3"><LivePrice variant="mobile" /></div>
             {NAV.map((n) => {
               if ("children" in n) {
