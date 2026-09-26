@@ -110,12 +110,25 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll while the mobile drawer is open so the page behind
+  // doesn't move and all menu content stays reachable inside the drawer.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 flex flex-col transition-all duration-300 ${
+        open
+          ? "max-h-[100dvh] bg-background/95 backdrop-blur-xl border-b border-border"
+          : scrolled
+            ? "bg-background/80 backdrop-blur-xl border-b border-border"
+            : "bg-transparent"
       }`}
     >
       <Link
@@ -166,7 +179,7 @@ export function Header() {
             <div className="font-display text-xl font-bold tracking-wide">
               TEXIT<span className="text-primary">coin</span>
             </div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <div className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:block">
               Honest money · Mined in Texas
             </div>
           </div>
@@ -233,8 +246,8 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background/95 backdrop-blur-xl">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
+        <div className="lg:hidden min-h-0 flex-1 overflow-y-auto overscroll-contain border-t border-border bg-background/95 backdrop-blur-xl">
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4 pb-10">
             <div className="pb-3"><LivePrice variant="mobile" /></div>
             {NAV.map((n) => {
               if ("children" in n) {
