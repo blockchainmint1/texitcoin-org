@@ -179,7 +179,7 @@ export function Header() {
             <div className="font-display text-xl font-bold tracking-wide">
               TEXIT<span className="text-primary">coin</span>
             </div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <div className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:block">
               Honest money · Mined in Texas
             </div>
           </div>
