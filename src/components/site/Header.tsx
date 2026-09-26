@@ -129,10 +129,6 @@ export function Header() {
           : scrolled
             ? "bg-background/80 backdrop-blur-xl border-b border-border"
             : "bg-transparent"
-      } ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
       }`}
     >
       <Link
