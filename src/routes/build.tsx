@@ -358,7 +358,7 @@ const CHAIN_SECTIONS: DocSection[] = [
         <li><span className="text-muted-foreground">Max supply:</span> <code className="font-mono">353,396,296 TXC</code>.</li>
         <li><span className="text-muted-foreground">Initial block reward:</span> <code className="font-mono">254 TXC</code>.</li>
         <li><span className="text-muted-foreground">Halving interval:</span> <code className="font-mono">695,662 blocks</code> (~4 years at the 3-minute target).</li>
-        <li><span className="text-muted-foreground">Difficulty retarget:</span> <code className="font-mono">DGW v3</code> (Dark Gravity Wave) — per-block, the standard for Litecoin-family chains with sub-standard block times.</li>
+        <li><span className="text-muted-foreground">Difficulty retarget:</span> <code className="font-mono">LWMA-1</code> (60-block window), per-block, from block <code className="font-mono">364,100</code> (v0.26.1). Earlier blocks used <code className="font-mono">DGW v3</code> (Dark Gravity Wave) with sub-standard block times.</li>
         <li><span className="text-muted-foreground">Merge mining:</span> Litecoin (LTC) and Dogecoin (DOGE) — Scrypt AuxPoW.</li>
       </ul>
     ),
@@ -584,6 +584,8 @@ const OMNI_SECTIONS: DocSection[] = [
         <li><code className="font-mono">omni_getbalance &lt;addr&gt; &lt;id&gt;</code> — balance of one address</li>
         <li><code className="font-mono">omni_createpayload_grant &lt;id&gt; &lt;amount&gt; &lt;grantdata&gt;</code> — payload for a managed-token mint</li>
         <li><code className="font-mono">omni_createpayload_simplesend &lt;id&gt; &lt;amount&gt;</code> — payload for a transfer</li>
+        <li><code className="font-mono">omni_createpayload_sendtomany &lt;id&gt; &lt;mapping&gt;</code> — payload for a bulk transfer (v0.26.1+)</li>
+        <li><code className="font-mono">omni_sendtomany &lt;from&gt; &lt;id&gt; &lt;mapping&gt;</code> — wallet-signed bulk transfer (v0.26.1+)</li>
         <li><code className="font-mono">omni_decodetransaction &lt;rawhex&gt;</code> — sanity-check a tx before broadcast</li>
         <li><code className="font-mono">omni_gettransaction &lt;txid&gt;</code> — read back a parsed Omni tx after confirmation</li>
       </ul>
@@ -647,6 +649,39 @@ const txid = await fetch("https://mempool.texitcoin.org/api/tx", {
   "5.00000000",
 ]);
 // ...same OP_RETURN + dust + change construction as Grant.`,
+  },
+  {
+    heading: "5b · Send To Many (bulk transfers) — new in v0.26.1",
+    body: (
+      <div className="space-y-3">
+        <p>
+          Since block <strong>364,100</strong>, TXC Omni supports transaction type 7 —{" "}
+          <strong>Send To Many</strong>: one token, many receivers, one transaction. Perfect for
+          payroll, airdrops, rewards, and referral payouts. Before that height the node rejects
+          type-7 sends with error <code className="font-mono">-22</code>. Requires a node on{" "}
+          <strong>v0.26.1</strong> or newer.
+        </p>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>The command is <code className="font-mono">omni_sendtomany</code> (not <code className="font-mono">omni_sendmany</code>). It's a wallet RPC, so a plain <code className="font-mono">help</code> may not list it — call it by name.</li>
+          <li>In the raw payload, receivers are referenced by <strong>output index (vout)</strong>, not by address. <code className="font-mono">omni_sendtomany</code> does this for you: one dust output per receiver, in list order.</li>
+          <li>One 80-byte OP_RETURN fits <strong>7 receivers</strong> (9 + 9n ≤ 80). The protocol allows up to 255; going past 7 means chaining the payload across multiple OP_RETURN outputs.</li>
+          <li>Budget 10,000 sats of dust <em>per receiver</em> in your fee math.</li>
+          <li>Errors come back typed (e.g. <code className="font-mono">-26</code> output index doesn't resolve, <code className="font-mono">-28</code> amounts don't sum). <code className="font-mono">omni_getactivations</code> won't list it — the go-live height is baked into the release.</li>
+        </ul>
+      </div>
+    ),
+    code: `// Node wallet holds the key:
+omni_sendtomany "fromaddress" 31 '[{"address":"addr1","amount":"10.5"},{"address":"addr2","amount":"0.5"}]'
+
+// App builds its own tx — receivers by vout index:
+const payloadHex = await rpc("omni_createpayload_sendtomany", [
+  31,
+  [{ output: 2, amount: "10.5" }, { output: 3, amount: "0.5" }],
+]);
+psbt.addOutput({ script: opReturn, value: 0n });          // vout 0: "omni" + payload
+psbt.addOutput({ address: sender,    value: changeSats }); // vout 1: change
+psbt.addOutput({ address: receiver1, value: 10_000n });    // vout 2
+psbt.addOutput({ address: receiver2, value: 10_000n });    // vout 3`,
   },
   {
     heading: "6 · Reading balances",
