@@ -9,90 +9,264 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
-import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.]html'
-import { Route as NewsAndUpdatesDothtmlRouteImport } from './routes/News-and-Updates[.]html'
-import { Route as TheCaseForTEXITcoinDothtmlRouteImport } from './routes/The-Case-for-TEXITcoin[.]html'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as BobbyRouteImport } from './routes/bobby'
-import { Route as BuildRouteImport } from './routes/build'
-import { Route as BuyRouteImport } from './routes/buy'
-import { Route as ClarityRouteImport } from './routes/clarity'
-import { Route as CurrencyRouteImport } from './routes/currency'
-import { Route as DisclosuresRouteImport } from './routes/disclosures'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as InTheNewsRouteImport } from './routes/in-the-news'
-import { Route as LeadershipRouteImport } from './routes/leadership'
-import { Route as LegalRouteImport } from './routes/legal'
-import { Route as LiveRouteImport } from './routes/live'
-import { Route as MarketRouteImport } from './routes/market'
-import { Route as McpRouteImport } from './routes/mcp'
-import { Route as MerchRouteImport } from './routes/merch'
-import { Route as MineRouteImport } from './routes/mine'
-import { Route as PhilosophyRouteImport } from './routes/philosophy'
-import { Route as PressRouteImport } from './routes/press'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
-import { Route as RoadmapRouteImport } from './routes/roadmap'
-import { Route as ScreenplayRouteImport } from './routes/screenplay'
-import { Route as SearchRouteImport } from './routes/search'
-import { Route as SecAndCryptoRouteImport } from './routes/sec-and-crypto'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as StatsRouteImport } from './routes/stats'
-import { Route as TeamRouteImport } from './routes/team'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as TexasRouteImport } from './routes/texas'
-import { Route as TexitRouteImport } from './routes/texit'
-import { Route as TokenomicsRouteImport } from './routes/tokenomics'
-import { Route as TrollsRouteImport } from './routes/trolls'
-import { Route as ValueRouteImport } from './routes/value'
-import { Route as VideosRouteImport } from './routes/videos'
-import { Route as WalletsRouteImport } from './routes/wallets'
-import { Route as WhitepaperRouteImport } from './routes/whitepaper'
-import { Route as WtxcRouteImport } from './routes/wtxc'
 import { Route as ZoomRouteImport } from './routes/zoom'
-import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
-import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
-import { Route as AuthenticatedScreenplayAdminRouteImport } from './routes/_authenticated/screenplay-admin'
-import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
-import { Route as LegalArizonaRouteImport } from './routes/legal_.arizona'
-import { Route as MarketSlugRouteImport } from './routes/market_.$slug'
-import { Route as ScreenplaySeasonRouteImport } from './routes/screenplay_.$season'
+import { Route as WtxcRouteImport } from './routes/wtxc'
+import { Route as WhitepaperRouteImport } from './routes/whitepaper'
+import { Route as WalletsRouteImport } from './routes/wallets'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ValueRouteImport } from './routes/value'
+import { Route as TrollsRouteImport } from './routes/trolls'
+import { Route as TokenomicsRouteImport } from './routes/tokenomics'
+import { Route as TexitRouteImport } from './routes/texit'
+import { Route as TexasRouteImport } from './routes/texas'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TeamRouteImport } from './routes/team'
+import { Route as StatsRouteImport } from './routes/stats'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SecAndCryptoRouteImport } from './routes/sec-and-crypto'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as ScreenplayRouteImport } from './routes/screenplay'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as ProofOfWorkRouteImport } from './routes/proof-of-work'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PressRouteImport } from './routes/press'
+import { Route as PhilosophyRouteImport } from './routes/philosophy'
+import { Route as MineRouteImport } from './routes/mine'
+import { Route as MerchRouteImport } from './routes/merch'
+import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MarketRouteImport } from './routes/market'
+import { Route as LiveRouteImport } from './routes/live'
+import { Route as LegalRouteImport } from './routes/legal'
+import { Route as LeadershipRouteImport } from './routes/leadership'
+import { Route as InTheNewsRouteImport } from './routes/in-the-news'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as DisclosuresRouteImport } from './routes/disclosures'
+import { Route as CurrencyRouteImport } from './routes/currency'
+import { Route as ClarityRouteImport } from './routes/clarity'
+import { Route as BuyRouteImport } from './routes/buy'
+import { Route as BuildRouteImport } from './routes/build'
+import { Route as BobbyRouteImport } from './routes/bobby'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as TheCaseForTEXITcoinDothtmlRouteImport } from './routes/The-Case-for-TEXITcoin[.]html'
+import { Route as NewsAndUpdatesDothtmlRouteImport } from './routes/News-and-Updates[.]html'
+import { Route as MeetTheTeamDothtmlRouteImport } from './routes/Meet-the-Team[.]html'
+import { Route as DiscoverTEXITcoinDothtmlRouteImport } from './routes/Discover-TEXITcoin[.]html'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as ZoomSlugRouteImport } from './routes/zoom_.$slug'
-import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
-import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
-import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
+import { Route as ScreenplaySeasonRouteImport } from './routes/screenplay_.$season'
+import { Route as MarketSlugRouteImport } from './routes/market_.$slug'
+import { Route as LegalArizonaRouteImport } from './routes/legal_.arizona'
+import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as AuthenticatedScreenplayAdminRouteImport } from './routes/_authenticated/screenplay-admin'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
-import { Route as ApiPublicHooksSyncSubscribersRouteImport } from './routes/api/public/hooks/sync-subscribers'
-import { Route as ApiPublicIpfsCidRouteImport } from './routes/api/public/ipfs.$cid'
-import { Route as ApiPublicNotifyNewContentRouteImport } from './routes/api/public/notify/new-content'
-import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
-import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
-import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
+import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
+import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
+import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
+import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
+import { Route as ApiPublicNotifyNewContentRouteImport } from './routes/api/public/notify/new-content'
+import { Route as ApiPublicIpfsCidRouteImport } from './routes/api/public/ipfs.$cid'
+import { Route as ApiPublicHooksSyncSubscribersRouteImport } from './routes/api/public/hooks/sync-subscribers'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ZoomRoute = ZoomRouteImport.update({
+  id: '/zoom',
+  path: '/zoom',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DiscoverTEXITcoinDothtmlRoute =
-  DiscoverTEXITcoinDothtmlRouteImport.update({
-    id: '/Discover-TEXITcoin.html',
-    path: '/Discover-TEXITcoin.html',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const MeetTheTeamDothtmlRoute = MeetTheTeamDothtmlRouteImport.update({
-  id: '/Meet-the-Team.html',
-  path: '/Meet-the-Team.html',
+const WtxcRoute = WtxcRouteImport.update({
+  id: '/wtxc',
+  path: '/wtxc',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsAndUpdatesDothtmlRoute = NewsAndUpdatesDothtmlRouteImport.update({
-  id: '/News-and-Updates.html',
-  path: '/News-and-Updates.html',
+const WhitepaperRoute = WhitepaperRouteImport.update({
+  id: '/whitepaper',
+  path: '/whitepaper',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WalletsRoute = WalletsRouteImport.update({
+  id: '/wallets',
+  path: '/wallets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ValueRoute = ValueRouteImport.update({
+  id: '/value',
+  path: '/value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrollsRoute = TrollsRouteImport.update({
+  id: '/trolls',
+  path: '/trolls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TokenomicsRoute = TokenomicsRouteImport.update({
+  id: '/tokenomics',
+  path: '/tokenomics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TexitRoute = TexitRouteImport.update({
+  id: '/texit',
+  path: '/texit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TexasRoute = TexasRouteImport.update({
+  id: '/texas',
+  path: '/texas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatsRoute = StatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecAndCryptoRoute = SecAndCryptoRouteImport.update({
+  id: '/sec-and-crypto',
+  path: '/sec-and-crypto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScreenplayRoute = ScreenplayRouteImport.update({
+  id: '/screenplay',
+  path: '/screenplay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProofOfWorkRoute = ProofOfWorkRouteImport.update({
+  id: '/proof-of-work',
+  path: '/proof-of-work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhilosophyRoute = PhilosophyRouteImport.update({
+  id: '/philosophy',
+  path: '/philosophy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MineRoute = MineRouteImport.update({
+  id: '/mine',
+  path: '/mine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MerchRoute = MerchRouteImport.update({
+  id: '/merch',
+  path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketRoute = MarketRouteImport.update({
+  id: '/market',
+  path: '/market',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveRoute = LiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadershipRoute = LeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InTheNewsRoute = InTheNewsRouteImport.update({
+  id: '/in-the-news',
+  path: '/in-the-news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisclosuresRoute = DisclosuresRouteImport.update({
+  id: '/disclosures',
+  path: '/disclosures',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CurrencyRoute = CurrencyRouteImport.update({
+  id: '/currency',
+  path: '/currency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClarityRoute = ClarityRouteImport.update({
+  id: '/clarity',
+  path: '/clarity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuyRoute = BuyRouteImport.update({
+  id: '/buy',
+  path: '/buy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuildRoute = BuildRouteImport.update({
+  id: '/build',
+  path: '/build',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BobbyRoute = BobbyRouteImport.update({
+  id: '/bobby',
+  path: '/bobby',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TheCaseForTEXITcoinDothtmlRoute =
@@ -101,236 +275,34 @@ const TheCaseForTEXITcoinDothtmlRoute =
     path: '/The-Case-for-TEXITcoin.html',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NewsAndUpdatesDothtmlRoute = NewsAndUpdatesDothtmlRouteImport.update({
+  id: '/News-and-Updates.html',
+  path: '/News-and-Updates.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetTheTeamDothtmlRoute = MeetTheTeamDothtmlRouteImport.update({
+  id: '/Meet-the-Team.html',
+  path: '/Meet-the-Team.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiscoverTEXITcoinDothtmlRoute =
+  DiscoverTEXITcoinDothtmlRouteImport.update({
+    id: '/Discover-TEXITcoin.html',
+    path: '/Discover-TEXITcoin.html',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BobbyRoute = BobbyRouteImport.update({
-  id: '/bobby',
-  path: '/bobby',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BuildRoute = BuildRouteImport.update({
-  id: '/build',
-  path: '/build',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BuyRoute = BuyRouteImport.update({
-  id: '/buy',
-  path: '/buy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ClarityRoute = ClarityRouteImport.update({
-  id: '/clarity',
-  path: '/clarity',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CurrencyRoute = CurrencyRouteImport.update({
-  id: '/currency',
-  path: '/currency',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DisclosuresRoute = DisclosuresRouteImport.update({
-  id: '/disclosures',
-  path: '/disclosures',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InTheNewsRoute = InTheNewsRouteImport.update({
-  id: '/in-the-news',
-  path: '/in-the-news',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LeadershipRoute = LeadershipRouteImport.update({
-  id: '/leadership',
-  path: '/leadership',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LegalRoute = LegalRouteImport.update({
-  id: '/legal',
-  path: '/legal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LiveRoute = LiveRouteImport.update({
-  id: '/live',
-  path: '/live',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MarketRoute = MarketRouteImport.update({
-  id: '/market',
-  path: '/market',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const McpRoute = McpRouteImport.update({
-  id: '/mcp',
-  path: '/mcp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MerchRoute = MerchRouteImport.update({
-  id: '/merch',
-  path: '/merch',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MineRoute = MineRouteImport.update({
-  id: '/mine',
-  path: '/mine',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PhilosophyRoute = PhilosophyRouteImport.update({
-  id: '/philosophy',
-  path: '/philosophy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PressRoute = PressRouteImport.update({
-  id: '/press',
-  path: '/press',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProofOfWorkRoute = ProofOfWorkRouteImport.update({
-  id: '/proof-of-work',
-  path: '/proof-of-work',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RoadmapRoute = RoadmapRouteImport.update({
-  id: '/roadmap',
-  path: '/roadmap',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScreenplayRoute = ScreenplayRouteImport.update({
-  id: '/screenplay',
-  path: '/screenplay',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SearchRoute = SearchRouteImport.update({
-  id: '/search',
-  path: '/search',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SecAndCryptoRoute = SecAndCryptoRouteImport.update({
-  id: '/sec-and-crypto',
-  path: '/sec-and-crypto',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StatsRoute = StatsRouteImport.update({
-  id: '/stats',
-  path: '/stats',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TeamRoute = TeamRouteImport.update({
-  id: '/team',
-  path: '/team',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TexasRoute = TexasRouteImport.update({
-  id: '/texas',
-  path: '/texas',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TexitRoute = TexitRouteImport.update({
-  id: '/texit',
-  path: '/texit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TokenomicsRoute = TokenomicsRouteImport.update({
-  id: '/tokenomics',
-  path: '/tokenomics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TrollsRoute = TrollsRouteImport.update({
-  id: '/trolls',
-  path: '/trolls',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ValueRoute = ValueRouteImport.update({
-  id: '/value',
-  path: '/value',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VideosRoute = VideosRouteImport.update({
-  id: '/videos',
-  path: '/videos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WalletsRoute = WalletsRouteImport.update({
-  id: '/wallets',
-  path: '/wallets',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WhitepaperRoute = WhitepaperRouteImport.update({
-  id: '/whitepaper',
-  path: '/whitepaper',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WtxcRoute = WtxcRouteImport.update({
-  id: '/wtxc',
-  path: '/wtxc',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ZoomRoute = ZoomRouteImport.update({
-  id: '/zoom',
-  path: '/zoom',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Char91DotmcpChar93ListToolsRoute =
-  Char91DotmcpChar93ListToolsRouteImport.update({
-    id: '/.mcp/list-tools',
-    path: '/.mcp/list-tools',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const Char91DotwellKnownChar93OauthProtectedResourceRoute =
-  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
-    id: '/.well-known/oauth-protected-resource',
-    path: '/.well-known/oauth-protected-resource',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AuthenticatedScreenplayAdminRoute =
-  AuthenticatedScreenplayAdminRouteImport.update({
-    id: '/screenplay-admin',
-    path: '/screenplay-admin',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog_/$slug',
-  path: '/blog/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LegalArizonaRoute = LegalArizonaRouteImport.update({
-  id: '/legal_/arizona',
-  path: '/legal/arizona',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MarketSlugRoute = MarketSlugRouteImport.update({
-  id: '/market_/$slug',
-  path: '/market/$slug',
+const ZoomSlugRoute = ZoomSlugRouteImport.update({
+  id: '/zoom_/$slug',
+  path: '/zoom/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ScreenplaySeasonRoute = ScreenplaySeasonRouteImport.update({
@@ -338,9 +310,52 @@ const ScreenplaySeasonRoute = ScreenplaySeasonRouteImport.update({
   path: '/screenplay/$season',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ZoomSlugRoute = ZoomSlugRouteImport.update({
-  id: '/zoom_/$slug',
-  path: '/zoom/$slug',
+const MarketSlugRoute = MarketSlugRouteImport.update({
+  id: '/market_/$slug',
+  path: '/market/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalArizonaRoute = LegalArizonaRouteImport.update({
+  id: '/legal_/arizona',
+  path: '/legal/arizona',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog_/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedScreenplayAdminRoute =
+  AuthenticatedScreenplayAdminRouteImport.update({
+    id: '/screenplay-admin',
+    path: '/screenplay-admin',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
+  id: '/lovable/email/events',
+  path: '/lovable/email/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
+  id: '/api/public/track',
+  path: '/api/public/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicLegalFeesRoute = ApiPublicLegalFeesRouteImport.update({
+  id: '/api/public/legal-fees',
+  path: '/api/public/legal-fees',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
@@ -349,25 +364,32 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicLegalFeesRoute = ApiPublicLegalFeesRouteImport.update({
-  id: '/api/public/legal-fees',
-  path: '/api/public/legal-fees',
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
+  id: '/lovable/email/auth/webhook',
+  path: '/lovable/email/auth/webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
-  id: '/api/public/track',
-  path: '/api/public/track',
+const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
+  id: '/lovable/email/auth/preview',
+  path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
-  id: '/lovable/email/events',
-  path: '/lovable/email/events',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicHooksSyncSubscribersRoute =
-  ApiPublicHooksSyncSubscribersRouteImport.update({
-    id: '/api/public/hooks/sync-subscribers',
-    path: '/api/public/hooks/sync-subscribers',
+const ApiPublicTelegramWebhookRoute =
+  ApiPublicTelegramWebhookRouteImport.update({
+    id: '/api/public/telegram/webhook',
+    path: '/api/public/telegram/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicNotifyNewContentRoute =
+  ApiPublicNotifyNewContentRouteImport.update({
+    id: '/api/public/notify/new-content',
+    path: '/api/public/notify/new-content',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicIpfsCidRoute = ApiPublicIpfsCidRouteImport.update({
@@ -375,32 +397,10 @@ const ApiPublicIpfsCidRoute = ApiPublicIpfsCidRouteImport.update({
   path: '/api/public/ipfs/$cid',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicNotifyNewContentRoute =
-  ApiPublicNotifyNewContentRouteImport.update({
-    id: '/api/public/notify/new-content',
-    path: '/api/public/notify/new-content',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicTelegramWebhookRoute =
-  ApiPublicTelegramWebhookRouteImport.update({
-    id: '/api/public/telegram/webhook',
-    path: '/api/public/telegram/webhook',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
-  id: '/lovable/email/auth/preview',
-  path: '/lovable/email/auth/preview',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
-  id: '/lovable/email/auth/webhook',
-  path: '/lovable/email/auth/webhook',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LovableEmailTransactionalPreviewRoute =
-  LovableEmailTransactionalPreviewRouteImport.update({
-    id: '/lovable/email/transactional/preview',
-    path: '/lovable/email/transactional/preview',
+const ApiPublicHooksSyncSubscribersRoute =
+  ApiPublicHooksSyncSubscribersRouteImport.update({
+    id: '/api/public/hooks/sync-subscribers',
+    path: '/api/public/hooks/sync-subscribers',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -868,305 +868,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/Discover-TEXITcoin.html': {
-      id: '/Discover-TEXITcoin.html'
-      path: '/Discover-TEXITcoin.html'
-      fullPath: '/Discover-TEXITcoin.html'
-      preLoaderRoute: typeof DiscoverTEXITcoinDothtmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/Meet-the-Team.html': {
-      id: '/Meet-the-Team.html'
-      path: '/Meet-the-Team.html'
-      fullPath: '/Meet-the-Team.html'
-      preLoaderRoute: typeof MeetTheTeamDothtmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/News-and-Updates.html': {
-      id: '/News-and-Updates.html'
-      path: '/News-and-Updates.html'
-      fullPath: '/News-and-Updates.html'
-      preLoaderRoute: typeof NewsAndUpdatesDothtmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/The-Case-for-TEXITcoin.html': {
-      id: '/The-Case-for-TEXITcoin.html'
-      path: '/The-Case-for-TEXITcoin.html'
-      fullPath: '/The-Case-for-TEXITcoin.html'
-      preLoaderRoute: typeof TheCaseForTEXITcoinDothtmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bobby': {
-      id: '/bobby'
-      path: '/bobby'
-      fullPath: '/bobby'
-      preLoaderRoute: typeof BobbyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/build': {
-      id: '/build'
-      path: '/build'
-      fullPath: '/build'
-      preLoaderRoute: typeof BuildRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/buy': {
-      id: '/buy'
-      path: '/buy'
-      fullPath: '/buy'
-      preLoaderRoute: typeof BuyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/clarity': {
-      id: '/clarity'
-      path: '/clarity'
-      fullPath: '/clarity'
-      preLoaderRoute: typeof ClarityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/currency': {
-      id: '/currency'
-      path: '/currency'
-      fullPath: '/currency'
-      preLoaderRoute: typeof CurrencyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/disclosures': {
-      id: '/disclosures'
-      path: '/disclosures'
-      fullPath: '/disclosures'
-      preLoaderRoute: typeof DisclosuresRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/in-the-news': {
-      id: '/in-the-news'
-      path: '/in-the-news'
-      fullPath: '/in-the-news'
-      preLoaderRoute: typeof InTheNewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/leadership': {
-      id: '/leadership'
-      path: '/leadership'
-      fullPath: '/leadership'
-      preLoaderRoute: typeof LeadershipRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/legal': {
-      id: '/legal'
-      path: '/legal'
-      fullPath: '/legal'
-      preLoaderRoute: typeof LegalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/live': {
-      id: '/live'
-      path: '/live'
-      fullPath: '/live'
-      preLoaderRoute: typeof LiveRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/market': {
-      id: '/market'
-      path: '/market'
-      fullPath: '/market'
-      preLoaderRoute: typeof MarketRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mcp': {
-      id: '/mcp'
-      path: '/mcp'
-      fullPath: '/mcp'
-      preLoaderRoute: typeof McpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/merch': {
-      id: '/merch'
-      path: '/merch'
-      fullPath: '/merch'
-      preLoaderRoute: typeof MerchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mine': {
-      id: '/mine'
-      path: '/mine'
-      fullPath: '/mine'
-      preLoaderRoute: typeof MineRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/philosophy': {
-      id: '/philosophy'
-      path: '/philosophy'
-      fullPath: '/philosophy'
-      preLoaderRoute: typeof PhilosophyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/press': {
-      id: '/press'
-      path: '/press'
-      fullPath: '/press'
-      preLoaderRoute: typeof PressRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/proof-of-work': {
-      id: '/proof-of-work'
-      path: '/proof-of-work'
-      fullPath: '/proof-of-work'
-      preLoaderRoute: typeof ProofOfWorkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/roadmap': {
-      id: '/roadmap'
-      path: '/roadmap'
-      fullPath: '/roadmap'
-      preLoaderRoute: typeof RoadmapRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/screenplay': {
-      id: '/screenplay'
-      path: '/screenplay'
-      fullPath: '/screenplay'
-      preLoaderRoute: typeof ScreenplayRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sec-and-crypto': {
-      id: '/sec-and-crypto'
-      path: '/sec-and-crypto'
-      fullPath: '/sec-and-crypto'
-      preLoaderRoute: typeof SecAndCryptoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/stats': {
-      id: '/stats'
-      path: '/stats'
-      fullPath: '/stats'
-      preLoaderRoute: typeof StatsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/team': {
-      id: '/team'
-      path: '/team'
-      fullPath: '/team'
-      preLoaderRoute: typeof TeamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/texas': {
-      id: '/texas'
-      path: '/texas'
-      fullPath: '/texas'
-      preLoaderRoute: typeof TexasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/texit': {
-      id: '/texit'
-      path: '/texit'
-      fullPath: '/texit'
-      preLoaderRoute: typeof TexitRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tokenomics': {
-      id: '/tokenomics'
-      path: '/tokenomics'
-      fullPath: '/tokenomics'
-      preLoaderRoute: typeof TokenomicsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/trolls': {
-      id: '/trolls'
-      path: '/trolls'
-      fullPath: '/trolls'
-      preLoaderRoute: typeof TrollsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/value': {
-      id: '/value'
-      path: '/value'
-      fullPath: '/value'
-      preLoaderRoute: typeof ValueRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/videos': {
-      id: '/videos'
-      path: '/videos'
-      fullPath: '/videos'
-      preLoaderRoute: typeof VideosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/wallets': {
-      id: '/wallets'
-      path: '/wallets'
-      fullPath: '/wallets'
-      preLoaderRoute: typeof WalletsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/whitepaper': {
-      id: '/whitepaper'
-      path: '/whitepaper'
-      fullPath: '/whitepaper'
-      preLoaderRoute: typeof WhitepaperRouteImport
+    '/zoom': {
+      id: '/zoom'
+      path: '/zoom'
+      fullPath: '/zoom'
+      preLoaderRoute: typeof ZoomRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wtxc': {
@@ -1176,60 +882,305 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WtxcRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/zoom': {
-      id: '/zoom'
-      path: '/zoom'
-      fullPath: '/zoom'
-      preLoaderRoute: typeof ZoomRouteImport
+    '/whitepaper': {
+      id: '/whitepaper'
+      path: '/whitepaper'
+      fullPath: '/whitepaper'
+      preLoaderRoute: typeof WhitepaperRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.mcp/list-tools': {
-      id: '/.mcp/list-tools'
-      path: '/.mcp/list-tools'
-      fullPath: '/.mcp/list-tools'
-      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+    '/wallets': {
+      id: '/wallets'
+      path: '/wallets'
+      fullPath: '/wallets'
+      preLoaderRoute: typeof WalletsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.well-known/oauth-protected-resource': {
-      id: '/.well-known/oauth-protected-resource'
-      path: '/.well-known/oauth-protected-resource'
-      fullPath: '/.well-known/oauth-protected-resource'
-      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/screenplay-admin': {
-      id: '/_authenticated/screenplay-admin'
-      path: '/screenplay-admin'
-      fullPath: '/screenplay-admin'
-      preLoaderRoute: typeof AuthenticatedScreenplayAdminRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/blog_/$slug': {
-      id: '/blog_/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
+    '/value': {
+      id: '/value'
+      path: '/value'
+      fullPath: '/value'
+      preLoaderRoute: typeof ValueRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/legal_/arizona': {
-      id: '/legal_/arizona'
-      path: '/legal/arizona'
-      fullPath: '/legal/arizona'
-      preLoaderRoute: typeof LegalArizonaRouteImport
+    '/trolls': {
+      id: '/trolls'
+      path: '/trolls'
+      fullPath: '/trolls'
+      preLoaderRoute: typeof TrollsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/market_/$slug': {
-      id: '/market_/$slug'
-      path: '/market/$slug'
-      fullPath: '/market/$slug'
-      preLoaderRoute: typeof MarketSlugRouteImport
+    '/tokenomics': {
+      id: '/tokenomics'
+      path: '/tokenomics'
+      fullPath: '/tokenomics'
+      preLoaderRoute: typeof TokenomicsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/screenplay_/$season': {
-      id: '/screenplay_/$season'
-      path: '/screenplay/$season'
-      fullPath: '/screenplay/$season'
-      preLoaderRoute: typeof ScreenplaySeasonRouteImport
+    '/texit': {
+      id: '/texit'
+      path: '/texit'
+      fullPath: '/texit'
+      preLoaderRoute: typeof TexitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/texas': {
+      id: '/texas'
+      path: '/texas'
+      fullPath: '/texas'
+      preLoaderRoute: typeof TexasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stats': {
+      id: '/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof StatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sec-and-crypto': {
+      id: '/sec-and-crypto'
+      path: '/sec-and-crypto'
+      fullPath: '/sec-and-crypto'
+      preLoaderRoute: typeof SecAndCryptoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/screenplay': {
+      id: '/screenplay'
+      path: '/screenplay'
+      fullPath: '/screenplay'
+      preLoaderRoute: typeof ScreenplayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proof-of-work': {
+      id: '/proof-of-work'
+      path: '/proof-of-work'
+      fullPath: '/proof-of-work'
+      preLoaderRoute: typeof ProofOfWorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/philosophy': {
+      id: '/philosophy'
+      path: '/philosophy'
+      fullPath: '/philosophy'
+      preLoaderRoute: typeof PhilosophyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mine': {
+      id: '/mine'
+      path: '/mine'
+      fullPath: '/mine'
+      preLoaderRoute: typeof MineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/merch': {
+      id: '/merch'
+      path: '/merch'
+      fullPath: '/merch'
+      preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/market': {
+      id: '/market'
+      path: '/market'
+      fullPath: '/market'
+      preLoaderRoute: typeof MarketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live': {
+      id: '/live'
+      path: '/live'
+      fullPath: '/live'
+      preLoaderRoute: typeof LiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leadership': {
+      id: '/leadership'
+      path: '/leadership'
+      fullPath: '/leadership'
+      preLoaderRoute: typeof LeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/in-the-news': {
+      id: '/in-the-news'
+      path: '/in-the-news'
+      fullPath: '/in-the-news'
+      preLoaderRoute: typeof InTheNewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disclosures': {
+      id: '/disclosures'
+      path: '/disclosures'
+      fullPath: '/disclosures'
+      preLoaderRoute: typeof DisclosuresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/currency': {
+      id: '/currency'
+      path: '/currency'
+      fullPath: '/currency'
+      preLoaderRoute: typeof CurrencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clarity': {
+      id: '/clarity'
+      path: '/clarity'
+      fullPath: '/clarity'
+      preLoaderRoute: typeof ClarityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buy': {
+      id: '/buy'
+      path: '/buy'
+      fullPath: '/buy'
+      preLoaderRoute: typeof BuyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/build': {
+      id: '/build'
+      path: '/build'
+      fullPath: '/build'
+      preLoaderRoute: typeof BuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bobby': {
+      id: '/bobby'
+      path: '/bobby'
+      fullPath: '/bobby'
+      preLoaderRoute: typeof BobbyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/The-Case-for-TEXITcoin.html': {
+      id: '/The-Case-for-TEXITcoin.html'
+      path: '/The-Case-for-TEXITcoin.html'
+      fullPath: '/The-Case-for-TEXITcoin.html'
+      preLoaderRoute: typeof TheCaseForTEXITcoinDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/News-and-Updates.html': {
+      id: '/News-and-Updates.html'
+      path: '/News-and-Updates.html'
+      fullPath: '/News-and-Updates.html'
+      preLoaderRoute: typeof NewsAndUpdatesDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Meet-the-Team.html': {
+      id: '/Meet-the-Team.html'
+      path: '/Meet-the-Team.html'
+      fullPath: '/Meet-the-Team.html'
+      preLoaderRoute: typeof MeetTheTeamDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Discover-TEXITcoin.html': {
+      id: '/Discover-TEXITcoin.html'
+      path: '/Discover-TEXITcoin.html'
+      fullPath: '/Discover-TEXITcoin.html'
+      preLoaderRoute: typeof DiscoverTEXITcoinDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/zoom_/$slug': {
@@ -1239,25 +1190,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZoomSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.mcp/invoke-tool/$tool': {
-      id: '/.mcp/invoke-tool/$tool'
-      path: '/.mcp/invoke-tool/$tool'
-      fullPath: '/.mcp/invoke-tool/$tool'
-      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+    '/screenplay_/$season': {
+      id: '/screenplay_/$season'
+      path: '/screenplay/$season'
+      fullPath: '/screenplay/$season'
+      preLoaderRoute: typeof ScreenplaySeasonRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/legal-fees': {
-      id: '/api/public/legal-fees'
-      path: '/api/public/legal-fees'
-      fullPath: '/api/public/legal-fees'
-      preLoaderRoute: typeof ApiPublicLegalFeesRouteImport
+    '/market_/$slug': {
+      id: '/market_/$slug'
+      path: '/market/$slug'
+      fullPath: '/market/$slug'
+      preLoaderRoute: typeof MarketSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/track': {
-      id: '/api/public/track'
-      path: '/api/public/track'
-      fullPath: '/api/public/track'
-      preLoaderRoute: typeof ApiPublicTrackRouteImport
+    '/legal_/arizona': {
+      id: '/legal_/arizona'
+      path: '/legal/arizona'
+      fullPath: '/legal/arizona'
+      preLoaderRoute: typeof LegalArizonaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog_/$slug': {
+      id: '/blog_/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/screenplay-admin': {
+      id: '/_authenticated/screenplay-admin'
+      path: '/screenplay-admin'
+      fullPath: '/screenplay-admin'
+      preLoaderRoute: typeof AuthenticatedScreenplayAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/events': {
@@ -1267,39 +1246,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/hooks/sync-subscribers': {
-      id: '/api/public/hooks/sync-subscribers'
-      path: '/api/public/hooks/sync-subscribers'
-      fullPath: '/api/public/hooks/sync-subscribers'
-      preLoaderRoute: typeof ApiPublicHooksSyncSubscribersRouteImport
+    '/api/public/track': {
+      id: '/api/public/track'
+      path: '/api/public/track'
+      fullPath: '/api/public/track'
+      preLoaderRoute: typeof ApiPublicTrackRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/ipfs/$cid': {
-      id: '/api/public/ipfs/$cid'
-      path: '/api/public/ipfs/$cid'
-      fullPath: '/api/public/ipfs/$cid'
-      preLoaderRoute: typeof ApiPublicIpfsCidRouteImport
+    '/api/public/legal-fees': {
+      id: '/api/public/legal-fees'
+      path: '/api/public/legal-fees'
+      fullPath: '/api/public/legal-fees'
+      preLoaderRoute: typeof ApiPublicLegalFeesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/notify/new-content': {
-      id: '/api/public/notify/new-content'
-      path: '/api/public/notify/new-content'
-      fullPath: '/api/public/notify/new-content'
-      preLoaderRoute: typeof ApiPublicNotifyNewContentRouteImport
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/telegram/webhook': {
-      id: '/api/public/telegram/webhook'
-      path: '/api/public/telegram/webhook'
-      fullPath: '/api/public/telegram/webhook'
-      preLoaderRoute: typeof ApiPublicTelegramWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lovable/email/auth/preview': {
-      id: '/lovable/email/auth/preview'
-      path: '/lovable/email/auth/preview'
-      fullPath: '/lovable/email/auth/preview'
-      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/auth/webhook': {
@@ -1309,11 +1281,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/transactional/preview': {
-      id: '/lovable/email/transactional/preview'
-      path: '/lovable/email/transactional/preview'
-      fullPath: '/lovable/email/transactional/preview'
-      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+    '/lovable/email/auth/preview': {
+      id: '/lovable/email/auth/preview'
+      path: '/lovable/email/auth/preview'
+      fullPath: '/lovable/email/auth/preview'
+      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/telegram/webhook': {
+      id: '/api/public/telegram/webhook'
+      path: '/api/public/telegram/webhook'
+      fullPath: '/api/public/telegram/webhook'
+      preLoaderRoute: typeof ApiPublicTelegramWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/notify/new-content': {
+      id: '/api/public/notify/new-content'
+      path: '/api/public/notify/new-content'
+      fullPath: '/api/public/notify/new-content'
+      preLoaderRoute: typeof ApiPublicNotifyNewContentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/ipfs/$cid': {
+      id: '/api/public/ipfs/$cid'
+      path: '/api/public/ipfs/$cid'
+      fullPath: '/api/public/ipfs/$cid'
+      preLoaderRoute: typeof ApiPublicIpfsCidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/sync-subscribers': {
+      id: '/api/public/hooks/sync-subscribers'
+      path: '/api/public/hooks/sync-subscribers'
+      fullPath: '/api/public/hooks/sync-subscribers'
+      preLoaderRoute: typeof ApiPublicHooksSyncSubscribersRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
