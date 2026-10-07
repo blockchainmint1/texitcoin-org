@@ -62,7 +62,7 @@ export const Route = createFileRoute("/market_/$slug")({
     <div className="min-h-screen grid place-items-center bg-background text-foreground p-8">
       <div className="max-w-md text-center">
         <h1 className="font-display text-3xl font-bold">Something went wrong</h1>
-        <p className="mt-3 text-muted-foreground">{error.message}</p>
+        <p className="mt-3 text-muted-foreground">{error instanceof Error ? error.message : "Unexpected error"}</p>
       </div>
     </div>
   ),
