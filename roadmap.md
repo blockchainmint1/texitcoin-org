@@ -14,3 +14,4 @@
 - [x] Research SEEDS custody, escrow, and launch readiness against its project.
 - [x] Draft the SEEDS / utility / price article in Bobby's voice with sourced exchange examples and careful market-value claims.
 - [x] Save unpublished, provide a readable review copy, and verify no notifications were sent.
+- [ ] Read Bobby's BitMart shutdown article and correct the SEEDS draft to cover both lost assets and lost trading volume; keep unpublished.
