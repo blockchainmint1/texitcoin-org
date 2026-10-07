@@ -11,6 +11,6 @@
 - [x] Verify the expanded draft on desktop and mobile without publishing it.
 - [x] Revise the unpublished hearing article to defend the Path to $16 plan and foreground Bobby's community-currency argument.
 - [x] Incorporate SEC crypto-assets FAQ 2.3 with careful attribution and verify the revised private preview.
-- [ ] Research SEEDS custody, escrow, and launch readiness against its project.
-- [ ] Draft the SEEDS / utility / price article in Bobby's voice with sourced exchange examples and careful market-value claims.
-- [ ] Save unpublished, provide a readable review copy, and verify no notifications were sent.
+- [x] Research SEEDS custody, escrow, and launch readiness against its project.
+- [x] Draft the SEEDS / utility / price article in Bobby's voice with sourced exchange examples and careful market-value claims.
+- [x] Save unpublished, provide a readable review copy, and verify no notifications were sent.
