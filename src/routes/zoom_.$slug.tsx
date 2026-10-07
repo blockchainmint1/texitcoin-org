@@ -17,7 +17,11 @@ export const Route = createFileRoute("/zoom_/$slug")({
     if (!call) throw notFound();
     return call;
   },
-  head: ({ loaderData }) => ({
+  head: ({ loaderData: ld }) => {
+    const loaderData = ld as
+      | { title: string; summary: string | null; call_date: string; thumbnail_url: string | null }
+      | undefined;
+    return {
     meta: loaderData
       ? [
           { title: `${loaderData.title} — Honest Money Hour` },
@@ -42,7 +46,8 @@ export const Route = createFileRoute("/zoom_/$slug")({
             : []),
         ]
       : [{ title: "Honest Money Hour" }],
-  }),
+  };
+  },
   errorComponent: ZoomCallError,
   notFoundComponent: () => (
     <div className="min-h-screen bg-background text-foreground">
@@ -65,7 +70,7 @@ export const Route = createFileRoute("/zoom_/$slug")({
   component: ZoomCallPage,
 });
 
-function ZoomCallError({ reset }: { error: Error; reset: () => void }) {
+function ZoomCallError({ reset }: { error: unknown; reset: () => void }) {
   const router = useRouter();
   return (
     <div className="min-h-screen bg-background text-foreground">

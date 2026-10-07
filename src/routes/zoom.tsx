@@ -43,7 +43,7 @@ export const Route = createFileRoute("/zoom")({
   component: ZoomIndex,
 });
 
-function ZoomErrorComponent({ reset }: { error: Error; reset: () => void }) {
+function ZoomErrorComponent({ reset }: { error: unknown; reset: () => void }) {
   const router = useRouter();
   return (
     <div className="min-h-screen bg-background text-foreground">
