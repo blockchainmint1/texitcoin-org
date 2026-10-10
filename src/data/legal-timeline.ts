@@ -18,6 +18,17 @@ export type Entry = {
 
 export const ENTRIES: Entry[] = [
   {
+    date: "10 Oct 2026",
+    title: "Four Days Under Oath: The Full Breakdown",
+    tone: "context",
+    tag: "HEARING BREAKDOWN",
+    body: "With both briefs on the record, we published our full breakdown of the four-day TSSB hearing: day-by-day testimony, transcript citations, key quotes, what helped and what hurt, and how it all lines up with the brief we filed. Read it, check it against the transcripts, and decide for yourself.",
+    link: {
+      label: "Read the full breakdown →",
+      href: "/blog/tssb-hearing-full-breakdown",
+    },
+  },
+  {
     date: "9 Oct 2026",
     title: "Both Sides File Their Briefs — Now the Judge Decides",
     tone: "filing",
