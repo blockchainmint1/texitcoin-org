@@ -87,8 +87,8 @@ function useLegalFees() {
 
 function getTLDR(feesAmount: string | null) {
   return [
-    "Court adjourned August 20, 2026 — we stood our ground and made the record",
-    "Mining Package sales resume outside Texas on 23 Aug 2026 at midnight UTC",
+    "Both sides filed their briefs on 9 Oct 2026 — the record is closed and the judge now decides",
+    "Mining Package sales continue outside Texas — the C&D stops Texas sales only",
     "Texas remains restricted — no buying, selling, or earning hash power under the C&D",
     "Avi Perry from Quinn Emanuel leads our legal team",
     `${feesAmount ?? "$973,000+"} out of pocket so far on legal costs (and climbing)`,
