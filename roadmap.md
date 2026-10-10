@@ -1,5 +1,6 @@
 # Current work
 
+- [x] Pin the October 8 ALJ deadline order and insert its dated legal timeline entry in order; verify without publishing.
 - [x] Give Bobby the private preview link for article one.
 - [x] Draft article two from the September 22 governor letter.
 - [x] Keep disputed claims attributed and the pending case status clear.

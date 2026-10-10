@@ -34,6 +34,18 @@ export const ENTRIES: Entry[] = [
   },
 
   {
+    date: "8 Oct 2026",
+    title: "Apparently Two Months Isn't Enough — Decision Deadline Moves to January",
+    tone: "regulator",
+    tag: "MORE WAITING",
+    body: "Apparently two calendar months isn't enough time to do the right and easy thing. Judge Katerina DeAngelo signed an order on October 8 moving the deadline for the Proposal for Decision from December 22, 2026, to January 4, 2027. Here's the calendar math in the order: the evidentiary record closes October 23, starting the judges' 60-day drafting period. Five holiday days extend that period to December 27 — a Sunday, while SOAH is closed — so the deadline moves again to the next business day, January 4. We believe the record already makes the right answer clear. Instead, this community gets more waiting while the Emergency Order remains in place. This is a scheduling order, not a ruling on the merits, and the January deadline is for the judges' proposed decision, not a final Board decision. All other deadlines remain unchanged, including October 23 for replies and the close of the record. Read the signed order yourself.",
+    link: {
+      label: "Read the deadline extension order (PDF)",
+      href: "https://texitcoin.org/api/public/ipfs/QmSmi5DhiqGhHtqtytz5fNnVYzsmrjyAAa79YeeJQzr3sW",
+    },
+  },
+
+  {
     date: "22 Sep 2026",
     title: "Governor Abbott, This Is Bigger Than TEXITcoin",
     tone: "win",
