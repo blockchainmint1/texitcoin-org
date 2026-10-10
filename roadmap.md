@@ -15,5 +15,5 @@
 - [x] Draft the SEEDS / utility / price article in Bobby's voice with sourced exchange examples and careful market-value claims.
 - [x] Save unpublished, provide a readable review copy, and verify no notifications were sent.
 - [x] Read Bobby's BitMart shutdown article and correct the SEEDS draft to cover both lost assets and lost trading volume; keep unpublished.
-- [ ] Review the hearing breakdown against the filed respondents' brief, correct conflicting claims, and incorporate both briefs.
-- [ ] Verify the hearing breakdown remains unpublished with no announcement sent.
+- [x] Review the hearing breakdown against the filed respondents' brief, correct conflicting claims, and incorporate both briefs.
+- [x] Verify the hearing breakdown remains unpublished with no announcement sent.
