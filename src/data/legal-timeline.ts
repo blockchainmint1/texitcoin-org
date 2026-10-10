@@ -18,6 +18,22 @@ export type Entry = {
 
 export const ENTRIES: Entry[] = [
   {
+    date: "9 Oct 2026",
+    title: "Both Sides File Their Briefs — Now the Judge Decides",
+    tone: "filing",
+    tag: "BRIEFS FILED",
+    body: "Post-hearing briefs are on the record. Ours (95 pages) asks the judge to set the Emergency Order aside entirely. On fraud, it points to the TSSB investigator's own testimony: no money is missing, purchasers received their coins every day, and there is \"no allegation\" that Bobby lied — the TSSB investigated for eleven months without once talking to him, requesting a record, or visiting a mine, and didn't even defend its fraud claims in oral closing. On securities, it argues a Mining Package is a one-time purchase of hash power paying daily TXC — a commodity priced by an open market nobody here controls — that we repeatedly said was not an investment, and that under the SEC's March 2026 crypto-asset guidance a mining pool's work is ministerial. It also argues we had no fair notice, there was no emergency, refunds aren't properly before the court, and the TSSB's conduct warrants findings of frivolous allegations and possible sanctions. The Enforcement Division's brief (115 pages) asks the judge to affirm the Order with modifications — naming Bobby d/b/a TEXITcoin, MineTXC, Blockchain Mint, and Danagger Resources — to find the packages are investment contracts sold without registration by an unregistered dealer, to keep the fraud findings \"to the extent supported,\" and to recommend refunds. Note what they asked to change: the record forced them to concede their own findings needed fixing. Replies are due 23 Oct; the judge's Proposal for Decision follows. Read both, unredacted, and decide for yourself.",
+    link: {
+      label: "Our post-hearing brief (PDF, 95 pages)",
+      href: "/api/public/ipfs/QmdqMrXuKWaoQipjfVxkPuPgaALaU3yJrcuhT1YF4WrR9v",
+    },
+    secondaryLink: {
+      label: "The Enforcement Division's brief (PDF, 115 pages)",
+      href: "/api/public/ipfs/QmYZfC4WbhLsmZKrgKZvtHvMShK54gKyszKSnCEDHLSYGi",
+    },
+  },
+
+  {
     date: "22 Sep 2026",
     title: "Governor Abbott, This Is Bigger Than TEXITcoin",
     tone: "win",
