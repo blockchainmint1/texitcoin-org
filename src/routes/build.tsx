@@ -667,6 +667,12 @@ const txid = await fetch("https://mempool.texitcoin.org/api/tx", {
           <li>One 80-byte OP_RETURN fits <strong>7 receivers</strong> (9 + 9n ≤ 80). The protocol allows up to 255; going past 7 means chaining the payload across multiple OP_RETURN outputs.</li>
           <li>Budget 10,000 sats of dust <em>per receiver</em> in your fee math.</li>
           <li>Errors come back typed (e.g. <code className="font-mono">-26</code> output index doesn't resolve, <code className="font-mono">-28</code> amounts don't sum). <code className="font-mono">omni_getactivations</code> won't list it — the go-live height is baked into the release.</li>
+          <li><strong>Rule for wallet and explorer developers:</strong> the receivers live in the transaction <em>outputs</em>, not in the OP_RETURN payload. The payload only carries a 1-byte output index plus an 8-byte amount per receiver (9 bytes each). To show a receiver's history, look up that output index in the funding transaction — never try to parse addresses out of the payload.</li>
+          <li><strong>Use legacy addresses for now.</strong> In testing, the bulk-send encoder could not yet read the newer default address type, so create sender and receiver addresses with <code className="font-mono">getnewaddress "label" "legacy"</code>.</li>
+          <li><strong>Output order is consensus.</strong> The wallet builder appends the dust outputs in list order right after the payload outputs, and refuses to build if the wallet would insert change ahead of them. If funds ever land on the wrong address in a transaction that validates, check that ordering first.</li>
+          <li>The RPCs are wallet-scoped, so build the node with <code className="font-mono">--enable-wallet</code>. Errors live in the <code className="font-mono">-86000</code> band; the protocol allows up to 255 receivers per packet.</li>
+          <li>Only nodes on v0.26.1+ understand type 7. Older Omni nodes silently skip these messages and compute different token balances, so upgrade before relying on it.</li>
+          <li>Full public build log and patch: <a className="underline" href="https://core.honest.money/code/send-to-many" target="_blank" rel="noreferrer">core.honest.money/code/send-to-many</a> (16 files, all inside <code className="font-mono">src/omnicore/</code>).</li>
         </ul>
       </div>
     ),
@@ -682,6 +688,59 @@ psbt.addOutput({ script: opReturn, value: 0n });          // vout 0: "omni" + pa
 psbt.addOutput({ address: sender,    value: changeSats }); // vout 1: change
 psbt.addOutput({ address: receiver1, value: 10_000n });    // vout 2
 psbt.addOutput({ address: receiver2, value: 10_000n });    // vout 3`,
+  },
+  {
+    heading: "5c · Try Send To Many on regtest (free, 10 minutes)",
+    body: (
+      <div className="space-y-3">
+        <p>
+          Test on a private pretend chain before touching mainnet. Regtest has type 7 live from
+          block 0, runs next to a mainnet node without touching it, and costs nothing. This is the
+          walkthrough the core team used (verified Oct 3, 2026: receivers got 100 / 50 / 25, sender
+          kept 999,825 of 1,000,000).
+        </p>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>Build from source with <code className="font-mono">--enable-wallet</code>. Build the bundled <code className="font-mono">depends</code> first (it includes the Berkeley DB the wallet needs), then run configure with <code className="font-mono">CONFIG_SITE=$PWD/depends/x86_64-pc-linux-gnu/share/config.site</code>.</li>
+          <li>On a small 2-CPU / 4 GB box, add 4 GB of swap and use <code className="font-mono">make -j2</code> so the compile isn't killed for running out of memory.</li>
+          <li>Success is three balances of exactly 100, 50 and 25.</li>
+        </ul>
+      </div>
+    ),
+    code: `mkdir -p ~/txc-regtest
+cat > ~/txc-regtest/texitcoin.conf <<'EOF'
+regtest=1
+txindex=1
+server=1
+rpcallowip=127.0.0.1
+fallbackfee=0.0001
+[regtest]
+rpcport=15749
+rpcuser=txcregtest
+rpcpassword=regtest-only-not-secret
+EOF
+./src/texitcoind -regtest -datadir=$HOME/txc-regtest -daemon
+CLI="./src/texitcoin-cli -regtest -datadir=$HOME/txc-regtest"
+$CLI createwallet regtest
+
+# 101 blocks to a LEGACY address
+FROM=$($CLI getnewaddress "omni-funder" "legacy")
+$CLI generatetoaddress 101 "$FROM"
+
+# test token: fixed issuance of 1,000,000 units
+TX=$($CLI omni_sendissuancefixed "$FROM" 2 1 0 "STM" "" "TestTokens" "" "" "1000000")
+$CLI generatetoaddress 1 "$FROM"
+PROP=$($CLI omni_gettransaction "$TX" | grep -o '"propertyid"[ :]*[0-9]*' | grep -o '[0-9]*')
+
+# one transaction, three receivers
+A=$($CLI getnewaddress a legacy); B=$($CLI getnewaddress b legacy); C=$($CLI getnewaddress c legacy)
+$CLI omni_sendtomany "$FROM" "$PROP" \\
+  '[{"address":"'$A'","amount":"100"},{"address":"'$B'","amount":"50"},{"address":"'$C'","amount":"25"}]'
+$CLI generatetoaddress 1 "$FROM"
+$CLI omni_getbalance "$A" "$PROP"   # 100
+$CLI omni_getbalance "$B" "$PROP"   # 50
+$CLI omni_getbalance "$C" "$PROP"   # 25
+
+$CLI stop   # stops only the regtest node`,
   },
   {
     heading: "6 · Reading balances",
