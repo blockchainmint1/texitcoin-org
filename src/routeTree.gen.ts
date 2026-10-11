@@ -66,6 +66,7 @@ import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[
 import { Route as ApiPublicLegalFeesRouteImport } from './routes/api/public/legal-fees'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
+import { Route as ApiPublicHooksSyncEventsRouteImport } from './routes/api/public/hooks/sync-events'
 import { Route as ApiPublicHooksSyncSubscribersRouteImport } from './routes/api/public/hooks/sync-subscribers'
 import { Route as ApiPublicIpfsCidRouteImport } from './routes/api/public/ipfs.$cid'
 import { Route as ApiPublicNotifyNewContentRouteImport } from './routes/api/public/notify/new-content'
@@ -364,6 +365,12 @@ const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
   path: '/lovable/email/events',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksSyncEventsRoute =
+  ApiPublicHooksSyncEventsRouteImport.update({
+    id: '/api/public/hooks/sync-events',
+    path: '/api/public/hooks/sync-events',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksSyncSubscribersRoute =
   ApiPublicHooksSyncSubscribersRouteImport.update({
     id: '/api/public/hooks/sync-subscribers',
@@ -461,6 +468,7 @@ export interface FileRoutesByFullPath {
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/api/public/hooks/sync-events': typeof ApiPublicHooksSyncEventsRoute
   '/api/public/hooks/sync-subscribers': typeof ApiPublicHooksSyncSubscribersRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -526,6 +534,7 @@ export interface FileRoutesByTo {
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/api/public/hooks/sync-events': typeof ApiPublicHooksSyncEventsRoute
   '/api/public/hooks/sync-subscribers': typeof ApiPublicHooksSyncSubscribersRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -593,6 +602,7 @@ export interface FileRoutesById {
   '/api/public/legal-fees': typeof ApiPublicLegalFeesRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/api/public/hooks/sync-events': typeof ApiPublicHooksSyncEventsRoute
   '/api/public/hooks/sync-subscribers': typeof ApiPublicHooksSyncSubscribersRoute
   '/api/public/ipfs/$cid': typeof ApiPublicIpfsCidRoute
   '/api/public/notify/new-content': typeof ApiPublicNotifyNewContentRoute
@@ -660,6 +670,7 @@ export interface FileRouteTypes {
     | '/api/public/legal-fees'
     | '/api/public/track'
     | '/lovable/email/events'
+    | '/api/public/hooks/sync-events'
     | '/api/public/hooks/sync-subscribers'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -725,6 +736,7 @@ export interface FileRouteTypes {
     | '/api/public/legal-fees'
     | '/api/public/track'
     | '/lovable/email/events'
+    | '/api/public/hooks/sync-events'
     | '/api/public/hooks/sync-subscribers'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -791,6 +803,7 @@ export interface FileRouteTypes {
     | '/api/public/legal-fees'
     | '/api/public/track'
     | '/lovable/email/events'
+    | '/api/public/hooks/sync-events'
     | '/api/public/hooks/sync-subscribers'
     | '/api/public/ipfs/$cid'
     | '/api/public/notify/new-content'
@@ -857,6 +870,7 @@ export interface RootRouteChildren {
   ApiPublicLegalFeesRoute: typeof ApiPublicLegalFeesRoute
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
+  ApiPublicHooksSyncEventsRoute: typeof ApiPublicHooksSyncEventsRoute
   ApiPublicHooksSyncSubscribersRoute: typeof ApiPublicHooksSyncSubscribersRoute
   ApiPublicIpfsCidRoute: typeof ApiPublicIpfsCidRoute
   ApiPublicNotifyNewContentRoute: typeof ApiPublicNotifyNewContentRoute
@@ -1267,6 +1281,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/sync-events': {
+      id: '/api/public/hooks/sync-events'
+      path: '/api/public/hooks/sync-events'
+      fullPath: '/api/public/hooks/sync-events'
+      preLoaderRoute: typeof ApiPublicHooksSyncEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/sync-subscribers': {
       id: '/api/public/hooks/sync-subscribers'
       path: '/api/public/hooks/sync-subscribers'
@@ -1388,6 +1409,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicLegalFeesRoute: ApiPublicLegalFeesRoute,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
+  ApiPublicHooksSyncEventsRoute: ApiPublicHooksSyncEventsRoute,
   ApiPublicHooksSyncSubscribersRoute: ApiPublicHooksSyncSubscribersRoute,
   ApiPublicIpfsCidRoute: ApiPublicIpfsCidRoute,
   ApiPublicNotifyNewContentRoute: ApiPublicNotifyNewContentRoute,
