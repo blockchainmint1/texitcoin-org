@@ -93,7 +93,7 @@ function getTLDR(feesAmount: string | null) {
     "Avi Perry from Quinn Emanuel leads our legal team",
     `${feesAmount ?? "$973,000+"} out of pocket so far on legal costs (and climbing)`,
     "TEXITcoin network remains active — no disruption in service to community",
-    "Replies and record close: 23 Oct 2026; judge's Proposal for Decision now due 4 Jan 2027",
+    "Replies due 23 Oct 2026; record closes 20 Nov; judge's Proposal for Decision now due 25 Jan 2027",
   ];
 }
 

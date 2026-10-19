@@ -18,6 +18,17 @@ export type Entry = {
 
 export const ENTRIES: Entry[] = [
   {
+    date: "19 Oct 2026",
+    title: "The Judge Asks the Hard Questions — and the Deadline Slides Again",
+    tone: "regulator",
+    tag: "NEW ORDER",
+    body: "Judge DeAngelo issued instructions for reply briefs, and the questions she's asking are the ones we've been asking all along. Replies are still due 23 Oct, capped at 35 pages, no rehashing. Each side must answer six questions: whether the TSSB even has authority to order refunds in an emergency-order case (and whether that's ever been done before); why the TSSB's brief quietly switched to demanding the full amount paid instead of what its own Notice of Hearing asked for; what the TSSB actually has to prove for \"fraud by omission\" — duty, reliance, injury, intent; how the TSSB's new, modified fraud theories fit inside the charges it actually brought; whether \"immediate and irreparable harm\" is measured when the order issued or at the hearing; and what weight the SEC's March 2026 crypto guidance gets — guidance the TSSB's brief never even addressed. Both sides must also file a joint list of every undisputed fact by 20 Nov, which now closes the record. The cost: the Proposal for Decision moves from 4 Jan to 25 Jan 2027. More waiting, but the right questions.",
+    link: {
+      label: "Read the order (PDF, 4 pages)",
+      href: "/api/public/ipfs/QmXWUhNGsRp4Cue1sVRAgiLWMvjDt5rBKskATb3CrEpwWU",
+    },
+  },
+  {
     date: "10 Oct 2026",
     title: "Four Days Under Oath: The Full Breakdown",
     tone: "context",
