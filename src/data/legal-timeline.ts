@@ -28,7 +28,7 @@ export const ENTRIES: Entry[] = [
       label: "Read the full update →",
       href: "/blog/the-record-closes",
     },
-    body: "Our reply brief and proposed findings are filed. The message hasn't changed: set the Emergency Order aside in full. The reply answers the State's revised fraud theories, explains why buying hash power isn't buying shares in a business, and challenges both the authority and the evidence behind its refund demand. Our proposed findings set out 154 factual findings and seven legal conclusions for the judge to consider — not rulings she's already made. The State's investigator acknowledged there was no allegation of embezzlement or failure to deliver TXC; that is not a claim that nobody ever lost money trading it. We believe the record supports us. Now both sides must submit their joint stipulation of undisputed facts by 20 Nov, when the record closes. The judge's Proposal for Decision is due 25 Jan 2027. The order remains in place while we wait. Read our filings yourself.",
+    body: "Both sides filed their replies. Ours answer the State's revised fraud theories, explain why buying hash power isn't buying shares in a business, and challenge both the authority and the evidence behind its refund demand. The State's reply, filed the same afternoon, doubles down: it still calls the Mining Packages a pro-rata share of a mine, leans on the SEC's new guidance the other way, and asks the judge to modify the order and force refunds. Our proposed findings set out 154 factual findings and seven legal conclusions for the judge to consider — not rulings she's already made. The State's investigator acknowledged there was no allegation of embezzlement or failure to deliver TXC; that is not a claim that nobody ever lost money trading it. Now both sides must submit their joint stipulation of undisputed facts by 20 Nov, when the record closes. The judge's Proposal for Decision is due 25 Jan 2027. The order remains in place while we wait. Read every filing yourself.",
     link: {
       label: "Our post-hearing reply brief (PDF, 42 pages)",
       href: "https://texitcoin.org/api/public/ipfs/QmbF4mnwvE3ugZMDJzv9bJ97S8teLWBaHuvLQchMaioNFh",
@@ -36,6 +36,10 @@ export const ENTRIES: Entry[] = [
     secondaryLink: {
       label: "Our proposed findings of fact and conclusions of law (PDF, 24 pages)",
       href: "https://texitcoin.org/api/public/ipfs/QmSrbXd4N1UoFbLmdmPKffms4oxuNUCXjX3gBauEFSnCgS",
+    },
+    tertiaryLink: {
+      label: "The State's reply brief, with attachments (PDF, 57 pages)",
+      href: "https://texitcoin.org/api/public/ipfs/QmY1j2AU8WJvc8QF3Mkwgrdjn9FynRNKS291UGt77bN1h2",
     },
   },
   {

@@ -106,6 +106,14 @@ export function LegalTimeline({ entries }: { entries: Entry[] }) {
                   {e.secondaryLink.label}
                 </a>
               )}
+              {e.tertiaryLink && (
+                <a
+                  href={e.tertiaryLink.href}
+                  className="mt-3 block text-sm font-semibold text-primary hover:underline"
+                >
+                  {e.tertiaryLink.label}
+                </a>
+              )}
             </div>
           </motion.li>
         );
