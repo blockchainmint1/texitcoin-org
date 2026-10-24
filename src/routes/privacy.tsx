@@ -17,6 +17,8 @@ export const Route = createFileRoute("/privacy")({
         property: "og:description",
         content: "Plain-English privacy policy for TEXITcoin.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: PrivacyPage,
@@ -27,14 +29,14 @@ const SECTIONS: Section[] = [
     heading: "The short version",
     body: [
       "We don't want your data, we don't sell your data, and we don't run analytics that follow you around the internet. The TEXITcoin blockchain itself is public — every transaction is on a permanent, transparent ledger anyone can read. That's a feature, not a bug.",
-      "If a section below contradicts the short version, the short version wins. We'd rather be honest than thorough.",
+      "The details below explain what we collect and where it goes. We'd rather tell you plainly than hide it in fine print.",
     ],
   },
   {
     heading: "What this site collects",
     body: [
       "This marketing site (texitcoin.org and its previews) is mostly static. When you visit, your browser sends us standard things — IP address, user-agent, the page you requested — so the server can actually send you a page back. Standard web stuff.",
-      "We may use minimal, privacy-respecting analytics to count visits and see which pages people read. We do not run ad-tracking, fingerprinting, or third-party retargeting pixels.",
+      "We count visits and which pages people read. Visit records can include the page, referring site, browser, device, a session identifier, and a shortened network address. We do not run advertising retargeting pixels. These records are not the same thing as anonymous totals.",
     ],
   },
   {
@@ -53,7 +55,8 @@ const SECTIONS: Section[] = [
   {
     heading: "Email & forms",
     body: [
-      "If you sign up for a newsletter, type into a contact form, or join the community in some other way, we'll use what you give us to do exactly the thing you asked for. We won't sell it, rent it, or pass it along to a partner you've never heard of. If you ask us to delete it, we will.",
+      "When you subscribe, we save your email address, where you signed up, and when you signed up so we can send updates. We also share subscriber and account-holder email addresses with honest.money, the Honest Money Ecosystem's central mailing service, along with this site's name and your TEXITcoin and honest-money interests. That lets the ecosystem send related updates. We do not sell or rent your email address.",
+      "Unsubscribe using the link in an email. You can also ask us to correct or delete the information we hold, including the copy shared with honest.money. Information you submit in other forms is used to handle that submission.",
     ],
   },
   {
@@ -84,7 +87,7 @@ function PrivacyPage() {
         eyebrow="Privacy Policy"
         title="We don't want your data."
         lede="Most privacy policies are written by lawyers to protect lawyers. This one is written for humans who actually want to know what's going on."
-        updated="January 2026"
+        updated="October 24, 2026"
         sections={SECTIONS}
       />
       <Footer />
