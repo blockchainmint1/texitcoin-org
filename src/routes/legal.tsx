@@ -16,6 +16,7 @@ import { LegalTimeline } from "@/components/site/LegalTimeline";
 import { CaseDocket } from "@/components/site/CaseDocket";
 import { ENTRIES } from "@/data/legal-timeline";
 import { checkNewContent } from "@/lib/notify.functions";
+import { currentLegalCostTotal } from "@/lib/legal-costs";
 
 export const Route = createFileRoute("/legal")({
   head: () => ({
@@ -65,10 +66,12 @@ function useLegalFees() {
         if (!res.ok) return;
         const data = await res.json();
         if (cancelled) return;
-        const total = data?.total_usd as number | undefined;
-        if (typeof total === "number") {
+        const total = currentLegalCostTotal(data?.total_usd);
+        if (total !== null) {
           const rounded = Math.floor(total / 1000) * 1000;
           setAmount(`$${rounded.toLocaleString("en-US")}+`);
+        } else {
+          setAmount(null);
         }
       } catch {
         // silently fail — keep hardcoded fallback
@@ -90,10 +93,11 @@ function getTLDR(feesAmount: string | null) {
     "Our reply brief and proposed findings were filed 23 Oct 2026 — no ruling yet; the Emergency Order remains in place",
     "Mining Package sales continue outside Texas — the C&D stops Texas sales only",
     "Texas remains restricted — no buying, selling, or earning hash power under the C&D",
-    "Avi Perry from Quinn Emanuel leads our legal team",
-    `${feesAmount ?? "$973,000+"} out of pocket so far on legal costs (and climbing)`,
+    "We're transitioning from Avi Perry and Quinn Emanuel to Larry Friedman and Friedman & Feiger",
+    `${feesAmount ?? "Over $5 million"} out of pocket so far on legal costs (and climbing)`,
     "TEXITcoin network remains active — no disruption in service to community",
     "Joint stipulation due and record closes 20 Nov 2026; judge's Proposal for Decision due 25 Jan 2027",
+    "Don't take our word for it — read the filed briefs, orders, and hearing transcripts in the timeline below",
   ];
 }
 
@@ -217,7 +221,11 @@ function LegalPage() {
                     className="flex items-start gap-3 rounded-xl border border-border bg-background/50 p-4"
                   >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                    <span className="text-sm md:text-base">{item}</span>
+                    <span className="text-sm md:text-base">
+                      {item === tldr[7] ? (
+                        <a href="#timeline" className="underline decoration-primary/40 underline-offset-4 hover:text-primary">{item}</a>
+                      ) : item}
+                    </span>
                   </li>
                 ))}
               </ul>
