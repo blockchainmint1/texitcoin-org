@@ -1,5 +1,6 @@
 # Current work
 
+- [ ] Assess remaining audit warnings for actual public exposure and discuss whether further changes are needed; do not publish.
 - [x] Apply safe audit fixes for Telegram permissions, privacy disclosure, public facts, discovery, and compatible dependencies; verify without publishing.
 - [x] Identify and defer compatibility-sensitive dependency upgrades, enforced frame/CSP restrictions, consent/sync behavior changes, database-backed spam controls, and unverified replacement links. The environment protects .gitignore from editing.
 
