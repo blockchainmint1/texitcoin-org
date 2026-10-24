@@ -15,7 +15,10 @@ import {
   Banknote,
   Store,
   Smartphone,
+  FileSignature,
+  ScrollText,
 } from "lucide-react";
+
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import coldStorageCoin from "@/assets/cold-storage-coin.jpg";
@@ -503,7 +506,17 @@ function WalletsPage() {
                   cta: "Open",
                   highlight: false,
                 },
+                {
+                  icon: FileSignature,
+                  name: "TEXITcoin Web Wallet",
+                  best: "Best for bulk transfers & signing",
+                  body: "TXC native. Move a lot in one go and sign your own transactions.",
+                  href: "https://wallet.texitcoin.org/",
+                  cta: "Open",
+                  highlight: false,
+                },
               ].map((w) => (
+
                 <a
                   key={w.name}
                   href={w.href}
@@ -529,7 +542,52 @@ function WalletsPage() {
             </div>
           </div>
         </section>
+
+        {/* Use Your Words */}
+        <section className="border-t border-border py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 md:p-12"
+            >
+              <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+              <div className="relative grid gap-10 md:grid-cols-[1fr_auto] md:items-center">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs uppercase tracking-[0.22em] text-primary">
+                    <ScrollText className="h-3 w-3" /> Use Your Words
+                  </div>
+                  <h2 className="mt-5 font-display text-3xl font-bold leading-tight md:text-4xl">
+                    A seed phrase is just <span className="text-primary">words</span>
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+                    That's what makes them so versatile. Twelve or twenty-four ordinary words will
+                    fit on a slip of paper, get carved into copper, live in your head, or get split
+                    among people you trust. You choose them, so choose words you'll actually
+                    remember.
+                  </p>
+                  <p className="mt-4 max-w-2xl text-muted-foreground">
+                    words.honest.money lets you hand-pick the words of your own BIP-39 seed phrase
+                    and checks it's valid right there in your browser. Nothing you type is sent
+                    anywhere.
+                  </p>
+                </div>
+                <a
+                  href="https://words.honest.money/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+                >
+                  Learn more <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
       </main>
+
       <Footer />
     </>
   );
