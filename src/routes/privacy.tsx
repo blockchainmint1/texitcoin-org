@@ -36,7 +36,7 @@ const SECTIONS: Section[] = [
     heading: "What this site collects",
     body: [
       "This marketing site (texitcoin.org and its previews) is mostly static. When you visit, your browser sends us standard things — IP address, user-agent, the page you requested — so the server can actually send you a page back. Standard web stuff.",
-      "We count visits and which pages people read. Visit records can include the page, referring site, browser, device, a session identifier, and a shortened network address. We do not run advertising retargeting pixels. These records are not the same thing as anonymous totals.",
+      "We count visits and which pages people read. Visit records include the page, referring site's hostname, country when available, device category, and a session identifier stored in your browser for that tab. The browser information helps us identify the device category and filter bots; we do not store your full IP address in these visit records. We do not run advertising retargeting pixels. Session-level records are not the same thing as anonymous totals.",
     ],
   },
   {

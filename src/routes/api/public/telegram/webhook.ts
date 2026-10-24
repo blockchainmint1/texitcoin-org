@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
 import { createHash, timingSafeEqual } from "crypto";
 import type { Database } from "@/integrations/supabase/types";
+import { hasTelegramCommandAccess, isTelegramAdministrator } from "@/lib/telegram-permissions";
 
 /* -------------------------------------------------------------------------- */
 /*  Telegram gateway helpers                                                  */
@@ -102,7 +103,7 @@ function safeEqual(a: string, b: string): boolean {
   return A.length === B.length && timingSafeEqual(A, B);
 }
 
-// Chats whose members are trusted to issue commands directly.
+// Approved command chats; individual senders must still pass authorization.
 const AUTHORIZED_CHAT_IDS = new Set<string>(["-5219881042", "-1002172752143"]);
 
 // Individual users always allowed to issue commands, regardless of group
@@ -115,9 +116,9 @@ function isAuthorizedChat(chatId: number | string): boolean {
   return !!groupId && String(groupId) === String(chatId);
 }
 
-async function isAuthorizedUser(userId: number): Promise<boolean> {
+async function isAuthorizedUser(userId: number, chatId: number): Promise<boolean> {
   if (AUTHORIZED_USER_IDS.has(String(userId))) return true;
-  const groupId = process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
+  const groupId = isAuthorizedChat(chatId) ? String(chatId) : process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
   if (!groupId) {
     console.error("TELEGRAM_AUTHORIZED_GROUP_ID not configured");
     return false;
@@ -125,7 +126,7 @@ async function isAuthorizedUser(userId: number): Promise<boolean> {
   try {
     const res = await tgCall("getChatMember", { chat_id: groupId, user_id: userId });
     const status = res?.result?.status;
-    return ["creator", "administrator", "member", "restricted"].includes(status);
+    return res?.ok === true && isTelegramAdministrator(status);
   } catch (err) {
     console.error("Group membership check failed", err);
     return false;
@@ -444,7 +445,7 @@ function parseDate(s: string): string | null {
 }
 
 const HELP = `<b>TEXITcoin site bot</b>
-Only members of the authorized group may issue commands.
+Only approved users and administrators of an authorized group may issue commands.
 
 <b>New recorded call</b>
 Attach a .vtt/.txt transcript and set the caption to:
@@ -665,11 +666,18 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
         const userId: number | undefined = message.from?.id;
         if (!chatId) return Response.json({ ok: true, ignored: "no chat" });
 
-        // Trust commands posted inside an approved chat. Outside those chats,
-        // require an explicitly approved user or verified group membership.
-        const ok = isAuthorizedChat(chatId) || (userId ? await isAuthorizedUser(userId) : false);
+        // A group ID is not a sender identity. Reject anonymous/bot senders,
+        // and check the verified individual before any draft, upload or publish.
+        const eligible = hasTelegramCommandAccess({
+          userId,
+          isBot: message.from?.is_bot === true,
+          hasSenderChat: !!message.sender_chat,
+          explicitlyAuthorized: true,
+          administrator: false,
+        });
+        const ok = eligible && userId !== undefined && await isAuthorizedUser(userId, chatId);
         if (!ok) {
-          await tgReply(chatId, "Not authorized. Ask an admin to add you to the TEXITcoin bot group.");
+          await tgReply(chatId, "Not authorized. Only approved users and authorized group administrators can use the site bot.");
           return Response.json({ ok: true, ignored: "unauthorized user" });
         }
 
