@@ -10,6 +10,10 @@ import { hasTelegramCommandAccess, isTelegramAdministrator } from "@/lib/telegra
 
 const TG_GATEWAY = "https://connector-gateway.lovable.dev/telegram";
 
+function esc(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 function tgKey(): string {
   // TEXITcoin Site Bot (new); falls back to the legacy bot key if ever needed.
   const tg = process.env.TELEGRAM_API_KEY_1 ?? process.env.TELEGRAM_API_KEY;
@@ -504,7 +508,7 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
     console.error("zoom drafting failed", err);
     await tgReply(
       chatId,
-      `I couldn't write the title and summary for this call (<code>${(err as Error).message}</code>), so I didn't add a half-empty entry. Send the same message again and I'll retry.`,
+      "I couldn't write the title and summary for this call, so I didn't add a half-empty entry. Send the same message again and I'll retry.",
     );
     return;
   }
@@ -527,14 +531,14 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
   });
   if (error) {
     console.error("insert zoom_calls failed", error);
-    await tgReply(chatId, `Insert failed: <code>${error.message}</code>`);
+    await tgReply(chatId, "Couldn't save the call. Please retry.");
     return;
   }
 
   const preview = `${siteOrigin()}/zoom/${slug}`;
   await tgReply(
     chatId,
-    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n${draft.description}\n<code>${slug}</code>\n\nVideo: set • Summary: set • Cover image: ${thumbnail ? "generated" : "FAILED — send a photo with <code>/thumb " + slug + "</code>"}\n\nPreview: ${preview}`,
+    `✅ Recorded call added.\n\n<b>${esc(draft.title)}</b>\n${esc(draft.description)}\n<code>${esc(slug)}</code>\n\nVideo: set • Summary: set • Cover image: ${thumbnail ? "generated" : "FAILED — send a photo with <code>/thumb " + esc(slug) + "</code>"}\n\nPreview: ${esc(preview)}`,
   );
 }
 
@@ -550,7 +554,7 @@ async function handleThumb(chatId: number, args: string[], photoFileId: string |
     .eq("slug", slug)
     .maybeSingle();
   if (findErr || !existing) {
-    await tgReply(chatId, `No call found with slug <code>${slug}</code>.`);
+    await tgReply(chatId, `No call found with slug <code>${esc(slug)}</code>.`);
     return;
   }
   await tgReply(chatId, "Uploading photo to IPFS…");
@@ -572,10 +576,10 @@ async function handleThumb(chatId: number, args: string[], photoFileId: string |
     .update({ thumbnail_url: url, updated_at: new Date().toISOString() })
     .eq("slug", slug);
   if (updErr) {
-    await tgReply(chatId, `Update failed: <code>${updErr.message}</code>`);
+    await tgReply(chatId, "Couldn't update the thumbnail. Please retry.");
     return;
   }
-  await tgReply(chatId, `✅ Thumbnail set for <code>${slug}</code>.\n${url}`);
+  await tgReply(chatId, `✅ Thumbnail set for <code>${esc(slug)}</code>.\n${esc(url)}`);
 }
 
 async function handleBlog(chatId: number, rest: string) {
@@ -602,13 +606,13 @@ async function handleBlog(chatId: number, rest: string) {
   });
   if (error) {
     console.error("insert blog_posts failed", error);
-    await tgReply(chatId, `Insert failed: <code>${error.message}</code>`);
+    await tgReply(chatId, "Couldn't save the draft. Please retry.");
     return;
   }
   const preview = `${siteOrigin()}/blog/${draft.slug}`;
   await tgReply(
     chatId,
-    `📝 Draft saved (unpublished).\n\n<b>${draft.title}</b>\n<code>${draft.slug}</code>\n\nExcerpt: ${draft.excerpt}\n\nReply with <code>/publish ${draft.slug}</code> to publish.\n\nPreview (requires publish first): ${preview}`,
+    `📝 Draft saved (unpublished).\n\n<b>${esc(draft.title)}</b>\n<code>${esc(draft.slug)}</code>\n\nExcerpt: ${esc(draft.excerpt)}\n\nReply with <code>/publish ${esc(draft.slug)}</code> to publish.\n\nPublic link (available after publishing): ${esc(preview)}`,
   );
 }
 
@@ -625,10 +629,10 @@ async function handlePublish(chatId: number, args: string[]) {
     .select("slug")
     .maybeSingle();
   if (error || !data) {
-    await tgReply(chatId, `Publish failed for <code>${slug}</code>: ${error?.message ?? "not found"}`);
+    await tgReply(chatId, `Couldn't publish <code>${esc(slug)}</code>. Check the slug and retry.`);
     return;
   }
-  await tgReply(chatId, `✅ Published: ${siteOrigin()}/blog/${slug}`);
+  await tgReply(chatId, `✅ Published: ${esc(siteOrigin())}/blog/${esc(slug)}`);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -738,7 +742,7 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
           }
         } catch (err) {
           console.error("Handler crashed", err);
-          await tgReply(chatId, `Something broke: <code>${(err as Error).message}</code>`);
+          await tgReply(chatId, "Couldn't complete that command. Please retry.");
         }
 
         return Response.json({ ok: true });

@@ -54,6 +54,17 @@ export const listBlogPosts = createServerFn({ method: "GET" }).handler(
 
 export const DRAFT_PREVIEW_HINT = "preview";
 
+/** Full text remains available to search, but is not shipped with the blog index. */
+export const listBlogSearchPosts = createServerFn({ method: "GET" }).handler(
+  async (): Promise<BlogPostDTO[]> => {
+    const { data, error } = await publicClient().from("blog_posts")
+      .select("slug,title,date,author,author_role,tag,read_minutes,excerpt,body_markdown")
+      .eq("published", true).order("date", { ascending: false });
+    if (error) throw new Error("Failed to load search posts");
+    return (data ?? []).map(toDTO);
+  },
+);
+
 export const getBlogPost = createServerFn({ method: "GET" })
   .inputValidator((data: { slug: string; preview?: string }) => {
     if (!data?.slug || typeof data.slug !== "string") throw new Error("slug required");

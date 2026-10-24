@@ -4,12 +4,12 @@ import { Search as SearchIcon, ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { SEARCH_ENTRIES } from "@/data/search-index";
-import { listBlogPosts } from "@/lib/blog.functions";
+import { listBlogSearchPosts } from "@/lib/blog.functions";
 import { searchZoomCalls } from "@/lib/zoom.functions";
 
 const blogListQuery = queryOptions({
-  queryKey: ["blog-posts"],
-  queryFn: () => listBlogPosts(),
+  queryKey: ["blog-search-posts"],
+  queryFn: () => listBlogSearchPosts(),
   staleTime: 60_000,
 });
 
