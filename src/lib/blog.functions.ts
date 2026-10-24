@@ -40,7 +40,8 @@ export const listBlogPosts = createServerFn({ method: "GET" }).handler(
       .from("blog_posts")
       .select("slug,title,date,author,author_role,tag,read_minutes,excerpt")
       .eq("published", true)
-      .order("date", { ascending: false });
+      .order("date", { ascending: false })
+      .order("slug", { ascending: true });
     if (error) {
       console.error("listBlogPosts failed", error);
       throw new Error("Failed to load posts");
@@ -60,7 +61,7 @@ export const listBlogSearchPosts = createServerFn({ method: "GET" }).handler(
   async (): Promise<BlogPostDTO[]> => {
     const { data, error } = await publicClient().from("blog_posts")
       .select("slug,title,date,author,author_role,tag,read_minutes,excerpt,body_markdown")
-      .eq("published", true).order("date", { ascending: false });
+      .eq("published", true).order("date", { ascending: false }).order("slug", { ascending: true });
     if (error) throw new Error("Failed to load search posts");
     return (data ?? []).map(toDTO);
   },
