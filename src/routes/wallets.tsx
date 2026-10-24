@@ -15,7 +15,10 @@ import {
   Banknote,
   Store,
   Smartphone,
+  FileSignature,
+  ScrollText,
 } from "lucide-react";
+
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import coldStorageCoin from "@/assets/cold-storage-coin.jpg";
@@ -503,7 +506,17 @@ function WalletsPage() {
                   cta: "Open",
                   highlight: false,
                 },
+                {
+                  icon: FileSignature,
+                  name: "TEXITcoin Web Wallet",
+                  best: "Best for bulk transfers & signing",
+                  body: "TXC native. Move a lot in one go and sign your own transactions.",
+                  href: "https://wallet.texitcoin.org/",
+                  cta: "Open",
+                  highlight: false,
+                },
               ].map((w) => (
+
                 <a
                   key={w.name}
                   href={w.href}
