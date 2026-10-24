@@ -87,13 +87,13 @@ function useLegalFees() {
 
 function getTLDR(feesAmount: string | null) {
   return [
-    "Both sides filed their briefs on 9 Oct 2026 — the record is closed and the judge now decides",
+    "Our reply brief and proposed findings were filed 23 Oct 2026 — no ruling yet; the Emergency Order remains in place",
     "Mining Package sales continue outside Texas — the C&D stops Texas sales only",
     "Texas remains restricted — no buying, selling, or earning hash power under the C&D",
     "Avi Perry from Quinn Emanuel leads our legal team",
     `${feesAmount ?? "$973,000+"} out of pocket so far on legal costs (and climbing)`,
     "TEXITcoin network remains active — no disruption in service to community",
-    "Replies due 23 Oct 2026; record closes 20 Nov; judge's Proposal for Decision now due 25 Jan 2027",
+    "Joint stipulation due and record closes 20 Nov 2026; judge's Proposal for Decision due 25 Jan 2027",
   ];
 }
 

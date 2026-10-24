@@ -30,6 +30,7 @@ export const Route = createFileRoute("/")({
           "A digital, decentralized, peer-to-peer Layer 1 currency mined in Texas.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     scripts: [
       {
