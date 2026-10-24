@@ -124,7 +124,16 @@ export function Footer() {
             <Link to="/legal" className="hover:text-foreground">Legal</Link>
             <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
             <Link to="/terms" className="hover:text-foreground">Terms</Link>
+            <a
+              href="https://honest.money/manifesto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground"
+            >
+              Manifesto
+            </a>
             <Link to="/stats" className="hover:text-foreground">Site Stats</Link>
+
           </div>
         </div>
       </div>
