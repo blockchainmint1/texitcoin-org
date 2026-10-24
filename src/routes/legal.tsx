@@ -224,6 +224,11 @@ function LegalPage() {
                     <span className="text-sm md:text-base">
                       {item === tldr[7] ? (
                         <a href="#timeline" className="underline decoration-primary/40 underline-offset-4 hover:text-primary">{item}</a>
+                      ) : item === tldr[4] ? (
+                        <>
+                          {item}
+                          <a href="https://beans.honest.money/" target="_blank" rel="noopener noreferrer" className="mt-2 block text-sm text-primary underline underline-offset-4">Proof data: HME Beans <ArrowRight className="inline h-3.5 w-3.5" /></a>
+                        </>
                       ) : item}
                     </span>
                   </li>
