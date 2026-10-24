@@ -1,5 +1,8 @@
 # Current work
 
+- [ ] Verify Harvey's October 24 legal update against the reply brief, proposed findings, and latest scheduling order.
+- [ ] Pin both October 23 filings and add a correctly dated timeline blurb and current summary; keep site changes unpublished.
+- [ ] Save and verify a full October 24 blog draft in Bobby's voice without publication or announcements.
 - [x] Pin the October 8 ALJ deadline order and insert its dated legal timeline entry in order; verify without publishing.
 - [x] Give Bobby the private preview link for article one.
 - [x] Draft article two from the September 22 governor letter.
