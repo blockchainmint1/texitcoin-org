@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { isSameOriginAnalyticsRequest } from "@/lib/analytics-request";
 
 const payloadSchema = z.object({
   path: z.string().min(1).max(300),
@@ -28,9 +29,13 @@ export const Route = createFileRoute("/api/public/track")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        if (!isSameOriginAnalyticsRequest(request)) return new Response("Forbidden", { status: 403 });
+        if (Number(request.headers.get("content-length") ?? 0) > 4096) return new Response("Too large", { status: 413 });
         let body: unknown;
         try {
-          body = await request.json();
+          const text = await request.text();
+          if (text.length > 4096) return new Response("Too large", { status: 413 });
+          body = JSON.parse(text);
         } catch {
           return new Response("Bad request", { status: 400 });
         }

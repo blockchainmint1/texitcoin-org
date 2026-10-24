@@ -184,8 +184,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@texitcoin" },
       { name: "twitter:title", content: "TEXITcoin: Layer 1 Currency Mined in Texas" },
       { name: "twitter:description", content: "TEXITcoin (TXC) is a Layer 1 cryptocurrency mined in Texas — sound money for a sovereign Lone Star State. Trade on Pionex, track on CoinMarketCap." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b81936dd-a3ee-4374-8817-2b0360b2b59d/id-preview-eb6d076e--34565094-3905-4629-b19a-ad31bb8bb153.lovable.app-1778496316656.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b81936dd-a3ee-4374-8817-2b0360b2b59d/id-preview-eb6d076e--34565094-3905-4629-b19a-ad31bb8bb153.lovable.app-1778496316656.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

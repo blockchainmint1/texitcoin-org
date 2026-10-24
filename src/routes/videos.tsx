@@ -6,6 +6,8 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/videos")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Videos & Resources — TEXITcoin" },
       {
         name: "description",

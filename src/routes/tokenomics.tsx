@@ -7,6 +7,8 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/tokenomics")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "TEXITcoin Tokenomics — Supply, Emission & Distribution" },
       { name: "description", content: "TEXITcoin (TXC) is a fixed-supply, Proof-of-Work Layer 1. See the full breakdown: max supply, emission schedule, halvings, and distribution." },
       { property: "og:title", content: "TEXITcoin Tokenomics" },

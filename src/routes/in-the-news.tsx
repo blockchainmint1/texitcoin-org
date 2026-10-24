@@ -7,6 +7,8 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/in-the-news")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "TEXITcoin in the News — Press, Coverage & Commentary" },
       {
         name: "description",

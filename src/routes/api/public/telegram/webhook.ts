@@ -2,12 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
 import { createHash, timingSafeEqual } from "crypto";
 import type { Database } from "@/integrations/supabase/types";
+import { hasTelegramCommandAccess, isTelegramAdministrator } from "@/lib/telegram-permissions";
 
 /* -------------------------------------------------------------------------- */
 /*  Telegram gateway helpers                                                  */
 /* -------------------------------------------------------------------------- */
 
 const TG_GATEWAY = "https://connector-gateway.lovable.dev/telegram";
+
+function esc(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 
 function tgKey(): string {
   // TEXITcoin Site Bot (new); falls back to the legacy bot key if ever needed.
@@ -102,7 +107,7 @@ function safeEqual(a: string, b: string): boolean {
   return A.length === B.length && timingSafeEqual(A, B);
 }
 
-// Chats whose members are trusted to issue commands directly.
+// Approved command chats; individual senders must still pass authorization.
 const AUTHORIZED_CHAT_IDS = new Set<string>(["-5219881042", "-1002172752143"]);
 
 // Individual users always allowed to issue commands, regardless of group
@@ -115,9 +120,9 @@ function isAuthorizedChat(chatId: number | string): boolean {
   return !!groupId && String(groupId) === String(chatId);
 }
 
-async function isAuthorizedUser(userId: number): Promise<boolean> {
+async function isAuthorizedUser(userId: number, chatId: number): Promise<boolean> {
   if (AUTHORIZED_USER_IDS.has(String(userId))) return true;
-  const groupId = process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
+  const groupId = isAuthorizedChat(chatId) ? String(chatId) : process.env.TELEGRAM_AUTHORIZED_GROUP_ID;
   if (!groupId) {
     console.error("TELEGRAM_AUTHORIZED_GROUP_ID not configured");
     return false;
@@ -125,7 +130,7 @@ async function isAuthorizedUser(userId: number): Promise<boolean> {
   try {
     const res = await tgCall("getChatMember", { chat_id: groupId, user_id: userId });
     const status = res?.result?.status;
-    return ["creator", "administrator", "member", "restricted"].includes(status);
+    return res?.ok === true && isTelegramAdministrator(status);
   } catch (err) {
     console.error("Group membership check failed", err);
     return false;
@@ -444,7 +449,7 @@ function parseDate(s: string): string | null {
 }
 
 const HELP = `<b>TEXITcoin site bot</b>
-Only members of the authorized group may issue commands.
+Only approved users and administrators of an authorized group may issue commands.
 
 <b>New recorded call</b>
 Attach a .vtt/.txt transcript and set the caption to:
@@ -503,7 +508,7 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
     console.error("zoom drafting failed", err);
     await tgReply(
       chatId,
-      `I couldn't write the title and summary for this call (<code>${(err as Error).message}</code>), so I didn't add a half-empty entry. Send the same message again and I'll retry.`,
+      "I couldn't write the title and summary for this call, so I didn't add a half-empty entry. Send the same message again and I'll retry.",
     );
     return;
   }
@@ -526,14 +531,14 @@ async function handleZoom(chatId: number, args: string[], docFileId: string | nu
   });
   if (error) {
     console.error("insert zoom_calls failed", error);
-    await tgReply(chatId, `Insert failed: <code>${error.message}</code>`);
+    await tgReply(chatId, "Couldn't save the call. Please retry.");
     return;
   }
 
   const preview = `${siteOrigin()}/zoom/${slug}`;
   await tgReply(
     chatId,
-    `✅ Recorded call added.\n\n<b>${draft.title}</b>\n${draft.description}\n<code>${slug}</code>\n\nVideo: set • Summary: set • Cover image: ${thumbnail ? "generated" : "FAILED — send a photo with <code>/thumb " + slug + "</code>"}\n\nPreview: ${preview}`,
+    `✅ Recorded call added.\n\n<b>${esc(draft.title)}</b>\n${esc(draft.description)}\n<code>${esc(slug)}</code>\n\nVideo: set • Summary: set • Cover image: ${thumbnail ? "generated" : "FAILED — send a photo with <code>/thumb " + esc(slug) + "</code>"}\n\nPreview: ${esc(preview)}`,
   );
 }
 
@@ -549,7 +554,7 @@ async function handleThumb(chatId: number, args: string[], photoFileId: string |
     .eq("slug", slug)
     .maybeSingle();
   if (findErr || !existing) {
-    await tgReply(chatId, `No call found with slug <code>${slug}</code>.`);
+    await tgReply(chatId, `No call found with slug <code>${esc(slug)}</code>.`);
     return;
   }
   await tgReply(chatId, "Uploading photo to IPFS…");
@@ -571,10 +576,10 @@ async function handleThumb(chatId: number, args: string[], photoFileId: string |
     .update({ thumbnail_url: url, updated_at: new Date().toISOString() })
     .eq("slug", slug);
   if (updErr) {
-    await tgReply(chatId, `Update failed: <code>${updErr.message}</code>`);
+    await tgReply(chatId, "Couldn't update the thumbnail. Please retry.");
     return;
   }
-  await tgReply(chatId, `✅ Thumbnail set for <code>${slug}</code>.\n${url}`);
+  await tgReply(chatId, `✅ Thumbnail set for <code>${esc(slug)}</code>.\n${esc(url)}`);
 }
 
 async function handleBlog(chatId: number, rest: string) {
@@ -601,13 +606,13 @@ async function handleBlog(chatId: number, rest: string) {
   });
   if (error) {
     console.error("insert blog_posts failed", error);
-    await tgReply(chatId, `Insert failed: <code>${error.message}</code>`);
+    await tgReply(chatId, "Couldn't save the draft. Please retry.");
     return;
   }
   const preview = `${siteOrigin()}/blog/${draft.slug}`;
   await tgReply(
     chatId,
-    `📝 Draft saved (unpublished).\n\n<b>${draft.title}</b>\n<code>${draft.slug}</code>\n\nExcerpt: ${draft.excerpt}\n\nReply with <code>/publish ${draft.slug}</code> to publish.\n\nPreview (requires publish first): ${preview}`,
+    `📝 Draft saved (unpublished).\n\n<b>${esc(draft.title)}</b>\n<code>${esc(draft.slug)}</code>\n\nExcerpt: ${esc(draft.excerpt)}\n\nReply with <code>/publish ${esc(draft.slug)}</code> to publish.\n\nPublic link (available after publishing): ${esc(preview)}`,
   );
 }
 
@@ -624,10 +629,10 @@ async function handlePublish(chatId: number, args: string[]) {
     .select("slug")
     .maybeSingle();
   if (error || !data) {
-    await tgReply(chatId, `Publish failed for <code>${slug}</code>: ${error?.message ?? "not found"}`);
+    await tgReply(chatId, `Couldn't publish <code>${esc(slug)}</code>. Check the slug and retry.`);
     return;
   }
-  await tgReply(chatId, `✅ Published: ${siteOrigin()}/blog/${slug}`);
+  await tgReply(chatId, `✅ Published: ${esc(siteOrigin())}/blog/${esc(slug)}`);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -665,11 +670,18 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
         const userId: number | undefined = message.from?.id;
         if (!chatId) return Response.json({ ok: true, ignored: "no chat" });
 
-        // Trust commands posted inside an approved chat. Outside those chats,
-        // require an explicitly approved user or verified group membership.
-        const ok = isAuthorizedChat(chatId) || (userId ? await isAuthorizedUser(userId) : false);
+        // A group ID is not a sender identity. Reject anonymous/bot senders,
+        // and check the verified individual before any draft, upload or publish.
+        const eligible = hasTelegramCommandAccess({
+          userId,
+          isBot: message.from?.is_bot === true,
+          hasSenderChat: !!message.sender_chat,
+          explicitlyAuthorized: true,
+          administrator: false,
+        });
+        const ok = eligible && userId !== undefined && await isAuthorizedUser(userId, chatId);
         if (!ok) {
-          await tgReply(chatId, "Not authorized. Ask an admin to add you to the TEXITcoin bot group.");
+          await tgReply(chatId, "Not authorized. Only approved users and authorized group administrators can use the site bot.");
           return Response.json({ ok: true, ignored: "unauthorized user" });
         }
 
@@ -730,7 +742,7 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
           }
         } catch (err) {
           console.error("Handler crashed", err);
-          await tgReply(chatId, `Something broke: <code>${(err as Error).message}</code>`);
+          await tgReply(chatId, "Couldn't complete that command. Please retry.");
         }
 
         return Response.json({ ok: true });

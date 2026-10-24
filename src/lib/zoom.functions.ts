@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { publicDataClient } from "./public-data-client";
 
 export type ZoomCall = {
   id: string;
@@ -17,8 +18,8 @@ export type ZoomCall = {
 
 export const listZoomCalls = createServerFn({ method: "GET" }).handler(
   async (): Promise<{ upcoming: ZoomCall[]; recorded: ZoomCall[]; latest: ZoomCall | null }> => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data, error } = await supabaseAdmin
+    const supabase = publicDataClient();
+    const { data, error } = await supabase
       .from("zoom_calls")
       .select(
         "id, slug, title, description, call_date, status, video_cid, duration_seconds, summary, thumbnail_url"
@@ -42,8 +43,8 @@ const slugSchema = z
 export const getZoomCall = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => slugSchema.parse(input))
   .handler(async ({ data }): Promise<ZoomCall | null> => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: row, error } = await supabaseAdmin
+    const supabase = publicDataClient();
+    const { data: row, error } = await supabase
       .from("zoom_calls")
       .select(
         "id, slug, title, description, call_date, status, video_cid, duration_seconds, summary, transcript, thumbnail_url"
@@ -75,18 +76,22 @@ function buildSnippet(text: string, term: string) {
 export const searchZoomCalls = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => querySchema.parse(input))
   .handler(async ({ data }): Promise<ZoomSearchHit[]> => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabase = publicDataClient();
     const term = data.q.replace(/[%_,]/g, " ").trim();
     if (!term) return [];
     const pattern = `%${term}%`;
-    const { data: rows, error } = await supabaseAdmin
-      .from("zoom_calls")
-      .select("slug, title, call_date, summary, transcript")
-      .or(`title.ilike.${pattern},summary.ilike.${pattern},transcript.ilike.${pattern}`)
-      .order("call_date", { ascending: false })
-      .limit(15);
-    if (error) throw new Error(error.message);
-    return (rows ?? []).map((r) => {
+    // Values go through ilike's parameter encoding, never filter grammar.
+    const results = await Promise.all((["title", "summary", "transcript"] as const).map((column) =>
+      supabase.from("zoom_calls")
+        .select("slug, title, call_date, summary, transcript")
+        .ilike(column, pattern)
+        .order("call_date", { ascending: false })
+        .limit(15),
+    ));
+    if (results.some((result) => result.error)) throw new Error("Could not search calls");
+    const unique = new Map(results.flatMap((result) => result.data ?? []).map((row) => [row.slug, row]));
+    const rows = [...unique.values()].sort((a, b) => +new Date(b.call_date) - +new Date(a.call_date)).slice(0, 15);
+    return rows.map((r) => {
       const transcript = (r.transcript as string | null) ?? "";
       const summary = (r.summary as string | null) ?? "";
       const inTranscript = transcript.toLowerCase().includes(term.toLowerCase());

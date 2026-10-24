@@ -24,6 +24,8 @@ const ETHERSCAN_URL = `https://etherscan.io/token/${WTXC_CONTRACT}`;
 export const Route = createFileRoute("/wtxc")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Wrapped TEXITcoin (wTXC) — TXC on Ethereum" },
       { name: "description", content: "Wrapped TEXITcoin (wTXC) brings TXC to Ethereum as an ERC-20 token — unlocking Uniswap, DeFi, and on-chain composability while staying 1:1 redeemable for native TXC." },
       { property: "og:title", content: "Wrapped TEXITcoin (wTXC)" },

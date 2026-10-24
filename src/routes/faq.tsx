@@ -114,6 +114,8 @@ const ALL_FAQS: Faq[] = CATEGORIES.flatMap((c) => c.items);
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "TEXITcoin FAQ — Common Questions Answered" },
       { name: "description", content: "Answers to the most common TEXITcoin (TXC) questions: where to buy, max supply, mining, wallets, safety, and more." },
       { property: "og:title", content: "TEXITcoin FAQ" },

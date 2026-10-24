@@ -14,6 +14,8 @@ const BRAND_GUIDELINES_CID = "bafybeicdu53kgb7r32vzn3xnkz5i5kyfgy4k5ny5peifnbmua
 export const Route = createFileRoute("/press")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "TEXITcoin Press Kit — Logos, Boilerplate & Media Contact" },
       { name: "description", content: "Official TEXITcoin press kit: logos, brand colors, founder bios, project boilerplate, and media contact." },
       { property: "og:title", content: "TEXITcoin Press Kit" },

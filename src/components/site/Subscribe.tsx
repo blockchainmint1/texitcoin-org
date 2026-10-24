@@ -4,6 +4,7 @@ import { z } from "zod";
 import { useServerFn } from "@tanstack/react-start";
 import { subscribeToNewsletter } from "@/lib/newsletter.functions";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const emailSchema = z
   .string()
@@ -90,7 +91,7 @@ export function Subscribe() {
                   disabled={status === "loading"}
                   maxLength={254}
                 />
-                <button
+                <Button
                   type="submit"
                   disabled={status === "loading"}
                   className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-red-gradient px-6 text-sm font-semibold uppercase tracking-wider text-primary-foreground shadow-glow hover:brightness-110 transition disabled:opacity-60"
@@ -105,8 +106,11 @@ export function Subscribe() {
                       <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                     </>
                   )}
-                </button>
+                </Button>
               </div>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Your email is also shared with <a href="https://honest.money" className="text-primary hover:underline">honest.money</a> for related Honest Money Ecosystem updates. Unsubscribe any time. <a href="/privacy" className="text-primary hover:underline">Privacy policy</a>.
+              </p>
               {message && (
                 <p
                   className={`text-xs ${

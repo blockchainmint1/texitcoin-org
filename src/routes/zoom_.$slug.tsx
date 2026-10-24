@@ -24,6 +24,8 @@ export const Route = createFileRoute("/zoom_/$slug")({
     return {
     meta: loaderData
       ? [
+          { property: "og:type", content: "article" },
+          { name: "twitter:card", content: "summary_large_image" },
           { title: `${loaderData.title} — Honest Money Hour` },
           {
             name: "description",
@@ -38,14 +40,21 @@ export const Route = createFileRoute("/zoom_/$slug")({
               loaderData.summary?.slice(0, 200) ??
               "Watch the recording, read the AI summary and full transcript.",
           },
-          ...(loaderData.thumbnail_url
+          ...(loaderData.thumbnail_url && /^https:\/\//.test(loaderData.thumbnail_url)
             ? [
                 { property: "og:image", content: loaderData.thumbnail_url },
                 { name: "twitter:image", content: loaderData.thumbnail_url },
               ]
             : []),
         ]
-      : [{ title: "Honest Money Hour" }],
+      : [
+          { title: "Honest Money Hour Recording — TEXITcoin" },
+          { name: "description", content: "Watch TEXITcoin's Honest Money Hour recordings and read the full transcripts." },
+          { property: "og:title", content: "Honest Money Hour Recording — TEXITcoin" },
+          { property: "og:description", content: "TEXITcoin's Honest Money Hour recordings and full transcripts." },
+          { property: "og:type", content: "article" },
+          { name: "twitter:card", content: "summary" },
+        ],
   };
   },
   errorComponent: ZoomCallError,

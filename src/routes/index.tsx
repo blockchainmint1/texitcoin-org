@@ -42,7 +42,7 @@ export const Route = createFileRoute("/")({
               "@type": "Organization",
               name: "TEXITcoin",
               url: "https://texitcoin.org",
-              logo: "https://texitcoin.org/favicon.ico",
+              logo: "https://texitcoin.org/brand/texit_logo_color_large.png",
               sameAs: ["https://twitter.com/texitcoin"],
             },
             {

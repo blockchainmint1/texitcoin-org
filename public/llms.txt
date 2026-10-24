@@ -1,8 +1,8 @@
 # TEXITcoin
 
-> TEXITcoin (TXC) is a Layer 1, proof-of-work digital currency mined in Texas — sound money for a sovereign Lone Star State. Live on Bitmart since 2024.
+> TEXITcoin (TXC) is a Layer 1, proof-of-work digital currency mined in Texas — sound money for a sovereign Lone Star State.
 
-TEXITcoin is a community-driven cryptocurrency built for everyday peer-to-peer use: fast 3-minute blocks, no pre-mine, 353M max supply, and a foundation rooted in honest money and Texas independence.
+TEXITcoin is a community-driven cryptocurrency built for everyday peer-to-peer use: fast 3-minute blocks, Scrypt proof-of-work, no pre-mine, 353,396,296 TXC max supply, and a foundation rooted in honest money and Texas independence. Omni Layer 2 runs on TEXITcoin, not Bitcoin.
 
 ## Pages
 
@@ -30,6 +30,17 @@ TEXITcoin is a community-driven cryptocurrency built for everyday peer-to-peer u
 - [Legal](/legal): Legal information.
 - [Privacy](/privacy): Privacy policy.
 - [Terms](/terms): Terms of use.
+- [Market](/market): Currency comparisons and published case studies, linked from the market page.
+- [Screenplay](/screenplay): Published seasons and their stories, linked from the screenplay page.
+- [Zoom archive](/zoom): Recorded Honest Money Hour calls, full transcripts, and individual recording pages.
+- [Live](/live): Watch the Honest Money Hour.
+- [Statistics](/stats): Public site statistics.
+- [Clarity](/clarity): Cryptocurrency guidance and clarity.
+- [SEC and crypto](/sec-and-crypto): Federal cryptocurrency guidance and resources.
+- [TEXIT](/texit): Texas independence.
+- [Philosophy](/philosophy): Honest money principles.
+- [Bobby Gray](/bobby): The founder's story.
+- [Arizona legal proceedings](/legal/arizona): Arizona case information.
 
 ## Optional
 

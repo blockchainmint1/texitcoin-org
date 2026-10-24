@@ -21,6 +21,8 @@ import {
 export const Route = createFileRoute("/texas")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Discover Texas — History, Grit & the Lone Star Spirit | TEXITcoin" },
       {
         name: "description",

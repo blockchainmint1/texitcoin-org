@@ -35,6 +35,8 @@ const MEMPOOL_API = "https://mempool.texitcoin.org/api";
 export const Route = createFileRoute("/build")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Build on TEXITcoin — Developer Hub & Network Resources" },
       {
         name: "description",

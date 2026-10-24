@@ -25,6 +25,8 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/sec-and-crypto")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "The SEC and Crypto — Why TXC Isn't What They're Looking For" },
       {
         name: "description",

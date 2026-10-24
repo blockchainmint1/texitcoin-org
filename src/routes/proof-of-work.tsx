@@ -9,6 +9,8 @@ import securityImg from "@/assets/pow-security.jpg";
 export const Route = createFileRoute("/proof-of-work")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Proof of Work — TEXITcoin" },
       {
         name: "description",

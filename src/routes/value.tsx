@@ -9,6 +9,8 @@ import networkImg from "@/assets/value-network.jpg";
 export const Route = createFileRoute("/value")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Community-Driven Value — TEXITcoin" },
       {
         name: "description",
