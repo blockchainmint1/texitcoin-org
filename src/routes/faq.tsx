@@ -49,7 +49,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "How do I store TXC safely?",
-        a: "Use the TEXITcoin Web Wallet to get started, or download our iOS/Android apps. For long-term holdings, the Cold Storage Coin keeps your keys completely offline. See the Wallets page.",
+        a: "Use the TEXITcoin Web Wallet to get started. For serious security, the Vault Seed Protector keeps your seeds locked on a dedicated offline device, and the Cold Storage Coin keeps your keys completely offline. See the Wallets page.",
       },
     ],
   },
@@ -58,8 +58,8 @@ const CATEGORIES: Category[] = [
     label: "Wallets & Tools",
     items: [
       {
-        q: "What is the TXC Wallet app?",
-        a: "The TXC Wallet is the official mobile wallet for TEXITcoin (iOS and Android). It holds your keys on your device, lets you send and receive TXC, scan QR codes for in-person payments, and connect to the TEXITcoin network without trusting a third party. Pair it with the Cold Storage Coin for long-term holdings.",
+        q: "What is the Vault Seed Protector?",
+        a: "HME Vault is an offline seed protector: an app that runs on a dedicated, hardened phone (Pixel 10a with GrapheneOS) and keeps your seeds locked on that device. Nothing ever leaves it, and it signs transactions air-gapped. It pairs with the Cold Storage Coin for long-term holdings. Learn more at vault.honest.money.",
       },
       {
         q: "What is the Cold Storage Coin?",

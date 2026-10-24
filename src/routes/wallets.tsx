@@ -2,11 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   Globe,
-  Smartphone,
   Coins,
   Shield,
   Zap,
-  Download,
+  Lock,
   ArrowUpRight,
   Sparkles,
   KeyRound,
@@ -24,17 +23,17 @@ export const Route = createFileRoute("/wallets")({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: "TEXITcoin Wallets — Web, Mobile & Cold Storage" },
+      { title: "TEXITcoin Wallets — Web, Vault & Cold Storage" },
       {
         name: "description",
         content:
-          "Pick your TXC wallet. The TEXITcoin Web Wallet is the fastest way in — no install, full control. Plus iOS, Android, and the copper Cold Storage Coin.",
+          "Pick your TXC wallet. The TEXITcoin Web Wallet is the fastest way in — no install, full control. Plus the Vault Seed Protector and the copper Cold Storage Coin.",
       },
       { property: "og:title", content: "TEXITcoin Wallets" },
       {
         property: "og:description",
         content:
-          "Web, mobile, and cold storage wallets for TXC. Self-custody, fast, and forged for honest money.",
+          "Web, vault, and cold storage for TXC. Self-custody, fast, and forged for honest money.",
       },
     ],
   }),
@@ -63,8 +62,8 @@ function WalletsPage() {
                 TEXITcoin <span className="text-primary">wallets</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-                Three ways to hold TXC: a lightning-fast web wallet, mobile apps for iOS &
-                Android, and a copper cold storage coin. All non-custodial. Always your keys.
+                Three ways to hold TXC: a lightning-fast web wallet, the Vault Seed Protector for
+                your seeds, and a copper cold storage coin. All non-custodial. Always your keys.
               </p>
             </motion.div>
           </div>
@@ -261,7 +260,7 @@ function WalletsPage() {
           </div>
         </section>
 
-        {/* Mobile Wallet */}
+        {/* Vault Seed Protector */}
         <section className="border-t border-border py-20">
           <div className="mx-auto max-w-7xl px-6">
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
@@ -272,39 +271,32 @@ function WalletsPage() {
                 transition={{ duration: 0.5 }}
               >
                 <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  <Smartphone className="h-3 w-3 text-primary" /> Mobile
+                  <Lock className="h-3 w-3 text-primary" /> Seed Protection
                 </div>
                 <h2 className="mt-5 font-display text-4xl font-bold md:text-5xl">
-                  TXC Wallet for <span className="text-primary">iOS & Android</span>
+                  The <span className="text-primary">Vault Seed Protector</span>
                 </h2>
                 <p className="mt-4 text-lg text-muted-foreground">
-                  TXC in your pocket. Send, receive, back up, restore, and import — all from a
-                  clean native app built for everyday use.
+                  Your seeds, locked on a dedicated device. Nothing ever leaves it — no cloud, no
+                  sync, no server. HME Vault pairs a hardened phone with air-gapped signing and
+                  works hand in hand with the Cold Storage Coin.
                 </p>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  <Feature icon={ArrowUpRight} text="Send & receive" />
-                  <Feature icon={Shield} text="Backup & restore" />
-                  <Feature icon={Download} text="Import from coin" />
-                  <Feature icon={KeyRound} text="Non-custodial" />
+                  <Feature icon={Lock} text="Nothing ever leaves your device" />
+                  <Feature icon={Shield} text="Air-gapped transaction signing" />
+                  <Feature icon={KeyRound} text="Built for Pixel 10a + GrapheneOS" />
+                  <Feature icon={Coins} text="Pairs with the Cold Storage Coin" />
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
-                    href="https://apps.apple.com/us/app/txc-wallet/id6593671361"
+                    href="https://vault.honest.money/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:opacity-90 transition"
                   >
-                    Download for iOS <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.txc.wallet"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:border-primary transition"
-                  >
-                    Download for Android <ArrowUpRight className="h-4 w-4" />
+                    Learn at vault.honest.money <ArrowUpRight className="h-4 w-4" />
                   </a>
                 </div>
               </motion.div>
@@ -319,18 +311,18 @@ function WalletsPage() {
                 <div className="relative rounded-[2.5rem] border-8 border-foreground/80 bg-card p-3 shadow-2xl">
                   <div className="rounded-[1.75rem] bg-gradient-to-br from-primary/30 via-background to-background p-6">
                     <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                      TXC Wallet
+                      HME Vault
                     </div>
-                    <div className="mt-3 font-display text-3xl font-bold">5,280 TXC</div>
+                    <div className="mt-3 font-display text-3xl font-bold">Seeds locked</div>
                     <div className="mt-8 space-y-2">
-                      {["Received · 250 TXC", "Sent · 12 TXC", "Received · 1,000 TXC"].map(
+                      {["TXC seed · Offline", "ISK seed · Encrypted", "Signing key · Air-gapped"].map(
                         (r) => (
                           <div
                             key={r}
                             className="flex items-center justify-between rounded-lg border border-border bg-background/60 px-3 py-2 text-xs"
                           >
                             <span>{r}</span>
-                            <ArrowUpRight className="h-3 w-3 text-primary" />
+                            <Lock className="h-3 w-3 text-primary" />
                           </div>
                         ),
                       )}
@@ -423,12 +415,12 @@ function WalletsPage() {
                   highlight: true,
                 },
                 {
-                  icon: Smartphone,
-                  name: "Mobile Wallet",
-                  best: "Best for on-the-go",
-                  body: "Native iOS & Android. Tap to send, scan to receive.",
-                  href: "https://apps.apple.com/us/app/txc-wallet/id6593671361",
-                  cta: "Download",
+                  icon: Lock,
+                  name: "Vault Seed Protector",
+                  best: "Best for serious security",
+                  body: "Offline seeds on a dedicated device. Nothing ever leaves it.",
+                  href: "https://vault.honest.money/",
+                  cta: "Learn more",
                   highlight: false,
                 },
                 {
