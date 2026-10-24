@@ -6,3 +6,4 @@
 - Telegram commands require a verified individual sender who is explicitly authorized or an administrator of an approved group; chat membership alone must never permit publishing or uploads.
 - Use publicDataClient for blog and Zoom public reads so database row-level policies constrain access; privileged clients are reserved for authorized writes and private draft previews.
 - Keep machine-readable TEXITcoin specifications in site-facts.ts and cover supply and network identity with tests so AI tools cannot drift from the published specifications.
+- Response hardening must preserve preview framing and media playback; introduce CSP in report-only mode before enforcing any restrictions.

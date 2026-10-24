@@ -1,7 +1,7 @@
 # Current work
 
-- [ ] Apply safe audit fixes for Telegram permissions, privacy disclosure, public facts, discovery, and compatible dependencies; verify without publishing.
-- [ ] Identify audit changes requiring a larger migration or policy decision and leave those unchanged.
+- [x] Apply safe audit fixes for Telegram permissions, privacy disclosure, public facts, discovery, and compatible dependencies; verify without publishing.
+- [x] Identify and defer compatibility-sensitive dependency upgrades, enforced frame/CSP restrictions, consent/sync behavior changes, database-backed spam controls, and unverified replacement links. The environment protects .gitignore from editing.
 
 - [x] Publish the approved October 24 reply article; verified public access from the timeline with both filing links retained and Telegram announcement recorded. Site publication requested to ship the timeline link.
 - [x] Update legal proof link to HME Beans, retire stale MineTXC totals, show confirmed costs above $5 million, reflect counsel transition, and verify an eighth TLDR tile without publishing. Beans has no public legal-cost aggregate yet; use Bobby's confirmed minimum rather than inventing a live total.
