@@ -6,6 +6,8 @@ import { LegalPage, type Section } from "@/components/site/LegalPage";
 export const Route = createFileRoute("/disclosures")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Disclosures — TEXITcoin" },
       {
         name: "description",

@@ -15,6 +15,8 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/trolls")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "The Troll Index — A Hall of Fame for the Dedicated Loser's Club" },
       {
         name: "description",

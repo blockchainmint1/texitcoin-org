@@ -9,6 +9,8 @@ import blankSlateImg from "@/assets/currency-blank-slate.jpg";
 export const Route = createFileRoute("/currency")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Currency-First Layer 1 — TEXITcoin" },
       {
         name: "description",

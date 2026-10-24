@@ -22,6 +22,8 @@ import coldStorageCoin from "@/assets/cold-storage-coin.jpg";
 export const Route = createFileRoute("/wallets")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "TEXITcoin Wallets — Web, Mobile & Cold Storage" },
       {
         name: "description",

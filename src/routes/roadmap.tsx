@@ -20,6 +20,8 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/roadmap")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "Roadmap — TEXITcoin Journey to the Top 100" },
       {
         name: "description",

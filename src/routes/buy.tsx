@@ -8,6 +8,8 @@ import { SwapTerminal } from "@/components/site/SwapTerminal";
 export const Route = createFileRoute("/buy")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "How to Buy TEXITcoin (TXC) — Step-by-Step" },
       { name: "description", content: "Buy TEXITcoin (TXC) in four steps: pick a wallet, fund it, trade on the right exchange for your region, and self-custody your TXC." },
       { property: "og:title", content: "How to Buy TEXITcoin (TXC)" },

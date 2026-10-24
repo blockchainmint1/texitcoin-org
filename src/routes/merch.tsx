@@ -8,6 +8,8 @@ import { Subscribe } from "@/components/site/Subscribe";
 export const Route = createFileRoute("/merch")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { title: "TEXITcoin Merch — Coming Soon" },
       { name: "description", content: "Lone Star hats, tees, and patches stamped with the TEXITcoin mark. Drop list opens soon — get on the list." },
       { property: "og:title", content: "TEXITcoin Merch — Coming Soon" },
