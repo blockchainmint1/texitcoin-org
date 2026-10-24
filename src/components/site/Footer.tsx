@@ -14,7 +14,6 @@ const COLS: { title: string; links: FooterLink[] }[] = [
       { label: "Proof of Work", href: "/proof-of-work", internal: true },
       { label: "Currency", href: "/currency", internal: true },
       { label: "Community", href: "/value", internal: true },
-      { label: "The Hit List", href: "/market", internal: true },
       
     ],
   },
@@ -24,7 +23,6 @@ const COLS: { title: string; links: FooterLink[] }[] = [
       { label: "Block Explorer", href: "https://explorer.texitcoin.org/" },
       { label: "Mempool", href: "https://mempool.texitcoin.org/" },
       { label: "Wallets", href: "/wallets", internal: true },
-      { label: "Web Wallet", href: "https://wallet.texitcoin.org/" },
       { label: "Pool", href: "https://pool.texitcoin.org/" },
       { label: "Build on TXC", href: "/build", internal: true },
     ],
