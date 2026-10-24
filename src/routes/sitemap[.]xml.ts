@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "@/integrations/supabase/types";
+import { publicDataClient } from "@/lib/public-data-client";
 
 const BASE_URL = "https://texitcoin.org";
 
@@ -17,23 +16,24 @@ const STATIC_PATHS = [
   "/proof-of-work", "/whitepaper", "/roadmap", "/leadership", "/team",
   "/texas", "/texit", "/philosophy", "/bobby", "/build", "/faq", "/blog", "/videos", "/press", "/in-the-news",
   "/merch", "/disclosures", "/legal", "/legal/arizona", "/privacy", "/terms", "/trolls", "/wtxc",
-  "/live", "/zoom",
+  "/live", "/zoom", "/market", "/screenplay", "/stats", "/clarity", "/sec-and-crypto",
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const supabase = createClient<Database>(
-          process.env.SUPABASE_URL!,
-          process.env.SUPABASE_PUBLISHABLE_KEY!,
-          { auth: { storage: undefined, persistSession: false, autoRefreshToken: false } },
-        );
+        const supabase = publicDataClient();
         const { data: posts } = await supabase
           .from("blog_posts")
           .select("slug,date")
           .eq("published", true)
           .order("date", { ascending: false });
+        const [calls, coins, seasons] = await Promise.all([
+          supabase.from("zoom_calls").select("slug,call_date").eq("status", "recorded"),
+          supabase.from("hit_list_coins").select("slug").eq("published", true),
+          supabase.from("screenplay_seasons").select("slug").eq("published", true),
+        ]);
 
         const entries: SitemapEntry[] = [
           ...STATIC_PATHS.map((path) => ({
@@ -47,6 +47,9 @@ export const Route = createFileRoute("/sitemap.xml")({
             changefreq: "monthly" as const,
             priority: "0.6",
           })),
+          ...(calls.data ?? []).map((call) => ({ path: `/zoom/${encodeURIComponent(call.slug)}`, changefreq: "monthly" as const, priority: "0.6" })),
+          ...(coins.data ?? []).map((coin) => ({ path: `/market/${encodeURIComponent(coin.slug)}`, changefreq: "monthly" as const, priority: "0.6" })),
+          ...(seasons.data ?? []).map((season) => ({ path: `/screenplay/${encodeURIComponent(season.slug)}`, changefreq: "monthly" as const, priority: "0.6" })),
         ];
 
         const urls = entries.map((e) =>
