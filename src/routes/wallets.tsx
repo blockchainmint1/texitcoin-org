@@ -13,6 +13,8 @@ import {
   Crown,
   Layers,
   Banknote,
+  Store,
+  Smartphone,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -27,7 +29,7 @@ export const Route = createFileRoute("/wallets")({
       {
         name: "description",
         content:
-          "Pick your TXC wallet. The TEXITcoin Web Wallet is the fastest way in — no install, full control. Plus the Vault Seed Protector and the copper Cold Storage Coin.",
+          "Pick your TXC wallet: the honest.money Ecosystem Wallet, the TEXITcoin Web Wallet, the Vault Seed Protector, the copper Cold Storage Coin, plus BeeKeeper for NectarPay merchants and CryptoPOP for everyday spending.",
       },
       { property: "og:title", content: "TEXITcoin Wallets" },
       {
@@ -62,8 +64,9 @@ function WalletsPage() {
                 TEXITcoin <span className="text-primary">wallets</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-                Three ways to hold TXC: a lightning-fast web wallet, the Vault Seed Protector for
-                your seeds, and a copper cold storage coin. All non-custodial. Always your keys.
+                Start in a browser, lock your seeds on a dedicated device, or hold long-term in
+                pure copper. Plus wallets built for NectarPay merchants and everyday spending. All
+                non-custodial. Always your keys.
               </p>
             </motion.div>
           </div>
@@ -394,6 +397,56 @@ function WalletsPage() {
           </div>
         </section>
 
+        {/* Merchant & consumer wallets */}
+        <section className="border-t border-border py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="text-center">
+              <h2 className="font-display text-3xl font-bold md:text-4xl">Two more ways in</h2>
+              <p className="mt-3 text-muted-foreground">
+                Built for the two jobs that matter most: getting paid and spending.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
+              {[
+                {
+                  icon: Store,
+                  name: "BeeKeeper Wallet",
+                  best: "Best for NectarPay merchants",
+                  body: "Open a BeeKeeper wallet in seconds. TXC, ISK, ZCU, Bitcoin and EVM stablecoins, all self-custodial with your keys on your device. This is the wallet we point NectarPay merchants to.",
+                  href: "https://beekeeper.money/",
+                  cta: "Open BeeKeeper",
+                },
+                {
+                  icon: Smartphone,
+                  name: "CryptoPOP Wallet",
+                  best: "Best for consumers",
+                  body: "The non-custodial POP wallet. Scan a Cold Storage Coin or create a recovery phrase and you're ready to spend — your keys never leave your device.",
+                  href: "https://wallet.cryptopop.org/",
+                  cta: "Open CryptoPOP",
+                },
+              ].map((w) => (
+                <a
+                  key={w.name}
+                  href={w.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex flex-col rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary"
+                >
+                  <w.icon className="h-8 w-8 text-primary" />
+                  <div className="mt-4 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                    {w.best}
+                  </div>
+                  <div className="mt-1 font-display text-2xl font-bold">{w.name}</div>
+                  <p className="mt-2 flex-1 text-sm text-muted-foreground">{w.body}</p>
+                  <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                    {w.cta} <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Compare strip */}
         <section className="border-t border-border py-20">
           <div className="mx-auto max-w-7xl px-6">
@@ -401,16 +454,16 @@ function WalletsPage() {
               <h2 className="font-display text-3xl font-bold md:text-4xl">
                 Which wallet is right for you?
               </h2>
-              <p className="mt-3 text-muted-foreground">Quick guide. Pick one — or use all three.</p>
+              <p className="mt-3 text-muted-foreground">Quick guide. Pick one — or use them all.</p>
             </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
                   icon: Globe,
                   name: "Web & Mobile Wallet",
                   best: "Best for everyday use",
-                  body: "Fastest setup. Open wallet.texitcoin.org and go.",
-                  href: "https://wallet.texitcoin.org/",
+                  body: "Fastest setup. Open mobile.honest.money and go.",
+                  href: "https://mobile.honest.money/",
                   cta: "Open",
                   highlight: true,
                 },
@@ -430,6 +483,24 @@ function WalletsPage() {
                   body: "Air-gapped, offline, in pure copper. Built to outlast you.",
                   href: "https://blockchainmint.com/product/texitcoin-cold-storage-wallet",
                   cta: "Order",
+                  highlight: false,
+                },
+                {
+                  icon: Store,
+                  name: "BeeKeeper Wallet",
+                  best: "Best for NectarPay merchants",
+                  body: "Self-custodial and multi-chain. TXC, ISK, ZCU, Bitcoin and stablecoins.",
+                  href: "https://beekeeper.money/",
+                  cta: "Open",
+                  highlight: false,
+                },
+                {
+                  icon: Smartphone,
+                  name: "CryptoPOP Wallet",
+                  best: "Best for consumers",
+                  body: "Scan a Cold Storage Coin or create a recovery phrase. Keys stay on your device.",
+                  href: "https://wallet.cryptopop.org/",
+                  cta: "Open",
                   highlight: false,
                 },
               ].map((w) => (
