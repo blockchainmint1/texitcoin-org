@@ -11,6 +11,7 @@ export type Entry = {
   body: string;
   link?: { label: string; href: string; dead?: boolean; deadNote?: string };
   secondaryLink?: { label: string; href: string };
+  tertiaryLink?: { label: string; href: string };
   articleLink?: { label: string; href: string };
 
   tone?: "win" | "filing" | "context" | "regulator";
