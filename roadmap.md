@@ -1,5 +1,6 @@
 # Current work
 
+- [x] Assess remaining audit warnings for actual public exposure without publishing: live MCP parsing needs a targeted follow-up; subscriptions, screenplay submissions, and analytics retain spam risks. Verified live request rejection, disclosure, current database policies, and 15 passing tests; no exploit or stress testing.
 - [x] Apply safe audit fixes for Telegram permissions, privacy disclosure, public facts, discovery, and compatible dependencies; verify without publishing.
 - [x] Identify and defer compatibility-sensitive dependency upgrades, enforced frame/CSP restrictions, consent/sync behavior changes, database-backed spam controls, and unverified replacement links. The environment protects .gitignore from editing.
 
