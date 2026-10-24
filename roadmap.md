@@ -1,5 +1,6 @@
 # Current work
 
+- [x] Update legal proof link to HME Beans, retire stale MineTXC totals, show confirmed costs above $5 million, reflect counsel transition, and verify an eighth TLDR tile without publishing. Beans has no public legal-cost aggregate yet; use Bobby's confirmed minimum rather than inventing a live total.
 - [x] Verify Harvey's October 24 legal update against the reply brief, proposed findings, and latest scheduling order.
 - [x] Pin both October 23 filings and add a correctly dated timeline blurb and current summary; keep site changes unpublished.
 - [x] Save and verify a full October 24 blog draft in Bobby's voice without publication or announcements.

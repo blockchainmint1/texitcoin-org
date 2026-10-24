@@ -13,19 +13,17 @@ export const Route = createFileRoute('/api/public/legal-fees')({
     handlers: {
       OPTIONS: async () => new Response(null, { status: 204, headers: CORS }),
       GET: async () => {
-        try {
-          const upstream = await fetch(
-            'https://minetxc.com/api/public/stats/legal-fees',
-            { headers: { accept: 'application/json' } },
-          )
-          const body = await upstream.text()
-          return new Response(body, { status: upstream.status, headers: CORS })
-        } catch (e) {
-          return new Response(
-            JSON.stringify({ ok: false, error: (e as Error).message }),
-            { status: 502, headers: CORS },
-          )
-        }
+        // Beans has replaced MineTXC's stale proof ledger, but does not yet
+        // provide a public legal-cost aggregate. Do not mislabel the owner's
+        // confirmed lower bound as a live ledger total.
+        return Response.json({
+          ok: true,
+          total_usd: null,
+          confirmed_minimum_usd: 5_000_000,
+          confirmed_as_of: '2026-10-24',
+          source_url: 'https://beans.honest.money/',
+          status: 'confirmed_minimum_only',
+        }, { headers: CORS })
       },
     },
   },
