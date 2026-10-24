@@ -11,6 +11,7 @@ export type Entry = {
   body: string;
   link?: { label: string; href: string; dead?: boolean; deadNote?: string };
   secondaryLink?: { label: string; href: string };
+  articleLink?: { label: string; href: string };
 
   tone?: "win" | "filing" | "context" | "regulator";
   tag?: string;
@@ -22,6 +23,10 @@ export const ENTRIES: Entry[] = [
     title: "Our Reply Is Filed — Now Finish the Record and Decide",
     tone: "filing",
     tag: "REPLY FILED",
+    articleLink: {
+      label: "Read the full update →",
+      href: "/blog/the-record-closes",
+    },
     body: "Our reply brief and proposed findings are filed. The message hasn't changed: set the Emergency Order aside in full. The reply answers the State's revised fraud theories, explains why buying hash power isn't buying shares in a business, and challenges both the authority and the evidence behind its refund demand. Our proposed findings set out 154 factual findings and seven legal conclusions for the judge to consider — not rulings she's already made. The State's investigator acknowledged there was no allegation of embezzlement or failure to deliver TXC; that is not a claim that nobody ever lost money trading it. We believe the record supports us. Now both sides must submit their joint stipulation of undisputed facts by 20 Nov, when the record closes. The judge's Proposal for Decision is due 25 Jan 2027. The order remains in place while we wait. Read our filings yourself.",
     link: {
       label: "Our post-hearing reply brief (PDF, 42 pages)",

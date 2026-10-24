@@ -1,5 +1,6 @@
 # Current work
 
+- [ ] Publish the approved October 24 reply article, retain both filing links and add its timeline article link, verify public access and announcement, and request site publication.
 - [x] Update legal proof link to HME Beans, retire stale MineTXC totals, show confirmed costs above $5 million, reflect counsel transition, and verify an eighth TLDR tile without publishing. Beans has no public legal-cost aggregate yet; use Bobby's confirmed minimum rather than inventing a live total.
 - [x] Verify Harvey's October 24 legal update against the reply brief, proposed findings, and latest scheduling order.
 - [x] Pin both October 23 filings and add a correctly dated timeline blurb and current summary; keep site changes unpublished.
