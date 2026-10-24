@@ -28,6 +28,8 @@ export const Route = createFileRoute("/blog")({
         property: "og:description",
         content: "News and notes from the TEXITcoin team.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   errorComponent: ({ error }) => (

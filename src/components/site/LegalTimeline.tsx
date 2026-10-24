@@ -63,6 +63,14 @@ export function LegalTimeline({ entries }: { entries: Entry[] }) {
                 {e.title}
               </h3>
               <p className="mt-3 text-muted-foreground">{e.body}</p>
+              {e.articleLink && (
+                <a
+                  href={e.articleLink.href}
+                  className="mt-4 block text-sm font-semibold text-primary hover:underline"
+                >
+                  {e.articleLink.label}
+                </a>
+              )}
               {e.link && !e.link.dead && (
                 <a
                   href={e.link.href}
