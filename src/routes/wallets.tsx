@@ -407,7 +407,7 @@ function WalletsPage() {
               {[
                 {
                   icon: Globe,
-                  name: "Web Wallet",
+                  name: "Web & Mobile Wallet",
                   best: "Best for everyday use",
                   body: "Fastest setup. Open wallet.texitcoin.org and go.",
                   href: "https://wallet.texitcoin.org/",
