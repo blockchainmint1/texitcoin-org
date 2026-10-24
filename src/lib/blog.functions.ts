@@ -16,7 +16,8 @@ export type BlogPostDTO = {
   bodyMarkdown: string;
 };
 
-type Row = Database["public"]["Tables"]["blog_posts"]["Row"];
+type Row = Pick<Database["public"]["Tables"]["blog_posts"]["Row"],
+  "slug" | "title" | "date" | "author" | "author_role" | "tag" | "read_minutes" | "excerpt" | "body_markdown">;
 
 function toDTO(row: Row): BlogPostDTO {
   return {
