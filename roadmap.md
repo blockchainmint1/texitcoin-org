@@ -1,5 +1,6 @@
 # Current work
 
+- [ ] Update legal proof source to HME Beans, show costs above $5 million, reflect counsel transition, and add an eighth TLDR tile; verify without publishing.
 - [x] Verify Harvey's October 24 legal update against the reply brief, proposed findings, and latest scheduling order.
 - [x] Pin both October 23 filings and add a correctly dated timeline blurb and current summary; keep site changes unpublished.
 - [x] Save and verify a full October 24 blog draft in Bobby's voice without publication or announcements.
